@@ -1,12 +1,16 @@
 import { Navbar } from "@/components/layout";
-import { Hero, Results } from "@/components/sections";
+import { Hero, Results, Concept } from "@/components/sections";
+import SmoothScroll from "@/components/SmoothScroll";
 
 export default function Home() {
   return (
-    <main className="flex flex-col min-h-screen">
-      <Navbar />
-      <Hero />
-      <Results />
-    </main>
+    <SmoothScroll>
+      <main className="flex flex-col min-h-screen">
+        <Navbar />
+        <Hero />
+        <Results />
+        <Concept />
+      </main>
+    </SmoothScroll>
   );
 }
