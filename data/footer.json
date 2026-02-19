@@ -1,0 +1,43 @@
+{
+  "logo": {
+    "text": "Appstract",
+    "href": "/"
+  },
+  "links": [
+    {
+      "label": "About us",
+      "href": "#about"
+    },
+    {
+      "label": "Our work",
+      "href": "#work"
+    },
+    {
+      "label": "Services",
+      "href": "#services"
+    },
+    {
+      "label": "Contact",
+      "href": "#contact"
+    },
+    {
+      "label": "Strategy",
+      "href": "#strategy"
+    }
+  ],
+  "legalLinks": [
+    {
+      "label": "Privacy policy",
+      "href": "/privacy"
+    },
+    {
+      "label": "Terms of service",
+      "href": "/terms"
+    },
+    {
+      "label": "Cookies settings",
+      "href": "/cookies"
+    }
+  ],
+  "copyright": "© 2025 Appstract. All rights reserved."
+}

@@ -1,0 +1,32 @@
+{
+  "cta": {
+    "label": "Explore",
+    "href": "#explore"
+  },
+  "tabs": [
+    {
+      "label": "Shared Shopping",
+      "headline": "Designed for shopping together",
+      "description": "Strategy, design, and development that cuts through the noise. We work with those who understand that good work takes time and intention.",
+      "image": "/images/hero-bg.png"
+    },
+    {
+      "label": "Design",
+      "headline": "Designed for shopping together",
+      "description": "Strategy, design, and development that cuts through the noise. We work with those who understand that good work takes time and intention.",
+      "image": "/images/hero-bg.png"
+    },
+    {
+      "label": "Development",
+      "headline": "Designed for shopping together",
+      "description": "Strategy, design, and development that cuts through the noise. We work with those who understand that good work takes time and intention.",
+      "image": "/images/hero-bg.png"
+    },
+    {
+      "label": "Brand",
+      "headline": "Designed for shopping together",
+      "description": "Strategy, design, and development that cuts through the noise. We work with those who understand that good work takes time and intention.",
+      "image": "/images/hero-bg.png"
+    }
+  ]
+}

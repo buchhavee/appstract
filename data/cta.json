@@ -1,0 +1,9 @@
+{
+  "headline": "Get in touch",
+  "description": "Choose what fits your needs and scale as you grow",
+  "button": {
+    "label": "Schedule Now",
+    "href": "/schedule",
+    "icon": "ArrowRight"
+  }
+}

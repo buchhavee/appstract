@@ -1,0 +1,25 @@
+{
+  "logo": {
+    "text": "Appstract",
+    "href": "/"
+  },
+  "links": [
+    {
+      "label": "About us",
+      "href": "#about"
+    },
+    {
+      "label": "Our work",
+      "href": "#work"
+    },
+    {
+      "label": "Services",
+      "href": "#services",
+      "hasDropdown": true
+    }
+  ],
+  "cta": {
+    "label": "Contact",
+    "href": "#contact"
+  }
+}
