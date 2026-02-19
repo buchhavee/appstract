@@ -50,13 +50,13 @@ export default function Results() {
             </div>
 
             {/* Features */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="flex gap-6 py-2">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="flex gap-6 py-2 items-stretch">
               {resultsData.features.map((feature, index) => {
                 const Icon = iconMap[feature.icon];
                 return (
                   <div key={index} className="flex-1 flex flex-col gap-4">
                     {Icon && <Icon className="w-12 h-12 text-black" />}
-                    <h3 className="font-[family-name:var(--font-bw-gradual)] font-bold text-black leading-[1.4]" style={{ fontSize: "20px" }}>
+                    <h3 className="font-[family-name:var(--font-bw-gradual)] font-bold text-black leading-[1.4] min-h-[56px]" style={{ fontSize: "20px" }}>
                       {feature.title}
                     </h3>
                     <p className="font-[family-name:var(--font-bw-gradual)] font-normal text-[#41423c] leading-[1.5]" style={{ fontSize: "18px" }}>
@@ -69,11 +69,8 @@ export default function Results() {
 
             {/* Actions */}
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }} className="flex gap-6 items-center">
-              <Link href={resultsData.actions.primary.href} className="px-6 py-3 border border-black font-[family-name:var(--font-bw-gradual)] font-normal text-black text-base leading-[1.5] hover:bg-black hover:text-white transition-colors duration-300">
-                {resultsData.actions.primary.label}
-              </Link>
-              <Link href={resultsData.actions.secondary.href} className="flex items-center gap-2 font-[family-name:var(--font-bw-gradual)] font-normal text-black text-base leading-[1.5] group">
-                {resultsData.actions.secondary.label}
+              <Link href={resultsData.actions.href} className="flex items-center gap-2 font-[family-name:var(--font-bw-gradual)] font-normal text-black text-base leading-[1.5] group">
+                {resultsData.actions.label}
                 <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
             </motion.div>
@@ -81,7 +78,7 @@ export default function Results() {
 
           {/* Image */}
           <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="relative w-[506px] h-[540px] rounded-[25px] overflow-hidden shrink-0">
-            <Image src="/images/results-image.png" alt="Results" fill className="object-cover" />
+            <Image src="/images/results-image.png" alt="Results" fill className="object-cover object-[65%_center]" />
           </motion.div>
         </div>
       </div>
