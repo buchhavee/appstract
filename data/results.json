@@ -15,13 +15,7 @@
     }
   ],
   "actions": {
-    "primary": {
-      "label": "Learn",
-      "href": "#learn"
-    },
-    "secondary": {
-      "label": "Arrow",
-      "href": "#arrow"
-    }
+    "label": "Learn more",
+    "href": "#learn-more"
   }
 }
