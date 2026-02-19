@@ -12,27 +12,54 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   ShoppingCart,
 };
 
+// Animation variants for smoother scroll-triggered animations
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.7, ease: [0.25, 0.4, 0.25, 1] as const },
+  },
+};
+
+const fadeInRight = {
+  hidden: { opacity: 0, x: 60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: [0.25, 0.4, 0.25, 1] as const },
+  },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.1,
+    },
+  },
+};
+
 export default function Results() {
   return (
     <section style={{ marginTop: "120px" }} className="relative w-full bg-white py-28 px-16 flex justify-center">
       <div className="w-full max-w-[1280px]">
         <div className="flex gap-20 items-center">
           {/* Content */}
-          <div className="flex-1 flex flex-col gap-8">
+          <motion.div className="flex-1 flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
             {/* Section Title */}
             <div className="flex flex-col gap-4">
               {/* Tagline */}
-              <div className="flex items-center">
+              <motion.div variants={fadeInUp} className="flex items-center">
                 <Tag>{resultsData.tagline}</Tag>
-              </div>
+              </motion.div>
 
               {/* Headline & Description */}
               <div className="flex flex-col gap-6">
                 <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6 }}
+                  variants={fadeInUp}
                   className="font-[family-name:var(--font-bw-gradual)] font-bold leading-[1.2] bg-clip-text"
                   style={{
                     fontSize: "48px",
@@ -43,18 +70,29 @@ export default function Results() {
                 >
                   {resultsData.headline}
                 </motion.h2>
-                <motion.p initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.1 }} className="font-[family-name:var(--font-bw-gradual)] font-normal text-black leading-[1.5]" style={{ fontSize: "18px" }}>
+                <motion.p variants={fadeInUp} className="font-[family-name:var(--font-bw-gradual)] font-normal text-black leading-[1.5]" style={{ fontSize: "18px" }}>
                   {resultsData.description}
                 </motion.p>
               </div>
             </div>
 
             {/* Features */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.2 }} className="flex gap-6 py-2 items-stretch">
+            <motion.div variants={fadeInUp} className="flex gap-6 py-2 items-stretch">
               {resultsData.features.map((feature, index) => {
                 const Icon = iconMap[feature.icon];
                 return (
-                  <div key={index} className="flex-1 flex flex-col gap-4">
+                  <motion.div
+                    key={index}
+                    className="flex-1 flex flex-col gap-4"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{
+                      duration: 0.6,
+                      delay: index * 0.1,
+                      ease: [0.25, 0.4, 0.25, 1],
+                    }}
+                  >
                     {Icon && <Icon className="w-12 h-12 text-black" />}
                     <h3 className="font-[family-name:var(--font-bw-gradual)] font-bold text-black leading-[1.4] min-h-[56px]" style={{ fontSize: "20px" }}>
                       {feature.title}
@@ -62,22 +100,22 @@ export default function Results() {
                     <p className="font-[family-name:var(--font-bw-gradual)] font-normal text-[#41423c] leading-[1.5]" style={{ fontSize: "18px" }}>
                       {feature.description}
                     </p>
-                  </div>
+                  </motion.div>
                 );
               })}
             </motion.div>
 
             {/* Actions */}
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.3 }} className="flex gap-6 items-center">
+            <motion.div variants={fadeInUp} className="flex gap-6 items-center">
               <Link href={resultsData.actions.href} className="flex items-center gap-2 font-[family-name:var(--font-bw-gradual)] font-normal text-black text-base leading-[1.5] group">
                 {resultsData.actions.label}
                 <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
               </Link>
             </motion.div>
-          </div>
+          </motion.div>
 
           {/* Image */}
-          <motion.div initial={{ opacity: 0, x: 40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="relative w-[506px] h-[540px] rounded-[25px] overflow-hidden shrink-0">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeInRight} className="relative w-[506px] h-[540px] rounded-[25px] overflow-hidden shrink-0">
             <Image src="/images/results-image.png" alt="Results" fill className="object-cover object-[65%_center]" />
           </motion.div>
         </div>

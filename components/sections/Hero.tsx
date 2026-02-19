@@ -69,7 +69,7 @@ export default function Hero() {
   const currentTab = heroData.tabs[activeTab];
 
   return (
-    <section className="relative w-full h-[900px] flex flex-col items-center justify-center px-[var(--padding-page)] bg-black overflow-hidden mb-28">
+    <section className="relative w-full h-screen min-h-[900px] flex flex-col items-center justify-center px-[var(--padding-page)] bg-black overflow-hidden mb-28">
       {/* Background Images - stacked for crossfade */}
       {heroData.tabs.map((tab, index) => (
         <motion.div key={index} initial={false} animate={{ opacity: index === activeTab ? 1 : 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full" style={{ zIndex: index === activeTab ? 1 : 0 }}>

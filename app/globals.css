@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Colors */
 :root {
   /* Primary Gradient Colors */

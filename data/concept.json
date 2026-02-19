@@ -4,22 +4,22 @@
   "description": "Engage shoppers without sending them away. Your store should own the interaction.\nLearn more about the concept",
   "features": [
     {
-      "icon": "Users",
+      "icon": "ShoppingCart",
       "title": "Shop together",
       "description": "A native, real-time co-shopping experience embedded directly in your webshop. Enables customers to shop together, accelerating decision-making while increasing engagement and average order value within your own commerce environment."
     },
     {
-      "icon": "Gift",
+      "icon": "HeartHandshake",
       "title": "Group-Driven Incentives",
       "description": "Activate group-based offers that reward collective purchasing. Drives incremental revenue and viral growth by turning social behavior into a scalable commercial lever—without disrupting existing promotion structures."
     },
     {
-      "icon": "MessageCircle",
+      "icon": "MessagesSquare",
       "title": "On-Site Social Interaction",
       "description": "Built-in social interactions such as shared carts and live feedback keep customers engaged throughout the buying journey. Reduces drop-off by keeping social decision-making on-site instead of on external platforms."
     },
     {
-      "icon": "Zap",
+      "icon": "Unplug",
       "title": "Fast & Scalable Web Integration",
       "description": "Lightweight web integration via script or platform plugins (e.g. Shopify), designed for rapid deployment and minimal engineering effort. Scales across brands and markets without compromising site performance."
     }

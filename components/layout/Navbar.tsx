@@ -24,16 +24,30 @@ export default function Navbar() {
   return (
     <motion.nav initial={{ y: -20, opacity: 0 }} animate={{ y: hidden ? -100 : 0, opacity: 1 }} transition={{ duration: 0.3, ease: "easeOut" }} className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center justify-center h-[78px] px-16">
       <div
-        className="relative flex items-center justify-between gap-8 w-full max-w-[1312px] h-[60px] rounded-[15px]"
+        className="relative flex items-center justify-between gap-8 w-full max-w-[1312px] h-[60px] rounded-[20px] overflow-hidden"
         style={{
           padding: "0 20px",
-          background: "rgba(255, 255, 255, 0.3)",
-          backdropFilter: "blur(2px)",
-          WebkitBackdropFilter: "blur(2px)",
-          border: "1.5px solid rgba(255, 255, 255, 0.4)",
-          boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.2)",
+          background: "rgba(0, 0, 0, 0.3)",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
+          border: "1px solid rgba(255, 255, 255, 0.3)",
+          boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.1), inset 0 0 30px 15px rgba(255, 255, 255, 0.15)",
         }}
       >
+        {/* Top gradient line */}
+        <div
+          className="absolute top-0 left-0 right-0 h-[1px] pointer-events-none"
+          style={{
+            background: "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)",
+          }}
+        />
+        {/* Left gradient line */}
+        <div
+          className="absolute top-0 left-0 w-[1px] h-full pointer-events-none"
+          style={{
+            background: "linear-gradient(180deg, rgba(255, 255, 255, 0.8), transparent, rgba(255, 255, 255, 0.3))",
+          }}
+        />
         {/* Logo Column */}
         <div className="flex items-center shrink-0">
           <Link href={navbarData.logo.href} className="flex items-center gap-3">
