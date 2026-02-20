@@ -69,8 +69,8 @@ export default function Hero() {
   const currentTab = heroData.tabs[activeTab];
 
   return (
-    <section className="relative w-full h-screen min-h-[900px] flex flex-col items-center justify-center px-[var(--padding-page)] bg-black overflow-hidden mb-28">
-      {/* Background Images - stacked for crossfade */}
+    <section className="relative w-full h-svh md:min-h-[85vh] lg:min-h-225 flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-black overflow-hidden md:mb-20 lg:mb-28">
+      {/* Background Images */}
       {heroData.tabs.map((tab, index) => (
         <motion.div key={index} initial={false} animate={{ opacity: index === activeTab ? 1 : 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full" style={{ zIndex: index === activeTab ? 1 : 0 }}>
           <Image src={tab.image} alt="Hero background" fill className="object-cover" priority={index === 0} />
@@ -80,13 +80,13 @@ export default function Hero() {
       ))}
 
       {/* Content Container */}
-      <div className="relative z-10 flex flex-col items-center justify-center max-w-[1280px] w-full h-[411px]">
+      <div className="relative z-10 flex flex-col items-center justify-center max-w-7xl w-full min-h-75 md:min-h-87 lg:min-h-102 pt-20 md:pt-24 lg:pt-0">
         <AnimatePresence mode="wait">
-          <motion.div key={activeTab} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }} transition={{ duration: 0.6 }} className="flex flex-col items-center gap-8 max-w-[768px] w-full">
+          <motion.div key={activeTab} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }} transition={{ duration: 0.6 }} className="flex flex-col items-center gap-6 md:gap-8 max-w-[768px] w-full px-2">
             {/* Text Content */}
-            <div className="flex flex-col items-center gap-6 text-white text-center">
-              <h1 className="font-[family-name:var(--font-bw-gradual)] text-4xl font-bold leading-[1.2]">{currentTab.headline}</h1>
-              <p className="font-[family-name:var(--font-bw-gradual)] text-xl font-normal leading-[1.5]">{currentTab.description}</p>
+            <div className="flex flex-col items-center gap-4 md:gap-6 text-white text-center">
+              <h1 className="font-[family-name:var(--font-bw-gradual)] text-2xl md:text-3xl lg:text-4xl font-bold leading-[1.2]">{currentTab.headline}</h1>
+              <p className="font-[family-name:var(--font-bw-gradual)] text-base md:text-lg lg:text-xl font-normal leading-[1.5]">{currentTab.description}</p>
             </div>
 
             {/* CTA Button */}
@@ -99,20 +99,27 @@ export default function Hero() {
         </AnimatePresence>
       </div>
 
-      {/* Tabs Navigation */}
-      <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.7 }} className="absolute bottom-[80px] left-1/2 -translate-x-1/2 flex gap-4 max-w-[1024px] w-[1024px] z-20">
+      {/* Tabs Navigation - Desktop & Tablet */}
+      <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.7 }} className="hidden md:flex absolute bottom-16 lg:bottom-20 left-1/2 -translate-x-1/2 gap-3 md:gap-3 lg:gap-8 w-full max-w-[95%] lg:max-w-6xl z-20 px-4">
         {heroData.tabs.map((tab, index) => (
-          <motion.div key={index} onClick={() => handleTabClick(index)} className="flex-1 flex flex-col items-center px-8 cursor-pointer transition-all">
-            <span className="font-[family-name:var(--font-bw-gradual)] text-base text-white text-center leading-[1.5] mb-4">{tab.label}</span>
+          <motion.div key={index} onClick={() => handleTabClick(index)} className="flex-1 flex flex-col items-center md:px-1 lg:px-4 cursor-pointer transition-all">
+            <span className="font-[family-name:var(--font-bw-gradual)] text-sm md:text-base text-white text-center leading-[1.5] mb-3 md:mb-4">{tab.label}</span>
 
             {/* Progress bar container */}
-            <div className="w-full h-[4px] bg-white/30 overflow-hidden">
+            <div className="w-full h-1 bg-white/30 overflow-hidden">
               {/* Progress indicator */}
               {index === activeTab ? <motion.div className="h-full bg-white" initial={{ width: "0%" }} animate={{ width: `${progress}%` }} transition={{ duration: 0.05, ease: "linear" }} /> : index < activeTab ? <div className="h-full w-full bg-white" /> : null}
             </div>
           </motion.div>
         ))}
       </motion.div>
+
+      {/* Mobile Tab Indicators - Dots */}
+      <div className="flex md:hidden absolute bottom-8 left-1/2 -translate-x-1/2 gap-2 z-20">
+        {heroData.tabs.map((_, index) => (
+          <button key={index} onClick={() => handleTabClick(index)} className={`w-2 h-2 rounded-full transition-all duration-300 ${index === activeTab ? "bg-white w-6" : "bg-white/40"}`} aria-label={`Go to slide ${index + 1}`} />
+        ))}
+      </div>
     </section>
   );
 }

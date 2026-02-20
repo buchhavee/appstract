@@ -47,7 +47,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 export default function Concept() {
   return (
     <section
-      className="relative w-full py-16! px-16 flex justify-center overflow-hidden"
+      className="relative w-full py-16! px-4 md:px-8 lg:px-16 flex justify-center overflow-hidden"
       style={{
         background: "linear-gradient(to bottom, white 16.45%, #4CC9F0 52.2%, #6D5EFC 100%)",
       }}
@@ -88,12 +88,11 @@ export default function Concept() {
         </motion.div>
 
         {/* Phone Mockups */}
-        <motion.div className="relative w-full flex justify-center items-center h-[450px] md:h-[600px] lg:h-[750px] mt-8" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={staggerContainer}>
+        <motion.div className="relative w-full flex justify-center items-end mt-8" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={staggerContainer}>
           {/* Left Phone */}
           <motion.div
-            className="relative w-[120px] md:w-[200px] lg:w-[320px]"
+            className="relative w-50 sm:w-36 md:w-50 lg:w-80 shrink-0"
             style={{
-              left: "10%",
               zIndex: 1,
             }}
             variants={phoneVariants}
@@ -101,9 +100,9 @@ export default function Concept() {
             <Image src="/images/phone-left.png" alt="Shopping app - Vælg venner" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
           </motion.div>
 
-          {/* Center Phone (larger, on top) */}
+          {/* Center Phone */}
           <motion.div
-            className="relative w-[140px] md:w-[240px] lg:w-[350px]"
+            className="relative w-55 sm:w-40 md:w-60 lg:w-87 shrink-0 -mx-22 sm:-mx-20 md:-mx-30 lg:-mx-35"
             style={{
               zIndex: 10,
             }}
@@ -115,9 +114,8 @@ export default function Concept() {
 
           {/* Right Phone */}
           <motion.div
-            className="relative w-[120px] md:w-[200px] lg:w-[320px]"
+            className="relative w-50 sm:w-36 md:w-50 lg:w-80 shrink-0"
             style={{
-              right: "10%",
               zIndex: 1,
             }}
             variants={phoneVariants}
@@ -128,21 +126,21 @@ export default function Concept() {
         </motion.div>
 
         {/* Feature Cards */}
-        <motion.div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
+        <motion.div className="w-full grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
           {conceptData.features.map((feature, index) => {
             const Icon = iconMap[feature.icon];
             return (
-              <motion.div key={index} className="flex flex-col gap-3 p-4 rounded-[25px]" variants={fadeInUp}>
+              <motion.div key={index} className="flex flex-col gap-2 md:gap-3 p-0 md:p-4 rounded-[15px] md:rounded-[25px]" variants={fadeInUp}>
                 {/* Icon */}
-                {Icon && <Icon className="w-[42px] h-[42px] text-white" />}
+                {Icon && <Icon className="w-7 h-7 md:w-[42px] md:h-[42px] text-white" />}
 
                 {/* Title */}
-                <h3 className="font-[family-name:var(--font-bw-gradual)] font-bold text-white leading-[1.2] min-h-[77px]" style={{ fontSize: "32px" }}>
+                <h3 className="font-[family-name:var(--font-bw-gradual)] font-bold text-white leading-[1.2]" style={{ fontSize: "clamp(14px, 3vw, 32px)", minHeight: "2.4em" }}>
                   {feature.title}
                 </h3>
 
                 {/* Description */}
-                <p className="font-[family-name:var(--font-roboto)] font-normal text-white leading-[1.5]" style={{ fontSize: "16px" }}>
+                <p className="font-[family-name:var(--font-roboto)] font-normal text-white leading-[1.5]" style={{ fontSize: "clamp(11px, 1.5vw, 16px)" }}>
                   {feature.description}
                 </p>
               </motion.div>
