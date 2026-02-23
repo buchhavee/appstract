@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/layout";
-import { Hero, Results, Concept } from "@/components/sections";
+import { Hero, Results, Concept, Cases, Contact } from "@/components/sections";
 import SmoothScroll from "@/components/SmoothScroll";
 
 export default function Home() {
@@ -10,6 +10,8 @@ export default function Home() {
         <Hero />
         <Results />
         <Concept />
+        <Cases />
+        <Contact />
       </main>
     </SmoothScroll>
   );

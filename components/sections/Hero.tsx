@@ -8,12 +8,15 @@ import { Button } from "@/components/ui";
 
 const TAB_DURATION = 10000; // 10 seconds per tab
 const PAUSE_AFTER_CLICK = 5000; // 5 second pause after manual click
+const SWIPE_THRESHOLD = 50; // Minimum swipe distance in pixels
 
 export default function Hero() {
   const [activeTab, setActiveTab] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartRef = useRef<number | null>(null);
+  const touchEndRef = useRef<number | null>(null);
 
   // Auto-rotate tabs
   useEffect(() => {
@@ -34,7 +37,7 @@ export default function Hero() {
     const progressInterval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) return 0;
-        return prev + 100 / (TAB_DURATION / 50);
+        return Math.min(100, prev + 100 / (TAB_DURATION / 50));
       });
     }, 50);
 
@@ -57,6 +60,38 @@ export default function Hero() {
     }, PAUSE_AFTER_CLICK);
   };
 
+  // Swipe handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartRef.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndRef.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartRef.current || !touchEndRef.current) return;
+
+    const distance = touchStartRef.current - touchEndRef.current;
+    const isSwipe = Math.abs(distance) > SWIPE_THRESHOLD;
+
+    if (isSwipe) {
+      if (distance > 0) {
+        // Swipe left - go to next tab
+        const nextIndex = (activeTab + 1) % heroData.tabs.length;
+        handleTabClick(nextIndex);
+      } else {
+        // Swipe right - go to previous tab
+        const prevIndex = activeTab === 0 ? heroData.tabs.length - 1 : activeTab - 1;
+        handleTabClick(prevIndex);
+      }
+    }
+
+    // Reset touch refs
+    touchStartRef.current = null;
+    touchEndRef.current = null;
+  };
+
   // Cleanup timeout on unmount
   useEffect(() => {
     return () => {
@@ -69,7 +104,7 @@ export default function Hero() {
   const currentTab = heroData.tabs[activeTab];
 
   return (
-    <section className="relative w-full h-svh md:min-h-[85vh] lg:min-h-225 flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-black overflow-hidden md:mb-20 lg:mb-28">
+    <section className="relative w-full h-svh md:min-h-[85vh] lg:min-h-225 flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-black overflow-hidden " onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
       {/* Background Images */}
       {heroData.tabs.map((tab, index) => (
         <motion.div key={index} initial={false} animate={{ opacity: index === activeTab ? 1 : 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full" style={{ zIndex: index === activeTab ? 1 : 0 }}>

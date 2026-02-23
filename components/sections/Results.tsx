@@ -6,47 +6,25 @@ import Link from "next/link";
 import { BarChart3, ShoppingCart, ChevronRight } from "lucide-react";
 import { Tag } from "@/components/ui";
 import resultsData from "@/data/results.json";
+import { fadeInUp, fadeInRight, staggerContainer } from "@/lib/animations";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   BarChart3,
   ShoppingCart,
 };
 
-// Animation variants for smoother scroll-triggered animations
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.25, 0.4, 0.25, 1] as const },
-  },
-};
-
-const fadeInRight = {
-  hidden: { opacity: 0, x: 60 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.8, ease: [0.25, 0.4, 0.25, 1] as const },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
-};
-
 export default function Results() {
   return (
-    <section className="relative w-full bg-white py-12 md:py-12 px-4 md:px-8 flex justify-center mt-16 md:mt-20 lg:mt-12">
+    <section className="relative w-full bg-white py-12 md:py-24 px-4 md:px-8 flex justify-center overflow-x-hidden">
+      <div
+        className="absolute left-0 right-0 h-20 md:h-20 lg:h-20 pointer-events-none -top-16 md:-top-20 lg:-top-12"
+        style={{
+          background: "linear-gradient(to bottom, #4CC9F040 20%, rgba(255,255,255,0) 100%)",
+        }}
+      />
+
       <div className="w-full max-w-[1280px]">
-        <div className="flex flex-col lg:flex-row gap-10 md:gap-14 lg:gap-20 items-center">
+        <div className="flex flex-col lg:flex-row gap-10 md:gap-14 lg:gap-20 items-center min-w-0">
           {/* Content */}
           <motion.div className="flex-1 flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
             {/* Section Title */}
@@ -110,7 +88,7 @@ export default function Results() {
           </motion.div>
 
           {/* Image */}
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeInRight} className="relative w-full lg:w-[506px] h-[300px] sm:h-[400px] lg:h-[540px] rounded-[15px] md:rounded-[25px] overflow-hidden shrink-0 order-last md:order-last lg:order-last">
+          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeInRight} className="relative min-w-0 max-w-full w-full lg:w-[506px] h-[300px] sm:h-[400px] lg:h-[540px] rounded-[15px] md:rounded-[25px] overflow-hidden overflow-x-hidden order-last md:order-last lg:order-last">
             <Image src="/images/results-image.png" alt="Results" fill className="object-cover object-[65%_center]" />
           </motion.div>
         </div>

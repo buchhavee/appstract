@@ -5,36 +5,7 @@ import Image from "next/image";
 import { ShoppingCart, HeartHandshake, MessagesSquare, Unplug } from "lucide-react";
 import { Tag } from "@/components/ui";
 import conceptData from "@/data/concept.json";
-
-// Animation variants
-const fadeInUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: [0.25, 0.4, 0.25, 1] as const },
-  },
-};
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const phoneVariants = {
-  hidden: { opacity: 0, y: 100 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.25, 0.4, 0.25, 1] as const },
-  },
-};
+import { fadeInUp, staggerContainer, phoneVariants } from "@/lib/animations";
 
 // Map icon names to Lucide components
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {

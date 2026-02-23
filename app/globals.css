@@ -156,7 +156,7 @@ html {
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -288,4 +288,34 @@ img {
 
 .animate-spin-slow {
   animation: spin-slow 3s linear infinite;
+}
+
+/*  Font Utilities  */
+.font-bw-gradual {
+  font-family: var(--font-bw-gradual);
+}
+
+.font-roboto {
+  font-family: var(--font-roboto);
+}
+
+/*  Brand Color Utilities  */
+.text-primary-purple {
+  color: var(--color-primary-purple);
+}
+
+.text-primary-cyan {
+  color: var(--color-primary-cyan);
+}
+
+.bg-primary-purple {
+  background-color: var(--color-primary-purple);
+}
+
+.bg-primary-cyan {
+  background-color: var(--color-primary-cyan);
+}
+
+.bg-gradient-primary {
+  background: var(--gradient-primary);
 }
