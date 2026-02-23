@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode, useEffect, useRef } from "react";
+import { ReactNode, useEffect } from "react";
 import { motion, useScroll, useSpring } from "framer-motion";
 import Lenis from "lenis";
 
@@ -9,7 +9,6 @@ interface SmoothScrollProps {
 }
 
 export default function SmoothScroll({ children }: SmoothScrollProps) {
-  const lenisRef = useRef<Lenis | null>(null);
   const { scrollYProgress } = useScroll();
 
   // Create a smooth spring-based scroll indicator
@@ -27,8 +26,6 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
       smoothWheel: true,
       touchMultiplier: 2,
     });
-
-    lenisRef.current = lenis;
 
     function raf(time: number) {
       lenis.raf(time);

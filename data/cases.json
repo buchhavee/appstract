@@ -1,6 +1,32 @@
 {
-  "tagline": "Cases",
-  "headline": "How shared shopping is implemented in real e-commerce environments",
-  "highlightedText": "shared shopping",
-  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  "cases": [
+    {
+      "name": "Bahne",
+      "tagLabel": "CASE",
+      "description": "Full integration of Appstract's shared shopping experience into Bahne's e-commerce platform",
+      "featured": true,
+      "href": "/cases/bahne"
+    },
+    {
+      "name": "Botané Studios",
+      "tagLabel": "CASE",
+      "description": "",
+      "featured": false,
+      "href": "/cases/botane-studios"
+    },
+    {
+      "name": "Virksomhed",
+      "tagLabel": "CASE",
+      "description": "",
+      "featured": false,
+      "href": "/cases/virksomhed-1"
+    },
+    {
+      "name": "Virksomhed",
+      "tagLabel": "CASE",
+      "description": "",
+      "featured": false,
+      "href": "/cases/virksomhed-2"
+    }
+  ]
 }
