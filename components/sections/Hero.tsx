@@ -6,9 +6,9 @@ import { useState, useEffect, useRef } from "react";
 import heroData from "@/data/hero.json";
 import { Button } from "@/components/ui";
 
-const TAB_DURATION = 10000; // 10 seconds per tab
-const PAUSE_AFTER_CLICK = 5000; // 5 second pause after manual click
-const SWIPE_THRESHOLD = 50; // Minimum swipe distance in pixels
+const TAB_DURATION = 10000;
+const PAUSE_AFTER_CLICK = 5000;
+const SWIPE_THRESHOLD = 50;
 
 export default function Hero() {
   const [activeTab, setActiveTab] = useState(0);
@@ -115,13 +115,13 @@ export default function Hero() {
       ))}
 
       {/* Content Container */}
-      <div className="relative z-10 flex flex-col items-center justify-center max-w-7xl w-full min-h-75 md:min-h-87 lg:min-h-102 pt-20 md:pt-24 lg:pt-0">
+      <div className="relative z-10 flex flex-col items-center justify-center max-w-7xl w-full min-h-75 md:min-h-87 lg:min-h-102 pt-64 md:pt-72 lg:pt-64">
         <AnimatePresence mode="wait">
-          <motion.div key={activeTab} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }} transition={{ duration: 0.6 }} className="flex flex-col items-center gap-6 md:gap-8 max-w-[768px] w-full px-2">
+          <motion.div key={activeTab} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }} transition={{ duration: 0.6 }} className="flex flex-col items-center gap-6 md:gap-8 max-w-3xl w-full px-2">
             {/* Text Content */}
             <div className="flex flex-col items-center gap-4 md:gap-6 text-white text-center">
-              <h1 className="font-[family-name:var(--font-bw-gradual)] text-2xl md:text-3xl lg:text-4xl font-bold leading-[1.2]">{currentTab.headline}</h1>
-              <p className="font-[family-name:var(--font-bw-gradual)] text-base md:text-lg lg:text-xl font-normal leading-[1.5]">{currentTab.description}</p>
+              <h1 className="text-xl md:text-3xl lg:text-3xl font-bold leading-tight">{currentTab.headline}</h1>
+              <p className="text-sm md:text-lg lg:text-lg font-normal leading-normal text-pretty">{currentTab.description}</p>
             </div>
 
             {/* CTA Button */}
@@ -138,7 +138,7 @@ export default function Hero() {
       <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.7 }} className="hidden md:flex absolute bottom-16 lg:bottom-20 left-1/2 -translate-x-1/2 gap-3 md:gap-3 lg:gap-8 w-full max-w-[95%] lg:max-w-6xl z-20 px-4">
         {heroData.tabs.map((tab, index) => (
           <motion.div key={index} onClick={() => handleTabClick(index)} className="flex-1 flex flex-col items-center md:px-1 lg:px-4 cursor-pointer transition-all">
-            <span className="font-[family-name:var(--font-bw-gradual)] text-sm md:text-base text-white text-center leading-[1.5] mb-3 md:mb-4">{tab.label}</span>
+            <span className="text-sm md:text-base text-white text-center leading-normal mb-3 md:mb-4">{tab.label}</span>
 
             {/* Progress bar container */}
             <div className="w-full h-1 bg-white/30 overflow-hidden">
@@ -154,6 +154,33 @@ export default function Hero() {
         {heroData.tabs.map((_, index) => (
           <button key={index} onClick={() => handleTabClick(index)} className={`w-2 h-2 rounded-full transition-all duration-300 ${index === activeTab ? "bg-white w-6" : "bg-white/40"}`} aria-label={`Go to slide ${index + 1}`} />
         ))}
+      </div>
+
+      {/* Scroll Indicator */}
+      <div className="absolute right-2 md:right-8 lg:right-12 top-14/30 z-20">
+        <motion.div
+          className="flex flex-col items-center overflow-hidden"
+          style={{ width: 3, height: 90 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, y: [0, -10, 0] }}
+          transition={{
+            opacity: { delay: 1.2, duration: 0.8 },
+            y: { duration: 5, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.8, delay: 1.2 },
+          }}
+        >
+          <motion.div
+            className="w-px rounded-full bg-white/60"
+            style={{ height: 90, minHeight: 90 }}
+            animate={{ y: [90, 0, 90] }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: "easeInOut",
+              repeatDelay: 0.8,
+              delay: 1.2,
+            }}
+          />
+        </motion.div>
       </div>
     </section>
   );

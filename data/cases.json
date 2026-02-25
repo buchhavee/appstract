@@ -5,28 +5,60 @@
       "tagLabel": "CASE",
       "description": "Full integration of Appstract's shared shopping experience into Bahne's e-commerce platform",
       "featured": true,
-      "href": "/cases/bahne"
+      "href": "/cases/bahne",
+      "expandedContent": {
+        "headline": "Bringing Social Shopping On-Site",
+        "bullets": ["Bahne implemented Appstract's shared shopping web integration to enable customers to shop together directly within the webshop.", "From a commercial perspective, the integration was designed to support core e-commerce KPIs rather than disrupt existing flows.", "The result is a more engaging buying journey that reflects how customers naturally make purchase decisions."],
+        "stats": [
+          { "label": "Conversion increase", "value": "+34%" },
+          { "label": "Avg. session duration", "value": "+2.4 min" },
+          { "label": "AOV increase", "value": "+18%" }
+        ],
+        "images": ["/images/placeholder-case-1.jpg", "/images/placeholder-case-2.jpg", "/images/placeholder-case-3.jpg"]
+      }
     },
     {
-      "name": "Botané Studios",
+      "name": "Botáne Studios",
       "tagLabel": "CASE",
-      "description": "",
+      "description": "Full integration of Appstract's shared shopping experience into Botáne Studios' e-commerce platform",
       "featured": false,
-      "href": "/cases/botane-studios"
+      "href": "/cases/botane-studios",
+      "expandedContent": {
+        "headline": "Bringing Social Shopping On-Site",
+        "bullets": ["Botáne Studios integrated Appstract to enable real-time collaborative browsing for their premium skincare line.", "The integration allowed customers to share curated product picks and shop together, driving organic growth.", "Deeper social engagement translated directly into measurable improvements in return visitors and engagement rate."],
+        "stats": [
+          { "label": "Social shares", "value": "+52%" },
+          { "label": "Return visitors", "value": "+28%" },
+          { "label": "Engagement rate", "value": "+41%" }
+        ],
+        "images": ["/images/placeholder-case-1.jpg", "/images/placeholder-case-2.jpg", "/images/placeholder-case-3.jpg"]
+      }
     },
     {
       "name": "Virksomhed",
       "tagLabel": "CASE",
       "description": "",
       "featured": false,
-      "href": "/cases/virksomhed-1"
+      "href": "/cases/virksomhed-1",
+      "expandedContent": {
+        "headline": "Coming soon — another exciting implementation of Appstract's shared shopping technology",
+        "bullets": [],
+        "stats": [],
+        "images": []
+      }
     },
     {
       "name": "Virksomhed",
       "tagLabel": "CASE",
       "description": "",
       "featured": false,
-      "href": "/cases/virksomhed-2"
+      "href": "/cases/virksomhed-2",
+      "expandedContent": {
+        "headline": "Coming soon — another exciting implementation of Appstract's shared shopping technology",
+        "bullets": [],
+        "stats": [],
+        "images": []
+      }
     }
   ]
 }

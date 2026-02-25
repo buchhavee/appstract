@@ -11,6 +11,7 @@ import navbarData from "@/data/navbar.json";
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -21,6 +22,24 @@ export default function Navbar() {
       setHidden(false);
     }
   });
+
+  // Listen for modal open/close events
+  useEffect(() => {
+    const handleModalOpen = () => setModalOpen(true);
+    const handleModalClose = () => setModalOpen(false);
+    window.addEventListener("modalOpen", handleModalOpen);
+    window.addEventListener("modalClose", handleModalClose);
+    return () => {
+      window.removeEventListener("modalOpen", handleModalOpen);
+      window.removeEventListener("modalClose", handleModalClose);
+    };
+  }, []);
+
+  const scrollToSection = (href: string) => {
+    if (href.startsWith("#")) {
+      window.dispatchEvent(new CustomEvent("smoothScrollTo", { detail: href }));
+    }
+  };
 
   // Close mobile menu on resize to desktop
   useEffect(() => {
@@ -47,7 +66,7 @@ export default function Navbar() {
 
   return (
     <>
-      <motion.nav initial={{ y: -20, opacity: 0 }} animate={{ y: hidden && !mobileMenuOpen ? -100 : 0, opacity: 1 }} transition={{ duration: 0.3, ease: "easeOut" }} className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center justify-center h-[78px] px-4! md:px-8 lg:px-16">
+      <motion.nav initial={{ y: -20, opacity: 0 }} animate={{ y: (hidden && !mobileMenuOpen) || modalOpen ? -100 : 0, opacity: modalOpen ? 0 : 1 }} transition={{ duration: 0.3, ease: "easeOut" }} className="fixed top-0 left-0 right-0 z-50 flex flex-col items-center justify-center h-19.5 px-4! md:px-8 lg:px-16">
         <div
           className="relative flex items-center justify-between gap-4 lg:gap-8 w-full max-w-screen-2xl h-15 rounded-[20px] overflow-hidden px-4 lg:px-5"
           style={{
@@ -88,20 +107,10 @@ export default function Navbar() {
             <div className="flex items-center gap-8">
               {navbarData.links.map((link, index) => (
                 <div key={index} className="flex items-center justify-center">
-                  {link.hasDropdown ? (
-                    <div className="flex flex-col items-start">
-                      <Link href={link.href} className="group relative flex items-center justify-center gap-1 w-full text-base font-medium font-[family-name:var(--font-bw-gradual)] leading-[1.5] text-white!">
-                        {link.label}
-                        <ChevronDown className="w-5 h-5" />
-                        <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 ease-out" />
-                      </Link>
-                    </div>
-                  ) : (
-                    <Link href={link.href} className="group relative text-base font-medium font-[family-name:var(--font-bw-gradual)] leading-[1.5] text-white!">
-                      {link.label}
-                      <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 ease-out" />
-                    </Link>
-                  )}
+                  <button onClick={() => scrollToSection(link.href)} className="group relative text-base font-medium leading-normal text-white! cursor-pointer">
+                    {link.label}
+                    <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-white group-hover:w-full transition-all duration-300 ease-out" />
+                  </button>
                 </div>
               ))}
             </div>
@@ -109,7 +118,7 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <div className="hidden lg:flex flex-col items-end justify-center shrink-0">
-            <Button href={navbarData.cta.href} size="sm">
+            <Button onClick={() => window.dispatchEvent(new Event("modalOpen"))} size="sm">
               {navbarData.cta.label}
             </Button>
           </div>
@@ -129,23 +138,35 @@ export default function Navbar() {
             <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)} />
 
             {/* Menu Content */}
-            <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", damping: 25, stiffness: 200 }} className="absolute top-0 right-0 h-full w-full bg-gradient-to-br from-[#6D5EFC]/30 to-[#4CC9F0]/60 backdrop-blur-sm shadow-2xl">
+            <motion.div initial={{ x: "100%" }} animate={{ x: 0 }} exit={{ x: "100%" }} transition={{ type: "spring", damping: 25, stiffness: 200 }} className="absolute top-0 right-0 h-full w-full bg-linear-to-br from-[#6D5EFC]/30 to-[#4CC9F0]/60 backdrop-blur-sm shadow-2xl">
               <div className="flex flex-col h-full pt-24 px-6 pb-8">
                 {/* Navigation Links */}
                 <nav className="flex flex-col gap-2">
                   {navbarData.links.map((link, index) => (
                     <motion.div key={index} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: index * 0.1 }}>
-                      <Link href={link.href} onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between py-4 text-lg font-medium font-[family-name:var(--font-bw-gradual)] text-white! border-b border-white/10">
+                      <button
+                        onClick={() => {
+                          scrollToSection(link.href);
+                          setMobileMenuOpen(false);
+                        }}
+                        className="w-full flex items-center justify-between py-4 text-lg font-medium text-white! border-b border-white/10 cursor-pointer"
+                      >
                         {link.label}
-                        {link.hasDropdown && <ChevronDown className="w-5 h-5" />}
-                      </Link>
+                      </button>
                     </motion.div>
                   ))}
                 </nav>
 
                 {/* CTA Button */}
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 }} className="mt-8">
-                  <Button href={navbarData.cta.href} size="md" className="w-full">
+                  <Button
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      window.dispatchEvent(new Event("modalOpen"));
+                    }}
+                    size="md"
+                    className="w-full"
+                  >
                     {navbarData.cta.label}
                   </Button>
                 </motion.div>

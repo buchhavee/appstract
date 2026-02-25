@@ -5,17 +5,12 @@
   },
   "links": [
     {
-      "label": "About us",
-      "href": "#about"
+      "label": "Concept",
+      "href": "#concept"
     },
     {
       "label": "Our work",
-      "href": "#work"
-    },
-    {
-      "label": "Services",
-      "href": "#services",
-      "hasDropdown": true
+      "href": "#cases"
     }
   ],
   "cta": {
