@@ -5,7 +5,7 @@ interface TagProps {
 }
 
 export default function Tag({ children, variant = "default", className = "" }: TagProps) {
-  const baseStyles = "inline-flex items-center justify-center px-4 py-1 min-w-[84px] min-h-[24px] rounded-[var(--radius-md)] font-[family-name:var(--font-bw-gradual)] text-base font-semibold leading-[1.5]";
+  const baseStyles = "inline-flex items-center justify-center px-4 py-1 min-w-20 min-h-6 rounded-2xl text-base font-semibold leading-normal";
 
   const variants = {
     default: "border border-[var(--border-dark)] text-[var(--text-secondary)]",

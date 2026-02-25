@@ -15,7 +15,7 @@ interface ButtonProps {
 }
 
 export default function Button({ children, href, variant = "primary", size = "md", icon = false, className = "", onClick }: ButtonProps) {
-  const baseStyles = "group relative inline-flex items-center justify-center gap-2 font-[family-name:var(--font-bw-gradual)] font-medium leading-[1.5] rounded-[var(--radius-full)] cursor-pointer overflow-hidden";
+  const baseStyles = "group relative inline-flex items-center justify-center gap-2 font-medium leading-normal rounded-full cursor-pointer overflow-hidden";
 
   const variants = {
     primary: "bg-white border border-white shadow-[var(--shadow-button)] hover:shadow-[var(--shadow-md)] transition-shadow duration-300",

@@ -1,11 +1,4 @@
 @import "tailwindcss";
-
-/* Smooth Scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Colors */
 :root {
   /* Primary Gradient Colors */
   --color-primary-purple: #6d5efc;
@@ -45,8 +38,8 @@ html {
   /* Typographies */
 
   /* Font Families */
-  --font-heading: "Bw Gradual DEMO", system-ui, sans-serif;
-  --font-body: "Roboto", system-ui, sans-serif;
+  --font-heading: var(--font-bw-gradual), "Bw Gradual DEMO", system-ui, sans-serif;
+  --font-body: var(--font-bw-gradual), "Bw Gradual DEMO", system-ui, sans-serif;
 
   /* Font Sizes - Base (mobile) */
   --text-xs: 0.875rem; /* 14px */
@@ -156,7 +149,6 @@ html {
 }
 
 html {
-  /* scroll-behavior: smooth; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -164,7 +156,7 @@ html {
 body {
   background: var(--bg-primary);
   color: var(--text-primary);
-  font-family: var(--font-body);
+  font-family: var(--font-bw-gradual);
   font-size: var(--text-sm);
   line-height: var(--leading-normal);
   overflow-x: hidden;
@@ -293,10 +285,6 @@ img {
 /*  Font Utilities  */
 .font-bw-gradual {
   font-family: var(--font-bw-gradual);
-}
-
-.font-roboto {
-  font-family: var(--font-roboto);
 }
 
 /*  Brand Color Utilities  */

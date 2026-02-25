@@ -3,40 +3,41 @@
     "text": "Appstract",
     "href": "/"
   },
+  "offices": [
+    {
+      "city": "Copenhagen",
+      "lines": ["Strandgade 56, 2nd", "1401 Copenhagen", "Denmark"]
+    },
+    {
+      "city": "San Francisco",
+      "lines": ["1 Ferry Building Suite 201", "San Francisco, CA 94111", "USA"]
+    }
+  ],
   "links": [
     {
-      "label": "About us",
-      "href": "#about"
-    },
-    {
-      "label": "Our work",
-      "href": "#work"
-    },
-    {
-      "label": "Services",
-      "href": "#services"
+      "label": "LinkedIn",
+      "href": "https://www.linkedin.com/company/appstract/",
+      "external": true
     },
     {
       "label": "Contact",
       "href": "#contact"
     },
     {
-      "label": "Strategy",
-      "href": "#strategy"
-    }
-  ],
-  "legalLinks": [
-    {
-      "label": "Privacy policy",
-      "href": "/privacy"
-    },
-    {
-      "label": "Terms of service",
+      "label": "Terms of Service",
       "href": "/terms"
     },
     {
-      "label": "Cookies settings",
-      "href": "/cookies"
+      "label": "Privacy Policy",
+      "href": "/privacy"
+    },
+    {
+      "label": "Legal / Imprint",
+      "href": "/legal"
+    },
+    {
+      "label": "FAQ",
+      "href": "/faq"
     }
   ],
   "copyright": "© 2025 Appstract. All rights reserved."
