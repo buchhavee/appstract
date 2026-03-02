@@ -7,7 +7,7 @@ import { Tag } from "@/components/ui";
 import conceptData from "@/data/concept.json";
 import { fadeInUp, staggerContainer, phoneVariants } from "@/lib/animations";
 
-// Map icon names to Lucide components
+// Lucide icons map
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   ShoppingCart,
   HeartHandshake,
@@ -59,7 +59,7 @@ export default function Concept() {
           </motion.div>
         </motion.div>
 
-        {/* Phone Mockups */}
+        {/* Phones */}
         <motion.div className="relative w-full flex justify-center items-end mt-8" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={staggerContainer}>
           {/* Left Phone */}
           <motion.div

@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import heroData from "@/data/hero.json";
-import { Button } from "@/components/ui";
+import { Button, LiquidBackground, ScrollIndicator } from "@/components/ui";
 
 const TAB_DURATION = 10000;
 const PAUSE_AFTER_CLICK = 5000;
@@ -110,7 +110,11 @@ export default function Hero() {
         <motion.div key={index} initial={false} animate={{ opacity: index === activeTab ? 1 : 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full" style={{ zIndex: index === activeTab ? 1 : 0 }}>
           <Image src={tab.image} alt="Hero background" fill className="object-cover" priority={index === 0} />
           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/25" />
+          <div className="absolute inset-0 bg-black/10" />
+          {/* Liquid gradient overlay */}
+          <div className="absolute bottom-0 left-0 right-0 h-[30%]" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }}>
+            <LiquidBackground opacity={0.7} speed={0.6} />
+          </div>
         </motion.div>
       ))}
 
@@ -126,7 +130,7 @@ export default function Hero() {
 
             {/* CTA Button */}
             <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.2 }}>
-              <Button href={heroData.cta.href} variant="primary" size="md">
+              <Button href={heroData.cta.href} variant="expand" size="md">
                 {heroData.cta.label}
               </Button>
             </motion.div>
@@ -134,16 +138,21 @@ export default function Hero() {
         </AnimatePresence>
       </div>
 
+      {/* Scroll Indicator - Mouse */}
+      <div className="absolute bottom-32 md:bottom-36 lg:bottom-40 left-1/2 -translate-x-1/2 z-10">
+        <ScrollIndicator />
+      </div>
+
       {/* Tabs Navigation - Desktop & Tablet */}
-      <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.7 }} className="hidden md:flex absolute bottom-16 lg:bottom-20 left-1/2 -translate-x-1/2 gap-3 md:gap-3 lg:gap-8 w-full max-w-[95%] lg:max-w-6xl z-20 px-4">
+      <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.7 }} className="hidden md:flex absolute bottom-16 lg:bottom-20 left-1/2 -translate-x-1/2 gap-3 md:gap-3 lg:gap-8 w-full max-w-[95%] lg:max-w-6xl z-10 px-4">
         {heroData.tabs.map((tab, index) => (
           <motion.div key={index} onClick={() => handleTabClick(index)} className="flex-1 flex flex-col items-center md:px-1 lg:px-4 cursor-pointer transition-all">
             <span className="text-sm md:text-base text-white text-center leading-normal mb-3 md:mb-4">{tab.label}</span>
 
             {/* Progress bar container */}
-            <div className="w-full h-1 bg-white/30 overflow-hidden">
+            <div className="w-full h-1 bg-white/30 rounded-full overflow-hidden">
               {/* Progress indicator */}
-              {index === activeTab ? <motion.div className="h-full bg-white" initial={{ width: "0%" }} animate={{ width: `${progress}%` }} transition={{ duration: 0.05, ease: "linear" }} /> : index < activeTab ? <div className="h-full w-full bg-white" /> : null}
+              {index === activeTab ? <motion.div className="h-full" style={{ background: "linear-gradient(to right, rgba(109, 94, 252, 1), rgba(76, 201, 240, 1))" }} initial={{ width: "0%" }} animate={{ width: `${progress}%` }} transition={{ duration: 0.05, ease: "linear" }} /> : index < activeTab ? <div className="h-full w-full" style={{ background: "linear-gradient(to right, rgba(109, 94, 252, 1), rgba(76, 201, 240, 1))" }} /> : null}
             </div>
           </motion.div>
         ))}
@@ -154,33 +163,6 @@ export default function Hero() {
         {heroData.tabs.map((_, index) => (
           <button key={index} onClick={() => handleTabClick(index)} className={`w-2 h-2 rounded-full transition-all duration-300 ${index === activeTab ? "bg-white w-6" : "bg-white/40"}`} aria-label={`Go to slide ${index + 1}`} />
         ))}
-      </div>
-
-      {/* Scroll Indicator */}
-      <div className="absolute right-2 md:right-8 lg:right-12 top-14/30 z-20">
-        <motion.div
-          className="flex flex-col items-center overflow-hidden"
-          style={{ width: 3, height: 90 }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, y: [0, -10, 0] }}
-          transition={{
-            opacity: { delay: 1.2, duration: 0.8 },
-            y: { duration: 5, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.8, delay: 1.2 },
-          }}
-        >
-          <motion.div
-            className="w-px rounded-full bg-white/60"
-            style={{ height: 90, minHeight: 90 }}
-            animate={{ y: [90, 0, 90] }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-              repeatDelay: 0.8,
-              delay: 1.2,
-            }}
-          />
-        </motion.div>
       </div>
     </section>
   );

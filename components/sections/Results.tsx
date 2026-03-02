@@ -1,11 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import Link from "next/link";
-import { BarChart3, ShoppingCart, ChevronRight } from "lucide-react";
+import { BarChart3, ShoppingCart, ChevronRight, X, MoveUpRight, MoveDownRight, BadgeDollarSign, TrendingDown, Repeat, PackageCheck, Target, Gem, Share2, Wallet, Mails, CirclePlus } from "lucide-react";
 import { Tag } from "@/components/ui";
 import resultsData from "@/data/results.json";
+import kpiData from "@/data/resultskpi.json";
 import { fadeInUp, fadeInRight, staggerContainer } from "@/lib/animations";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -13,7 +14,25 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   ShoppingCart,
 };
 
+const kpiIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  MoveUpRight,
+  MoveDownRight,
+  BadgeDollarSign,
+  TrendingDown,
+  Repeat,
+  PackageCheck,
+  ShoppingCart,
+  Target,
+  Gem,
+  Share2,
+  Wallet,
+  Mails,
+  CirclePlus,
+};
+
 export default function Results() {
+  const [open, setOpen] = useState(false);
+
   return (
     <section className="relative w-full bg-white py-12 md:py-24 px-4 md:px-8 flex justify-center overflow-x-hidden">
       <div
@@ -83,10 +102,10 @@ export default function Results() {
 
             {/* Actions */}
             <motion.div variants={fadeInUp} className="flex gap-6 items-center">
-              <Link href={resultsData.actions.href} className="flex items-center gap-2 font-normal text-black text-base leading-normal group">
+              <button onClick={() => setOpen(true)} className="flex items-center gap-2 font-normal text-black text-base leading-normal group cursor-pointer">
                 {resultsData.actions.label}
                 <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
-              </Link>
+              </button>
             </motion.div>
           </motion.div>
 
@@ -96,6 +115,45 @@ export default function Results() {
           </motion.div>
         </div>
       </div>
+
+      {/* KPI Modal Popover */}
+      <AnimatePresence>
+        {open && (
+          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-100 flex items-center justify-center bg-linear-to-br from-violet-500/30 to-cyan-400/60 backdrop-blur-sm shadow-2xl overflow-hidden" style={{ touchAction: "none", overscrollBehavior: "contain" }} onClick={() => setOpen(false)} onWheel={(e) => e.stopPropagation()} onTouchMove={(e) => e.stopPropagation()}>
+            <motion.div className="bg-white rounded-2xl shadow-lg p-6 md:p-10 max-w-lg w-full flex flex-col gap-6 relative max-h-dvh overflow-y-auto mx-4" initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }} transition={{ duration: 0.25 }} onClick={(e) => e.stopPropagation()}>
+              <button className="absolute top-4 right-4 text-black bg-neutral-light rounded-full w-10 h-10 flex items-center justify-center hover:bg-neutral-medium transition-colors border border-neutral-medium cursor-pointer" onClick={() => setOpen(false)} aria-label="Close">
+                <X className="w-6 h-6" />
+              </button>
+
+              <div className="flex flex-col gap-2">
+                <div className="text-xs font-bw-gradual font-semibold text-primary-purple uppercase tracking-wider">Results</div>
+                <h2 className="text-2xl md:text-3xl font-bw-gradual font-bold text-black">{kpiData.title}</h2>
+              </div>
+
+              <ul className="flex flex-col gap-3">
+                {kpiData.kpis.map((kpi, index) => {
+                  const LeftIcon = kpiIconMap[kpi.leftIcon];
+                  const ArrowIcon = kpiIconMap[kpi.arrow];
+                  return (
+                    <motion.li key={index} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3, delay: index * 0.05 }} className="flex items-center gap-3">
+                      <div
+                        className="flex items-center justify-center w-8 h-8 rounded-lg shrink-0"
+                        style={{
+                          background: "linear-gradient(135deg, #6d5efc, #4cc9f0)",
+                        }}
+                      >
+                        {LeftIcon && <LeftIcon className="w-4 h-4 text-white" />}
+                      </div>
+                      <span className="flex-1 text-sm md:text-base text-black font-medium">{kpi.label}</span>
+                      {ArrowIcon && <ArrowIcon className="w-5 h-5 text-neutral-medium shrink-0" />}
+                    </motion.li>
+                  );
+                })}
+              </ul>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
