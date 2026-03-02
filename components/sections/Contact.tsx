@@ -15,17 +15,14 @@ export default function ContactSection() {
     offset: ["start end", "end start"],
   });
 
-  // Different parallax speeds for each 3D element
-  const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]); // Top left - line graph
-  const y2 = useTransform(scrollYProgress, [0, 1], [80, -120]); // Top right - chat bubble
-  const y3 = useTransform(scrollYProgress, [0, 1], [120, -80]); // Bottom left - envelope
-  const y4 = useTransform(scrollYProgress, [0, 1], [60, -140]); // Bottom right - pie chart
+  const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [80, -120]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [120, -80]);
+  const y4 = useTransform(scrollYProgress, [0, 1], [60, -140]);
 
-  // Slight rotation effects
   const rotate1 = useTransform(scrollYProgress, [0, 1], [-5, 5]);
   const rotate2 = useTransform(scrollYProgress, [0, 1], [5, -5]);
 
-  // Hovering animation for 3D elements
   const hoverAnimation = {
     y: [0, -8, 0],
     transition: {
@@ -65,14 +62,12 @@ export default function ContactSection() {
     },
   };
 
-  // Listen for external modalOpen events (e.g. from Navbar CTA)
   useEffect(() => {
     const handleOpen = () => setOpen(true);
     window.addEventListener("modalOpen", handleOpen);
     return () => window.removeEventListener("modalOpen", handleOpen);
   }, []);
 
-  // Notify other components when modal opens/closes
   useEffect(() => {
     if (open) {
       window.dispatchEvent(new Event("modalOpen"));
@@ -82,10 +77,9 @@ export default function ContactSection() {
   }, [open]);
 
   return (
+    // Contact section container
     <section ref={sectionRef} className="section section-padding pt-32 md:pt-40 -mt-16 md:-mt-24 flex flex-col items-center justify-center bg-neutral-dark relative overflow-x-clip overflow-y-visible z-10">
-      {/* Main CTA Card with Gradient Background */}
       <div className="relative w-full flex flex-col items-center justify-center min-h-[60svh] max-w-7xl rounded-3xl border border-black/15 p-8 md:p-16 overflow-visible">
-        {/* Gradient Background */}
         <div
           className="absolute inset-0 rounded-3xl"
           style={{
@@ -93,41 +87,39 @@ export default function ContactSection() {
           }}
         />
 
-        {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center gap-6">
           <h2 className="text-5xl font-bold font-bw-gradual text-white text-center leading-tight">Get in touch</h2>
           <p className="font-bw-gradual text-lg text-white text-center leading-normal">Choose what fits your needs and scale as you grow</p>
 
-          {/* Schedule Button */}
           <button onClick={() => setOpen(true)} className="cursor-pointer font-bw-gradual mt-4 bg-white text-black rounded-full px-8 py-4 flex items-center gap-3 shadow-[0_9px_27px_rgba(255,255,255,0.56)] hover:shadow-[0_10px_60px_rgba(255,255,255,0.56)] transition-all duration-400 font-medium text-lg">
             Schedule Now
             <ArrowRight size={24} />
           </button>
         </div>
 
-        {/* 3D Elements with Parallax - Top Left (Line Graph) */}
-        <motion.div className="absolute -top-12 md:-top-20 -left-15 md:-left-5 w-30 h-28 md:w-50 md:h-64 lg:w-65 lg:h-72 pointer-events-none z-20" style={{ y: y1, rotate: rotate1 }}>
+        {/* Top Left (Line Graph) */}
+        <motion.div className="absolute -top-12 md:-top-20 -left-15 md:-left-5 w-30 h-28 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-80 xl:h-90 pointer-events-none z-20" style={{ y: y1, rotate: rotate1 }}>
           <motion.div animate={hoverAnimation} className="w-full h-full opacity-95">
             <Image src="/images/3dlinegraph.png" alt="3D Line Graph" fill className="object-contain z-999" />
           </motion.div>
         </motion.div>
 
-        {/* 3D Elements with Parallax - Top Right (Chat Bubble) */}
-        <motion.div className="absolute -top-8 md:-top-20 -right-16 md:-right-8 w-30 h-32 md:w-50 md:h-72 lg:w-62 lg:h-72 pointer-events-none z-20" style={{ y: y2, rotate: rotate2 }}>
+        {/* Top Right (Chat Bubble) */}
+        <motion.div className="absolute -top-8 md:-top-20 -right-16 md:-right-8 w-30 h-32 md:w-50 md:h-72 lg:w-62 lg:h-72 xl:w-80 xl:h-90 pointer-events-none z-20" style={{ y: y2, rotate: rotate2 }}>
           <motion.div animate={hoverAnimation2} className="w-full h-full opacity-95">
             <Image src="/images/3dchatbubble.png" alt="3D Chat Bubble" fill className="object-contain z-999" />
           </motion.div>
         </motion.div>
 
-        {/* 3D Elements with Parallax - Bottom Left (Envelope) */}
-        <motion.div className="absolute -bottom-6 md:-bottom-15 -left-16 md:-left-12 w-30 h-28 md:w-50 md:h-64 lg:w-62 lg:h-72 pointer-events-none z-20" style={{ y: y3, rotate: rotate2 }}>
+        {/* Bottom Left (Envelope) */}
+        <motion.div className="absolute -bottom-6 md:-bottom-15 -left-16 md:-left-12 w-30 h-28 md:w-50 md:h-64 lg:w-62 lg:h-72 xl:w-80 xl:h-90 pointer-events-none z-20" style={{ y: y3, rotate: rotate2 }}>
           <motion.div animate={hoverAnimation3} className="w-full h-full opacity-95">
             <Image src="/images/3denvelope.png" alt="3D Envelope" fill className="object-contain z-999" />
           </motion.div>
         </motion.div>
 
-        {/* 3D Elements with Parallax - Bottom Right (Pie Chart) */}
-        <motion.div className="absolute -bottom-22 md:-bottom-30 -right-16 md:-right-15 w-30 h-28 md:w-50 md:h-64 lg:w-65 lg:h-72 pointer-events-none z-20" style={{ y: y4, rotate: rotate1 }}>
+        {/* Bottom Right (Pie Chart) */}
+        <motion.div className="absolute -bottom-22 md:-bottom-30 -right-16 md:-right-15 w-30 h-28 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-80 xl:h-90 pointer-events-none z-20" style={{ y: y4, rotate: rotate1 }}>
           <motion.div animate={hoverAnimation4} className="w-full h-full opacity-95">
             <Image src="/images/3dpiechart.png" alt="3D Pie Chart" fill className="object-contain z-999" />
           </motion.div>
@@ -148,7 +140,7 @@ export default function ContactSection() {
 
               {/* Main Content - Two Column Layout */}
               <div className="w-full flex flex-col md:flex-row gap-8">
-                {/* Left Column - Contact Info (on mobile this comes after form due to order) */}
+                {/* Left Column - Contact Info */}
                 <div className="w-full md:w-1/3 flex flex-col gap-4 order-2 md:order-1">
                   {/* Copenhagen Office */}
                   <div className="p-4 bg-neutral-light rounded-xl border border-neutral-medium">

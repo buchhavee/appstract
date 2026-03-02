@@ -115,7 +115,7 @@ export default function Portfolio() {
 
   return (
     <motion.section id="cases" className="relative z-0 w-full flex flex-col items-center justify-center py-12 md:py-20 lg:py-28 bg-white" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
-      {/* Top gradient fade */}
+      {/* Top gradient */}
       <div className="absolute top-0 left-0 right-0 h-48 md:h-64 pointer-events-none" style={{ background: "linear-gradient(180deg, rgba(109,94,252,0.18) 0%, rgba(76,201,240,0.10) 50%, rgba(255,255,255,0) 100%)" }} />
 
       {/* Section Title */}

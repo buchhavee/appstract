@@ -36,7 +36,7 @@ export default function Footer() {
             <Image src="/images/logo-text.svg" alt="Appstract" width={176} height={29} className="h-6 w-auto object-contain" />
           </Link>
 
-          {/* Top Section - Offices & Links */}
+          {/* Top Section */}
           <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-6">
             {/* Offices */}
             <div className="flex flex-col sm:flex-row gap-8 sm:gap-16">
@@ -82,7 +82,7 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Bottom Section - Logo Text, Divider, Credits */}
+          {/* Bottom Section */}
           <div className="flex flex-col items-left gap-8 w-full">
             {/* Divider */}
             <div className="w-full h-px bg-white/30" />

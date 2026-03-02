@@ -1,0 +1,60 @@
+{
+  "title": "Key Performance Indicators",
+  "kpis": [
+    {
+      "label": "Average Order Value (AOV) increase",
+      "leftIcon": "BadgeDollarSign",
+      "arrow": "MoveUpRight"
+    },
+    {
+      "label": "Customer Acquisition Cost (CAC) decrease",
+      "leftIcon": "TrendingDown",
+      "arrow": "MoveDownRight"
+    },
+    {
+      "label": "Customer Retention Rate (CRR) increase",
+      "leftIcon": "Repeat",
+      "arrow": "MoveUpRight"
+    },
+    {
+      "label": "Return Rate (RR) decrease",
+      "leftIcon": "PackageCheck",
+      "arrow": "MoveDownRight"
+    },
+    {
+      "label": "Abandoned Cart Rate (ACR) decrease",
+      "leftIcon": "ShoppingCart",
+      "arrow": "MoveDownRight"
+    },
+    {
+      "label": "Conversion Rate (CR) increase",
+      "leftIcon": "Target",
+      "arrow": "MoveUpRight"
+    },
+    {
+      "label": "Customer Lifetime Value (CLV) increase",
+      "leftIcon": "Gem",
+      "arrow": "MoveUpRight"
+    },
+    {
+      "label": "Customer Referral Rate (CRR) increase",
+      "leftIcon": "Share2",
+      "arrow": "MoveUpRight"
+    },
+    {
+      "label": "Share of Wallet (SOW) increase",
+      "leftIcon": "Wallet",
+      "arrow": "MoveUpRight"
+    },
+    {
+      "label": "Abandoned Cart Rate - Retail (ACR) decrease",
+      "leftIcon": "ShoppingCart",
+      "arrow": "MoveDownRight"
+    },
+    {
+      "label": "Email Sign-ups added",
+      "leftIcon": "Mails",
+      "arrow": "CirclePlus"
+    }
+  ]
+}
