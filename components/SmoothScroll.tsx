@@ -58,6 +58,8 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
 
     window.addEventListener("modalOpen", handleModalOpen);
     window.addEventListener("modalClose", handleModalClose);
+    window.addEventListener("mobileMenuOpen", handleModalOpen);
+    window.addEventListener("mobileMenuClose", handleModalClose);
 
     const handleScrollTo = (e: Event) => {
       const target = (e as CustomEvent<string>).detail;
@@ -70,6 +72,8 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     return () => {
       window.removeEventListener("modalOpen", handleModalOpen);
       window.removeEventListener("modalClose", handleModalClose);
+      window.removeEventListener("mobileMenuOpen", handleModalOpen);
+      window.removeEventListener("mobileMenuClose", handleModalClose);
       window.removeEventListener("smoothScrollTo", handleScrollTo);
     };
   }, []);

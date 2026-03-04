@@ -1,60 +1,74 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useAnimationControls } from "framer-motion";
+import { useEffect } from "react";
 
-const DELAY = 2;
-const ANIM_SPEED = 1;
-const PAUSE = 1;
-const MOUSE_WIDTH = 25;
-const MOUSE_HEIGHT = 44;
-const DOT_SIZE = 5;
+const SCALE = 0.8;
+const GAP = 5;
+const DRIFT = 14 * (SCALE / 0.8);
+const CHEVRON_W = 18 * SCALE;
+const CHEVRON_H = 9 * SCALE;
+
+const chevronAnim = {
+  y: [0, 0, DRIFT, DRIFT, DRIFT, DRIFT, 0],
+  opacity: [0, 1, 1, 0.6, 0.85, 0, 0],
+  transition: {
+    duration: 1.8,
+    repeat: Infinity,
+    repeatType: "loop" as const,
+    ease: "easeInOut" as const,
+    times: [0, 0.167, 0.5, 0.583, 0.667, 0.833, 1],
+  },
+};
+
+const glowAnim = {
+  filter: ["drop-shadow(0 0 0px rgba(255,255,255,0))", `drop-shadow(0 0 ${2 * SCALE}px rgba(255,255,255,0.35))`, `drop-shadow(0 0 ${2 * SCALE}px rgba(255,255,255,0.2))`, `drop-shadow(0 0 ${4 * SCALE}px rgba(255,255,255,0.4))`, `drop-shadow(0 0 ${4 * SCALE}px rgba(255,255,255,0.4))`, "drop-shadow(0 0 0px rgba(255,255,255,0))", "drop-shadow(0 0 0px rgba(255,255,255,0))"],
+  transition: {
+    duration: 1.8,
+    repeat: Infinity,
+    repeatType: "loop" as const,
+    ease: "easeInOut" as const,
+    times: [0, 0.167, 0.5, 0.583, 0.667, 0.833, 1],
+  },
+};
 
 export default function ScrollIndicator() {
-  const animDistance = Math.min(MOUSE_WIDTH, MOUSE_HEIGHT) * 0.25;
+  const glowControls = useAnimationControls();
+  const chevron1 = useAnimationControls();
+  const chevron2 = useAnimationControls();
+
+  useEffect(() => {
+    glowControls.start(glowAnim);
+    chevron1.start(chevronAnim);
+    chevron2.start(chevronAnim);
+  }, [glowControls, chevron1, chevron2]);
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: DELAY }} className="flex items-center justify-center">
-      {/* Mouse outline */}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+      }}
+    >
       <motion.div
+        animate={glowControls}
         style={{
-          width: MOUSE_WIDTH,
-          height: MOUSE_HEIGHT,
-          border: "2px solid rgba(255, 255, 255, 0.5)",
-          borderRadius: "100px",
-          position: "relative",
           display: "flex",
-          justifyContent: "center",
-          paddingTop: Math.min(MOUSE_WIDTH, MOUSE_HEIGHT) * 0.25,
-        }}
-        animate={{
-          borderColor: ["rgba(255, 255, 255, 0.5)", "rgba(255, 255, 255, 0.7)", "rgba(255, 255, 255, 0.5)"],
-        }}
-        transition={{
-          duration: ANIM_SPEED,
-          repeat: Infinity,
-          ease: "easeInOut",
-          repeatDelay: PAUSE,
-          delay: DELAY,
+          flexDirection: "column",
+          alignItems: "center",
+          gap: `${GAP}px`,
         }}
       >
-        {/* Trackball */}
-        <motion.div
-          style={{
-            width: DOT_SIZE,
-            height: DOT_SIZE,
-            borderRadius: "50%",
-            backgroundColor: "#ffffff",
-          }}
-          animate={{ y: [0, animDistance, 0] }}
-          transition={{
-            duration: ANIM_SPEED,
-            repeat: Infinity,
-            ease: "easeInOut",
-            repeatDelay: PAUSE,
-            delay: DELAY,
-          }}
-        />
+        <motion.svg animate={chevron1} width={CHEVRON_W} height={CHEVRON_H} viewBox="0 0 18 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.5 1.5L9 7.5L16.5 1.5" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </motion.svg>
+        <motion.svg animate={chevron2} width={CHEVRON_W} height={CHEVRON_H} viewBox="0 0 18 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1.5 1.5L9 7.5L16.5 1.5" stroke="#ffffff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </motion.svg>
       </motion.div>
-    </motion.div>
+    </div>
   );
 }

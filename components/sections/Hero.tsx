@@ -110,10 +110,10 @@ export default function Hero() {
         <motion.div key={index} initial={false} animate={{ opacity: index === activeTab ? 1 : 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full" style={{ zIndex: index === activeTab ? 1 : 0 }}>
           <Image src={tab.image} alt="Hero background" fill className="object-cover" priority={index === 0} />
           {/* Overlay */}
-          <div className="absolute inset-0 bg-black/10" />
+          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.1) 100%)" }} />
           {/* Liquid gradient overlay */}
           <div className="absolute bottom-0 left-0 right-0 h-[30%]" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }}>
-            <LiquidBackground opacity={0.7} speed={0.6} />
+            <LiquidBackground opacity={0.1} speed={0.6} />
           </div>
         </motion.div>
       ))}
@@ -139,7 +139,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll Indicator - Mouse */}
-      <div className="absolute bottom-32 md:bottom-36 lg:bottom-40 left-1/2 -translate-x-1/2 z-10">
+      <div className="absolute right-10 translate-y-20 z-10 opacity-100">
         <ScrollIndicator />
       </div>
 
@@ -147,12 +147,12 @@ export default function Hero() {
       <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.7 }} className="hidden md:flex absolute bottom-16 lg:bottom-20 left-1/2 -translate-x-1/2 gap-3 md:gap-3 lg:gap-8 w-full max-w-[95%] lg:max-w-6xl z-10 px-4">
         {heroData.tabs.map((tab, index) => (
           <motion.div key={index} onClick={() => handleTabClick(index)} className="flex-1 flex flex-col items-center md:px-1 lg:px-4 cursor-pointer transition-all">
-            <span className="text-sm md:text-base text-white text-center leading-normal mb-3 md:mb-4">{tab.label}</span>
+            <span className={`text-sm md:text-base text-center leading-normal mb-3 md:mb-4 transition-opacity duration-500 ${index === activeTab ? "text-white" : "text-white/60"}`}>{tab.label}</span>
 
             {/* Progress bar container */}
             <div className="w-full h-1 bg-white/30 rounded-full overflow-hidden">
               {/* Progress indicator */}
-              {index === activeTab ? <motion.div className="h-full" style={{ background: "linear-gradient(to right, rgba(109, 94, 252, 1), rgba(76, 201, 240, 1))" }} initial={{ width: "0%" }} animate={{ width: `${progress}%` }} transition={{ duration: 0.05, ease: "linear" }} /> : index < activeTab ? <div className="h-full w-full" style={{ background: "linear-gradient(to right, rgba(109, 94, 252, 1), rgba(76, 201, 240, 1))" }} /> : null}
+              {index === activeTab ? <motion.div className="h-full" style={{ background: "linear-gradient(to right, #6d5efc, #4cc9f0)" }} initial={{ width: "0%" }} animate={{ width: `${progress}%` }} transition={{ duration: 0.05, ease: "linear" }} /> : index < activeTab ? <div className="h-full w-full bg-white/00" /> : null}
             </div>
           </motion.div>
         ))}

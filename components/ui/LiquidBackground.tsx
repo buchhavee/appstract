@@ -202,7 +202,7 @@ interface LiquidBackgroundProps {
 
 /* ── component ──────────────────────────────────────────── */
 
-export default function LiquidBackground({ className = "", opacity = 0.4, color1 = "#00b1ff", color2 = "#bd55e7", color3 = "#ebc9ff", speed = 0.25, warpStrength = 1, warpFrequency = 5, warpSpeed = 2, warpRange = 50, colorShift = 0, blendAngle = 0, blendSoftness = 0.15, flowRotation = 500, flowNoise = 2, grainAmount = 0.1, grainSize = 2, grainAnimate = false, contrast = 1, gamma = 1.2, saturation = 1, zoom = 0.9 }: LiquidBackgroundProps) {
+export default function LiquidBackground({ className = "", opacity = 0.4, color1 = "#0100ff", color2 = "#6700ff", color3 = "#00b8ff", speed = 0.1, warpStrength = 0.3, warpFrequency = 10, warpSpeed = 1, warpRange = 20, colorShift = 0, blendAngle = 1, blendSoftness = 0.15, flowRotation = 500, flowNoise = 2, grainAmount = 0.1, grainSize = 2, grainAnimate = false, contrast = 1, gamma = 1, saturation = 1, zoom = 1.4 }: LiquidBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const c1 = useMemo(() => colorToRgb(color1), [color1]);

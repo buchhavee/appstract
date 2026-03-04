@@ -4,3 +4,6 @@ export { default as Concept } from "./Concept";
 export { default as Cases } from "./Cases";
 export { default as Contact } from "./Contact";
 export { default as Footer } from "./Footer";
+
+// Case subcomponents
+export { Case, CaseList, CaseGallery, InteractiveListItem, type CaseData } from "./case-components";
