@@ -2,6 +2,7 @@
   "cases": [
     {
       "name": "Bahne",
+      "logo": "/images/bahne.svg",
       "tagLabel": "CASE",
       "description": "Full integration of Appstract's shared shopping experience into Bahne's e-commerce platform",
       "featured": true,
@@ -14,11 +15,16 @@
           { "label": "Avg. session duration", "value": "+2.4 min" },
           { "label": "AOV increase", "value": "+18%" }
         ],
-        "images": ["/images/placeholder-case-1.jpg", "/images/placeholder-case-2.jpg", "/images/placeholder-case-3.jpg"]
+        "images": [
+          { "src": "/images/phone-center.png", "title": "Shop Together", "description": "Invite friends to browse and shop with you in real-time" },
+          { "src": "/images/phone-center.png", "title": "Live Reactions", "description": "See what your friends think about products instantly" },
+          { "src": "/images/phone-center.png", "title": "Shared Cart", "description": "Build a cart together and split purchases easily" }
+        ]
       }
     },
     {
-      "name": "Botáne Studios",
+      "name": "Botané Studios",
+      "logo": "/images/botane.svg",
       "tagLabel": "CASE",
       "description": "Full integration of Appstract's shared shopping experience into Botáne Studios' e-commerce platform",
       "featured": false,
@@ -31,11 +37,16 @@
           { "label": "Return visitors", "value": "+28%" },
           { "label": "Engagement rate", "value": "+41%" }
         ],
-        "images": ["/images/placeholder-case-1.jpg", "/images/placeholder-case-2.jpg", "/images/placeholder-case-3.jpg"]
+        "images": [
+          { "src": "/images/phone-center.png", "title": "Curated Collections", "description": "Share your favorite skincare products with friends" },
+          { "src": "/images/phone-center.png", "title": "Video Chat", "description": "Get real-time feedback while browsing together" },
+          { "src": "/images/phone-center.png", "title": "Wishlists", "description": "Create shared wishlists for gift ideas" }
+        ]
       }
     },
     {
       "name": "Virksomhed",
+      "logo": "",
       "tagLabel": "CASE",
       "description": "",
       "featured": false,
@@ -49,6 +60,7 @@
     },
     {
       "name": "Virksomhed",
+      "logo": "",
       "tagLabel": "CASE",
       "description": "",
       "featured": false,

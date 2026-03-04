@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { BarChart3, ShoppingCart, ChevronRight, X, MoveUpRight, MoveDownRight, BadgeDollarSign, TrendingDown, Repeat, PackageCheck, Target, Gem, Share2, Wallet, Mails, CirclePlus } from "lucide-react";
+import { BarChart3, ShoppingCart, ChevronRight, ChevronLeft, BadgeDollarSign, TrendingDown, Repeat, PackageCheck, Target, Gem, Share2, Wallet, Mails, CirclePlus } from "lucide-react";
 import { Tag } from "@/components/ui";
 import resultsData from "@/data/results.json";
 import kpiData from "@/data/resultskpi.json";
@@ -15,8 +15,6 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
 };
 
 const kpiIconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  MoveUpRight,
-  MoveDownRight,
   BadgeDollarSign,
   TrendingDown,
   Repeat,
@@ -44,16 +42,12 @@ export default function Results() {
 
       <div className="w-full max-w-7xl">
         <div className="flex flex-col lg:flex-row gap-10 md:gap-14 lg:gap-20 items-center min-w-0">
-          {/* Content */}
           <motion.div className="flex-1 flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
-            {/* Section Title */}
             <div className="flex flex-col gap-4">
-              {/* Tagline */}
               <motion.div variants={fadeInUp} className="flex items-center">
                 <Tag>{resultsData.tagline}</Tag>
               </motion.div>
 
-              {/* Headline & Description */}
               <div className="flex flex-col gap-4 md:gap-6">
                 <motion.h2
                   variants={fadeInUp}
@@ -72,7 +66,6 @@ export default function Results() {
               </div>
             </div>
 
-            {/* Features */}
             <motion.div variants={fadeInUp} className="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr] gap-6 sm:gap-8 py-2">
               {resultsData.features.map((feature, index) => {
                 const Icon = iconMap[feature.icon];
@@ -100,7 +93,6 @@ export default function Results() {
               })}
             </motion.div>
 
-            {/* Actions */}
             <motion.div variants={fadeInUp} className="flex gap-6 items-center">
               <button onClick={() => setOpen(true)} className="flex items-center gap-2 font-normal text-black text-base leading-normal group cursor-pointer">
                 {resultsData.actions.label}
@@ -109,47 +101,71 @@ export default function Results() {
             </motion.div>
           </motion.div>
 
-          {/* Image */}
           <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeInRight} className="relative min-w-0 max-w-full w-full lg:w-126.5 h-75 sm:h-100 lg:h-135 rounded-[15px] md:rounded-[25px] overflow-hidden overflow-x-hidden order-last md:order-last lg:order-last">
             <Image src="/images/results-image.png" alt="Results" fill className="object-cover object-[65%_center]" />
           </motion.div>
         </div>
       </div>
 
-      {/* KPI Modal Popover */}
       <AnimatePresence>
         {open && (
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-100 flex items-center justify-center bg-linear-to-br from-violet-500/30 to-cyan-400/60 backdrop-blur-sm shadow-2xl overflow-hidden" style={{ touchAction: "none", overscrollBehavior: "contain" }} onClick={() => setOpen(false)} onWheel={(e) => e.stopPropagation()} onTouchMove={(e) => e.stopPropagation()}>
-            <motion.div className="bg-white rounded-2xl shadow-lg p-6 md:p-10 max-w-lg w-full flex flex-col gap-6 relative max-h-dvh overflow-y-auto mx-4" initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }} transition={{ duration: 0.25 }} onClick={(e) => e.stopPropagation()}>
-              <button className="absolute top-4 right-4 text-black bg-neutral-light rounded-full w-10 h-10 flex items-center justify-center hover:bg-neutral-medium transition-colors border border-neutral-medium cursor-pointer" onClick={() => setOpen(false)} aria-label="Close">
-                <X className="w-6 h-6" />
+            <motion.div className="bg-white md:rounded-2xl shadow-lg max-w-3xl md:max-w-4xl lg:max-w-5xl w-full flex flex-col md:flex-row relative max-h-dvh overflow-y-auto mx-0 md:mx-4 h-full md:h-auto" initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }} transition={{ duration: 0.25 }} onClick={(e) => e.stopPropagation()}>
+              <button className="hidden md:flex flex-col items-center justify-start gap-1 pt-12 px-5 text-neutral-medium hover:text-black transition-colors cursor-pointer shrink-0" onClick={() => setOpen(false)} aria-label="Back">
+                <ChevronLeft className="w-4 h-4" />
+                <span className="text-[10px] font-medium uppercase tracking-wider">Back</span>
               </button>
 
-              <div className="flex flex-col gap-2">
-                <div className="text-xs font-bw-gradual font-semibold text-primary-purple uppercase tracking-wider">Results</div>
-                <h2 className="text-2xl md:text-3xl font-bw-gradual font-bold text-black">{kpiData.title}</h2>
-              </div>
+              <div className="flex flex-col gap-6 md:gap-8 p-6 md:p-12 flex-1 min-w-0">
+                <button className="flex md:hidden items-center gap-1 text-neutral-medium hover:text-black transition-colors cursor-pointer self-start" onClick={() => setOpen(false)} aria-label="Back">
+                  <ChevronLeft className="w-4 h-4" />
+                  <span className="text-xs font-medium uppercase tracking-wider">Back</span>
+                </button>
 
-              <ul className="flex flex-col gap-3">
-                {kpiData.kpis.map((kpi, index) => {
-                  const LeftIcon = kpiIconMap[kpi.leftIcon];
-                  const ArrowIcon = kpiIconMap[kpi.arrow];
+                <div className="flex flex-col gap-2">
+                  <div className="text-xs font-bw-gradual font-semibold text-primary-purple uppercase tracking-wider">Results</div>
+                  <h2 className="text-xl md:text-3xl font-bw-gradual font-bold text-black">{kpiData.title}</h2>
+                </div>
+
+                {(() => {
+                  const half = Math.ceil(kpiData.kpis.length / 2);
+                  const leftCol = kpiData.kpis.slice(0, half);
+                  const rightCol = kpiData.kpis.slice(half);
                   return (
-                    <motion.li key={index} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.3, delay: index * 0.05 }} className="flex items-center gap-3">
-                      <div
-                        className="flex items-center justify-center w-8 h-8 rounded-lg shrink-0"
-                        style={{
-                          background: "linear-gradient(135deg, #6d5efc, #4cc9f0)",
-                        }}
-                      >
-                        {LeftIcon && <LeftIcon className="w-4 h-4 text-white" />}
-                      </div>
-                      <span className="flex-1 text-sm md:text-base text-black font-medium">{kpi.label}</span>
-                      {ArrowIcon && <ArrowIcon className="w-5 h-5 text-neutral-medium shrink-0" />}
-                    </motion.li>
+                    <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-5 md:gap-8">
+                      <ul className="flex flex-col gap-4 md:gap-5">
+                        {leftCol.map((kpi, index) => {
+                          const LeftIcon = kpiIconMap[kpi.leftIcon];
+                          return (
+                            <motion.li key={index} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: index * 0.04 }} className="flex items-center gap-3 md:gap-4">
+                              <div className="flex items-center justify-center w-8 h-8 md:w-9 md:h-9 rounded-lg shrink-0" style={{ background: "linear-gradient(135deg, #6d5efc, #4cc9f0)" }}>
+                                {LeftIcon && <LeftIcon className="w-4 h-4 md:w-4.5 md:h-4.5 text-white" />}
+                              </div>
+                              <span className="text-sm md:text-base text-black font-medium leading-snug">{kpi.label}</span>
+                            </motion.li>
+                          );
+                        })}
+                      </ul>
+
+                      <div className="hidden md:block w-px bg-black/10" />
+
+                      <ul className="flex flex-col gap-4 md:gap-5">
+                        {rightCol.map((kpi, index) => {
+                          const LeftIcon = kpiIconMap[kpi.leftIcon];
+                          return (
+                            <motion.li key={index} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: (index + half) * 0.04 }} className="flex items-center gap-3 md:gap-4">
+                              <div className="flex items-center justify-center w-8 h-8 md:w-9 md:h-9 rounded-lg shrink-0" style={{ background: "linear-gradient(135deg, #6d5efc, #4cc9f0)" }}>
+                                {LeftIcon && <LeftIcon className="w-4 h-4 md:w-4.5 md:h-4.5 text-white" />}
+                              </div>
+                              <span className="text-sm md:text-base text-black font-medium leading-snug">{kpi.label}</span>
+                            </motion.li>
+                          );
+                        })}
+                      </ul>
+                    </div>
                   );
-                })}
-              </ul>
+                })()}
+              </div>
             </motion.div>
           </motion.div>
         )}
