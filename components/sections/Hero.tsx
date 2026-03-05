@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import heroData from "@/data/hero.json";
-import { Button, LiquidBackground, ScrollIndicator } from "@/components/ui";
+import { Button, LiquidBackground } from "@/components/ui";
 
 const TAB_DURATION = 10000;
 const PAUSE_AFTER_CLICK = 5000;
@@ -108,24 +108,28 @@ export default function Hero() {
       {/* Background Images */}
       {heroData.tabs.map((tab, index) => (
         <motion.div key={index} initial={false} animate={{ opacity: index === activeTab ? 1 : 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full" style={{ zIndex: index === activeTab ? 1 : 0 }}>
-          <Image src={tab.image} alt="Hero background" fill className="object-cover" priority={index === 0} />
+          <Image src={tab.image} alt="Hero background" fill className="object-cover" style={{ objectPosition: tab.objectPosition || "center center" }} priority={index === 0} />
           {/* Overlay */}
           <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.1) 100%)" }} />
           {/* Liquid gradient overlay */}
           <div className="absolute bottom-0 left-0 right-0 h-[30%]" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }}>
-            <LiquidBackground opacity={0.1} speed={0.6} />
+            <LiquidBackground opacity={0.3} speed={0.6} />
           </div>
         </motion.div>
       ))}
 
       {/* Content Container */}
-      <div className="relative z-10 flex flex-col items-center justify-center max-w-7xl w-full min-h-75 md:min-h-87 lg:min-h-102 pt-64 md:pt-72 lg:pt-64">
+      <div className="relative z-10 flex flex-col items-center justify-center max-w-360 w-full min-h-75 md:min-h-87 lg:min-h-102 pt-64 md:pt-72 lg:pt-64">
         <AnimatePresence mode="wait">
-          <motion.div key={activeTab} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }} transition={{ duration: 0.6 }} className="flex flex-col items-center gap-6 md:gap-8 max-w-3xl w-full px-2">
+          <motion.div key={activeTab} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }} transition={{ duration: 0.6 }} className="flex flex-col items-center gap-6 md:gap-8 max-w-5xl w-full px-2">
             {/* Text Content */}
             <div className="flex flex-col items-center gap-4 md:gap-6 text-white text-center">
-              <h1 className="text-xl md:text-3xl lg:text-3xl font-bold leading-tight">{currentTab.headline}</h1>
-              <p className="text-sm md:text-lg lg:text-lg font-normal leading-normal text-pretty">{currentTab.description}</p>
+              <h1 className="font-bold text-pretty leading-tight" style={{ fontSize: "clamp(1.75rem, 5vw + 1rem, 4rem)" }}>
+                {currentTab.headline}
+              </h1>
+              <p className="font-normal leading-relaxed text-pretty text-white/90 max-w-2xl" style={{ fontSize: "clamp(0.875rem, 1vw + 0.5rem, 1.125rem)" }}>
+                {currentTab.description}
+              </p>
             </div>
 
             {/* CTA Button */}
@@ -136,11 +140,6 @@ export default function Hero() {
             </motion.div>
           </motion.div>
         </AnimatePresence>
-      </div>
-
-      {/* Scroll Indicator - Mouse */}
-      <div className="absolute right-10 translate-y-20 z-10 opacity-100">
-        <ScrollIndicator />
       </div>
 
       {/* Tabs Navigation - Desktop & Tablet */}

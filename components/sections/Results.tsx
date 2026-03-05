@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { BarChart3, ShoppingCart, ChevronRight, ChevronLeft, BadgeDollarSign, TrendingDown, Repeat, PackageCheck, Target, Gem, Share2, Wallet, Mails, CirclePlus } from "lucide-react";
 import { Tag } from "@/components/ui";
@@ -30,6 +30,12 @@ const kpiIconMap: Record<string, React.ComponentType<{ className?: string }>> = 
 
 export default function Results() {
   const [open, setOpen] = useState(false);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: imageRef,
+    offset: ["start end", "end start"],
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
   return (
     <section className="relative w-full bg-white py-12 md:py-24 px-4 md:px-8 flex justify-center overflow-x-hidden">
@@ -83,7 +89,7 @@ export default function Results() {
                         ease: [0.25, 0.4, 0.25, 1],
                       }}
                     >
-                      {Icon && <Icon className="w-10 h-10 md:w-12 md:h-12 text-black" />}
+                      {Icon && <Icon className="w-8 h-8 md:w-10 md:h-10 text-black/60" />}
                       <h3 className="font-bold text-black leading-snug text-lg md:text-xl">{feature.title}</h3>
                       <p className="font-normal text-neutral-medium leading-normal text-base md:text-lg">{feature.description}</p>
                     </motion.div>
@@ -94,15 +100,30 @@ export default function Results() {
             </motion.div>
 
             <motion.div variants={fadeInUp} className="flex gap-6 items-center">
-              <button onClick={() => setOpen(true)} className="flex items-center gap-2 font-normal text-black text-base leading-normal group cursor-pointer">
-                {resultsData.actions.label}
-                <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
+              <button onClick={() => setOpen(true)} className="group relative inline-flex items-center justify-center gap-2 font-medium leading-normal rounded-full cursor-pointer overflow-hidden bg-white border border-white shadow-(--shadow-button) hover:shadow-(--shadow-md) transition-shadow duration-300 min-h-12 px-6 py-3 text-[1rem]">
+                {/* Rotating gradient hover effect */}
+                <div className="absolute inset-0 flex items-center justify-center z-1 pointer-events-none">
+                  <div
+                    className="w-40 h-40 rounded-full opacity-0 group-hover:opacity-70 transition-all duration-400 group-hover:w-32 group-hover:h-32"
+                    style={{
+                      background: "linear-gradient(135deg, #6D5EFC 0%, #4CC9F0 100%)",
+                      filter: "blur(10px)",
+                      animation: "spin-slow 3s linear infinite",
+                    }}
+                  />
+                </div>
+                <span className="relative z-10 flex items-center gap-2 text-black">
+                  {resultsData.actions.label}
+                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                </span>
               </button>
             </motion.div>
           </motion.div>
 
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeInRight} className="relative min-w-0 max-w-full w-full lg:w-126.5 h-75 sm:h-100 lg:h-135 rounded-[15px] md:rounded-[25px] overflow-hidden overflow-x-hidden order-last md:order-last lg:order-last">
-            <Image src="/images/results-image.png" alt="Results" fill className="object-cover object-[65%_center]" />
+          <motion.div ref={imageRef} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeInRight} className="relative min-w-0 w-screen md:w-full lg:w-126.5 h-75 sm:h-100 lg:h-135 md:rounded-[25px] overflow-hidden order-last md:order-last lg:order-last -mx-4 md:mx-0">
+            <motion.div className="absolute inset-0 -top-[15%] h-[130%]" style={{ y }}>
+              <Image src="/images/results-image.png" alt="Results" fill className="object-cover object-[65%_center]" />
+            </motion.div>
           </motion.div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import { X, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import { LiquidBackground, ConicButton } from "@/components/ui";
 
 export default function ContactSection() {
   const [open, setOpen] = useState(false);
@@ -78,48 +79,54 @@ export default function ContactSection() {
 
   return (
     // Contact section container
-    <section ref={sectionRef} className="section section-padding pt-32 md:pt-40 -mt-16 md:-mt-24 flex flex-col items-center justify-center bg-neutral-dark relative overflow-x-clip overflow-y-visible z-10">
+    <section ref={sectionRef} className="section section-padding pt-32! md:pt-40 -mt-16 md:-mt-24 flex flex-col items-center justify-center bg-neutral-dark relative overflow-x-clip overflow-y-visible z-10">
       <div className="relative w-full flex flex-col items-center justify-center min-h-[60svh] max-w-7xl rounded-3xl border border-black/15 p-8 md:p-16 overflow-visible">
         <div
           className="absolute inset-0 rounded-3xl"
           style={{
-            background: "radial-gradient(ellipse 120% 150% at 50% 100%, rgba(146,126,219,1) 0%, rgba(112,161,229,1) 27%, rgba(78,195,239,1) 54%, rgba(78,195,239,0.8) 100%)",
+            background: "radial-gradient(ellipse 120% 150% at 50% 100%, rgba(146,126,219,1) 0%, rgba(112,161,229,0.8) 27%, rgba(78,195,239,0.8) 54%, rgba(78,195,239,0.8) 100%)",
           }}
         />
+        {/* Liquid gradient overlay */}
+        <div className="absolute inset-0 rounded-3xl overflow-hidden">
+          <LiquidBackground opacity={0.4} speed={0.8} zoom={1.0} warpStrength={0.5} />
+        </div>
 
         <div className="relative z-10 flex flex-col items-center justify-center gap-6">
           <h2 className="text-5xl font-bold font-bw-gradual text-white text-center leading-tight">Get in touch</h2>
           <p className="font-bw-gradual text-lg text-white text-center leading-normal">Choose what fits your needs and scale as you grow</p>
 
-          <button onClick={() => setOpen(true)} className="cursor-pointer font-bw-gradual mt-4 bg-white text-black rounded-full px-8 py-4 flex items-center gap-3 shadow-[0_9px_27px_rgba(255,255,255,0.56)] hover:shadow-[0_10px_60px_rgba(255,255,255,0.56)] transition-all duration-400 font-medium text-lg">
-            Schedule Now
-            <ArrowRight size={24} />
-          </button>
+          <ConicButton onClick={() => setOpen(true)} borderColor="#4CC9F0" overlayBorderColor="rgba(76, 201, 240, 0.3)" backgroundColor="rgba(255, 255, 255, 0.1)" textColor="white" animationDuration={4} blurRadius={4} borderRadius={999} overlayMargin={2} className="mt-4 font-bw-gradual group">
+            <span className="flex items-center gap-3">
+              Schedule Now
+              <ArrowRight size={24} className="transition-transform duration-300 group-hover:translate-x-1" />
+            </span>
+          </ConicButton>
         </div>
 
         {/* Top Left (Line Graph) */}
-        <motion.div className="absolute -top-12 md:-top-20 -left-15 md:-left-5 w-30 h-28 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-80 xl:h-90 pointer-events-none z-20" style={{ y: y1, rotate: rotate1 }}>
+        <motion.div className="absolute -top-20 md:-top-32 lg:-top-36 xl:-top-44 -left-20 md:-left-20 lg:-left-28 xl:-left-36 w-40 h-36 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-96 xl:h-110 pointer-events-none z-20" style={{ y: y1, rotate: rotate1 }}>
           <motion.div animate={hoverAnimation} className="w-full h-full opacity-95">
             <Image src="/images/3dlinegraph.png" alt="3D Line Graph" fill className="object-contain z-999" />
           </motion.div>
         </motion.div>
 
         {/* Top Right (Chat Bubble) */}
-        <motion.div className="absolute -top-8 md:-top-20 -right-16 md:-right-8 w-30 h-32 md:w-50 md:h-72 lg:w-62 lg:h-72 xl:w-80 xl:h-90 pointer-events-none z-20" style={{ y: y2, rotate: rotate2 }}>
+        <motion.div className="absolute -top-16 md:-top-32 lg:-top-36 xl:-top-44 -right-20 md:-right-20 lg:-right-28 xl:-right-36 w-40 h-40 md:w-50 md:h-72 lg:w-62 lg:h-72 xl:w-96 xl:h-110 pointer-events-none z-20" style={{ y: y2, rotate: rotate2 }}>
           <motion.div animate={hoverAnimation2} className="w-full h-full opacity-95">
             <Image src="/images/3dchatbubble.png" alt="3D Chat Bubble" fill className="object-contain z-999" />
           </motion.div>
         </motion.div>
 
         {/* Bottom Left (Envelope) */}
-        <motion.div className="absolute -bottom-6 md:-bottom-15 -left-16 md:-left-12 w-30 h-28 md:w-50 md:h-64 lg:w-62 lg:h-72 xl:w-80 xl:h-90 pointer-events-none z-20" style={{ y: y3, rotate: rotate2 }}>
+        <motion.div className="absolute -bottom-16 md:-bottom-28 lg:-bottom-32 xl:-bottom-40 -left-20 md:-left-20 lg:-left-28 xl:-left-36 w-40 h-36 md:w-50 md:h-64 lg:w-62 lg:h-72 xl:w-96 xl:h-110 pointer-events-none z-20" style={{ y: y3, rotate: rotate2 }}>
           <motion.div animate={hoverAnimation3} className="w-full h-full opacity-95">
             <Image src="/images/3denvelope.png" alt="3D Envelope" fill className="object-contain z-999" />
           </motion.div>
         </motion.div>
 
         {/* Bottom Right (Pie Chart) */}
-        <motion.div className="absolute -bottom-22 md:-bottom-30 -right-16 md:-right-15 w-30 h-28 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-80 xl:h-90 pointer-events-none z-20" style={{ y: y4, rotate: rotate1 }}>
+        <motion.div className="absolute -bottom-32 md:-bottom-44 lg:-bottom-48 xl:-bottom-56 -right-20 md:-right-20 lg:-right-28 xl:-right-36 w-40 h-36 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-96 xl:h-110 pointer-events-none z-20" style={{ y: y4, rotate: rotate1 }}>
           <motion.div animate={hoverAnimation4} className="w-full h-full opacity-95">
             <Image src="/images/3dpiechart.png" alt="3D Pie Chart" fill className="object-contain z-999" />
           </motion.div>

@@ -8,25 +8,29 @@
       "label": "Shared Shopping",
       "headline": "Designed for shopping together",
       "description": "Strategy, design, and development that cuts through the noise. We work with those who understand that good work takes time and intention.",
-      "image": "/images/hero-bg1.png"
+      "image": "/images/hero-bg1.png",
+      "objectPosition": "62% center"
     },
     {
       "label": "Design",
       "headline": "Improve your customers shopping experience",
       "description": "Strategy, design, and development that cuts through the noise. We work with those who understand that good work takes time and intention.",
-      "image": "/images/hero-bg2.png"
+      "image": "/images/hero-bg2.png",
+      "objectPosition": "center center"
     },
     {
       "label": "Development",
       "headline": "Enhance your development process",
       "description": "Strategy, design, and development that cuts through the noise. We work with those who understand that good work takes time and intention.",
-      "image": "/images/hero-bg3.png"
+      "image": "/images/hero-bg3.png",
+      "objectPosition": "40% center"
     },
     {
       "label": "Brand",
       "headline": "Strengthen your brand identity",
       "description": "Strategy, design, and development that cuts through the noise. We work with those who understand that good work takes time and intention.",
-      "image": "/images/hero-bg4.png"
+      "image": "/images/hero-bg4.png",
+      "objectPosition": "55% center"
     }
   ]
 }
