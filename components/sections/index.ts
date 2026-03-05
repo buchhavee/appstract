@@ -6,4 +6,4 @@ export { default as Contact } from "./Contact";
 export { default as Footer } from "./Footer";
 
 // Case subcomponents
-export { Case, CaseList, CaseGallery, InteractiveListItem, type CaseData } from "./case-components";
+export { CaseList, CaseGallery, InteractiveListItem, type CaseData } from "./case-components";

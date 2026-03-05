@@ -2,7 +2,7 @@
 
 import { Tag } from "@/components/ui";
 import casesData from "@/data/casescomponent.json";
-import portfolioData from "@/data/cases.json";
+import ListData from "@/data/cases.json";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import { CaseList } from "./case-components";
@@ -24,7 +24,7 @@ export default function Cases() {
       <motion.div className="relative z-10 w-full max-w-7xl flex flex-col items-center gap-4 md:gap-8 mb-8 md:mb-16 px-4 md:px-8 lg:px-16" variants={fadeInUp}>
         <div className="flex flex-col items-center gap-4 md:gap-6 max-w-4xl text-center">
           <Tag>{casesData.tagline}</Tag>
-          <h2 className="font-bw-gradual font-bold text-pretty text-5xl! sm:text-4xl! md:text-4xl! lg:text-5xl tracking-tight leading-tight text-black">
+          <h2 className="font-bw-gradual font-bold text-pretty tracking-tight leading-tight text-black" style={{ fontSize: "clamp(2.5rem, 5vw + 1rem, 4.5rem)" }}>
             How{" "}
             <span
               className="bg-clip-text text-transparent"
@@ -45,8 +45,8 @@ export default function Cases() {
       </motion.div>
 
       {/* Cases List */}
-      <div className="relative z-10 w-full px-0">
-        <CaseList cases={portfolioData.cases} initialCount={INITIAL_COUNT} />
+      <div className="relative z-10 w-full max-w-7xl">
+        <CaseList cases={ListData.cases} initialCount={INITIAL_COUNT} />
       </div>
     </motion.section>
   );

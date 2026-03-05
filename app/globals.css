@@ -24,6 +24,9 @@
   /* Backgrounds */
   --bg-primary: var(--color-white);
   --bg-dark: var(--color-neutral-dark);
+  --bg-neutral-medium: #41423c;
+  --bg-neutral-light: #aaaaaa;
+  --bg-neutral-lightest: #eeeeee;
   --bg-glass: rgba(255, 255, 255, 0.1);
 
   /* Text Colors */
@@ -79,7 +82,6 @@
   --leading-normal: 1.5;
 
   /*  Spacing  */
-
   --space-1: 0.25rem; /* 4px */
   --space-2: 0.5rem; /* 8px */
   --space-3: 0.75rem; /* 12px */
@@ -91,7 +93,7 @@
   --space-12: 5rem; /* 80px */
   --space-14: 7rem; /* 112px */
 
-  /* Page Padding - responsive */
+  /* Page Padding */
   --padding-page: 1rem; /* 16px mobile */
   --padding-section: 3rem; /* 48px mobile */
 

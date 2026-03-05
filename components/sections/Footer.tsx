@@ -41,13 +41,16 @@ export default function Footer() {
             {/* Offices */}
             <div className="flex flex-col sm:flex-row gap-8 sm:gap-16">
               {footerData.offices.map((office, index) => (
-                <div key={index} className="flex flex-col gap-2">
-                  <h4 className="text-sm font-bold text-white">{office.city}</h4>
-                  {office.lines.map((line, li) => (
-                    <p key={li} className="text-sm text-white/80 leading-relaxed">
-                      {line}
-                    </p>
-                  ))}
+                <div key={index} className="flex flex-row gap-8 sm:gap-16">
+                  <div className="flex flex-col gap-2">
+                    <h4 className="text-sm font-bold text-white">{office.city}</h4>
+                    {office.lines.map((line, li) => (
+                      <p key={li} className="text-sm text-white/80 leading-relaxed">
+                        {line}
+                      </p>
+                    ))}
+                  </div>
+                  {index < footerData.offices.length - 1 && <div className="hidden sm:block w-px h-full bg-white/30" />}
                 </div>
               ))}
             </div>
@@ -55,19 +58,25 @@ export default function Footer() {
             {/* Links */}
             <nav className="flex gap-12 text-sm text-white">
               {/* Left column */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col order-2 md:order-1 lg:order-1 gap-3">
                 {footerData.links
                   .filter((l) => l.label === "LinkedIn" || l.label === "Contact")
-                  .map((link, index) => (
-                    <Link key={index} href={link.href} {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="flex items-center gap-1.5 hover:opacity-80 transition-opacity underline">
-                      {link.label}
-                      {link.label === "LinkedIn" && (
-                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                        </svg>
-                      )}
-                    </Link>
-                  ))}
+                  .map((link, index) =>
+                    link.label === "Contact" ? (
+                      <button key={index} onClick={() => window.dispatchEvent(new Event("modalOpen"))} className="flex items-center gap-1.5 hover:opacity-80 transition-opacity text-left cursor-pointer">
+                        {link.label}
+                      </button>
+                    ) : (
+                      <Link key={index} href={link.href} {...(link.external ? { target: "_blank", rel: "noopener noreferrer" } : {})} className="flex items-center gap-1.5 hover:opacity-80 transition-opacity underline">
+                        {link.label}
+                        {link.label === "LinkedIn" && (
+                          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                          </svg>
+                        )}
+                      </Link>
+                    ),
+                  )}
               </div>
               {/* Right column */}
               <div className="flex flex-col gap-3">
@@ -83,12 +92,12 @@ export default function Footer() {
           </div>
 
           {/* Bottom Section */}
-          <div className="flex flex-col items-left gap-8 w-full">
+          <div className="flex flex-col items-end gap-2 w-full">
             {/* Divider */}
             <div className="w-full h-px bg-white/30" />
 
             {/* Copyright */}
-            <p className="text-sm text-white/90">{footerData.copyright}</p>
+            <p className="text-xs text-white/70">{footerData.copyright}</p>
           </div>
         </div>
       </div>
