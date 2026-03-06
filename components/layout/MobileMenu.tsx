@@ -5,7 +5,6 @@ import { useMemo } from "react";
 import { Button } from "@/components/ui";
 import navbarData from "@/data/navbar.json";
 
-// Kinetic easing curve from SterlingGateKineticNavigation
 const kineticEase: [number, number, number, number] = [0.65, 0.01, 0.05, 0.99];
 
 interface MobileMenuProps {
@@ -14,7 +13,6 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  // --- Kinetic animation variants ---
   const panelVariants = useMemo(
     () => ({
       closed: (i: number) => ({
@@ -45,6 +43,22 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     [],
   );
 
+  const buttonVariants = useMemo(
+    () => ({
+      closed: {
+        y: "250%",
+        rotate: 10,
+        transition: { duration: 0.35, delay: 0, ease: kineticEase },
+      },
+      open: {
+        y: "0%",
+        rotate: 0,
+        transition: { duration: 0.55, delay: 0.3 + navbarData.links.length * 0.06, ease: kineticEase },
+      },
+    }),
+    [],
+  );
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -53,7 +67,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 0.45 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="fixed inset-0 z-40 lg:hidden" style={{ background: "#000", cursor: "pointer", touchAction: "none" }} onClick={() => onClose()} onTouchMove={(e) => e.preventDefault()} aria-hidden="true" />
 
           {/* Sliding panel */}
-          <aside className="fixed top-0 right-0 z-50 lg:hidden" style={{ width: "100vw", height: "100vh", overflow: "hidden", touchAction: "none" }} onTouchMove={(e) => e.preventDefault()} aria-label="Menu">
+          <aside className="fixed top-0 right-0 z-50 lg:hidden" style={{ width: "100vw", height: "100vh", overflow: "hidden", clipPath: "inset(0)", touchAction: "none" }} onTouchMove={(e) => e.preventDefault()} aria-label="Menu">
             {/* 3 staggered panel layers */}
             <div style={{ position: "absolute", inset: 0 }}>
               {[0, 1, 2].map((i) => (
@@ -67,7 +81,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   style={{
                     position: "absolute",
                     inset: 0,
-                    background: "linear-gradient(to bottom right, rgba(109, 94, 252, 0.3), rgba(76, 201, 240, 0.6))",
+                    background: "linear-gradient(to bottom right, rgba(109, 94, 252, 0.5), rgba(76, 201, 240, 1))",
                     backdropFilter: "blur(12px)",
                     WebkitBackdropFilter: "blur(12px)",
                     opacity: i === 0 ? 0.4 : i === 1 ? 0.6 : 1,
@@ -77,7 +91,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </div>
 
             {/* Navigation links */}
-            <nav className="relative flex flex-col justify-center h-full" style={{ zIndex: 34, padding: "72px 32px" }}>
+            <motion.nav className="relative flex flex-col justify-center h-full" style={{ zIndex: 34, padding: "72px 32px" }} initial={{ x: "101%" }} animate={{ x: "0%" }} exit={{ x: "101%" }} transition={{ duration: 0.55, delay: 0.2, ease: kineticEase }}>
               <ul className="list-none m-0 p-0 flex flex-col gap-1">
                 {navbarData.links.map((link, i) => (
                   <li key={`${link.label}-${i}`} style={{ overflow: "hidden" }}>
@@ -106,21 +120,21 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 ))}
               </ul>
 
-              <div style={{ overflow: "hidden" }} className="mt-10">
-                <motion.div custom={navbarData.links.length} variants={linkVariants} initial="closed" animate="open" exit="closed">
+              <div style={{ overflow: "hidden" }} className="mt-10 pb-4">
+                <motion.div variants={buttonVariants} initial="closed" animate="open" exit="closed">
                   <Button
                     onClick={() => {
                       onClose();
                       window.dispatchEvent(new Event("modalOpen"));
                     }}
                     size="md"
-                    className="w-full"
+                    className="w-full text-xl!"
                   >
                     {navbarData.cta.label}
                   </Button>
                 </motion.div>
               </div>
-            </nav>
+            </motion.nav>
           </aside>
         </>
       )}

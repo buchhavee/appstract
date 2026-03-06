@@ -104,7 +104,7 @@ export default function Concept() {
             return (
               <motion.div key={index} className="flex flex-col gap-2 md:gap-3 p-0 md:p-4 rounded-[15px] md:rounded-[25px]" variants={fadeInUp}>
                 {/* Icon */}
-                {Icon && <Icon className="w-7 h-7 md:w-10.5 md:h-10.5 text-white" />}
+                {Icon && <Icon className="w-7 h-7 md:w-10.5 md:h-10.5 p-1.5 outline-1 outline-white/10 shadow-lg rounded-sm bg-gradient-primary/20 text-white" />}
 
                 {/* Title */}
                 <h3 className="font-bold text-white leading-tight" style={{ fontSize: "clamp(14px, 3vw, 32px)", minHeight: "2.4em" }}>
