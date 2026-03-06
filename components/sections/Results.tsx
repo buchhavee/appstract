@@ -100,21 +100,22 @@ export default function Results() {
             </motion.div>
 
             <motion.div variants={fadeInUp} className="flex gap-6 items-center">
-              <button onClick={() => setOpen(true)} className="group relative inline-flex items-center justify-center gap-2 font-medium leading-normal rounded-full cursor-pointer overflow-hidden bg-white border border-white shadow-(--shadow-button) hover:shadow-(--shadow-md) transition-shadow duration-300 min-h-12 px-6 py-3 text-[1rem]">
-                {/* Rotating gradient hover effect */}
+              <button onClick={() => setOpen(true)} className="group relative inline-flex items-center justify-center gap-2 font-medium leading-normal rounded-full cursor-pointer overflow-hidden bg-white outline outline-black/10 shadow-(--shadow-button) hover:shadow-(--shadow-md) transition-shadow duration-300 min-h-12 px-6 py-3 text-[1rem]">
                 <div className="absolute inset-0 flex items-center justify-center z-1 pointer-events-none">
                   <div
-                    className="w-40 h-40 rounded-full opacity-0 group-hover:opacity-70 transition-all duration-400 group-hover:w-32 group-hover:h-32"
+                    className="w-40 h-40 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-400 group-hover:w-40 group-hover:h-40"
                     style={{
                       background: "linear-gradient(135deg, #6D5EFC 0%, #4CC9F0 100%)",
-                      filter: "blur(10px)",
-                      animation: "spin-slow 3s linear infinite",
+                      filter: "blur(30px)",
+                      width: "200px",
+                      height: "200px",
+                      animation: "spin-slow 6s linear infinite",
                     }}
                   />
                 </div>
-                <span className="relative z-10 flex items-center gap-2 text-black">
+                <span className="relative z-10 flex items-center gap-2 text-black/80 group-hover:text-white transition-colors duration-300">
                   {resultsData.actions.label}
-                  <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </span>
               </button>
             </motion.div>
@@ -131,7 +132,7 @@ export default function Results() {
       <AnimatePresence>
         {open && (
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-100 flex items-center justify-center bg-linear-to-br from-violet-500/30 to-cyan-400/60 backdrop-blur-sm shadow-2xl overflow-hidden" style={{ touchAction: "none", overscrollBehavior: "contain" }} onClick={() => setOpen(false)} onWheel={(e) => e.stopPropagation()} onTouchMove={(e) => e.stopPropagation()}>
-            <motion.div className="bg-white md:rounded-2xl shadow-lg max-w-3xl md:max-w-4xl lg:max-w-5xl w-full flex flex-col md:flex-row relative max-h-dvh overflow-y-auto mx-0 md:mx-4 h-full md:h-auto" initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }} transition={{ duration: 0.25 }} onClick={(e) => e.stopPropagation()}>
+            <motion.div className="bg-white lg:pr-18 md:rounded-2xl shadow-lg max-w-3xl md:max-w-4xl lg:max-w-5xl w-full flex flex-col md:flex-row relative max-h-dvh overflow-y-auto mx-0 md:mx-0 h-full md:h-auto" initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }} transition={{ duration: 0.25 }} onClick={(e) => e.stopPropagation()}>
               <button className="hidden md:flex flex-col items-center justify-start gap-1 pt-12 px-5 text-neutral-medium hover:text-black transition-colors cursor-pointer shrink-0" onClick={() => setOpen(false)} aria-label="Back">
                 <ChevronLeft className="w-4 h-4" />
                 <span className="text-[10px] font-medium uppercase tracking-wider">Back</span>

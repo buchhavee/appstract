@@ -22,17 +22,36 @@ export default function Navbar() {
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
   const { scrollY } = useScroll();
 
-  // --- Kinetic icon animation variant ---
-  const iconVariants = useMemo(
+  const burgerTransition = { type: "spring" as const, bounce: 0.2, duration: 0.8 };
+
+  const burgerContainerVariants = useMemo(
     () => ({
-      menu: {
-        rotate: 0,
-        transition: { duration: 0.4, ease: kineticEase },
-      },
-      close: {
-        rotate: 315,
-        transition: { duration: 0.4, ease: kineticEase },
-      },
+      menu: { rotate: 0, transition: burgerTransition },
+      close: { rotate: 180, transition: burgerTransition },
+    }),
+    [],
+  );
+
+  const topLineVariants = useMemo(
+    () => ({
+      menu: { rotate: 0, x: 0, y: 0, width: "50%", transition: burgerTransition },
+      close: { rotate: 45, x: "1.2px", y: "-2.4px", width: "55%", originX: 0, originY: 1, transition: burgerTransition },
+    }),
+    [],
+  );
+
+  const middleLineVariants = useMemo(
+    () => ({
+      menu: { rotate: 0, width: "100%", transition: burgerTransition },
+      close: { rotate: -45, width: "110%", transition: burgerTransition },
+    }),
+    [],
+  );
+
+  const bottomLineVariants = useMemo(
+    () => ({
+      menu: { rotate: 0, x: 0, y: 0, width: "50%", transition: burgerTransition },
+      close: { rotate: 45, x: "-1.2px", y: "2.4px", width: "55%", originX: 1, originY: 0, transition: burgerTransition },
     }),
     [],
   );
@@ -189,21 +208,16 @@ export default function Navbar() {
             </Button>
           </div>
 
-          {/* Mobile Menu Button — rotating + / ✕ */}
-          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden flex items-center justify-center w-10 h-10 text-white cursor-pointer" style={{ background: "none", border: "none", padding: 0 }} aria-label={mobileMenuOpen ? "Luk menu" : "Åbn menu"} aria-expanded={mobileMenuOpen}>
-            <div style={{ width: 16, height: 16, display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <motion.svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none" variants={iconVariants} animate={mobileMenuOpen ? "close" : "menu"} style={{ transformOrigin: "50% 50%" }}>
-                {/* Vertical bar */}
-                <path d="M7.33333 16L7.33333 0L8.66667 0L8.66667 16L7.33333 16Z" fill="currentColor" />
-                {/* Horizontal bar */}
-                <path d="M16 8.66667L0 8.66667L0 7.33333L16 7.33333L16 8.66667Z" fill="currentColor" />
-                {/* Corner fills for rounded appearance */}
-                <path d="M6 7.33333L7.33333 7.33333L7.33333 6C7.33333 6.73637 6.73638 7.33333 6 7.33333Z" fill="currentColor" />
-                <path d="M10 7.33333L8.66667 7.33333L8.66667 6C8.66667 6.73638 9.26362 7.33333 10 7.33333Z" fill="currentColor" />
-                <path d="M6 8.66667L7.33333 8.66667L7.33333 10C7.33333 9.26362 6.73638 8.66667 6 8.66667Z" fill="currentColor" />
-                <path d="M10 8.66667L8.66667 8.66667L8.66667 10C8.66667 9.26362 9.26362 8.66667 10 8.66667Z" fill="currentColor" />
-              </motion.svg>
-            </div>
+          {/* Mobile Menu Button */}
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden flex items-center justify-center w-9 h-9 cursor-pointer rounded-full" style={{ background: "rgba(255, 255, 255, 1)", border: "none", padding: "8px" }} aria-label={mobileMenuOpen ? "Luk menu" : "Åbn menu"} aria-expanded={mobileMenuOpen}>
+            <motion.div variants={burgerContainerVariants} animate={mobileMenuOpen ? "close" : "menu"} className="flex flex-col items-center justify-center w-full h-full" style={{ gap: "4px" }}>
+              {/* Top line - left aligned, short */}
+              <motion.div variants={topLineVariants} animate={mobileMenuOpen ? "close" : "menu"} className="h-0.5 rounded-full self-start" style={{ backgroundColor: "rgb(0, 0, 0)" }} />
+              {/* Middle line - full width */}
+              <motion.div variants={middleLineVariants} animate={mobileMenuOpen ? "close" : "menu"} className="h-0.5 rounded-full" style={{ backgroundColor: "rgb(0, 0, 0)" }} />
+              {/* Bottom line - right aligned, short */}
+              <motion.div variants={bottomLineVariants} animate={mobileMenuOpen ? "close" : "menu"} className="h-0.5 rounded-full self-end" style={{ backgroundColor: "rgb(0, 0, 0)" }} />
+            </motion.div>
           </button>
         </div>
       </motion.nav>

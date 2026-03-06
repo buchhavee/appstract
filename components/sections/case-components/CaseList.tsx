@@ -76,7 +76,7 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
               delay: i * 0.05,
             }}
           >
-            <InteractiveListItem name={c.name} index={i} logo={c.logo} images={c.expandedContent?.images} isExpanded={expandedIndex === i} onClick={() => toggleExpand(i)} />
+            <InteractiveListItem name={c.name} logo={c.logo} images={c.expandedContent?.images} isExpanded={expandedIndex === i} onClick={() => toggleExpand(i)} />
 
             {/* Expanded content */}
             <AnimatePresence>{expandedIndex === i && c.expandedContent && <CaseExpandedContent content={c.expandedContent} onClose={() => toggleExpand(i)} />}</AnimatePresence>
@@ -102,7 +102,7 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
                   }}
                   className="overflow-hidden"
                 >
-                  <InteractiveListItem name={c.name} index={actualIndex} logo={c.logo} images={c.expandedContent?.images} isExpanded={expandedIndex === actualIndex} onClick={() => toggleExpand(actualIndex)} />
+                  <InteractiveListItem name={c.name} logo={c.logo} images={c.expandedContent?.images} isExpanded={expandedIndex === actualIndex} onClick={() => toggleExpand(actualIndex)} />
 
                   {/* Expanded content */}
                   <AnimatePresence>{expandedIndex === actualIndex && c.expandedContent && <CaseExpandedContent content={c.expandedContent} onClose={() => toggleExpand(actualIndex)} />}</AnimatePresence>

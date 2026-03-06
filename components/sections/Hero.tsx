@@ -133,11 +133,11 @@ export default function Hero() {
             </div>
 
             {/* CTA Button */}
-            <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.2 }}>
+            {/* <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.2 }}>
               <Button href={heroData.cta.href} variant="expand" size="md">
                 {heroData.cta.label}
               </Button>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </AnimatePresence>
       </div>
