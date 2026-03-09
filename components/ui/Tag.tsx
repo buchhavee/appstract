@@ -1,6 +1,6 @@
 interface TagProps {
   children: React.ReactNode;
-  variant?: "default" | "gradient";
+  variant?: "default" | "gradient" | "dark";
   className?: string;
 }
 
@@ -10,6 +10,7 @@ export default function Tag({ children, variant = "default", className = "" }: T
   const variants = {
     default: "border border-[var(--border-dark)] text-[var(--text-secondary)]",
     gradient: "bg-[var(--gradient-primary)] border border-white text-white",
+    dark: "border border-white/30 text-white/80 bg-white/5",
   };
 
   return <span className={`${baseStyles} ${variants[variant]} ${className}`}>{children}</span>;

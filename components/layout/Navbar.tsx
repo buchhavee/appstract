@@ -1,71 +1,20 @@
 "use client";
 
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import Image from "next/image";
-import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { Button } from "@/components/ui";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { Button, Logo, BurgerButton, DesktopNavLinks } from "@/components/ui";
 import MobileMenu from "./MobileMenu";
+import { useBodyScrollLockWithPendingScroll } from "@/lib/hooks";
 import navbarData from "@/data/navbar.json";
-
-// Kinetic easing curve from SterlingGateKineticNavigation
-const kineticEase: [number, number, number, number] = [0.65, 0.01, 0.05, 0.99];
 
 export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const navContainerRef = useRef<HTMLDivElement>(null);
-  const navItemRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const pendingScrollRef = useRef<string | null>(null);
-  const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
   const { scrollY } = useScroll();
 
-  const burgerTransition = { type: "spring" as const, bounce: 0.2, duration: 0.8 };
-
-  const burgerContainerVariants = useMemo(
-    () => ({
-      menu: { rotate: 0, transition: burgerTransition },
-      close: { rotate: 180, transition: burgerTransition },
-    }),
-    [],
-  );
-
-  const topLineVariants = useMemo(
-    () => ({
-      menu: { rotate: 0, x: 0, y: 0, width: "50%", transition: burgerTransition },
-      close: { rotate: 45, x: "1.2px", y: "-2.4px", width: "55%", originX: 0, originY: 1, transition: burgerTransition },
-    }),
-    [],
-  );
-
-  const middleLineVariants = useMemo(
-    () => ({
-      menu: { rotate: 0, width: "100%", transition: burgerTransition },
-      close: { rotate: -45, width: "110%", transition: burgerTransition },
-    }),
-    [],
-  );
-
-  const bottomLineVariants = useMemo(
-    () => ({
-      menu: { rotate: 0, x: 0, y: 0, width: "50%", transition: burgerTransition },
-      close: { rotate: 45, x: "-1.2px", y: "2.4px", width: "55%", originX: 1, originY: 0, transition: burgerTransition },
-    }),
-    [],
-  );
-
-  const measurePill = useCallback((index: number | null) => {
-    if (index === null || !navContainerRef.current || !navItemRefs.current[index]) return;
-    const containerRect = navContainerRef.current.getBoundingClientRect();
-    const itemRect = navItemRefs.current[index]!.getBoundingClientRect();
-    setPillStyle({
-      left: itemRect.left - containerRect.left,
-      width: itemRect.width,
-    });
-  }, []);
-
+  // Handle scroll-based navbar visibility
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
     if (latest > previous && latest > 100) {
@@ -87,13 +36,7 @@ export default function Navbar() {
     };
   }, []);
 
-  const scrollToSection = (href: string) => {
-    if (href.startsWith("#")) {
-      window.dispatchEvent(new CustomEvent("smoothScrollTo", { detail: href }));
-    }
-  };
-
-  // Close mobile menu on resize to desktop
+  // Close mobile menu on resize to desktop or Escape key
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
@@ -111,32 +54,21 @@ export default function Navbar() {
     };
   }, []);
 
-  // Prevent body scroll when mobile menu is open (also stop Lenis)
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.overflow = "hidden";
-      window.dispatchEvent(new Event("mobileMenuOpen"));
-    } else {
-      document.documentElement.style.overflow = "";
-      document.body.style.overflow = "";
-      window.dispatchEvent(new Event("mobileMenuClose"));
+  // Handle body scroll lock when mobile menu is open
+  useBodyScrollLockWithPendingScroll(mobileMenuOpen, pendingScrollRef);
 
-      // If there's a pending scroll target, dispatch after Lenis restarts
-      if (pendingScrollRef.current) {
-        const href = pendingScrollRef.current;
-        pendingScrollRef.current = null;
-        setTimeout(() => {
-          window.dispatchEvent(new CustomEvent("smoothScrollTo", { detail: href }));
-        }, 200);
-      }
+  const scrollToSection = (href: string) => {
+    if (href.startsWith("#")) {
+      window.dispatchEvent(new CustomEvent("smoothScrollTo", { detail: href }));
     }
-    return () => {
-      document.documentElement.style.overflow = "";
-      document.body.style.overflow = "";
-      window.dispatchEvent(new Event("mobileMenuClose"));
-    };
-  }, [mobileMenuOpen]);
+  };
+
+  const handleMobileMenuClose = (scrollTarget?: string) => {
+    if (scrollTarget) {
+      pendingScrollRef.current = scrollTarget;
+    }
+    setMobileMenuOpen(false);
+  };
 
   return (
     <>
@@ -168,37 +100,12 @@ export default function Navbar() {
 
           {/* Logo */}
           <div className="flex items-center shrink-0">
-            <Link href={navbarData.logo.href} className="flex items-center gap-2 lg:gap-3">
-              <div className="relative w-8 h-8 lg:w-10 lg:h-10 rounded-[10px] overflow-hidden flex items-center justify-center">
-                <Image src="/images/logo-icon.svg" alt="" width={40} height={40} className="object-contain" />
-              </div>
-              <Image src="/images/logo-text.svg" alt="Appstract" width={176} height={29} className="h-5 lg:h-7 w-auto object-contain" />
-            </Link>
+            <Logo href={navbarData.logo.href} size="lg" />
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex flex-1 flex-col items-end min-w-0">
-            <div ref={navContainerRef} className="relative flex items-center gap-1" onMouseLeave={() => setHoveredIndex(null)}>
-              {/* Sliding pill indicator */}
-              <AnimatePresence>{hoveredIndex !== null && <motion.div className="absolute top-0 bottom-0 rounded-full pointer-events-none" style={{ background: "rgba(255, 255, 255, 0.2)" }} initial={{ opacity: 0, left: pillStyle.left, width: pillStyle.width }} animate={{ opacity: 1, left: pillStyle.left, width: pillStyle.width }} exit={{ opacity: 0 }} transition={{ type: "spring", stiffness: 400, damping: 30, mass: 0.8 }} layoutId="nav-pill" />}</AnimatePresence>
-
-              {navbarData.links.map((link, index) => (
-                <button
-                  key={index}
-                  ref={(el) => {
-                    navItemRefs.current[index] = el;
-                  }}
-                  onClick={() => scrollToSection(link.href)}
-                  onMouseEnter={() => {
-                    setHoveredIndex(index);
-                    measurePill(index);
-                  }}
-                  className="relative text-base font-medium leading-normal text-white! cursor-pointer px-4 py-2 rounded-full transition-colors duration-200 z-10"
-                >
-                  {link.label}
-                </button>
-              ))}
-            </div>
+            <DesktopNavLinks links={navbarData.links} onLinkClick={scrollToSection} />
           </div>
 
           {/* Desktop CTA */}
@@ -209,29 +116,14 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Menu Button */}
-          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden flex items-center justify-center w-9 h-9 cursor-pointer rounded-full" style={{ background: "rgba(255, 255, 255, 1)", border: "none", padding: "8px" }} aria-label={mobileMenuOpen ? "Luk menu" : "Åbn menu"} aria-expanded={mobileMenuOpen}>
-            <motion.div variants={burgerContainerVariants} animate={mobileMenuOpen ? "close" : "menu"} className="flex flex-col items-center justify-center w-full h-full" style={{ gap: "4px" }}>
-              {/* Top line - left aligned, short */}
-              <motion.div variants={topLineVariants} animate={mobileMenuOpen ? "close" : "menu"} className="h-0.5 rounded-full self-start" style={{ backgroundColor: "rgb(0, 0, 0)" }} />
-              {/* Middle line - full width */}
-              <motion.div variants={middleLineVariants} animate={mobileMenuOpen ? "close" : "menu"} className="h-0.5 rounded-full" style={{ backgroundColor: "rgb(0, 0, 0)" }} />
-              {/* Bottom line - right aligned, short */}
-              <motion.div variants={bottomLineVariants} animate={mobileMenuOpen ? "close" : "menu"} className="h-0.5 rounded-full self-end" style={{ backgroundColor: "rgb(0, 0, 0)" }} />
-            </motion.div>
-          </button>
+          <div className="lg:hidden">
+            <BurgerButton isOpen={mobileMenuOpen} onClick={() => setMobileMenuOpen(!mobileMenuOpen)} />
+          </div>
         </div>
       </motion.nav>
 
       {/* Mobile Menu */}
-      <MobileMenu
-        isOpen={mobileMenuOpen}
-        onClose={(scrollTarget) => {
-          if (scrollTarget) {
-            pendingScrollRef.current = scrollTarget;
-          }
-          setMobileMenuOpen(false);
-        }}
-      />
+      <MobileMenu isOpen={mobileMenuOpen} onClose={handleMobileMenuClose} />
     </>
   );
 }

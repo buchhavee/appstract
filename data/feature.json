@@ -1,0 +1,87 @@
+{
+  "tagline": "Why Appstract",
+  "headline": {
+    "line1": "Turn group shopping into revenue",
+    "line2": "Scale word-of-mouth directly inside your store."
+  },
+  "cards": [
+    {
+      "title": "Stop losing group purchases",
+      "description": "Customers rarely shop alone. They ask friends, partners or roommates before buying. Appstract makes it easy to shop together and unlock group discounts directly on your product pages."
+    },
+    {
+      "title": "Conversion grows when shopping becomes social",
+      "description": "Buying decisions rarely happen alone. Shared shopping introduces collaboration into the purchase journey — reducing hesitation and accelerating decisions through social proof and group incentives.",
+      "features": ["Social shopping directly in your store", "Higher average order value", "Organic customer acquisition"],
+      "featuresLabel": "Appstract enables:",
+      "carousel": [
+        {
+          "icon": "Zap",
+          "title": "Faster Decisions",
+          "iconBg": "#6D5EFC",
+          "cardBg": "#D8D4F8"
+        },
+        {
+          "icon": "Users",
+          "title": "Social Proof",
+          "iconBg": "#D53CFF",
+          "cardBg": "#F4D8F8"
+        },
+        {
+          "icon": "Gift",
+          "title": "Group Incentives",
+          "iconBg": "#4CC9F0",
+          "cardBg": "#D4F0F8"
+        },
+        {
+          "icon": "ShieldCheck",
+          "title": "Reduced Hesitation",
+          "iconBg": "#8B7CF7",
+          "cardBg": "#E4E0FC"
+        },
+        {
+          "icon": "TrendingUp",
+          "title": "Purchase Momentum",
+          "iconBg": "#5DD8F7",
+          "cardBg": "#DDF4FC"
+        }
+      ]
+    }
+  ],
+  "chat": {
+    "messages": [
+      {
+        "sender": "Emma",
+        "message": "Hi — if we buy 3 together do we get a discount?",
+        "isRight": true
+      },
+      {
+        "sender": "Oliver",
+        "message": "Let me check 👀",
+        "isRight": false
+      },
+      {
+        "sender": "Appstract",
+        "message": "Yes. Invite 2 friends to unlock 10% group discount.",
+        "isAssistant": true,
+        "isRight": false
+      },
+      {
+        "sender": "Emma",
+        "message": "Nice — sending the link now.",
+        "isRight": true
+      },
+      {
+        "sender": "Maya",
+        "message": "I'm in. Ordering mine.",
+        "isRight": false
+      }
+    ],
+    "buttons": ["Invite friends", "View product"]
+  },
+  "insight": {
+    "icon": "💡",
+    "text": "People don't distrust products —",
+    "textEnd": "they distrust buying alone."
+  }
+}

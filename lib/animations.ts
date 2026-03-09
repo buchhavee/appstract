@@ -1,6 +1,16 @@
 // Shared animation variants for Framer Motion
 // Used across multiple components for consistent animations
 
+// Kinetic easing curve - used for smooth, organic menu animations
+export const kineticEase: [number, number, number, number] = [0.65, 0.01, 0.05, 0.99];
+
+// Spring transition for burger menu animations
+export const burgerSpringTransition = {
+  type: "spring" as const,
+  bounce: 0.2,
+  duration: 0.8,
+};
+
 export const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
   visible: {

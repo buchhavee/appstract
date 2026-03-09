@@ -3,9 +3,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo } from "react";
 import { Button } from "@/components/ui";
+import { kineticEase } from "@/lib/animations";
 import navbarData from "@/data/navbar.json";
-
-const kineticEase: [number, number, number, number] = [0.65, 0.01, 0.05, 0.99];
 
 interface MobileMenuProps {
   isOpen: boolean;
