@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
+import { Logo } from "@/components/ui";
 import footerData from "@/data/footer.json";
 
 export default function Footer() {
@@ -29,12 +29,7 @@ export default function Footer() {
           }}
         >
           {/* Logo */}
-          <Link href={footerData.logo.href} className="flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-[10px] overflow-hidden flex items-center justify-center">
-              <Image src="/images/logo-icon.svg" alt="" width={40} height={40} className="object-contain" />
-            </div>
-            <Image src="/images/logo-text.svg" alt="Appstract" width={176} height={29} className="h-6 w-auto object-contain" />
-          </Link>
+          <Logo href={footerData.logo.href} size="md" />
 
           {/* Top Section */}
           <div className="flex flex-col md:flex-row justify-between gap-10 md:gap-6">
