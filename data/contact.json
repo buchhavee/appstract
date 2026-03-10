@@ -1,0 +1,43 @@
+{
+  "headline": "Turn Conversations Into Conversions",
+  "description": "Customers already discuss purchases with friends. Appstract helps you keep those conversations inside your store—where they drive engagement and revenue.",
+  "Trust": "Quick introduction tailored to your store.",
+  "button": {
+    "label": "Schedule A Demo",
+    "icon": "ArrowRight"
+  },
+  "modal": {
+    "tagline": "Contact us",
+    "headline": "Ready to turn shopping into a social, engaging experience?",
+    "offices": [
+      {
+        "city": "Copenhagen",
+        "company": "Appstract ApS",
+        "address": "Strandgade 56, 2nd floor",
+        "postalCity": "1401 Copenhagen, Denmark",
+        "phone": "+45 2614 8222"
+      },
+      {
+        "city": "San Francisco",
+        "company": "Appstract System Inc.",
+        "address": "1 Ferry Building, Suite 201",
+        "postalCity": "San Francisco, CA 94111, USA",
+        "phone": "+1 (628) 289 3629"
+      }
+    ],
+    "email": {
+      "label": "Email",
+      "address": "hey@appstract.co"
+    },
+    "form": {
+      "fields": [
+        { "name": "fullName", "placeholder": "Full Name *", "type": "text", "required": true },
+        { "name": "company", "placeholder": "Company Name", "type": "text", "required": false },
+        { "name": "email", "placeholder": "Email *", "type": "email", "required": true },
+        { "name": "phone", "placeholder": "Phone", "type": "tel", "required": false },
+        { "name": "message", "placeholder": "Message", "type": "textarea", "required": false }
+      ],
+      "submitButton": "Submit"
+    }
+  }
+}
