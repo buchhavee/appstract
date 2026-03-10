@@ -25,7 +25,7 @@ export default function Cases() {
         <div className="flex flex-col items-center gap-4 md:gap-6 max-w-4xl text-center">
           <Tag>{casesData.tagline}</Tag>
           <h2 className="font-bw-gradual font-bold text-pretty tracking-tight leading-tight text-black" style={{ fontSize: "clamp(2.5rem, 5vw + 1rem, 4.5rem)" }}>
-            How{" "}
+            {casesData.headline.split(casesData.highlightedText)[0]}
             <span
               className="bg-clip-text text-transparent"
               style={{
@@ -33,12 +33,8 @@ export default function Cases() {
               }}
             >
               {casesData.highlightedText}
-            </span>{" "}
-            is implemented in real{" "}
-            <span className="hidden sm:inline">
-              <br />
             </span>
-            e-commerce environments
+            {casesData.headline.split(casesData.highlightedText)[1]}
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-neutral-medium font-normal leading-normal">{casesData.description}</p>
         </div>
