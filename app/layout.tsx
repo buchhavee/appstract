@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import CookieConsent from "@/components/ui/CookieConsent";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 const bwGradual = localFont({
   src: [
