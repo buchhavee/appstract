@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import CookieConsent from "@/components/ui/CookieConsent";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const bwGradual = localFont({
   src: [
@@ -84,6 +85,7 @@ export default function RootLayout({
       <body className={`${bwGradual.variable} font-sans antialiased overflow-x-hidden`}>
         {children}
         <CookieConsent />
+        <SpeedInsights />
       </body>
     </html>
   );
