@@ -38,6 +38,11 @@
         { "name": "message", "placeholder": "Message", "type": "textarea", "required": false }
       ],
       "submitButton": "Submit"
+    },
+    "confirmation": {
+      "headline": "Thank you!",
+      "description": "Your message has been sent successfully. We'll get back to you as soon as possible.",
+      "closeButton": "Close"
     }
   }
 }

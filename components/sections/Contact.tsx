@@ -1,15 +1,74 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { X, ArrowRight } from "lucide-react";
-import Image from "next/image";
+import { useScroll, useTransform } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import { LiquidBackground, ConicButton } from "@/components/ui";
+import { Floating3DImage, ContactModal } from "./contact-components";
 import contactData from "@/data/contact.json";
+
+// 3D floating images configuration
+const floatingImages = [
+  {
+    src: "/images/3d/3dlinegraph.png",
+    alt: "3D Line Graph",
+    positionClasses: "-top-13 md:-top-32 lg:-top-36 xl:-top-44 -left-13 md:-left-20 lg:-left-28 xl:-left-36 w-40 h-36 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-96 xl:h-110",
+    yRange: [100, -100] as [number, number],
+    rotateRange: [-5, 5] as [number, number],
+    hoverAnimation: {
+      y: [0, -8, 0],
+      transition: { duration: 4, repeat: Infinity, ease: "easeInOut" as const },
+    },
+  },
+  {
+    src: "/images/3d/3dchatbubble.png",
+    alt: "3D Chat Bubble",
+    positionClasses: "-top-13 md:-top-32 lg:-top-36 xl:-top-44 -right-10 md:-right-20 lg:-right-28 xl:-right-36 w-40 h-40 md:w-50 md:h-72 lg:w-62 lg:h-72 xl:w-96 xl:h-110",
+    yRange: [80, -120] as [number, number],
+    rotateRange: [5, -5] as [number, number],
+    hoverAnimation: {
+      y: [0, -10, 0],
+      transition: { duration: 5, repeat: Infinity, ease: "easeInOut" as const, delay: 1 },
+    },
+  },
+  {
+    src: "/images/3d/3denvelope.png",
+    alt: "3D Envelope",
+    positionClasses: "-bottom-16 md:-bottom-28 lg:-bottom-32 xl:-bottom-40 -left-12 md:-left-20 lg:-left-28 xl:-left-36 w-40 h-36 md:w-50 md:h-64 lg:w-62 lg:h-72 xl:w-96 xl:h-110",
+    yRange: [120, -80] as [number, number],
+    rotateRange: [5, -5] as [number, number],
+    hoverAnimation: {
+      y: [0, -6, 0],
+      transition: { duration: 4.5, repeat: Infinity, ease: "easeInOut" as const, delay: 0.5 },
+    },
+  },
+  {
+    src: "/images/3d/3dpiechart.png",
+    alt: "3D Pie Chart",
+    positionClasses: "-bottom-32 md:-bottom-44 lg:-bottom-48 xl:-bottom-56 -right-10 md:-right-20 lg:-right-28 xl:-right-36 w-40 h-36 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-96 xl:h-110",
+    yRange: [60, -140] as [number, number],
+    rotateRange: [-5, 5] as [number, number],
+    hoverAnimation: {
+      y: [0, -12, 0],
+      transition: { duration: 5.5, repeat: Infinity, ease: "easeInOut" as const, delay: 1.5 },
+    },
+  },
+];
 
 export default function ContactSection() {
   const [open, setOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    setTimeout(() => setSubmitted(false), 300);
+  };
 
   // Parallax scroll effect
   const { scrollYProgress } = useScroll({
@@ -17,52 +76,18 @@ export default function ContactSection() {
     offset: ["start end", "end start"],
   });
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [100, -100]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [80, -120]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [120, -80]);
-  const y4 = useTransform(scrollYProgress, [0, 1], [60, -140]);
+  // Create motion values for each floating image
+  const y0 = useTransform(scrollYProgress, [0, 1], floatingImages[0].yRange);
+  const y1 = useTransform(scrollYProgress, [0, 1], floatingImages[1].yRange);
+  const y2 = useTransform(scrollYProgress, [0, 1], floatingImages[2].yRange);
+  const y3 = useTransform(scrollYProgress, [0, 1], floatingImages[3].yRange);
+  const yValues = [y0, y1, y2, y3];
 
-  const rotate1 = useTransform(scrollYProgress, [0, 1], [-5, 5]);
-  const rotate2 = useTransform(scrollYProgress, [0, 1], [5, -5]);
-
-  const hoverAnimation = {
-    y: [0, -8, 0],
-    transition: {
-      duration: 4,
-      repeat: Infinity,
-      ease: "easeInOut" as const,
-    },
-  };
-
-  const hoverAnimation2 = {
-    y: [0, -10, 0],
-    transition: {
-      duration: 5,
-      repeat: Infinity,
-      ease: "easeInOut" as const,
-      delay: 1,
-    },
-  };
-
-  const hoverAnimation3 = {
-    y: [0, -6, 0],
-    transition: {
-      duration: 4.5,
-      repeat: Infinity,
-      ease: "easeInOut" as const,
-      delay: 0.5,
-    },
-  };
-
-  const hoverAnimation4 = {
-    y: [0, -12, 0],
-    transition: {
-      duration: 5.5,
-      repeat: Infinity,
-      ease: "easeInOut" as const,
-      delay: 1.5,
-    },
-  };
+  const rotate0 = useTransform(scrollYProgress, [0, 1], floatingImages[0].rotateRange);
+  const rotate1 = useTransform(scrollYProgress, [0, 1], floatingImages[1].rotateRange);
+  const rotate2 = useTransform(scrollYProgress, [0, 1], floatingImages[2].rotateRange);
+  const rotate3 = useTransform(scrollYProgress, [0, 1], floatingImages[3].rotateRange);
+  const rotateValues = [rotate0, rotate1, rotate2, rotate3];
 
   useEffect(() => {
     const handleOpen = () => setOpen(true);
@@ -79,20 +104,22 @@ export default function ContactSection() {
   }, [open]);
 
   return (
-    // Contact section container
     <section ref={sectionRef} className="section section-padding pt-32! md:pt-40 -mt-16 md:-mt-24 flex flex-col items-center justify-center bg-neutral-dark relative overflow-x-clip overflow-y-visible z-10">
       <div className="relative w-full flex flex-col items-center justify-center min-h-[60svh] max-w-7xl rounded-3xl border border-black/15 p-8 md:p-16 overflow-visible">
+        {/* Background gradient */}
         <div
           className="absolute inset-0 rounded-3xl"
           style={{
             background: "radial-gradient(ellipse 120% 150% at 50% 100%, rgba(146,126,219,1) 0%, rgba(112,161,229,0.8) 27%, rgba(78,195,239,0.8) 54%, rgba(78,195,239,0.8) 100%)",
           }}
         />
+
         {/* Liquid gradient overlay */}
         <div className="absolute inset-0 rounded-3xl overflow-hidden">
           <LiquidBackground opacity={0.4} speed={0.8} zoom={1.0} warpStrength={0.5} />
         </div>
 
+        {/* Content */}
         <div className="relative z-10 flex flex-col items-center justify-center gap-4 md:gap-6 max-w-3xl px-4">
           <h2 className="font-bold font-bw-gradual text-white text-center text-pretty leading-tight tracking-tight" style={{ fontSize: "clamp(2rem, 4vw + 1rem, 3.5rem)" }}>
             {contactData.headline}
@@ -113,85 +140,14 @@ export default function ContactSection() {
           </p>
         </div>
 
-        {/* Top Left (Line Graph) */}
-        <motion.div className="absolute -top-13 md:-top-32 lg:-top-36 xl:-top-44 -left-13 md:-left-20 lg:-left-28 xl:-left-36 w-40 h-36 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-96 xl:h-110 pointer-events-none z-20" style={{ y: y1, rotate: rotate1 }}>
-          <motion.div animate={hoverAnimation} className="w-full h-full opacity-95">
-            <Image src="/images/3d/3dlinegraph.png" alt="3D Line Graph" fill className="object-contain z-999" />
-          </motion.div>
-        </motion.div>
-
-        {/* Top Right (Chat Bubble) */}
-        <motion.div className="absolute -top-13 md:-top-32 lg:-top-36 xl:-top-44 -right-10 md:-right-20 lg:-right-28 xl:-right-36 w-40 h-40 md:w-50 md:h-72 lg:w-62 lg:h-72 xl:w-96 xl:h-110 pointer-events-none z-20" style={{ y: y2, rotate: rotate2 }}>
-          <motion.div animate={hoverAnimation2} className="w-full h-full opacity-95">
-            <Image src="/images/3d/3dchatbubble.png" alt="3D Chat Bubble" fill className="object-contain z-999" />
-          </motion.div>
-        </motion.div>
-
-        {/* Bottom Left (Envelope) */}
-        <motion.div className="absolute -bottom-16 md:-bottom-28 lg:-bottom-32 xl:-bottom-40 -left-12 md:-left-20 lg:-left-28 xl:-left-36 w-40 h-36 md:w-50 md:h-64 lg:w-62 lg:h-72 xl:w-96 xl:h-110 pointer-events-none z-20" style={{ y: y3, rotate: rotate2 }}>
-          <motion.div animate={hoverAnimation3} className="w-full h-full opacity-95">
-            <Image src="/images/3d/3denvelope.png" alt="3D Envelope" fill className="object-contain z-999" />
-          </motion.div>
-        </motion.div>
-
-        {/* Bottom Right (Pie Chart) */}
-        <motion.div className="absolute -bottom-32 md:-bottom-44 lg:-bottom-48 xl:-bottom-56 -right-10 md:-right-20 lg:-right-28 xl:-right-36 w-40 h-36 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-96 xl:h-110 pointer-events-none z-20" style={{ y: y4, rotate: rotate1 }}>
-          <motion.div animate={hoverAnimation4} className="w-full h-full opacity-95">
-            <Image src="/images/3d/3dpiechart.png" alt="3D Pie Chart" fill className="object-contain z-999" />
-          </motion.div>
-        </motion.div>
+        {/* Floating 3D Images */}
+        {floatingImages.map((image, index) => (
+          <Floating3DImage key={image.src} src={image.src} alt={image.alt} positionClasses={image.positionClasses} y={yValues[index]} rotate={rotateValues[index]} hoverAnimation={image.hoverAnimation} />
+        ))}
       </div>
 
-      {/* Contact Modal Popover */}
-      <AnimatePresence>
-        {open && (
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-100 flex items-center justify-center bg-linear-to-br from-violet-500/30 to-cyan-400/60 backdrop-blur-sm shadow-2xl overflow-hidden" style={{ touchAction: "none", overscrollBehavior: "contain" }} onClick={() => setOpen(false)} onWheel={(e) => e.stopPropagation()} onTouchMove={(e) => e.stopPropagation()}>
-            <motion.div className="bg-white rounded-2xl shadow-lg p-6 md:p-10 max-w-5xl w-full flex flex-col items-center gap-6 relative max-h-dvh overflow-y-auto" initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }} transition={{ duration: 0.25 }} onClick={(e) => e.stopPropagation()}>
-              <button className="absolute top-4 right-4 text-black bg-neutral-light rounded-full w-10 h-10 flex items-center justify-center hover:bg-neutral-medium transition-colors border border-neutral-medium" onClick={() => setOpen(false)} aria-label="Close">
-                <X className="cursor-pointer w-6 h-6" />
-              </button>
-
-              <div className="text-xs font-bw-gradual font-semibold text-primary-purple uppercase tracking-wider">{contactData.modal.tagline}</div>
-              <h2 className="text-2xl md:text-3xl font-bw-gradual font-bold text-center text-black">{contactData.modal.headline}</h2>
-
-              {/* Main Content - Two Column Layout */}
-              <div className="w-full flex flex-col md:flex-row gap-8">
-                {/* Left Column - Contact Info */}
-                <div className="w-full md:w-1/3 flex flex-col gap-4 order-2 md:order-1">
-                  {/* Office Locations */}
-                  {contactData.modal.offices.map((office, index) => (
-                    <div key={index} className="p-4 bg-neutral-light rounded-xl border border-neutral-medium">
-                      <h3 className="font-bold text-black mb-2 text-sm">{office.city}</h3>
-                      <p className="font-semibold text-black text-sm">{office.company}</p>
-                      <p className="text-gray-600 text-sm">{office.address}</p>
-                      <p className="text-gray-600 text-sm">{office.postalCity}</p>
-                      <p className="mt-2 text-gray-600 text-sm">{office.phone}</p>
-                    </div>
-                  ))}
-
-                  {/* Email */}
-                  <div className="p-4 bg-neutral-light rounded-xl border border-neutral-medium">
-                    <h3 className="font-bold text-black mb-2 text-sm">{contactData.modal.email.label}</h3>
-                    <a href={`mailto:${contactData.modal.email.address}`} className="text-primary-purple hover:underline font-medium text-sm">
-                      {contactData.modal.email.address}
-                    </a>
-                  </div>
-                </div>
-
-                {/* Right Column - Contact Form */}
-                <div className="w-full md:w-2/3 order-1 md:order-2">
-                  <form className="w-full flex flex-col gap-4">
-                    {contactData.modal.form.fields.map((field, index) => (field.type === "textarea" ? <textarea key={index} placeholder={field.placeholder} required={field.required} className="bg-neutral-light text-black text-body rounded-xl px-4 py-3 border border-neutral-medium focus:border-primary-purple focus:outline-none transition-colors duration-200 min-h-32" /> : <input key={index} type={field.type} placeholder={field.placeholder} required={field.required} className="bg-neutral-light text-black text-body rounded-xl px-4 py-3 border border-neutral-medium focus:border-primary-purple focus:outline-none transition-colors duration-200" />))}
-                    <button type="submit" className="cursor-pointer bg-gradient-primary text-white font-bold rounded-full px-6 py-3 shadow-button transition-colors duration-200 hover:bg-primary-purple">
-                      {contactData.modal.form.submitButton}
-                    </button>
-                  </form>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Contact Modal */}
+      <ContactModal open={open} submitted={submitted} onClose={handleClose} onSubmit={handleSubmit} />
     </section>
   );
 }
