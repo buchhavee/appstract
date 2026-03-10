@@ -39,15 +39,15 @@ export const metadata: Metadata = {
   description: "Designed for shopping together. A native, real-time co-shopping experience embedded directly in your webshop.",
   keywords: ["shared shopping", "co-shopping", "ecommerce", "collaborative commerce"],
   authors: [{ name: "Appstract" }],
-  metadataBase: new URL("https://appstract.co"),
+  metadataBase: new URL("https://appstract.vercel.app"),
   openGraph: {
     title: "Appstract - Shared Shopping Experience",
     description: "A native, real-time co-shopping experience embedded directly in your webshop.",
-    url: "https://appstract.co",
+    url: "https://appstract.vercel.app",
     siteName: "Appstract",
     locale: "en_US",
     type: "website",
-    images: [{ url: "/images/og-image.png", width: 1200, height: 630 }],
+    images: [{ url: "/images/og-image.png", width: 1200, height: 630, alt: "Appstract - Shared Shopping Experience" }],
   },
   twitter: {
     card: "summary_large_image",
