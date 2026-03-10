@@ -146,7 +146,7 @@ export default function Hero() {
       <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.7 }} className="hidden md:flex absolute bottom-16 lg:bottom-20 left-1/2 -translate-x-1/2 gap-3 md:gap-3 lg:gap-8 w-full max-w-[95%] lg:max-w-6xl z-10 px-4">
         {heroData.tabs.map((tab, index) => (
           <motion.div key={index} onClick={() => handleTabClick(index)} className="flex-1 flex flex-col items-center md:px-1 lg:px-4 cursor-pointer transition-all">
-            <span className={`text-sm md:text-base text-center leading-normal mb-3 md:mb-4 transition-opacity duration-500 ${index === activeTab ? "text-white" : "text-white/60"}`}>{tab.label}</span>
+            <span className={`text-sm md:text-base text-nowrap text-center leading-normal mb-3 md:mb-4 transition-opacity duration-500 ${index === activeTab ? "text-white" : "text-white/60"}`}>{tab.label}</span>
 
             {/* Progress bar container */}
             <div className="w-full h-1 bg-white/30 rounded-full overflow-hidden">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import CookieConsent from "@/components/ui/CookieConsent";
 
 const bwGradual = localFont({
   src: [
@@ -60,8 +61,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: "/images/logo-icon.svg",
-    apple: "/images/logo-icon.svg",
+    icon: "/images/logo/logo-icon.svg",
+    apple: "/images/logo/logo-icon.svg",
   },
   appleWebApp: {
     capable: true,
@@ -80,7 +81,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bwGradual.variable} font-sans antialiased overflow-x-hidden`}>{children}</body>
+      <body className={`${bwGradual.variable} font-sans antialiased overflow-x-hidden`}>
+        {children}
+        <CookieConsent />
+      </body>
     </html>
   );
 }

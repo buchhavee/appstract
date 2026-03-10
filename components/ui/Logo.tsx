@@ -33,9 +33,9 @@ export default function Logo({ href = "/", size = "md", className = "" }: LogoPr
   return (
     <Link href={href} className={`flex items-center gap-2 lg:gap-3 ${className}`}>
       <div className={`relative ${sizes.icon} rounded-[10px] overflow-hidden flex items-center justify-center`}>
-        <Image src="/images/logo-icon.svg" alt="" width={40} height={40} className="object-contain" />
+        <Image src="/images/logo/logo-icon.svg" alt="" width={40} height={40} className="object-contain" />
       </div>
-      <Image src="/images/logo-text.svg" alt="Appstract" width={176} height={29} className={`${sizes.text} w-auto object-contain`} />
+      <Image src="/images/logo/logo-text.svg" alt="Appstract" width={176} height={29} className={`${sizes.text} w-auto object-contain`} />
     </Link>
   );
 }

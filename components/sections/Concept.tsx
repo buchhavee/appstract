@@ -69,7 +69,7 @@ export default function Concept() {
             }}
             variants={phoneVariants}
           >
-            <Image src="/images/phone-left.png" alt="Shopping app - Vælg venner" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
+            <Image src="/images/hero/phone-left.png" alt="Shopping app - Vælg venner" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
           </motion.div>
 
           {/* Center Phone */}
@@ -81,7 +81,7 @@ export default function Concept() {
             variants={phoneVariants}
             transition={{ delay: 0.2 }}
           >
-            <Image src="/images/phone-center.png" alt="Shopping app - Shop sammen" width={414} height={896} className="w-full h-auto drop-shadow-2xl" />
+            <Image src="/images/hero/phone-center.png" alt="Shopping app - Shop sammen" width={414} height={896} className="w-full h-auto drop-shadow-2xl" />
           </motion.div>
 
           {/* Right Phone */}
@@ -93,7 +93,7 @@ export default function Concept() {
             variants={phoneVariants}
             transition={{ delay: 0.4 }}
           >
-            <Image src="/images/phone-right.png" alt="Shopping app - Chat" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
+            <Image src="/images/hero/phone-right.png" alt="Shopping app - Chat" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
           </motion.div>
         </motion.div>
 

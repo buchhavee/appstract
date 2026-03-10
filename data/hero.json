@@ -8,28 +8,28 @@
       "label": "Shared Shopping",
       "headline": "Designed for shopping together",
       "description": "Your customers already shop together — just outside your store. Appstract brings conversations, decisions, and collaboration directly into your webshop to increase engagement and conversion.",
-      "image": "/images/hero-bg1.png",
+      "image": "/images/hero/hero-bg1.png",
       "objectPosition": "62% center"
     },
     {
       "label": "Conversion",
       "headline": "When Customers Shop Together, They Buy More",
       "description": "Enable real-time shared shopping where customers invite friends, compare products, and decide together — driving larger baskets and higher conversion rates.",
-      "image": "/images/hero-bg2.png",
+      "image": "/images/hero/hero-bg2.png",
       "objectPosition": "center center"
     },
     {
       "label": "Customer Acquisition",
       "headline": "Let Your Customers Do the Acquisition",
       "description": "Instead of sending links on messaging apps, shoppers can invite friends directly into your store. Turn every visitor into a new acquisition channel.",
-      "image": "/images/hero-bg3.png",
+      "image": "/images/hero/hero-bg3.png",
       "objectPosition": "40% center"
     },
     {
       "label": "Retention",
       "headline": "Keep Conversations Inside Your Store",
       "description": "Customers naturally discuss purchases with friends. Appstract ensures those conversations—and the buying decisions—happen on your site, not on messaging platforms.",
-      "image": "/images/hero-bg4.png",
+      "image": "/images/hero/hero-bg4.png",
       "objectPosition": "55% center"
     }
   ]

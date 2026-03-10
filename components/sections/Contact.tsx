@@ -116,28 +116,28 @@ export default function ContactSection() {
         {/* Top Left (Line Graph) */}
         <motion.div className="absolute -top-13 md:-top-32 lg:-top-36 xl:-top-44 -left-13 md:-left-20 lg:-left-28 xl:-left-36 w-40 h-36 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-96 xl:h-110 pointer-events-none z-20" style={{ y: y1, rotate: rotate1 }}>
           <motion.div animate={hoverAnimation} className="w-full h-full opacity-95">
-            <Image src="/images/3dlinegraph.png" alt="3D Line Graph" fill className="object-contain z-999" />
+            <Image src="/images/3d/3dlinegraph.png" alt="3D Line Graph" fill className="object-contain z-999" />
           </motion.div>
         </motion.div>
 
         {/* Top Right (Chat Bubble) */}
         <motion.div className="absolute -top-13 md:-top-32 lg:-top-36 xl:-top-44 -right-10 md:-right-20 lg:-right-28 xl:-right-36 w-40 h-40 md:w-50 md:h-72 lg:w-62 lg:h-72 xl:w-96 xl:h-110 pointer-events-none z-20" style={{ y: y2, rotate: rotate2 }}>
           <motion.div animate={hoverAnimation2} className="w-full h-full opacity-95">
-            <Image src="/images/3dchatbubble.png" alt="3D Chat Bubble" fill className="object-contain z-999" />
+            <Image src="/images/3d/3dchatbubble.png" alt="3D Chat Bubble" fill className="object-contain z-999" />
           </motion.div>
         </motion.div>
 
         {/* Bottom Left (Envelope) */}
         <motion.div className="absolute -bottom-16 md:-bottom-28 lg:-bottom-32 xl:-bottom-40 -left-12 md:-left-20 lg:-left-28 xl:-left-36 w-40 h-36 md:w-50 md:h-64 lg:w-62 lg:h-72 xl:w-96 xl:h-110 pointer-events-none z-20" style={{ y: y3, rotate: rotate2 }}>
           <motion.div animate={hoverAnimation3} className="w-full h-full opacity-95">
-            <Image src="/images/3denvelope.png" alt="3D Envelope" fill className="object-contain z-999" />
+            <Image src="/images/3d/3denvelope.png" alt="3D Envelope" fill className="object-contain z-999" />
           </motion.div>
         </motion.div>
 
         {/* Bottom Right (Pie Chart) */}
         <motion.div className="absolute -bottom-32 md:-bottom-44 lg:-bottom-48 xl:-bottom-56 -right-10 md:-right-20 lg:-right-28 xl:-right-36 w-40 h-36 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-96 xl:h-110 pointer-events-none z-20" style={{ y: y4, rotate: rotate1 }}>
           <motion.div animate={hoverAnimation4} className="w-full h-full opacity-95">
-            <Image src="/images/3dpiechart.png" alt="3D Pie Chart" fill className="object-contain z-999" />
+            <Image src="/images/3d/3dpiechart.png" alt="3D Pie Chart" fill className="object-contain z-999" />
           </motion.div>
         </motion.div>
       </div>

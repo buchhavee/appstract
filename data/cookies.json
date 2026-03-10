@@ -1,0 +1,41 @@
+{
+  "texts": {
+    "title": "We're using cookies",
+    "description": "We use cookies to improve your experience and analyze our traffic.",
+    "learnMore": "Learn more",
+    "accept": "Accept all",
+    "reject": "Reject",
+    "customize": "Customize settings",
+    "save": "Save settings",
+    "settingsButton": "Cookies",
+    "privacy": "Privacy Policy",
+    "cookie": "Cookie Policy",
+    "imprint": "Terms of Service"
+  },
+  "categories": {
+    "necessary": {
+      "name": "Necessary",
+      "description": "These cookies are essential for the website to function correctly."
+    },
+    "functional": {
+      "name": "Functional",
+      "description": "These cookies allow us to remember your preferences."
+    },
+    "analytics": {
+      "name": "Analytics",
+      "description": "These cookies help us understand how visitors interact with our website."
+    },
+    "marketing": {
+      "name": "Marketing",
+      "description": "These cookies are used to show you relevant advertisements."
+    }
+  },
+  "links": {
+    "privacy": "/privacy",
+    "cookie": "/cookies",
+    "imprint": "/terms"
+  },
+  "settings": {
+    "expiryDays": 365
+  }
+}

@@ -2,7 +2,7 @@
   "cases": [
     {
       "name": "Bahne",
-      "logo": "/images/bahne.svg",
+      "logo": "/images/cases/bahne.svg",
       "tagLabel": "CASE",
       "description": "Full integration of Appstract's shared shopping experience into Bahne's e-commerce platform",
       "featured": true,
@@ -16,15 +16,15 @@
           { "label": "AOV increase", "value": "+18%" }
         ],
         "images": [
-          { "src": "/images/case-bahne1.png", "title": "Shop Together", "description": "Invite friends to browse and shop with you in real-time" },
-          { "src": "/images/case-bahne2.png", "title": "Live Reactions", "description": "See what your friends think about products instantly" },
-          { "src": "/images/case-bahne3.png", "title": "Shared Cart", "description": "Build a cart together and split purchases easily" }
+          { "src": "/images/cases/case-bahne1.png", "title": "Shop Together", "description": "Invite friends to browse and shop with you in real-time" },
+          { "src": "/images/cases/case-bahne2.png", "title": "Live Reactions", "description": "See what your friends think about products instantly" },
+          { "src": "/images/cases/case-bahne3.png", "title": "Shared Cart", "description": "Build a cart together and split purchases easily" }
         ]
       }
     },
     {
       "name": "Botané Studios",
-      "logo": "/images/botane.svg",
+      "logo": "/images/cases/botane.svg",
       "tagLabel": "CASE",
       "description": "Full integration of Appstract's shared shopping experience into Botáne Studios' e-commerce platform",
       "featured": false,
@@ -38,9 +38,9 @@
           { "label": "Engagement rate", "value": "+41%" }
         ],
         "images": [
-          { "src": "/images/phone-center.png", "title": "Curated Collections", "description": "Share your favorite skincare products with friends" },
-          { "src": "/images/phone-center.png", "title": "Video Chat", "description": "Get real-time feedback while browsing together" },
-          { "src": "/images/phone-center.png", "title": "Wishlists", "description": "Create shared wishlists for gift ideas" }
+          { "src": "/images/hero/phone-center.png", "title": "Curated Collections", "description": "Share your favorite skincare products with friends" },
+          { "src": "/images/hero/phone-center.png", "title": "Video Chat", "description": "Get real-time feedback while browsing together" },
+          { "src": "/images/hero/phone-center.png", "title": "Wishlists", "description": "Create shared wishlists for gift ideas" }
         ]
       }
     },

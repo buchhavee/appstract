@@ -47,7 +47,7 @@ export default function Results() {
       />
 
       <div className="w-full max-w-7xl">
-        <div className="flex flex-col lg:flex-row gap-10 md:gap-14 lg:gap-20 items-center min-w-0">
+        <div className="flex flex-col lg:flex-row gap-10 md:gap-14 lg:gap-10 xl:gap-20 items-center min-w-0">
           <motion.div className="flex-1 flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
             <div className="flex flex-col gap-4">
               <motion.div variants={fadeInUp} className="flex items-center">
@@ -121,9 +121,9 @@ export default function Results() {
             </motion.div>
           </motion.div>
 
-          <motion.div ref={imageRef} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeInRight} className="relative min-w-0 w-screen md:w-full lg:w-126.5 h-75 sm:h-100 lg:h-135 md:rounded-[25px] overflow-hidden order-last md:order-last lg:order-last -mx-4 md:mx-0">
+          <motion.div ref={imageRef} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeInRight} className="relative min-w-0 w-screen md:w-full lg:w-100 xl:w-126.5 h-75 sm:h-100 lg:h-115 xl:h-135 md:rounded-[25px] overflow-hidden order-last md:order-last lg:order-last -mx-4 md:mx-0">
             <motion.div className="absolute inset-0 -top-[15%] h-[130%]" style={{ y }}>
-              <Image src="/images/results-image.png" alt="Results" fill className="object-cover object-[65%_center]" />
+              <Image src="/images/results/results-image.png" alt="Results" fill className="object-cover object-[65%_center]" />
             </motion.div>
           </motion.div>
         </div>
