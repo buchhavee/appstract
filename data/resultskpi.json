@@ -2,57 +2,68 @@
   "title": "Key Performance Indicators",
   "kpis": [
     {
-      "label": "Average Order Value (AOV) increase",
+      "label": "AOV - Average Order Value",
+      "trend": "increase",
       "leftIcon": "BadgeDollarSign",
       "arrow": "MoveUpRight"
     },
     {
-      "label": "Customer Acquisition Cost (CAC) decrease",
+      "label": "CAC - Customer Acquisition Cost",
+      "trend": "decrease",
       "leftIcon": "TrendingDown",
       "arrow": "MoveDownRight"
     },
     {
-      "label": "Customer Retention Rate (CRR) increase",
+      "label": "CRR - Customer Retention Rate",
+      "trend": "increase",
       "leftIcon": "Repeat",
       "arrow": "MoveUpRight"
     },
     {
-      "label": "Return Rate (RR) decrease",
+      "label": "RR - Return Rate",
+      "trend": "decrease",
       "leftIcon": "PackageCheck",
       "arrow": "MoveDownRight"
     },
     {
-      "label": "Abandoned Cart Rate (ACR) decrease",
+      "label": "ACR - Abandoned Cart Rate",
+      "trend": "decrease",
       "leftIcon": "ShoppingCart",
       "arrow": "MoveDownRight"
     },
     {
-      "label": "Conversion Rate (CR) increase",
+      "label": "CR - Conversion Rate",
+      "trend": "increase",
       "leftIcon": "Target",
       "arrow": "MoveUpRight"
     },
     {
-      "label": "Customer Lifetime Value (CLV) increase",
+      "label": "CLV - Customer Lifetime Value",
+      "trend": "increase",
       "leftIcon": "Gem",
       "arrow": "MoveUpRight"
     },
     {
-      "label": "Customer Referral Rate (CRR) increase",
+      "label": "CRR - Customer Referral Rate",
+      "trend": "increase",
       "leftIcon": "Share2",
       "arrow": "MoveUpRight"
     },
     {
-      "label": "Share of Wallet (SOW) increase",
+      "label": "SOW - Share of Wallet",
+      "trend": "increase",
       "leftIcon": "Wallet",
       "arrow": "MoveUpRight"
     },
     {
-      "label": "Abandoned Cart Rate - Retail (ACR) decrease",
+      "label": "ACR - Abandoned Cart Rate - Retail",
+      "trend": "decrease",
       "leftIcon": "ShoppingCart",
       "arrow": "MoveDownRight"
     },
     {
-      "label": "Email Sign-ups added",
+      "label": "Email Sign-ups",
+      "trend": "added",
       "leftIcon": "Mails",
       "arrow": "CirclePlus"
     }

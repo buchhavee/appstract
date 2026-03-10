@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, Fragment } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { BarChart3, ShoppingCart, ChevronRight, ChevronLeft, BadgeDollarSign, TrendingDown, Repeat, PackageCheck, Target, Gem, Share2, Wallet, Mails, CirclePlus } from "lucide-react";
@@ -40,9 +40,10 @@ export default function Results() {
   return (
     <section className="relative w-full bg-white py-12 md:py-24 px-4 md:px-8 flex justify-center overflow-x-hidden">
       <div
-        className="absolute left-0 right-0 h-20 md:h-20 lg:h-20 pointer-events-none -top-16 md:-top-20 lg:-top-12"
+        className="absolute left-0 right-0 h-28 md:h-32 lg:h-30 pointer-events-none -top-12 md:-top-16 lg:-top-8"
         style={{
-          background: "linear-gradient(to bottom, #4CC9F040 20%, rgba(255,255,255,0) 100%)",
+          background: "linear-gradient(to bottom, #6d5efcB0 0%, #4CC9F090 40%, rgba(255,255,255,0) 100%)",
+          opacity: 0.7,
         }}
       />
 
@@ -76,9 +77,8 @@ export default function Results() {
               {resultsData.features.map((feature, index) => {
                 const Icon = iconMap[feature.icon];
                 return (
-                  <>
+                  <Fragment key={index}>
                     <motion.div
-                      key={index}
                       className="grid grid-rows-[auto_minmax(3.5rem,auto)_auto] gap-3 md:gap-4"
                       initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
@@ -94,7 +94,7 @@ export default function Results() {
                       <p className="font-normal text-neutral-medium leading-normal text-base md:text-lg">{feature.description}</p>
                     </motion.div>
                     {index === 0 && <div className="hidden sm:block w-px bg-black/20" />}
-                  </>
+                  </Fragment>
                 );
               })}
             </motion.div>
@@ -163,7 +163,10 @@ export default function Results() {
                               <div className="flex items-center justify-center w-8 h-8 md:w-9 md:h-9 rounded-lg shrink-0" style={{ background: "linear-gradient(135deg, #6d5efc, #4cc9f0)" }}>
                                 {LeftIcon && <LeftIcon className="w-4 h-4 md:w-4.5 md:h-4.5 text-white" />}
                               </div>
-                              <span className="text-sm md:text-base text-black font-medium leading-snug">{kpi.label}</span>
+                              <div className="flex flex-col">
+                                <span className="text-sm md:text-base text-black font-medium leading-snug">{kpi.label}</span>
+                                <span className={`text-xs font-medium capitalize ${kpi.trend === "increase" || kpi.trend === "added" ? "text-green-600" : "text-red-500"}`}>{kpi.trend}</span>
+                              </div>
                             </motion.li>
                           );
                         })}
@@ -179,7 +182,10 @@ export default function Results() {
                               <div className="flex items-center justify-center w-8 h-8 md:w-9 md:h-9 rounded-lg shrink-0" style={{ background: "linear-gradient(135deg, #6d5efc, #4cc9f0)" }}>
                                 {LeftIcon && <LeftIcon className="w-4 h-4 md:w-4.5 md:h-4.5 text-white" />}
                               </div>
-                              <span className="text-sm md:text-base text-black font-medium leading-snug">{kpi.label}</span>
+                              <div className="flex flex-col">
+                                <span className="text-sm md:text-base text-black font-medium leading-snug">{kpi.label}</span>
+                                <span className={`text-xs font-medium capitalize ${kpi.trend === "increase" || kpi.trend === "added" ? "text-green-600" : "text-red-500"}`}>{kpi.trend}</span>
+                              </div>
                             </motion.li>
                           );
                         })}
