@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import "./globals.css";
 
 const bwGradual = localFont({
@@ -80,7 +81,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bwGradual.variable} font-sans antialiased overflow-x-hidden`}>{children}</body>
+      <body className={`${bwGradual.variable} font-sans antialiased overflow-x-hidden`}>
+        {children}
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
