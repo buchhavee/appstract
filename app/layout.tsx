@@ -73,7 +73,11 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#6D5EFC",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#6D5EFC" },
+    { media: "(prefers-color-scheme: dark)", color: "#6D5EFC" },
+  ],
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -83,7 +87,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bwGradual.variable} font-sans antialiased overflow-x-hidden`}>
+      <body className={`${bwGradual.variable} font-sans antialiased overflow-x-hidden bg-black`}>
         {children}
         <CookieConsent />
         <SpeedInsights />
