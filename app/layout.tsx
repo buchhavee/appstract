@@ -87,7 +87,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${bwGradual.variable} font-sans antialiased overflow-x-hidden bg-black`}>
+      <body className={`${bwGradual.variable} font-sans antialiased overflow-x-hidden`}>
         {children}
         <CookieConsent />
         <SpeedInsights />
