@@ -2,9 +2,9 @@
 
 **Live demo:** [appstract.vercel.app](https://appstract.vercel.app)
 
-Appstract er en landingpage for et fiktivt SaaS-produkt, der tilbyder en co-shopping-oplevelse, som kan integreres direkte i eksisterende webshops. Idéen bag produktet er, at brugere kan shoppe sammen i realtid – dele kurve, chatte og få fælles anbefalinger.
+Dette er en landingpage for Appstract, der tilbyder en shared shopping/co-shopping-oplevelse, som kan integreres direkte i eksisterende webshops. Idéen bag produktet er, at brugere kan shoppe sammen i realtid – dele kurve, chatte og få fælles anbefalinger.
 
-Projektet er udviklet som del af 4. semester på KEA (Københavns Erhvervsakademi) og fungerer som en moderne, animeret one-page marketingside, der demonstrerer produktets koncept og værdi.
+Projektet fungerer som en moderne, animeret one-page marketingside, der demonstrerer produktets koncept og værdi.
 
 ---
 
@@ -122,7 +122,7 @@ Root layout eksporterer udførlig metadata inklusiv Open Graph-tags, Twitter Car
 
 ### Font
 
-Projektet bruger skrifttypen **Bw Gradual DEMO**, som er indlæst lokalt via `next/font/local` i flere vægte (Light, Regular, Medium, Bold, ExtraBold) med `font-display: swap` for optimal loading.
+Projektet bruger skrifttypen **Bw Gradual**, som er indlæst lokalt via `next/font/local` i flere vægte (Light, Regular, Medium, Bold, ExtraBold) med `font-display: swap` for optimal loading.
 
 ### Cookie consent
 
