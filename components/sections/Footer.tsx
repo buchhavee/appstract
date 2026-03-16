@@ -38,9 +38,9 @@ export default function Footer() {
               {footerData.offices.map((office, index) => (
                 <div key={index} className="flex flex-row gap-8 sm:gap-16">
                   <div className="flex flex-col gap-2">
-                    <h4 className="text-sm font-bold text-white">{office.city}</h4>
+                    <h4 className="text-sm font-bw-gradual font-bold text-white">{office.city}</h4>
                     {office.lines.map((line, li) => (
-                      <p key={li} className="text-sm text-white/80 leading-relaxed">
+                      <p key={li} className="text-sm font-bw-gradual text-white/80 leading-relaxed">
                         {line}
                       </p>
                     ))}
@@ -53,7 +53,7 @@ export default function Footer() {
             {/* Links */}
             <nav className="flex gap-12 text-sm text-white">
               {/* Left column */}
-              <div className="flex flex-col order-2 md:order-1 lg:order-1 gap-3">
+              <div className="flex flex-col font-bw-gradual order-2 md:order-1 lg:order-1 gap-3">
                 {footerData.links
                   .filter((l) => l.label === "LinkedIn" || l.label === "Contact")
                   .map((link, index) =>
@@ -74,7 +74,7 @@ export default function Footer() {
                   )}
               </div>
               {/* Right column */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col font-bw-gradual gap-3">
                 {footerData.links
                   .filter((l) => l.label !== "LinkedIn" && l.label !== "Contact")
                   .map((link, index) => (
@@ -91,7 +91,7 @@ export default function Footer() {
             <div className="w-full h-px bg-white/30" />
 
             {/* Copyright */}
-            <p className="text-xs text-white/70">{footerData.copyright}</p>
+            <p className="text-xs font-bw-gradual text-white/70">{footerData.copyright}</p>
           </div>
         </div>
       </div>

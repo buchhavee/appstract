@@ -68,7 +68,7 @@ export default function DesktopNavLinks({ links, onLinkClick, className = "" }: 
             setHoveredIndex(index);
             measurePill(index);
           }}
-          className="relative text-base font-medium leading-normal text-white! cursor-pointer px-4 py-2 rounded-full transition-colors duration-200 z-10"
+          className="relative text-base font-bw-gradual font-medium leading-normal text-white! cursor-pointer px-4 py-2 rounded-full transition-colors duration-200 z-10"
         >
           {link.label}
         </button>

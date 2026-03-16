@@ -103,7 +103,7 @@ export default function ConicButton({ children, onClick, className = "", borderC
         }}
       >
         <span
-          className="font-medium"
+          className="font-medium font-bw-gradual"
           style={{
             color: textColor,
             textAlign: "center",

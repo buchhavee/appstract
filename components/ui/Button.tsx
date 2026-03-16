@@ -47,7 +47,7 @@ export default function Button({ children, href, variant = "primary", size = "md
           />
         </div>
       )}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center font-bw-gradual gap-2">
         <span className={`relative z-10 ${variant === "primary" || variant === "expand" ? "text-black group-hover:text-white" : "text-black"} transition-colors duration-300`}>{children}</span>
         {icon && <ChevronRight className={`relative z-10 w-5 h-5 ${variant === "primary" || variant === "expand" ? "text-black group-hover:text-white" : ""} transition-colors duration-300`} />}
       </div>

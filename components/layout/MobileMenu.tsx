@@ -109,7 +109,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                           borderBottomColor: "rgba(255,255,255,0.06)",
                         }}
                       >
-                        <span className="text-white text-4xl sm:text-5xl font-normal tracking-tight leading-none transition-colors duration-250" style={{ letterSpacing: "-0.02em" }} onMouseEnter={(e) => (e.currentTarget.style.color = "#6366f1")} onMouseLeave={(e) => (e.currentTarget.style.color = "#fff")}>
+                        <span className="text-white text-4xl sm:text-5xl font-bw-gradual font-normal tracking-tight leading-none transition-colors duration-250" style={{ letterSpacing: "-0.02em" }} onMouseEnter={(e) => (e.currentTarget.style.color = "#6366f1")} onMouseLeave={(e) => (e.currentTarget.style.color = "#fff")}>
                           {link.label}
                         </span>
                       </button>
