@@ -56,10 +56,10 @@ export default function Results() {
               </motion.div>
 
               <div className="pb-8 flex flex-col gap-6 md:gap-10 max-w-3xl">
-                <motion.h2 variants={fadeInUp} className="gradient-text font-bold leading-tight text-3xl md:text-3xl lg:text-3xl">
+                <motion.h2 variants={fadeInUp} className="gradient-text font-bold font-bw-gradual leading-tight text-3xl md:text-3xl lg:text-3xl">
                   {resultsData.headline}
                 </motion.h2>
-                <motion.p variants={fadeInUp} className="font-normal text-black leading-normal text-base md:text-lg">
+                <motion.p variants={fadeInUp} className="font-normal font-bw-gradual text-black leading-normal text-base md:text-lg">
                   {resultsData.description}
                 </motion.p>
               </div>
