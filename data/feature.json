@@ -61,19 +61,19 @@
         "isRight": false
       },
       {
-        "sender": "Appstract",
-        "message": "Yes. Invite 2 friends to unlock 10% group discount.",
-        "isAssistant": true,
+        "sender": "Oliver",
+        "message": "Yes. If we buy 2 or more we get a 10% discount!",
+        "isAssistant": false,
         "isRight": false
       },
       {
         "sender": "Emma",
-        "message": "Nice — sending the link now.",
+        "message": "Nice — sending the link now!",
         "isRight": true
       },
       {
         "sender": "Maya",
-        "message": "I'm in. Ordering mine.",
+        "message": "I'm in! Let's ",
         "isRight": false
       }
     ],

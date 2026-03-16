@@ -8,3 +8,4 @@ export { default as Logo } from "./Logo";
 export { default as RotatingCardStack } from "./RotatingCardStack";
 export { default as SpotlightCard } from "./SpotlightCard";
 export { default as Tag } from "./Tag";
+export { default as Modal } from "./Modal";

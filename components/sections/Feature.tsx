@@ -22,8 +22,8 @@ function ChatMessage({ sender, message, isAssistant = false, isRight = false, de
   return (
     <motion.div className={`flex flex-col gap-1 ${alignment}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: delay * 0.1 }}>
       <div className={`flex items-center gap-2 ${flexDir}`}>
-        <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${isAssistant ? "bg-linear-to-br from-violet-500 to-cyan-400" : isRight ? "bg-linear-to-br from-cyan-400 to-cyan-600" : "bg-linear-to-br from-emerald-400 to-emerald-600"}`}>{isAssistant ? "✨" : sender.charAt(0)}</div>
-        <span className="text-xs text-white/60">{sender}</span>
+        <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${isAssistant ? "bg-linear-to-br from-violet-500 to-cyan-400" : isRight ? "bg-linear-to-br from-cyan-400 to-cyan-600" : "bg-linear-to-br from-purple-400 to-purple-600"}`}>{isAssistant ? "✨" : sender.charAt(0)}</div>
+        <span className="text-xs text-black/60">{sender}</span>
       </div>
       <div className={`rounded-2xl px-4 py-3 max-w-[85%] ${bubbleMargin} ${isAssistant ? "bg-neutral-800 border border-white/10" : isRight ? "bg-cyan-600/30 border border-cyan-400/20" : "bg-neutral-700/50"}`}>
         <p className="text-sm text-white/90 leading-relaxed">{message}</p>
@@ -45,7 +45,7 @@ function ChatMessage({ sender, message, isAssistant = false, isRight = false, de
 // Chat illustration component
 function ChatIllustration() {
   return (
-    <div className="relative w-full rounded-2xl bg-neutral-900/50 p-4">
+    <div className="relative w-full rounded-2xl bg-white/50 p-4">
       <div className="flex flex-col gap-3">
         {featureData.chat.messages.map((msg, index) => (
           <ChatMessage key={index} sender={msg.sender} message={msg.message} isAssistant={msg.isAssistant} isRight={msg.isRight} delay={index} />
@@ -75,14 +75,13 @@ export default function Feature() {
       }}
     >
       <div className="w-full max-w-7xl flex flex-col items-center">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div className="flex flex-col items-center max-w-3xl text-center mb-12 md:mb-16" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
           {/* Tag */}
           <motion.div variants={fadeInUp}>
             <Tag variant="dark">{featureData.tagline}</Tag>
           </motion.div>
 
-          {/* Headline */}
           <motion.div className="mt-6" variants={fadeInUp}>
             <h2 className="font-bw-gradual font-bold leading-tight text-white" style={{ fontSize: "clamp(32px, 6vw, 64px)" }}>
               {featureData.headline.line1}
@@ -91,9 +90,9 @@ export default function Feature() {
           </motion.div>
         </motion.div>
 
-        {/* Cards Grid */}
+        {/* Cards */}
         <motion.div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={staggerContainer}>
-          {/* Left Card - Chat */}
+          {/* Left Card */}
           <motion.div variants={fadeInUp}>
             <SpotlightCard
               className="h-full"
@@ -106,7 +105,6 @@ export default function Feature() {
               }}
             >
               <div className="p-6 md:p-8">
-                {/* Card Header */}
                 <div className="text-center mb-6">
                   <h3 className="text-xl md:text-2xl font-semibold text-white mb-3">{featureData.cards[0].title}</h3>
                   <p className="text-sm md:text-base text-white/80 leading-relaxed max-w-md mx-auto">{featureData.cards[0].description}</p>
@@ -118,7 +116,7 @@ export default function Feature() {
             </SpotlightCard>
           </motion.div>
 
-          {/* Right Card - Market */}
+          {/* Right Card */}
           <motion.div variants={fadeInUp}>
             <SpotlightCard
               className="h-full"
@@ -131,13 +129,12 @@ export default function Feature() {
               }}
             >
               <div className="p-6 md:p-8">
-                {/* Card Header */}
                 <div className="text-center mb-8">
                   <h3 className="text-xl md:text-2xl font-semibold text-white mb-3">{featureData.cards[1].title}</h3>
                   <p className="text-sm md:text-base text-white/80 leading-relaxed max-w-md mx-auto">{featureData.cards[1].description}</p>
                 </div>
 
-                {/* Rotating Card Stack */}
+                {/* Card Stack */}
                 <div className="flex flex-col items-center justify-center pb-8">
                   <RotatingCardStack items={carouselItems} autoRotate={true} rotationInterval={4000} className="w-full max-w-sm" />
                 </div>

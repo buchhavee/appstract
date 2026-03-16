@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useRef, Fragment } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { BarChart3, ShoppingCart, ChevronRight, ChevronLeft, BadgeDollarSign, TrendingDown, Repeat, PackageCheck, Target, Gem, Share2, Wallet, Mails, CirclePlus } from "lucide-react";
-import { Tag } from "@/components/ui";
+import { BarChart3, ShoppingCart, ChevronRight, BadgeDollarSign, TrendingDown, Repeat, PackageCheck, Target, Gem, Share2, Wallet, Mails, CirclePlus } from "lucide-react";
+import { Tag, Button, Modal } from "@/components/ui";
 import resultsData from "@/data/results.json";
 import kpiData from "@/data/resultskpi.json";
 import { fadeInUp, fadeInRight, staggerContainer } from "@/lib/animations";
@@ -50,21 +50,13 @@ export default function Results() {
       <div className="w-full max-w-7xl">
         <div className="flex flex-col lg:flex-row gap-10 md:gap-14 lg:gap-10 xl:gap-20 items-center min-w-0">
           <motion.div className="flex-1 flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-6 md:gap-8">
               <motion.div variants={fadeInUp} className="flex items-center">
                 <Tag>{resultsData.tagline}</Tag>
               </motion.div>
 
-              <div className="flex flex-col gap-4 md:gap-6">
-                <motion.h2
-                  variants={fadeInUp}
-                  className="font-bold leading-tight bg-clip-text text-3xl md:text-3xl lg:text-3xl"
-                  style={{
-                    backgroundImage: "linear-gradient(161deg, #6D5EFC 0%, #4CC9F0 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
+              <div className="pb-8 flex flex-col gap-6 md:gap-10 max-w-3xl">
+                <motion.h2 variants={fadeInUp} className="gradient-text font-bold leading-tight text-3xl md:text-3xl lg:text-3xl">
                   {resultsData.headline}
                 </motion.h2>
                 <motion.p variants={fadeInUp} className="font-normal text-black leading-normal text-base md:text-lg">
@@ -100,24 +92,9 @@ export default function Results() {
             </motion.div>
 
             <motion.div variants={fadeInUp} className="flex gap-6 items-center">
-              <button onClick={() => setOpen(true)} className="group relative inline-flex items-center justify-center gap-2 font-medium leading-normal rounded-full cursor-pointer overflow-hidden bg-white outline outline-black/10 shadow-(--shadow-button) hover:shadow-(--shadow-md) transition-shadow duration-300 min-h-12 px-6 py-3 text-[1rem]">
-                <div className="absolute inset-0 flex items-center justify-center z-1 pointer-events-none">
-                  <div
-                    className="w-40 h-40 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-400 group-hover:w-40 group-hover:h-40"
-                    style={{
-                      background: "linear-gradient(135deg, #6D5EFC 0%, #4CC9F0 100%)",
-                      filter: "blur(30px)",
-                      width: "200px",
-                      height: "200px",
-                      animation: "spin-slow 6s linear infinite",
-                    }}
-                  />
-                </div>
-                <span className="relative z-10 flex items-center gap-2 text-black/80 group-hover:text-white transition-colors duration-300">
-                  {resultsData.actions.label}
-                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-              </button>
+              <Button onClick={() => setOpen(true)} icon>
+                {resultsData.actions.label}
+              </Button>
             </motion.div>
           </motion.div>
 
@@ -129,75 +106,57 @@ export default function Results() {
         </div>
       </div>
 
-      <AnimatePresence>
-        {open && (
-          <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.25 }} className="fixed inset-0 z-100 flex items-center justify-center bg-linear-to-br from-violet-500/30 to-cyan-400/60 backdrop-blur-sm shadow-2xl overflow-hidden" style={{ touchAction: "none", overscrollBehavior: "contain" }} onClick={() => setOpen(false)} onWheel={(e) => e.stopPropagation()} onTouchMove={(e) => e.stopPropagation()}>
-            <motion.div className="bg-white lg:pr-18 md:rounded-2xl shadow-lg max-w-3xl md:max-w-4xl lg:max-w-5xl w-full flex flex-col md:flex-row relative max-h-dvh overflow-y-auto mx-0 md:mx-0 h-full md:h-auto" initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 40, opacity: 0 }} transition={{ duration: 0.25 }} onClick={(e) => e.stopPropagation()}>
-              <button className="hidden md:flex flex-col items-center justify-start gap-1 pt-12 px-5 text-neutral-medium hover:text-black transition-colors cursor-pointer shrink-0" onClick={() => setOpen(false)} aria-label="Back">
-                <ChevronLeft className="w-4 h-4" />
-                <span className="text-[10px] font-medium uppercase tracking-wider">Back</span>
-              </button>
+      <Modal open={open} onClose={() => setOpen(false)} panelClassName="lg:pr-18">
+        <div className="flex flex-col gap-2">
+          <div className="text-xs font-bw-gradual font-semibold text-primary-purple uppercase tracking-wider">Results</div>
+          <h2 className="text-xl md:text-3xl font-bw-gradual font-bold text-black">{kpiData.title}</h2>
+        </div>
 
-              <div className="flex flex-col gap-6 md:gap-8 p-6 md:p-12 flex-1 min-w-0">
-                <button className="flex md:hidden items-center gap-1 text-neutral-medium hover:text-black transition-colors cursor-pointer self-start" onClick={() => setOpen(false)} aria-label="Back">
-                  <ChevronLeft className="w-4 h-4" />
-                  <span className="text-xs font-medium uppercase tracking-wider">Back</span>
-                </button>
-
-                <div className="flex flex-col gap-2">
-                  <div className="text-xs font-bw-gradual font-semibold text-primary-purple uppercase tracking-wider">Results</div>
-                  <h2 className="text-xl md:text-3xl font-bw-gradual font-bold text-black">{kpiData.title}</h2>
-                </div>
-
-                {(() => {
-                  const half = Math.ceil(kpiData.kpis.length / 2);
-                  const leftCol = kpiData.kpis.slice(0, half);
-                  const rightCol = kpiData.kpis.slice(half);
+        {(() => {
+          const half = Math.ceil(kpiData.kpis.length / 2);
+          const leftCol = kpiData.kpis.slice(0, half);
+          const rightCol = kpiData.kpis.slice(half);
+          return (
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-5 md:gap-8">
+              <ul className="flex flex-col gap-4 md:gap-5">
+                {leftCol.map((kpi, index) => {
+                  const LeftIcon = kpiIconMap[kpi.leftIcon];
                   return (
-                    <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] gap-5 md:gap-8">
-                      <ul className="flex flex-col gap-4 md:gap-5">
-                        {leftCol.map((kpi, index) => {
-                          const LeftIcon = kpiIconMap[kpi.leftIcon];
-                          return (
-                            <motion.li key={index} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: index * 0.04 }} className="flex items-center gap-3 md:gap-4">
-                              <div className="flex items-center justify-center w-8 h-8 md:w-9 md:h-9 rounded-lg shrink-0" style={{ background: "linear-gradient(135deg, #6d5efc, #4cc9f0)" }}>
-                                {LeftIcon && <LeftIcon className="w-4 h-4 md:w-4.5 md:h-4.5 text-white" />}
-                              </div>
-                              <div className="flex flex-col">
-                                <span className="text-sm md:text-base text-black font-medium leading-snug">{kpi.label}</span>
-                                <span className={`text-xs font-medium capitalize ${kpi.trend === "increase" || kpi.trend === "added" ? "text-green-600" : "text-red-500"}`}>{kpi.trend}</span>
-                              </div>
-                            </motion.li>
-                          );
-                        })}
-                      </ul>
-
-                      <div className="hidden md:block w-px bg-black/10" />
-
-                      <ul className="flex flex-col gap-4 md:gap-5">
-                        {rightCol.map((kpi, index) => {
-                          const LeftIcon = kpiIconMap[kpi.leftIcon];
-                          return (
-                            <motion.li key={index} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: (index + half) * 0.04 }} className="flex items-center gap-3 md:gap-4">
-                              <div className="flex items-center justify-center w-8 h-8 md:w-9 md:h-9 rounded-lg shrink-0" style={{ background: "linear-gradient(135deg, #6d5efc, #4cc9f0)" }}>
-                                {LeftIcon && <LeftIcon className="w-4 h-4 md:w-4.5 md:h-4.5 text-white" />}
-                              </div>
-                              <div className="flex flex-col">
-                                <span className="text-sm md:text-base text-black font-medium leading-snug">{kpi.label}</span>
-                                <span className={`text-xs font-medium capitalize ${kpi.trend === "increase" || kpi.trend === "added" ? "text-green-600" : "text-red-500"}`}>{kpi.trend}</span>
-                              </div>
-                            </motion.li>
-                          );
-                        })}
-                      </ul>
-                    </div>
+                    <motion.li key={index} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: index * 0.04 }} className="flex items-center gap-3 md:gap-4">
+                      <div className="flex items-center justify-center w-8 h-8 md:w-9 md:h-9 rounded-lg shrink-0" style={{ background: "var(--gradient-primary)" }}>
+                        {LeftIcon && <LeftIcon className="w-4 h-4 md:w-4.5 md:h-4.5 text-white" />}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-sm md:text-base text-black font-medium leading-snug">{kpi.label}</span>
+                        <span className={`text-xs font-medium capitalize ${kpi.trend === "increase" || kpi.trend === "added" ? "text-green-600" : "text-red-500"}`}>{kpi.trend}</span>
+                      </div>
+                    </motion.li>
                   );
-                })()}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                })}
+              </ul>
+
+              <div className="hidden md:block w-px bg-black/10" />
+
+              <ul className="flex flex-col gap-4 md:gap-5">
+                {rightCol.map((kpi, index) => {
+                  const LeftIcon = kpiIconMap[kpi.leftIcon];
+                  return (
+                    <motion.li key={index} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3, delay: (index + half) * 0.04 }} className="flex items-center gap-3 md:gap-4">
+                      <div className="flex items-center justify-center w-8 h-8 md:w-9 md:h-9 rounded-lg shrink-0" style={{ background: "var(--gradient-primary)" }}>
+                        {LeftIcon && <LeftIcon className="w-4 h-4 md:w-4.5 md:h-4.5 text-white" />}
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-sm md:text-base text-black font-medium leading-snug">{kpi.label}</span>
+                        <span className={`text-xs font-medium capitalize ${kpi.trend === "increase" || kpi.trend === "added" ? "text-green-600" : "text-red-500"}`}>{kpi.trend}</span>
+                      </div>
+                    </motion.li>
+                  );
+                })}
+              </ul>
+            </div>
+          );
+        })()}
+      </Modal>
     </section>
   );
 }

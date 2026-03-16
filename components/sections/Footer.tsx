@@ -15,7 +15,7 @@ export default function Footer() {
         }}
       />
 
-      {/* Container */}
+      {/* Footer content */}
       <div className="relative w-full max-w-7xl">
         {/* Glass Card */}
         <div
@@ -86,9 +86,8 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Bottom Section */}
+          {/* Divider & Copyright */}
           <div className="flex flex-col items-end gap-2 w-full">
-            {/* Divider */}
             <div className="w-full h-px bg-white/30" />
 
             {/* Copyright */}

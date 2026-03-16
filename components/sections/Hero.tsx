@@ -111,53 +111,45 @@ export default function Hero() {
           <Image src={tab.image} alt="Hero background" fill className="object-cover" style={{ objectPosition: tab.objectPosition || "center center" }} priority={index === 0} />
           {/* Overlay */}
           <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.1) 100%)" }} />
-          {/* Liquid gradient overlay */}
+          {/* Liquid overlay */}
           <div className="absolute bottom-0 left-0 right-0 h-[30%]" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }}>
             <LiquidBackground opacity={0.3} speed={0.6} />
           </div>
         </motion.div>
       ))}
 
-      {/* Content Container */}
+      {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center max-w-360 w-full min-h-75 md:min-h-87 lg:min-h-102 pt-64 md:pt-72 lg:pt-64">
         <AnimatePresence mode="wait">
           <motion.div key={activeTab} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -20, opacity: 0 }} transition={{ duration: 0.6 }} className="flex flex-col items-center gap-6 md:gap-8 max-w-5xl w-full px-2">
-            {/* Text Content */}
             <div className="flex flex-col items-center gap-4 md:gap-6 text-white text-center">
-              <h1 className="font-bold text-pretty leading-tight" style={{ fontSize: "clamp(1.75rem, 5vw + 1rem, 4rem)" }}>
+              <h1 className="font-bold text-pretty font-bw-gradual leading-tight" style={{ fontSize: "clamp(1.75rem, 5vw + 1rem, 4rem)" }}>
                 {currentTab.headline}
               </h1>
-              <p className="font-normal leading-relaxed text-pretty text-white/90 max-w-2xl" style={{ fontSize: "clamp(0.875rem, 1vw + 0.5rem, 1.125rem)" }}>
+              <p className="font-normal leading-relaxed font-bw-gradual text-pretty text-white/90 max-w-2xl" style={{ fontSize: "clamp(0.875rem, 1vw + 0.5rem, 1.125rem)" }}>
                 {currentTab.description}
               </p>
             </div>
-
-            {/* CTA Button */}
-            {/* <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.2 }}>
-              <Button href={heroData.cta.href} variant="expand" size="md">
-                {heroData.cta.label}
-              </Button>
-            </motion.div> */}
           </motion.div>
         </AnimatePresence>
       </div>
 
-      {/* Tabs Navigation - Desktop & Tablet */}
+      {/* Tabs - Desktop */}
       <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.6, delay: 0.7 }} className="hidden md:flex absolute bottom-16 lg:bottom-20 left-1/2 -translate-x-1/2 gap-3 md:gap-3 lg:gap-8 w-full max-w-[95%] lg:max-w-6xl z-10 px-4">
         {heroData.tabs.map((tab, index) => (
           <motion.div key={index} onClick={() => handleTabClick(index)} className="flex-1 flex flex-col items-center md:px-1 lg:px-4 cursor-pointer transition-all">
             <span className={`text-sm md:text-base text-nowrap text-center leading-normal mb-3 md:mb-4 transition-opacity duration-500 ${index === activeTab ? "text-white" : "text-white/60"}`}>{tab.label}</span>
 
-            {/* Progress bar container */}
+            {/* Progress bar */}
             <div className="w-full h-1 bg-white/30 rounded-full overflow-hidden">
-              {/* Progress indicator */}
-              {index === activeTab ? <motion.div className="h-full" style={{ background: "linear-gradient(to right, #6d5efc, #4cc9f0)" }} initial={{ width: "0%" }} animate={{ width: `${progress}%` }} transition={{ duration: 0.05, ease: "linear" }} /> : index < activeTab ? <div className="h-full w-full bg-white/00" /> : null}
+              {/* Progress fill */}
+              {index === activeTab ? <motion.div className="h-full" style={{ background: "linear-gradient(to right, var(--color-primary-purple), var(--color-primary-cyan))" }} initial={{ width: "0%" }} animate={{ width: `${progress}%` }} transition={{ duration: 0.05, ease: "linear" }} /> : index < activeTab ? <div className="h-full w-full bg-white/00" /> : null}
             </div>
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Mobile Tab Indicators - Dots */}
+      {/* Tabs - Mobile */}
       <div className="flex md:hidden absolute bottom-8 left-1/2 -translate-x-1/2 gap-2 z-20">
         {heroData.tabs.map((_, index) => (
           <button key={index} onClick={() => handleTabClick(index)} className={`w-2 h-2 rounded-full transition-all duration-300 ${index === activeTab ? "bg-white w-6" : "bg-white/40"}`} aria-label={`Go to slide ${index + 1}`} />

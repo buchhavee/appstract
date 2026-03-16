@@ -29,14 +29,7 @@ export function CaseExpandedContent({ content, onClose }: CaseExpandedContentPro
               <div className="flex flex-wrap gap-4 mt-2">
                 {content.stats.map((stat, si) => (
                   <div key={si} className="flex flex-col gap-1 bg-black/5 border border-black/10 rounded-xl px-4 py-3">
-                    <span
-                      className="font-bw-gradual font-bold text-lg md:text-xl bg-clip-text text-transparent"
-                      style={{
-                        backgroundImage: "linear-gradient(135deg, #6D5EFC, #4CC9F0)",
-                      }}
-                    >
-                      {stat.value}
-                    </span>
+                    <span className="gradient-text font-bw-gradual font-bold text-lg md:text-xl">{stat.value}</span>
                     <span className="text-xs text-black/60">{stat.label}</span>
                   </div>
                 ))}

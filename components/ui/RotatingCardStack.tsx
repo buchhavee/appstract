@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Zap, Users, Gift, ShieldCheck, TrendingUp, LucideIcon } from "lucide-react";
 
-// Map icon names to Lucide components
 const iconMap: Record<string, LucideIcon> = {
   Zap,
   Users,
@@ -41,12 +40,10 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
     return () => clearInterval(interval);
   }, [autoRotate, items.length, rotationInterval]);
 
-  // Calculate position relative to active card (can be negative for cards above)
   const getRelativePosition = (index: number) => {
     const diff = index - activeIndex;
     const halfLength = Math.floor(items.length / 2);
 
-    // Wrap around for circular positioning
     if (diff > halfLength) return diff - items.length;
     if (diff < -halfLength) return diff + items.length;
     return diff;
@@ -66,24 +63,19 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
         const absPos = Math.abs(relativePos);
         const isActive = relativePos === 0;
 
-        // Cards spread above (negative y) and below (positive y) the center
         const yOffset = relativePos * 85;
-        const zOffset = -absPos * 45; // Push non-active cards back
+        const zOffset = -absPos * 45;
         const scale = isActive ? 1.05 : 1 - absPos * 0.03;
 
-        // 3D rotation - cards tilt based on position
-        const rotateX = relativePos * -8; // Tilt up/down based on stack position
-        const rotateY = relativePos * 2; // Subtle side rotation
+        const rotateX = relativePos * -8;
+        const rotateY = relativePos * 2;
 
-        // Dynamic shadow based on depth
         const shadowBlur = isActive ? 35 : 20 - absPos * 3;
         const shadowOpacity = isActive ? 0.3 : 0.18 - absPos * 0.03;
         const shadowY = isActive ? 24 : 14 - absPos * 2;
 
-        // Blur for non-active cards (reduced)
         const cardBlur = isActive ? 0 : absPos * 0.4;
 
-        // Staggered delay based on distance from active card
         const staggerDelay = absPos * 0.06;
 
         const IconComponent = iconMap[item.icon];
@@ -153,7 +145,7 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
                 }}
               />
 
-              {/* Highlight gradient overlay */}
+              {/* Gradient overlay */}
               <div
                 className="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden"
                 style={{
@@ -161,7 +153,7 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
                 }}
               />
 
-              {/* Bottom reflection hint */}
+              {/* Bottom reflection */}
               <div
                 className="absolute bottom-0 left-0 right-0 h-8 pointer-events-none rounded-b-2xl"
                 style={{
@@ -183,13 +175,6 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
                   border: "1px solid rgba(255, 255, 255, 0.15)",
                 }}
               >
-                {/* Icon inner highlight */}
-                <div
-                  className="absolute inset-0 rounded-xl pointer-events-none"
-                  style={{
-                    background: "linear-gradient(145deg, rgba(255,255,255,0.15) 0%, transparent 50%)",
-                  }}
-                />
                 {IconComponent && <IconComponent className="w-7 h-7 text-white drop-shadow-md relative z-10" strokeWidth={2} />}
               </div>
 
