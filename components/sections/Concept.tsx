@@ -42,7 +42,7 @@ export default function Concept() {
               {conceptData.headline}
             </h2>
 
-            <div className="font-normal text-secondary text-lg leading-normal">
+            <div className="font-normal text-neutral-medium font-bw-gradual text-lg leading-normal">
               {conceptData.description.split("\n").map((line, index) => (
                 <p key={index} className={index > 0 ? "mt-0" : ""}>
                   {line}
@@ -98,11 +98,11 @@ export default function Concept() {
               <motion.div key={index} className="flex flex-col gap-2 md:gap-3 p-0 md:p-4 rounded-[15px] md:rounded-[25px]" variants={fadeInUp}>
                 {Icon && <Icon className="w-7 h-7 md:w-10.5 md:h-10.5 p-1.5 outline-1 outline-white/10 shadow-lg rounded-sm bg-primary-purple/20 text-white" />}
 
-                <h3 className="font-bold text-white leading-tight" style={{ fontSize: "clamp(14px, 3vw, 32px)", minHeight: "2.4em" }}>
+                <h3 className="font-bold font-bw-gradual! text-white leading-tight" style={{ fontSize: "clamp(14px, 3vw, 32px)", minHeight: "2.4em" }}>
                   {feature.title}
                 </h3>
 
-                <p className="font-normal text-white leading-normal" style={{ fontSize: "clamp(11px, 1.5vw, 16px)" }}>
+                <p className="font-normal font-bw-gradual! text-white leading-normal" style={{ fontSize: "clamp(11px, 1.5vw, 16px)" }}>
                   {feature.description}
                 </p>
               </motion.div>

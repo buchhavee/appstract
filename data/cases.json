@@ -44,21 +44,6 @@
           { "src": "/images/hero/phone-center.png", "title": "Wishlists", "description": "Create shared wishlists for gift ideas" }
         ]
       }
-    },
-    {
-      "name": "Business Name",
-      "logo": "",
-      "tagLabel": "CASE",
-      "status": "Coming Soon!",
-      "description": "",
-      "featured": false,
-      "href": "/cases/virksomhed-2",
-      "expandedContent": {
-        "headline": "Coming soon — another exciting implementation of Appstract's shared shopping technology",
-        "bullets": [],
-        "stats": [],
-        "images": []
-      }
     }
   ]
 }

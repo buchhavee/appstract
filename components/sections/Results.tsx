@@ -59,7 +59,7 @@ export default function Results() {
                 <motion.h2 variants={fadeInUp} className="gradient-text font-bold font-bw-gradual leading-tight text-3xl md:text-3xl lg:text-3xl">
                   {resultsData.headline}
                 </motion.h2>
-                <motion.p variants={fadeInUp} className="font-normal font-bw-gradual text-black leading-normal text-base md:text-lg">
+                <motion.p variants={fadeInUp} className="font-normal font-bw-gradual text-neutral-medium leading-normal text-base md:text-lg">
                   {resultsData.description}
                 </motion.p>
               </div>
@@ -82,8 +82,8 @@ export default function Results() {
                       }}
                     >
                       {Icon && <Icon className="w-8 h-8 md:w-10 md:h-10 text-black/60" />}
-                      <h3 className="font-bold text-black leading-snug text-lg md:text-xl">{feature.title}</h3>
-                      <p className="font-normal text-neutral-medium leading-normal text-base md:text-lg">{feature.description}</p>
+                      <h3 className="font-bold font-bw-gradual! text-black leading-snug text-lg md:text-xl">{feature.title}</h3>
+                      <p className="font-normal font-bw-gradual! text-neutral-medium leading-normal text-base md:text-lg">{feature.description}</p>
                     </motion.div>
                     {index === 0 && <div className="hidden sm:block w-px bg-black/20" />}
                   </Fragment>

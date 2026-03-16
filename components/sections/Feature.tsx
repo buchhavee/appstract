@@ -45,7 +45,7 @@ function ChatMessage({ sender, message, isAssistant = false, isRight = false, de
 // Chat illustration component
 function ChatIllustration() {
   return (
-    <div className="relative w-full rounded-2xl bg-white/50 p-4">
+    <div className="relative w-full rounded-2xl bg-white/60 p-4">
       <div className="flex flex-col gap-3">
         {featureData.chat.messages.map((msg, index) => (
           <ChatMessage key={index} sender={msg.sender} message={msg.message} isAssistant={msg.isAssistant} isRight={msg.isRight} delay={index} />
@@ -106,8 +106,8 @@ export default function Feature() {
             >
               <div className="p-6 md:p-8">
                 <div className="text-center mb-6">
-                  <h3 className="text-xl md:text-2xl font-semibold text-white mb-3">{featureData.cards[0].title}</h3>
-                  <p className="text-sm md:text-base text-white/80 leading-relaxed max-w-md mx-auto">{featureData.cards[0].description}</p>
+                  <h3 className="text-xl md:text-2xl font-semibold font-bw-gradual! text-white mb-3">{featureData.cards[0].title}</h3>
+                  <p className="text-sm md:text-base font-bw-gradual! text-white/80 leading-relaxed max-w-md mx-auto">{featureData.cards[0].description}</p>
                 </div>
 
                 {/* Chat Illustration */}
@@ -130,8 +130,8 @@ export default function Feature() {
             >
               <div className="p-6 md:p-8">
                 <div className="text-center mb-8">
-                  <h3 className="text-xl md:text-2xl font-semibold text-white mb-3">{featureData.cards[1].title}</h3>
-                  <p className="text-sm md:text-base text-white/80 leading-relaxed max-w-md mx-auto">{featureData.cards[1].description}</p>
+                  <h3 className="text-xl md:text-2xl font-semibold font-bw-gradual! text-white mb-3">{featureData.cards[1].title}</h3>
+                  <p className="text-sm md:text-base font-bw-gradual! text-white/80 leading-relaxed max-w-md mx-auto">{featureData.cards[1].description}</p>
                 </div>
 
                 {/* Card Stack */}
