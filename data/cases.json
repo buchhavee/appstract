@@ -26,6 +26,7 @@
       "name": "Botané Studios",
       "logo": "/images/cases/botane.svg",
       "tagLabel": "CASE",
+      "status": "Coming Soon!",
       "description": "Full integration of Appstract's shared shopping experience into Botáne Studios' e-commerce platform",
       "featured": false,
       "href": "/cases/botane-studios",
@@ -45,37 +46,10 @@
       }
     },
     {
-      "name": "Virksomhed",
+      "name": "Business Name",
       "logo": "",
       "tagLabel": "CASE",
-      "description": "",
-      "featured": false,
-      "href": "/cases/virksomhed-1",
-      "expandedContent": {
-        "headline": "Coming soon — another exciting implementation of Appstract's shared shopping technology",
-        "bullets": [],
-        "stats": [],
-        "images": []
-      }
-    },
-    {
-      "name": "Virksomhed",
-      "logo": "",
-      "tagLabel": "CASE",
-      "description": "",
-      "featured": false,
-      "href": "/cases/virksomhed-1",
-      "expandedContent": {
-        "headline": "Coming soon — another exciting implementation of Appstract's shared shopping technology",
-        "bullets": [],
-        "stats": [],
-        "images": []
-      }
-    },
-    {
-      "name": "Virksomhed",
-      "logo": "",
-      "tagLabel": "CASE",
+      "status": "Coming Soon!",
       "description": "",
       "featured": false,
       "href": "/cases/virksomhed-2",

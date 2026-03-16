@@ -19,37 +19,30 @@ export default function Concept() {
   return (
     <section
       id="concept"
-      className="relative w-full py-16! px-4 md:px-8 lg:px-16 flex justify-center overflow-hidden"
+      className="relative w-full py-12! px-4 md:px-8 lg:px-16 flex justify-center overflow-hidden"
       style={{
         background: "linear-gradient(to bottom, white 16.45%, #4CC9F0 52.2%, #6D5EFC 100%)",
       }}
     >
       <div className="w-full max-w-7xl flex flex-col items-center">
-        {/* Section Title */}
+        {/* Header */}
         <motion.div className="flex flex-col items-center max-w-3xl text-center" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
           {/* Tagline */}
           <motion.div variants={fadeInUp}>
             <Tag>{conceptData.tagline}</Tag>
           </motion.div>
 
-          {/* Content */}
-          <motion.div className="flex flex-col gap-6 items-center mt-6" variants={fadeInUp}>
-            {/* Headline */}
+          <motion.div className="flex flex-col gap-6 items-center mt-2" variants={fadeInUp}>
             <h2
-              className="font-bw-gradual font-bold leading-tight"
+              className="gradient-text font-bw-gradual font-bold tracking-tight leading-tight"
               style={{
                 fontSize: "clamp(54px, 8vw, 96px)",
-                backgroundImage: "linear-gradient(122deg, #6D5EFC 0%, #4CC9F0 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
               }}
             >
               {conceptData.headline}
             </h2>
 
-            {/* Description */}
-            <div className="font-normal text-neutral-medium text-md leading-normal">
+            <div className="font-normal text-secondary text-lg leading-normal">
               {conceptData.description.split("\n").map((line, index) => (
                 <p key={index} className={index > 0 ? "mt-0" : ""}>
                   {line}
@@ -60,7 +53,7 @@ export default function Concept() {
         </motion.div>
 
         {/* Phones */}
-        <motion.div className="relative w-full flex justify-center items-end mt-8" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={staggerContainer}>
+        <motion.div className="relative w-full flex justify-center items-end mt-6" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={staggerContainer}>
           {/* Left Phone */}
           <motion.div
             className="relative w-50 sm:w-36 md:w-75 lg:w-96 shrink-0"
@@ -69,7 +62,7 @@ export default function Concept() {
             }}
             variants={phoneVariants}
           >
-            <Image src="/images/hero/phone-left.png" alt="Shopping app - Vælg venner" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
+            <Image src="/images/concept/phone-left.png" alt="Shopping app - Vælg venner" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
           </motion.div>
 
           {/* Center Phone */}
@@ -81,7 +74,7 @@ export default function Concept() {
             variants={phoneVariants}
             transition={{ delay: 0.2 }}
           >
-            <Image src="/images/hero/phone-center.png" alt="Shopping app - Shop sammen" width={414} height={896} className="w-full h-auto drop-shadow-2xl" />
+            <Image src="/images/concept/phone-center.png" alt="Shopping app - Shop sammen" width={414} height={896} className="w-full h-auto drop-shadow-2xl" />
           </motion.div>
 
           {/* Right Phone */}
@@ -93,7 +86,7 @@ export default function Concept() {
             variants={phoneVariants}
             transition={{ delay: 0.4 }}
           >
-            <Image src="/images/hero/phone-right.png" alt="Shopping app - Chat" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
+            <Image src="/images/concept/phone-right.png" alt="Shopping app - Chat" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
           </motion.div>
         </motion.div>
 
@@ -103,15 +96,12 @@ export default function Concept() {
             const Icon = iconMap[feature.icon];
             return (
               <motion.div key={index} className="flex flex-col gap-2 md:gap-3 p-0 md:p-4 rounded-[15px] md:rounded-[25px]" variants={fadeInUp}>
-                {/* Icon */}
-                {Icon && <Icon className="w-7 h-7 md:w-10.5 md:h-10.5 p-1.5 outline-1 outline-white/10 shadow-lg rounded-sm bg-gradient-primary/20 text-white" />}
+                {Icon && <Icon className="w-7 h-7 md:w-10.5 md:h-10.5 p-1.5 outline-1 outline-white/10 shadow-lg rounded-sm bg-primary-purple/20 text-white" />}
 
-                {/* Title */}
                 <h3 className="font-bold text-white leading-tight" style={{ fontSize: "clamp(14px, 3vw, 32px)", minHeight: "2.4em" }}>
                   {feature.title}
                 </h3>
 
-                {/* Description */}
                 <p className="font-normal text-white leading-normal" style={{ fontSize: "clamp(11px, 1.5vw, 16px)" }}>
                   {feature.description}
                 </p>

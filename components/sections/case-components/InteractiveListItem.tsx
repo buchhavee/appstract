@@ -1,32 +1,27 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Undo2 } from "lucide-react";
 import Image from "next/image";
 import type { GalleryImage } from "./types";
 import { getImageSrc, TRANSITION_STANDARD } from "./utils";
+import { useIsMobile } from "@/lib/hooks";
 
 interface InteractiveListItemProps {
   name: string;
   logo?: string;
   images?: (string | GalleryImage)[];
   isExpanded?: boolean;
+  comingSoon?: boolean;
   onClick?: () => void;
 }
 
-export function InteractiveListItem({ name, logo, images = [], isExpanded = false, onClick }: InteractiveListItemProps) {
+export function InteractiveListItem({ name, logo, images = [], isExpanded = false, comingSoon = false, onClick }: InteractiveListItemProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile(1024);
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  const isActive = isMobile ? isExpanded : isHovered || isExpanded;
+  const isActive = comingSoon ? false : isMobile ? isExpanded : isHovered || isExpanded;
 
   const previewImages = images.slice(0, 3);
 
@@ -36,11 +31,18 @@ export function InteractiveListItem({ name, logo, images = [], isExpanded = fals
   const logoWidth = "clamp(8rem, 10vw + 2rem, 12rem)";
 
   return (
-    <div className="relative w-full py-4 lg:py-6 px-4 md:px-8 lg:px-16 border-t border-black/10 cursor-pointer overflow-hidden bg-white" onMouseEnter={() => !isMobile && setIsHovered(true)} onMouseLeave={() => !isMobile && setIsHovered(false)} onClick={onClick}>
+    <div className={`relative w-full py-4 lg:py-6 px-4 md:px-8 lg:px-16 border-t border-black/10 overflow-hidden ${comingSoon ? "cursor-default bg-neutral-100" : "cursor-pointer bg-white"}`} onMouseEnter={() => !isMobile && !comingSoon && setIsHovered(true)} onMouseLeave={() => !isMobile && !comingSoon && setIsHovered(false)} onClick={comingSoon ? undefined : onClick}>
       {/* gradient background */}
       <motion.div className="absolute inset-0 z-0" style={{ background: "var(--gradient-primary)" }} initial={{ y: "100%" }} animate={{ y: isActive ? "0%" : "100%" }} transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }} />
 
-      <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-0 max-w-7xl mx-auto">
+      {/* Coming Soon pill overlay */}
+      {comingSoon && (
+        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
+          <span className="px-5 py-1.5 rounded-full bg-black/10 text-black/40 text-sm font-semibold tracking-wide backdrop-blur-sm">Coming Soon!</span>
+        </div>
+      )}
+
+      <div className={`relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 lg:gap-0 max-w-7xl mx-auto ${comingSoon ? "opacity-30" : ""}`}>
         {/* Rolling effect */}
         {logo ? (
           <div className="relative overflow-hidden" style={{ height: logoHeight }}>
@@ -48,7 +50,6 @@ export function InteractiveListItem({ name, logo, images = [], isExpanded = fals
               <span className="font-bw-gradual font-bold text-black/80 whitespace-nowrap flex items-center shrink-0" style={{ fontSize: textSize, height: logoHeight }}>
                 {name}
               </span>
-              {/* Logo (shown on hover) */}
               <div className="relative shrink-0" style={{ width: logoWidth, height: logoHeight }}>
                 <Image src={logo} alt={`${name} logo`} fill className="object-contain object-left brightness-0 invert" />
               </div>
@@ -67,11 +68,9 @@ export function InteractiveListItem({ name, logo, images = [], isExpanded = fals
           </div>
         )}
 
-        {/* Right side - 3 square previews with See case overlay */}
+        {/* Preview images */}
         <div className="hidden lg:flex relative" style={{ height: "clamp(3.5rem, 4vw + 1.5rem, 5rem)" }}>
-          {/* Clip container - clips bottom extended to container edge */}
           <div className="relative flex items-center gap-2" style={{ clipPath: "inset(-50% -50% -100% -50%)" }}>
-            {/* 3 square previews side by side */}
             {previewImages.map((img, i) => (
               <motion.div
                 key={i}

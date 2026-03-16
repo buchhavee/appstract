@@ -1,1 +1,2 @@
-export { useBodyScrollLock, useBodyScrollLockWithPendingScroll } from "./useBodyScrollLock";
+export { useBodyScrollLockWithPendingScroll } from "./useBodyScrollLock";
+export { useIsMobile } from "./useIsMobile";

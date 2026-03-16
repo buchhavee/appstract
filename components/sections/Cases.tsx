@@ -26,14 +26,7 @@ export default function Cases() {
           <Tag>{casesData.tagline}</Tag>
           <h2 className="font-bw-gradual font-bold text-pretty tracking-tight leading-tight text-black" style={{ fontSize: "clamp(2.5rem, 5vw + 1rem, 4.5rem)" }}>
             {casesData.headline.split(casesData.highlightedText)[0]}
-            <span
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage: "linear-gradient(152.57deg, #6D5EFC 0.1%, #4CC9F0 99.9%)",
-              }}
-            >
-              {casesData.highlightedText}
-            </span>
+            <span className="gradient-text">{casesData.highlightedText}</span>
             {casesData.headline.split(casesData.highlightedText)[1]}
           </h2>
           <p className="text-sm sm:text-base md:text-lg text-neutral-medium font-normal leading-normal">{casesData.description}</p>

@@ -14,7 +14,6 @@ export default function Navbar() {
   const pendingScrollRef = useRef<string | null>(null);
   const { scrollY } = useScroll();
 
-  // Handle scroll-based navbar visibility
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
     if (latest > previous && latest > 100) {
@@ -24,7 +23,6 @@ export default function Navbar() {
     }
   });
 
-  // Listen for modal open/close events
   useEffect(() => {
     const handleModalOpen = () => setModalOpen(true);
     const handleModalClose = () => setModalOpen(false);
@@ -36,7 +34,6 @@ export default function Navbar() {
     };
   }, []);
 
-  // Close mobile menu on resize to desktop or Escape key
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
@@ -54,7 +51,6 @@ export default function Navbar() {
     };
   }, []);
 
-  // Handle body scroll lock when mobile menu is open
   useBodyScrollLockWithPendingScroll(mobileMenuOpen, pendingScrollRef);
 
   const scrollToSection = (href: string) => {
@@ -100,7 +96,14 @@ export default function Navbar() {
 
           {/* Logo */}
           <div className="flex items-center shrink-0">
-            <Logo href={navbarData.logo.href} size="lg" />
+            <Logo
+              href={navbarData.logo.href}
+              size="lg"
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: "smooth" });
+              }}
+            />
           </div>
 
           {/* Desktop Navigation */}

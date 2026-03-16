@@ -12,9 +12,10 @@ interface ButtonProps {
   icon?: boolean;
   className?: string;
   onClick?: () => void;
+  type?: "button" | "submit" | "reset";
 }
 
-export default function Button({ children, href, variant = "primary", size = "md", icon = false, className = "", onClick }: ButtonProps) {
+export default function Button({ children, href, variant = "primary", size = "md", icon = false, className = "", onClick, type = "button" }: ButtonProps) {
   const baseStyles = "group relative inline-flex items-center justify-center gap-2 font-medium leading-normal rounded-full cursor-pointer overflow-hidden";
 
   const variants = {
@@ -34,13 +35,12 @@ export default function Button({ children, href, variant = "primary", size = "md
 
   const content = (
     <>
-      {/* Rotating gradient hover effect */}
       {(variant === "primary" || variant === "expand") && (
         <div className="absolute inset-0 flex items-center justify-center z-1 pointer-events-none">
           <div
-            className="w-40 h-40 rounded-full opacity-0 group-hover:opacity-70 transition-all duration-400 group-hover:w-32 group-hover:h-32"
+            className="w-40 h-40 rounded-full opacity-0 group-hover:opacity-70 transition-all duration-400 group-hover:w-350 group-hover:h-350"
             style={{
-              background: "linear-gradient(135deg, #6D5EFC 0%, #4CC9F0 100%)",
+              background: "var(--gradient-primary)",
               filter: "blur(10px)",
               animation: "spin-slow 3s linear infinite",
             }}
@@ -67,7 +67,7 @@ export default function Button({ children, href, variant = "primary", size = "md
   }
 
   return (
-    <motion.button whileHover={hoverAnimation} whileTap={{ scale: 0.98 }} className={combinedClasses} onClick={onClick}>
+    <motion.button whileHover={hoverAnimation} whileTap={{ scale: 0.98 }} className={combinedClasses} onClick={onClick} type={type}>
       {content}
     </motion.button>
   );

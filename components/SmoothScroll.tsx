@@ -12,14 +12,12 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
   const { scrollYProgress } = useScroll();
   const lenisRef = useRef<Lenis | null>(null);
 
-  // Create a smooth spring-based scroll indicator
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001,
   });
 
-  // Initialize Lenis smooth scroll
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -42,7 +40,6 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
     };
   }, []);
 
-  // Listen for modal open/close events
   useEffect(() => {
     const handleModalOpen = () => {
       if (lenisRef.current) {
@@ -81,7 +78,7 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
   return (
     <>
       {/* Progress bar indicator */}
-      <motion.div className="fixed top-0 left-0 right-0 h-1 bg-linear-to-r from-[#6d5efc] to-[#4cc9f0] origin-left z-50" style={{ scaleX }} />
+      <motion.div className="fixed top-0 left-0 right-0 h-1 origin-left z-50" style={{ background: "linear-gradient(to right, var(--color-primary-purple), var(--color-primary-cyan))", scaleX }} />
       {children}
     </>
   );

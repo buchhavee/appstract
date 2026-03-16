@@ -96,11 +96,8 @@ export default function BurgerButton({ isOpen, onClick, className = "" }: Burger
       aria-expanded={isOpen}
     >
       <motion.div variants={containerVariants} animate={animationState} className="flex flex-col items-center justify-center w-full h-full" style={{ gap: "4px" }}>
-        {/* Top line - left aligned, short */}
         <motion.div variants={topLineVariants} animate={animationState} className="h-0.5 rounded-full self-start" style={{ backgroundColor: "rgb(0, 0, 0)" }} />
-        {/* Middle line - full width */}
         <motion.div variants={middleLineVariants} animate={animationState} className="h-0.5 rounded-full" style={{ backgroundColor: "rgb(0, 0, 0)" }} />
-        {/* Bottom line - right aligned, short */}
         <motion.div variants={bottomLineVariants} animate={animationState} className="h-0.5 rounded-full self-end" style={{ backgroundColor: "rgb(0, 0, 0)" }} />
       </motion.div>
     </button>

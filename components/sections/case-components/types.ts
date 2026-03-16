@@ -1,5 +1,3 @@
-// Shared types for case components
-
 export interface GalleryImage {
   src: string;
   title?: string;
@@ -19,5 +17,6 @@ export interface CaseData {
   logo?: string;
   description?: string;
   href?: string;
+  status?: string;
   expandedContent?: ExpandedContent;
 }

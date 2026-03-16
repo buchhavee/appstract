@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cookie } from "lucide-react";
 import cookieData from "@/data/cookies.json";
+import { useIsMobile } from "@/lib/hooks";
 
 const CONSENT_KEY = "gdpr_cookie_consent";
 const CONSENT_VERSION = "1.0";
@@ -22,7 +23,6 @@ interface SavedConsent {
   c: ConsentState;
 }
 
-// Toggle component
 const Toggle = ({ active, disabled, onChange }: { active: boolean; disabled?: boolean; onChange: () => void }) => (
   <button
     onClick={disabled ? undefined : onChange}
@@ -56,7 +56,6 @@ const Toggle = ({ active, disabled, onChange }: { active: boolean; disabled?: bo
   </button>
 );
 
-// Load consent from localStorage
 const loadConsent = (): ConsentState | null => {
   if (typeof window === "undefined") return null;
   try {
@@ -71,7 +70,6 @@ const loadConsent = (): ConsentState | null => {
   }
 };
 
-// Save consent to localStorage
 const saveConsent = (consent: ConsentState, expiryDays: number) => {
   if (typeof window === "undefined") return;
   const data: SavedConsent = {
@@ -88,7 +86,7 @@ export default function CookieConsent() {
   const [showModal, setShowModal] = useState(false);
   const [showFab, setShowFab] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
   const [consent, setConsent] = useState<ConsentState>({
     necessary: true,
     functional: false,
@@ -98,15 +96,6 @@ export default function CookieConsent() {
 
   const { texts, categories, links, settings } = cookieData;
 
-  // Detect mobile
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  // Initialize
   useEffect(() => {
     const saved = loadConsent();
     if (saved) {
@@ -249,7 +238,7 @@ export default function CookieConsent() {
                   )}
                 </p>
 
-                {/* Buttons (collapsed view) */}
+                {/* Buttons */}
                 {!isExpanded && (
                   <div className="flex gap-2.5">
                     <motion.button
@@ -278,7 +267,7 @@ export default function CookieConsent() {
                   </div>
                 )}
 
-                {/* Categories (expanded view) */}
+                {/* Categories */}
                 {isExpanded && (
                   <div className="-mx-2 px-2">
                     {(Object.keys(categories) as Array<keyof typeof categories>).map((key) => {
@@ -296,7 +285,7 @@ export default function CookieConsent() {
                   </div>
                 )}
 
-                {/* Save button (expanded view) */}
+                {/* Save */}
                 {isExpanded && (
                   <motion.button
                     whileHover={{ opacity: 0.9 }}
@@ -311,7 +300,7 @@ export default function CookieConsent() {
                   </motion.button>
                 )}
 
-                {/* Customize link (collapsed view) */}
+                {/* Customize */}
                 {!isExpanded && (
                   <button onClick={() => setIsExpanded(true)} className="block w-full text-center mt-4 text-sm text-white/50 hover:text-white/70 cursor-pointer bg-transparent border-none underline underline-offset-2 transition-colors">
                     {texts.customize}

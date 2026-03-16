@@ -10,6 +10,8 @@ interface LogoProps {
   size?: LogoSize;
   /** Additional class names */
   className?: string;
+  /** Optional click handler (e.g. for smooth scroll) */
+  onClick?: (e: React.MouseEvent) => void;
 }
 
 const sizeClasses: Record<LogoSize, { icon: string; text: string }> = {
@@ -27,11 +29,11 @@ const sizeClasses: Record<LogoSize, { icon: string; text: string }> = {
   },
 };
 
-export default function Logo({ href = "/", size = "md", className = "" }: LogoProps) {
+export default function Logo({ href = "/", size = "md", className = "", onClick }: LogoProps) {
   const sizes = sizeClasses[size];
 
   return (
-    <Link href={href} className={`flex items-center gap-2 lg:gap-3 ${className}`}>
+    <Link href={href} onClick={onClick} className={`flex items-center gap-2 lg:gap-3 ${className}`}>
       <div className={`relative ${sizes.icon} rounded-[10px] overflow-hidden flex items-center justify-center`}>
         <Image src="/images/logo/logo-icon.svg" alt="" width={40} height={40} className="object-contain" />
       </div>

@@ -67,7 +67,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
           {/* Sliding panel */}
           <aside className="fixed top-0 right-0 z-50 lg:hidden" style={{ width: "100vw", height: "100vh", overflow: "hidden", clipPath: "inset(0)", touchAction: "none" }} onTouchMove={(e) => e.preventDefault()} aria-label="Menu">
-            {/* 3 staggered panel layers */}
             <div style={{ position: "absolute", inset: 0 }}>
               {[0, 1, 2].map((i) => (
                 <motion.div

@@ -34,7 +34,7 @@ export default function ConicButton({ children, onClick, className = "", borderC
         padding: 0,
       }}
     >
-      {/* Rotating conic gradient border - masked to only show border */}
+      {/* Conic gradient border */}
       <div
         style={{
           position: "absolute",
@@ -71,7 +71,7 @@ export default function ConicButton({ children, onClick, className = "", borderC
         />
       </div>
 
-      {/* Inner overlay with backdrop blur */}
+      {/* Inner overlay */}
       <div
         style={{
           position: "absolute",

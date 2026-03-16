@@ -21,15 +21,16 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const scrollToCase = (index: number) => {
-    // Small delay to let the animation start
     setTimeout(() => {
       window.dispatchEvent(new CustomEvent("smoothScrollTo", { detail: `[data-case-index="${index}"]` }));
     }, 50);
   };
 
   const toggleExpand = (index: number) => {
+    const caseItem = cases[index];
+    if (caseItem?.status === "Coming Soon!") return;
+
     if (expandedIndex === index) {
-      // Closing - scroll back to the case item
       scrollToCase(index);
       setExpandedIndex(null);
     } else {
@@ -37,7 +38,6 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
     }
   };
 
-  // Close expanded case when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
@@ -76,14 +76,14 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
               delay: i * 0.05,
             }}
           >
-            <InteractiveListItem name={c.name} logo={c.logo} images={c.expandedContent?.images} isExpanded={expandedIndex === i} onClick={() => toggleExpand(i)} />
+            <InteractiveListItem name={c.name} logo={c.logo} images={c.expandedContent?.images} isExpanded={expandedIndex === i} comingSoon={c.status === "Coming Soon!"} onClick={() => toggleExpand(i)} />
 
             {/* Expanded content */}
             <AnimatePresence>{expandedIndex === i && c.expandedContent && <CaseExpandedContent content={c.expandedContent} onClose={() => toggleExpand(i)} />}</AnimatePresence>
           </motion.div>
         ))}
 
-        {/* Extra cases with slide animation */}
+        {/* Extra cases */}
         <AnimatePresence>
           {showAll &&
             extraCases.map((c, i) => {
@@ -102,7 +102,7 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
                   }}
                   className="overflow-hidden"
                 >
-                  <InteractiveListItem name={c.name} logo={c.logo} images={c.expandedContent?.images} isExpanded={expandedIndex === actualIndex} onClick={() => toggleExpand(actualIndex)} />
+                  <InteractiveListItem name={c.name} logo={c.logo} images={c.expandedContent?.images} isExpanded={expandedIndex === actualIndex} comingSoon={c.status === "Coming Soon!"} onClick={() => toggleExpand(actualIndex)} />
 
                   {/* Expanded content */}
                   <AnimatePresence>{expandedIndex === actualIndex && c.expandedContent && <CaseExpandedContent content={c.expandedContent} onClose={() => toggleExpand(actualIndex)} />}</AnimatePresence>
