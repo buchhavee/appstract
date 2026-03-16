@@ -122,10 +122,10 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #000000;
 }
 
 body {
-  background: var(--bg-primary);
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: var(--text-sm);
