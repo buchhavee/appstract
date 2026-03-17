@@ -140,7 +140,7 @@ export default function Hero() {
           {/* Overlay */}
           <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.1) 100%)" }} />
           {/* Purple top gradient */}
-          <div className="absolute inset-0 z-[1]" style={{ background: "linear-gradient(to bottom, rgba(109,94,252,1) 0%, rgba(109,94,252,0) 10%)" }} />
+          <div className="absolute inset-0 z-[1] max-h-14" style={{ background: "linear-gradient(to bottom, rgba(109,94,252,0.9) 0%, rgba(255,255,255,0) 20%)" }} />
           {/* Liquid overlay */}
           <div className="absolute bottom-0 left-0 right-0 h-[30%]" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }}>
             <LiquidBackground opacity={0.3} speed={0.6} />

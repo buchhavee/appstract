@@ -54,13 +54,11 @@ function ChatIllustration() {
         ))}
 
         {featureData.insight && (
-          <motion.div className="flex items-center justify-center gap-2 py-3 mt-1" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: messageCount * 0.1 }}>
-            <div className="h-px flex-1 bg-black/10" />
-            <span className="text-xs text-black/50 font-medium whitespace-nowrap flex items-center gap-1.5 px-2">
+          <motion.div className="flex items-center justify-center py-3 mt-1" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: messageCount * 0.1 }}>
+            <span className="text-xs text-black/50 font-medium flex flex-col md:flex-row items-center gap-0.5 md:gap-1.5 px-2 text-center">
               <span className="italic">{featureData.insight.text}</span>
               <span className="font-semibold italic text-black/70">{featureData.insight.textEnd}</span>
             </span>
-            <div className="h-px flex-1 bg-black/10" />
           </motion.div>
         )}
       </div>
