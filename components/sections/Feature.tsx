@@ -23,9 +23,9 @@ function ChatMessage({ sender, message, isAssistant = false, isRight = false, de
     <motion.div className={`flex flex-col gap-1 ${alignment}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: delay * 0.1 }}>
       <div className={`flex items-center gap-2 ${flexDir}`}>
         <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${isAssistant ? "bg-linear-to-br from-violet-500 to-cyan-400" : isRight ? "bg-linear-to-br from-cyan-400 to-cyan-600" : "bg-linear-to-br from-purple-400 to-purple-600"}`}>{isAssistant ? "✨" : sender.charAt(0)}</div>
-        <span className="text-xs text-black/60">{sender}</span>
+        <span className="text-xs font-bw-gradual text-black/60">{sender}</span>
       </div>
-      <div className={`rounded-2xl px-4 py-3 max-w-[85%] ${bubbleMargin} ${isAssistant ? "bg-neutral-800 border border-white/10" : isRight ? "bg-cyan-600/30 border border-cyan-400/20" : "bg-neutral-700/50"}`}>
+      <div className={`rounded-2xl px-4 py-3 max-w-[85%] ${bubbleMargin} ${isAssistant ? "bg-neutral-800 border border-white/10" : isRight ? "bg-cyan-600/60 border border-cyan-400/20" : "bg-neutral-700/50"}`}>
         <p className="text-sm text-white/90 leading-relaxed">{message}</p>
         {isAssistant && (
           <div className="flex flex-wrap gap-2 mt-3">
@@ -44,19 +44,31 @@ function ChatMessage({ sender, message, isAssistant = false, isRight = false, de
 
 // Chat illustration component
 function ChatIllustration() {
+  const messageCount = featureData.chat.messages.length;
+
   return (
-    <div className="relative w-full rounded-2xl bg-white/60 p-4">
+    <div className="relative w-full rounded-2xl bg-white/80 p-4">
       <div className="flex flex-col gap-3">
         {featureData.chat.messages.map((msg, index) => (
           <ChatMessage key={index} sender={msg.sender} message={msg.message} isAssistant={msg.isAssistant} isRight={msg.isRight} delay={index} />
         ))}
+
+        {featureData.insight && (
+          <motion.div className="flex items-center justify-center gap-2 py-3 mt-1" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: messageCount * 0.1 }}>
+            <div className="h-px flex-1 bg-black/10" />
+            <span className="text-xs text-black/50 font-medium whitespace-nowrap flex items-center gap-1.5 px-2">
+              <span className="italic">{featureData.insight.text}</span>
+              <span className="font-semibold italic text-black/70">{featureData.insight.textEnd}</span>
+            </span>
+            <div className="h-px flex-1 bg-black/10" />
+          </motion.div>
+        )}
       </div>
     </div>
   );
 }
 
 export default function Feature() {
-  // Create carousel items from feature data
   const carouselItems =
     featureData.cards[1].carousel?.map((item, index) => ({
       id: index,
@@ -129,13 +141,13 @@ export default function Feature() {
               }}
             >
               <div className="p-6 md:p-8">
-                <div className="text-center mb-8">
+                <div className="text-center mb-2">
                   <h3 className="text-xl md:text-2xl font-semibold font-bw-gradual! text-white mb-3">{featureData.cards[1].title}</h3>
                   <p className="text-sm md:text-base font-bw-gradual! text-white/80 leading-relaxed max-w-md mx-auto">{featureData.cards[1].description}</p>
                 </div>
 
                 {/* Card Stack */}
-                <div className="flex flex-col items-center justify-center pb-8">
+                <div className="flex flex-col items-center justify-center py-12">
                   <RotatingCardStack items={carouselItems} autoRotate={true} rotationInterval={4000} className="w-full max-w-sm" />
                 </div>
               </div>

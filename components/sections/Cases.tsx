@@ -11,7 +11,7 @@ const INITIAL_COUNT = 2;
 
 export default function Cases() {
   return (
-    <motion.section id="cases" className="relative z-0 w-full flex flex-col items-center justify-center py-12 md:py-20 lg:py-28 bg-white" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
+    <motion.section id="cases" className="relative z-0 w-full flex flex-col items-center justify-center pt-12 pb-28 md:pt-20 md:pb-40 lg:pt-28 lg:pb-48 bg-white" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
       {/* Top gradient */}
       <div
         className="absolute top-0 left-0 right-0 h-48 md:h-64 pointer-events-none"

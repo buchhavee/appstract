@@ -15,8 +15,9 @@ export default function Hero() {
   const [progress, setProgress] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const touchStartRef = useRef<number | null>(null);
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const touchEndRef = useRef<number | null>(null);
+  const isHorizontalSwipeRef = useRef(false);
 
   // Auto-rotate tabs
   useEffect(() => {
@@ -62,20 +63,46 @@ export default function Hero() {
 
   // Swipe handlers for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartRef.current = e.targetTouches[0].clientX;
+    touchStartRef.current = {
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY,
+    };
+    touchEndRef.current = null;
+    isHorizontalSwipeRef.current = false;
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
-    touchEndRef.current = e.targetTouches[0].clientX;
+    if (!touchStartRef.current) return;
+
+    const currentX = e.targetTouches[0].clientX;
+    const currentY = e.targetTouches[0].clientY;
+    const diffX = Math.abs(currentX - touchStartRef.current.x);
+    const diffY = Math.abs(currentY - touchStartRef.current.y);
+
+    // Once we detect a predominantly horizontal swipe, lock it in and prevent vertical scroll
+    if (!isHorizontalSwipeRef.current && diffX > 10 && diffX > diffY * 1.2) {
+      isHorizontalSwipeRef.current = true;
+    }
+
+    if (isHorizontalSwipeRef.current) {
+      e.preventDefault();
+    }
+
+    touchEndRef.current = currentX;
   };
 
   const handleTouchEnd = () => {
-    if (!touchStartRef.current || !touchEndRef.current) return;
+    if (!touchStartRef.current || !touchEndRef.current) {
+      touchStartRef.current = null;
+      touchEndRef.current = null;
+      isHorizontalSwipeRef.current = false;
+      return;
+    }
 
-    const distance = touchStartRef.current - touchEndRef.current;
+    const distance = touchStartRef.current.x - touchEndRef.current;
     const isSwipe = Math.abs(distance) > SWIPE_THRESHOLD;
 
-    if (isSwipe) {
+    if (isSwipe && isHorizontalSwipeRef.current) {
       if (distance > 0) {
         // Swipe left - go to next tab
         const nextIndex = (activeTab + 1) % heroData.tabs.length;
@@ -90,6 +117,7 @@ export default function Hero() {
     // Reset touch refs
     touchStartRef.current = null;
     touchEndRef.current = null;
+    isHorizontalSwipeRef.current = false;
   };
 
   // Cleanup timeout on unmount
@@ -111,6 +139,8 @@ export default function Hero() {
           <Image src={tab.image} alt="Hero background" fill className="object-cover" style={{ objectPosition: tab.objectPosition || "center center" }} priority={index === 0} />
           {/* Overlay */}
           <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.1) 100%)" }} />
+          {/* Purple top gradient */}
+          <div className="absolute inset-0 z-[1]" style={{ background: "linear-gradient(to bottom, rgba(109,94,252,1) 0%, rgba(109,94,252,0) 10%)" }} />
           {/* Liquid overlay */}
           <div className="absolute bottom-0 left-0 right-0 h-[30%]" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }}>
             <LiquidBackground opacity={0.3} speed={0.6} />

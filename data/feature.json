@@ -52,35 +52,34 @@
     "messages": [
       {
         "sender": "Emma",
-        "message": "Hi — if we buy 3 together do we get a discount?",
+        "message": "Girls look at this! 👀 I’m about to place an order and there’s a discount if we order 2 or more. Anyone want me to add something for them?",
         "isRight": true
       },
       {
-        "sender": "Oliver",
-        "message": "Let me check 👀",
+        "sender": "Sofia",
+        "message": "Oh nice, checking now!",
         "isRight": false
       },
       {
-        "sender": "Oliver",
-        "message": "Yes. If we buy 2 or more we get a 10% discount!",
+        "sender": "Maya",
+        "message": "Oh nice — yeah I’m in! I was actually thinking of ordering that anyway.",
         "isAssistant": false,
         "isRight": false
       },
       {
-        "sender": "Emma",
-        "message": "Nice — sending the link now!",
-        "isRight": true
+        "sender": "Sofia",
+        "message": "I'm in! Let's do it!",
+        "isRight": false
       },
       {
-        "sender": "Maya",
-        "message": "I'm in! Let's ",
-        "isRight": false
+        "sender": "Emma",
+        "message": "Perfect. I’ll add yours and we’ll hit the discount 🙌",
+        "isRight": true
       }
     ],
     "buttons": ["Invite friends", "View product"]
   },
   "insight": {
-    "icon": "💡",
     "text": "People don't distrust products —",
     "textEnd": "they distrust buying alone."
   }
