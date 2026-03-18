@@ -139,14 +139,48 @@ export default function Hero() {
           <Image src={tab.image} alt="Hero background" fill className="object-cover" style={{ objectPosition: tab.objectPosition || "center center" }} priority={index === 0} />
           {/* Overlay */}
           <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.1) 100%)" }} />
-          {/* Purple top gradient */}
-          <div className="absolute inset-0 z-[1] max-h-14" style={{ background: "linear-gradient(to bottom, rgba(109,94,252,0.9) 0%, rgba(255,255,255,0) 20%)" }} />
           {/* Liquid overlay */}
           <div className="absolute bottom-0 left-0 right-0 h-[30%]" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }}>
             <LiquidBackground opacity={0.3} speed={0.6} />
           </div>
         </motion.div>
       ))}
+
+      {/* Purple gradient overlay — eased fade to avoid gray muddy transition */}
+      <div
+        className="absolute top-0 left-0 w-full z-[2] pointer-events-none"
+        style={{
+          height: "280px",
+          background: `linear-gradient(to bottom,
+            rgba(109,94,252,1)   0%,
+            rgba(109,94,252,0.9) 10%,
+            rgba(109,94,252,0.7) 22%,
+            rgba(109,94,252,0.45) 38%,
+            rgba(109,94,252,0.2) 57%,
+            rgba(109,94,252,0.05) 75%,
+            rgba(109,94,252,0)   100%
+          )`,
+        }}
+      />
+
+      {/* Purple arch — commented out, restore if needed
+      <motion.div
+        initial={{ y: "-100%" }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+        className="absolute top-0 left-0 w-full z-[2]"
+        style={{
+          height: "200px",
+          maskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
+          WebkitMaskImage: "linear-gradient(to bottom, black 0%, transparent 100%)",
+          filter: "drop-shadow(0 6px 16px rgba(109,94,252,0.10))",
+        }}
+      >
+        <svg className="w-full h-full" viewBox="0 0 100 60" preserveAspectRatio="none">
+          <path d="M0,0 L100,0 L100,60 Q50,10 0,60 Z" fill="var(--color-primary-purple)" />
+        </svg>
+      </motion.div>
+      */}
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center max-w-360 w-full min-h-75 md:min-h-87 lg:min-h-102 pt-64 md:pt-72 lg:pt-64">

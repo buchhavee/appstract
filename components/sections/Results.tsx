@@ -40,10 +40,9 @@ export default function Results() {
   return (
     <section className="relative w-full bg-white py-12 md:py-24 px-4 md:px-8 flex justify-center overflow-x-hidden">
       <div
-        className="absolute left-0 right-0 h-28 md:h-32 lg:h-30 pointer-events-none -top-12 md:-top-16 lg:-top-8"
+        className="absolute left-0 right-0 pointer-events-none -top-24 md:-top-32 h-48 md:h-64"
         style={{
-          background: "linear-gradient(to bottom, #6d5efcB0 0%, #4CC9F090 40%, rgba(255,255,255,0) 100%)",
-          opacity: 0.7,
+          background: "linear-gradient(to bottom, #4c1d95 0%, #6d5efc 30%, rgba(109,94,252,0.15) 70%, rgba(255,255,255,0) 100%)",
         }}
       />
 
@@ -71,7 +70,7 @@ export default function Results() {
                 return (
                   <Fragment key={index}>
                     <motion.div
-                      className="grid grid-rows-[auto_minmax(3.5rem,auto)_auto] gap-3 md:gap-4"
+                      className="flex flex-row sm:grid sm:grid-rows-[auto_minmax(3.5rem,auto)_auto] items-start gap-4 sm:gap-3 md:gap-4"
                       initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.3 }}
@@ -81,9 +80,13 @@ export default function Results() {
                         ease: [0.25, 0.4, 0.25, 1],
                       }}
                     >
-                      {Icon && <Icon className="w-8 h-8 md:w-10 md:h-10 text-black/60" />}
-                      <h3 className="font-bold font-bw-gradual! text-black leading-snug text-lg md:text-xl">{feature.title}</h3>
-                      <p className="font-normal font-bw-gradual! text-neutral-medium leading-normal text-base md:text-lg">{feature.description}</p>
+                      {Icon && <Icon className="w-8 h-8 shrink-0 text-black/60 sm:w-8 sm:h-8 md:w-10 md:h-10 mt-0.5" />}
+                      {/* Vertical divider — mobile only */}
+                      <div className="sm:hidden w-px self-stretch bg-black/20 shrink-0" />
+                      <div className="flex flex-col gap-1 sm:contents">
+                        <h3 className="font-bold font-bw-gradual! text-black leading-snug text-lg md:text-xl">{feature.title}</h3>
+                        <p className="font-normal font-bw-gradual! text-neutral-medium leading-normal text-base md:text-lg">{feature.description}</p>
+                      </div>
                     </motion.div>
                     {index === 0 && <div className="hidden sm:block w-px bg-black/20" />}
                   </Fragment>
