@@ -131,6 +131,8 @@ body {
   font-size: var(--text-sm);
   line-height: var(--leading-normal);
   overflow-x: hidden;
+  min-height: 100svh;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
 /*  Gradient Text  */
