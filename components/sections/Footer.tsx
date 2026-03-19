@@ -6,13 +6,12 @@ import footerData from "@/data/footer.json";
 
 export default function Footer() {
   return (
-    <footer className="relative z-[2] w-full min-h-[30svh] lg:min-h-[50svh] pt-26 px-5 md:px-20 flex flex-col items-center justify-end" style={{ paddingBottom: "calc(3rem + env(safe-area-inset-bottom, 0px))" }}>
-      {/* Background gradient - extends into safe area */}
+    <footer className="relative z-[2] w-full min-h-[30svh] lg:min-h-[50svh] pt-26 pb-12 px-5 md:px-20 flex flex-col items-center justify-end">
+      {/* Background gradient */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(78,195,239,1) 40%, rgba(109,94,252,1) 100%)",
-          bottom: "calc(-1 * env(safe-area-inset-bottom, 0px))",
         }}
       />
 
