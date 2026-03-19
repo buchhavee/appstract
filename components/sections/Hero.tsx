@@ -205,6 +205,9 @@ export default function Hero() {
             <button key={index} onClick={() => handleTabClick(index)} className={`w-2 h-2 rounded-full transition-all duration-300 ${index === activeTab ? "bg-white w-6" : "bg-white/40"}`} aria-label={`Go to slide ${index + 1}`} />
           ))}
         </div>
+
+        {/* Safe area bottom cover – prevents black address bar on iOS Safari */}
+        <div className="absolute bottom-0 left-0 right-0 z-50 pointer-events-none" style={{ height: "env(safe-area-inset-bottom, 0px)", background: "#6d5efc" }} />
       </div>
     </div>
   );
