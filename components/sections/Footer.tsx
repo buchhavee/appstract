@@ -15,9 +15,6 @@ export default function Footer() {
         }}
       />
 
-      {/* Overscroll cover – prevents Hero from showing below the footer */}
-      <div className="absolute left-0 right-0 top-full pointer-events-none" style={{ height: "100vh", background: "#6d5efc" }} />
-
       {/* Footer content */}
       <div className="relative w-full max-w-7xl">
         {/* Glass Card */}

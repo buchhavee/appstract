@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import heroData from "@/data/hero.json";
 import { Button, LiquidBackground } from "@/components/ui";
 
@@ -14,10 +14,21 @@ export default function Hero() {
   const [activeTab, setActiveTab] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [isFixed, setIsFixed] = useState(true);
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const touchEndRef = useRef<number | null>(null);
   const isHorizontalSwipeRef = useRef(false);
+
+  // Switch from fixed to absolute once scrolled past the hero
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsFixed(window.scrollY < window.innerHeight);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Auto-rotate tabs
   useEffect(() => {
@@ -134,7 +145,7 @@ export default function Hero() {
   return (
     <div className="relative z-1 h-svh">
       {/* Fixed hero - always fills viewport */}
-      <div className="fixed inset-0 z-1 flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-black overflow-hidden" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+      <div className={`${isFixed ? "fixed" : "absolute"} inset-0 z-1 flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-[#1c1c1c] overflow-hidden`} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
         {/* Background Images */}
         {heroData.tabs.map((tab, index) => (
           <motion.div key={index} initial={false} animate={{ opacity: index === activeTab ? 1 : 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full" style={{ zIndex: index === activeTab ? 1 : 0 }}>
@@ -205,9 +216,6 @@ export default function Hero() {
             <button key={index} onClick={() => handleTabClick(index)} className={`w-2 h-2 rounded-full transition-all duration-300 ${index === activeTab ? "bg-white w-6" : "bg-white/40"}`} aria-label={`Go to slide ${index + 1}`} />
           ))}
         </div>
-
-        {/* Safe area bottom cover – prevents black address bar on iOS Safari */}
-        <div className="absolute bottom-0 left-0 right-0 z-50 pointer-events-none" style={{ height: "env(safe-area-inset-bottom, 0px)", background: "#6d5efc" }} />
       </div>
     </div>
   );
