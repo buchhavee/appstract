@@ -18,69 +18,72 @@ export function CaseExpandedContent({ content, onClose }: CaseExpandedContentPro
 
       <div className="px-4 md:px-8 lg:px-16 py-10 md:py-14">
         <div className="flex flex-col gap-10 lg:gap-14 max-w-7xl mx-auto">
-          {/* Content + Stats — two-column on desktop */}
-          <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
-            {/* Left: Headline + Bullets */}
-            <div className="flex flex-col gap-5 lg:flex-1">
-              <h3 className="font-bw-gradual font-bold text-black tracking-tight leading-tight" style={{ fontSize: "clamp(1.5rem, 2vw + 0.75rem, 2.25rem)" }}>
-                {content.headline}
-              </h3>
+          {/* Main row: text+stats left, gallery right on desktop */}
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-stretch">
+            {/* Left: Headline + Bullets + Stats */}
+            <div className="flex flex-col gap-8 lg:flex-1">
+              {/* Headline + Bullets */}
+              <div className="flex flex-col gap-5">
+                <h3 className="font-bw-gradual font-bold text-black tracking-tight leading-tight" style={{ fontSize: "clamp(1.5rem, 2vw + 0.75rem, 2.25rem)" }}>
+                  {content.headline}
+                </h3>
 
-              {content.bullets.length > 0 && (
-                <ul className="flex flex-col gap-4">
-                  {content.bullets.map((bullet, bi) => (
-                    <li key={bi} className="flex gap-3 items-start">
-                      <span
-                        className="mt-1 flex items-center justify-center rounded-full shrink-0"
-                        style={{
-                          width: "1.25rem",
-                          height: "1.25rem",
-                          background: "var(--gradient-primary)",
-                        }}
-                      >
-                        <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                {content.bullets.length > 0 && (
+                  <ul className="flex flex-col gap-4">
+                    {content.bullets.map((bullet, bi) => (
+                      <li key={bi} className="flex gap-3 items-start">
+                        <span
+                          className="mt-1 flex items-center justify-center rounded-full shrink-0"
+                          style={{
+                            width: "1.25rem",
+                            height: "1.25rem",
+                            background: "var(--gradient-primary)",
+                          }}
+                        >
+                          <Check className="w-3 h-3 text-white" strokeWidth={3} />
+                        </span>
+                        <span className="text-neutral-medium leading-relaxed" style={{ fontSize: "var(--text-sm)" }}>
+                          {bullet}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+
+              {/* Stats */}
+              {content.stats.length > 0 && (
+                <div className="flex flex-row flex-wrap gap-4">
+                  {content.stats.map((stat, si) => (
+                    <motion.div
+                      key={si}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.35, delay: 0.15 + si * 0.08 }}
+                      className="flex flex-col gap-1.5 flex-1 min-w-32 rounded-2xl px-5 py-4 bg-white border border-black/6"
+                      style={{
+                        boxShadow: "0 2px 12px rgba(109, 94, 252, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04)",
+                      }}
+                    >
+                      <span className="gradient-text font-bw-gradual font-bold" style={{ fontSize: "clamp(1.5rem, 1.5vw + 0.75rem, 2rem)" }}>
+                        {stat.value}
                       </span>
-                      <span className="text-neutral-medium leading-relaxed" style={{ fontSize: "var(--text-sm)" }}>
-                        {bullet}
+                      <span className="text-neutral-medium font-medium" style={{ fontSize: "var(--text-xs)" }}>
+                        {stat.label}
                       </span>
-                    </li>
+                    </motion.div>
                   ))}
-                </ul>
+                </div>
               )}
             </div>
 
-            {/* Right: Stats */}
-            {content.stats.length > 0 && (
-              <div className="flex flex-row flex-wrap lg:flex-col gap-4 lg:w-72 lg:shrink-0">
-                {content.stats.map((stat, si) => (
-                  <motion.div
-                    key={si}
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.35, delay: 0.15 + si * 0.08 }}
-                    className="flex flex-col gap-1.5 flex-1 min-w-32 rounded-2xl px-5 py-4 bg-white border border-black/6"
-                    style={{
-                      boxShadow: "0 2px 12px rgba(109, 94, 252, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04)",
-                    }}
-                  >
-                    <span className="gradient-text font-bw-gradual font-bold" style={{ fontSize: "clamp(1.5rem, 1.5vw + 0.75rem, 2rem)" }}>
-                      {stat.value}
-                    </span>
-                    <span className="text-neutral-medium font-medium" style={{ fontSize: "var(--text-xs)" }}>
-                      {stat.label}
-                    </span>
-                  </motion.div>
-                ))}
+            {/* Right: Gallery */}
+            {content.images.length > 0 && (
+              <div className="w-full lg:w-[45%] lg:shrink-0 lg:self-stretch lg:flex lg:flex-col">
+                <CaseGallery images={content.images} />
               </div>
             )}
           </div>
-
-          {/* Gallery */}
-          {content.images.length > 0 && (
-            <div className="w-full">
-              <CaseGallery images={content.images} />
-            </div>
-          )}
 
           {/* Close button */}
           <button
