@@ -5,7 +5,7 @@ import SmoothScroll from "@/components/SmoothScroll";
 export default function Home() {
   return (
     <SmoothScroll>
-      <main className="flex flex-col min-h-screen overflow-x-hidden">
+      <main className="flex flex-col min-h-screen overflow-x-clip">
         <Navbar />
         <Hero />
         <Results />

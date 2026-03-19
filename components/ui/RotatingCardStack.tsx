@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Zap, Users, Gift, ShieldCheck, TrendingUp, LucideIcon } from "lucide-react";
 
@@ -29,16 +29,39 @@ interface RotatingCardStackProps {
 
 export default function RotatingCardStack({ items, autoRotate = true, rotationInterval = 3000, className = "" }: RotatingCardStackProps) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const lastClickTimeRef = useRef<number>(0);
 
   useEffect(() => {
     if (!autoRotate || items.length <= 1) return;
 
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % items.length);
-    }, rotationInterval);
+    const startInterval = () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
 
-    return () => clearInterval(interval);
+      intervalRef.current = setInterval(() => {
+        const timeSinceLastClick = Date.now() - lastClickTimeRef.current;
+        // Only auto-rotate if at least rotationInterval + 2000ms has passed since last manual click
+        if (timeSinceLastClick > rotationInterval + 2000) {
+          setActiveIndex((prev) => (prev + 1) % items.length);
+        }
+      }, rotationInterval);
+    };
+
+    startInterval();
+
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
   }, [autoRotate, items.length, rotationInterval]);
+
+  const handleCardClick = (index: number) => {
+    lastClickTimeRef.current = Date.now();
+    setActiveIndex(index);
+  };
 
   const getRelativePosition = (index: number) => {
     const diff = index - activeIndex;
@@ -50,25 +73,51 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
   };
 
   return (
-    <div
+    <motion.div
       className={`relative w-full flex items-center justify-center ${className}`}
       style={{
-        height: "420px",
+        height: "480px",
         perspective: "1200px",
         perspectiveOrigin: "center center",
       }}
+      animate={{
+        y: [0, -5, 0],
+      }}
+      transition={{
+        repeat: Infinity,
+        repeatType: "reverse",
+        duration: 5,
+        ease: "easeInOut",
+      }}
     >
+      {/* Glow effect behind cards */}
+      <div
+        className="absolute inset-0 flex items-center justify-center pointer-events-none"
+        style={{
+          filter: "blur(80px)",
+          opacity: 1,
+        }}
+      >
+        <div
+          className="w-full h-48 rounded-full"
+          style={{
+            maxWidth: "500px",
+            background: "radial-gradient(ellipse, rgba(255, 255, 255, 0.15) 0%, rgba(146, 222, 246, 0.85) 25%, rgba(139, 92, 246, 0.6) 50%, rgba(109, 94, 252, 0.4) 70%, transparent 90%)",
+          }}
+        />
+      </div>
+
       {items.map((item, index) => {
         const relativePos = getRelativePosition(index);
         const absPos = Math.abs(relativePos);
         const isActive = relativePos === 0;
 
-        const yOffset = relativePos * 85;
-        const zOffset = -absPos * 45;
-        const scale = isActive ? 1.05 : 1 - absPos * 0.03;
+        const yOffset = relativePos * 90;
+        const zOffset = -absPos * 60;
+        const scale = isActive ? 1.06 : 1 - absPos * 0.03;
 
-        const rotateX = relativePos * -8;
-        const rotateY = relativePos * 2;
+        const rotateX = relativePos * -9;
+        const rotateY = relativePos * 2.5;
 
         const shadowBlur = isActive ? 35 : 20 - absPos * 3;
         const shadowOpacity = isActive ? 0.3 : 0.18 - absPos * 0.03;
@@ -76,7 +125,20 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
 
         const cardBlur = isActive ? 0 : absPos * 0.4;
 
-        const staggerDelay = absPos * 0.06;
+        const staggerDelay = absPos * 0.08;
+
+        let zIndexValue: number;
+        if (isActive) {
+          zIndexValue = 50; // Highest for active card
+        } else if (relativePos === -1) {
+          zIndexValue = 40; // Card above active, moving up front
+        } else if (relativePos === 1) {
+          zIndexValue = 30; // Card below active, moving down back
+        } else if (relativePos < 0) {
+          zIndexValue = 20; // Top card (position -2), moving up
+        } else {
+          zIndexValue = 10; // Bottom card (position +2), moving down
+        }
 
         const IconComponent = iconMap[item.icon];
 
@@ -95,21 +157,21 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
             }}
             transition={{
               type: "spring",
-              stiffness: 65,
-              damping: 18,
-              mass: 1.2,
+              stiffness: 55,
+              damping: 17,
+              mass: 0.9,
               delay: staggerDelay,
-              filter: { duration: 0.2, delay: staggerDelay },
+              filter: { duration: 0.25, delay: staggerDelay },
             }}
             style={{
-              zIndex: items.length - absPos,
+              zIndex: zIndexValue,
               width: "100%",
               maxWidth: "380px",
               transformStyle: "preserve-3d",
               willChange: "transform, filter",
               backfaceVisibility: "hidden",
             }}
-            onClick={() => setActiveIndex(index)}
+            onClick={() => handleCardClick(index)}
           >
             {/* Card */}
             <motion.div
@@ -132,10 +194,11 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
                       scale: 1.02,
                       rotateX: 2,
                       rotateY: -2,
+                      transition: { type: "spring", stiffness: 350, damping: 18 },
                     }
                   : {}
               }
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
+              transition={{ type: "spring", stiffness: 300, damping: 18 }}
             >
               {/* Top edge highlight */}
               <div
@@ -192,6 +255,6 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
           </motion.div>
         );
       })}
-    </div>
+    </motion.div>
   );
 }

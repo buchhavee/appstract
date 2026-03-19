@@ -3,7 +3,7 @@
 import { useState, useRef, Fragment } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { BarChart3, ShoppingCart, ChevronRight, BadgeDollarSign, TrendingDown, Repeat, PackageCheck, Target, Gem, Share2, Wallet, Mails, CirclePlus } from "lucide-react";
+import { BarChart3, ShoppingCart, BadgeDollarSign, TrendingDown, Repeat, PackageCheck, Target, Gem, Share2, Wallet, Mails, CirclePlus } from "lucide-react";
 import { Tag, Button, Modal } from "@/components/ui";
 import resultsData from "@/data/results.json";
 import kpiData from "@/data/resultskpi.json";
@@ -31,21 +31,32 @@ const kpiIconMap: Record<string, React.ComponentType<{ className?: string }>> = 
 export default function Results() {
   const [open, setOpen] = useState(false);
   const imageRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Internal image parallax
   const { scrollYProgress } = useScroll({
     target: imageRef,
     offset: ["start end", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
-  return (
-    <section className="relative w-full bg-white py-12 md:py-24 px-4 md:px-8 flex justify-center overflow-x-hidden">
-      <div
-        className="absolute left-0 right-0 pointer-events-none -top-24 md:-top-32 h-48 md:h-64"
-        style={{
-          background: "linear-gradient(to bottom, #4c1d95 0%, #6d5efc 30%, rgba(109,94,252,0.15) 70%, rgba(255,255,255,0) 100%)",
-        }}
-      />
+  // Section-level scroll: slide up over Hero
+  const { scrollYProgress: sectionScrollProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "start 0.3"],
+  });
+  const sectionY = useTransform(sectionScrollProgress, [0, 1], [100, 0]);
 
+  return (
+    <motion.section
+      ref={sectionRef}
+      className="relative z-2 w-full bg-white py-12 md:py-24 px-4 md:px-8 flex justify-center overflow-x-hidden -mt-12 md:-mt-16"
+      style={{
+        borderRadius: "24px 24px 0 0",
+        boxShadow: "0 -20px 60px rgba(0, 0, 0, 0.3), 0 -8px 24px rgba(0, 0, 0, 0.2), 0 -2px 6px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+        y: sectionY,
+      }}
+    >
       <div className="w-full max-w-7xl">
         <div className="flex flex-col lg:flex-row gap-10 md:gap-14 lg:gap-10 xl:gap-20 items-center min-w-0">
           <motion.div className="flex-1 flex flex-col gap-8" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
@@ -70,7 +81,7 @@ export default function Results() {
                 return (
                   <Fragment key={index}>
                     <motion.div
-                      className="flex flex-row sm:grid sm:grid-rows-[auto_minmax(3.5rem,auto)_auto] items-start gap-4 sm:gap-3 md:gap-4"
+                      className="flex flex-row sm:flex sm:flex-col items-start gap-4 sm:gap-3 md:gap-4"
                       initial={{ opacity: 0, y: 30 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, amount: 0.3 }}
@@ -81,11 +92,11 @@ export default function Results() {
                       }}
                     >
                       {Icon && <Icon className="w-8 h-8 shrink-0 text-black/60 sm:w-8 sm:h-8 md:w-10 md:h-10 mt-0.5" />}
-                      {/* Vertical divider — mobile only */}
+                      {/* Vertical divider */}
                       <div className="sm:hidden w-px self-stretch bg-black/20 shrink-0" />
-                      <div className="flex flex-col gap-1 sm:contents">
-                        <h3 className="font-bold font-bw-gradual! text-black leading-snug text-lg md:text-xl">{feature.title}</h3>
-                        <p className="font-normal font-bw-gradual! text-neutral-medium leading-normal text-base md:text-lg">{feature.description}</p>
+                      <div className="flex flex-col gap-1">
+                        <h3 className="font-bold font-bw-gradual! text-black leading-snug text-lg md:text-lg">{feature.title}</h3>
+                        <p className="font-normal font-bw-gradual! text-neutral-medium leading-normal text-base md:text-base">{feature.description}</p>
                       </div>
                     </motion.div>
                     {index === 0 && <div className="hidden sm:block w-px bg-black/20" />}
@@ -160,6 +171,6 @@ export default function Results() {
           );
         })()}
       </Modal>
-    </section>
+    </motion.section>
   );
 }

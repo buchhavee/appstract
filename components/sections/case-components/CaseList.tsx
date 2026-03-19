@@ -59,9 +59,48 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
   const extraCases = cases.slice(initialCount);
 
   return (
-    <div ref={containerRef} className="relative z-10 w-full bg-white overflow-hidden rounded-xl border border-black/10 shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+    <div
+      ref={containerRef}
+      className="relative z-10 w-full overflow-hidden md:rounded-xl rounded-md"
+      style={{
+        background: "linear-gradient(145deg, rgba(255, 255, 255, 1) 0%, rgba(250, 250, 252, 1) 100%)",
+        border: "1px solid rgba(0, 0, 0, 0.08)",
+        borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
+        boxShadow: `
+          0 20px 40px rgba(0, 0, 0, 0.08),
+          0 8px 16px rgba(0, 0, 0, 0.06),
+          0 2px 4px rgba(0, 0, 0, 0.04),
+          inset 0 1px 0 rgba(255, 255, 255, 1),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.04)
+        `,
+      }}
+    >
+      {/* Top edge highlight sheen */}
+      <div
+        className="absolute top-0 left-8 right-8 h-px pointer-events-none z-20"
+        style={{
+          background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 80%, transparent 100%)",
+        }}
+      />
+
+      {/* Gradient overlay for depth */}
+      <div
+        className="absolute inset-0 pointer-events-none rounded-xl overflow-hidden"
+        style={{
+          background: "linear-gradient(160deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.1) 30%, transparent 50%, rgba(0,0,0,0.02) 100%)",
+        }}
+      />
+
+      {/* Bottom reflection */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none rounded-b-xl"
+        style={{
+          background: "linear-gradient(to top, rgba(0,0,0,0.03) 0%, transparent 100%)",
+        }}
+      />
+
       {/* Cases List */}
-      <div className="flex flex-col">
+      <div className="flex flex-col relative z-10">
         {/* Always visible cases */}
         {initialCases.map((c, i) => (
           <motion.div
@@ -113,11 +152,11 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
       </div>
 
       {/* Bottom border */}
-      <div className="h-px bg-black/10" />
+      <div className="h-px bg-black/10 relative z-10" />
 
       {/* Show more / Show less */}
       {hasMore && (
-        <div className="flex justify-center py-6 md:py-8 bg-white">
+        <div className="flex justify-center py-6 md:py-8 bg-transparent relative z-10">
           <motion.button
             onClick={() => {
               if (showAll) setExpandedIndex(null);

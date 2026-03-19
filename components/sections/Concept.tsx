@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { ShoppingCart, HeartHandshake, MessagesSquare, Unplug } from "lucide-react";
 import { Tag } from "@/components/ui";
+import StarField from "@/components/ui/StarField";
 import conceptData from "@/data/concept.json";
 import { fadeInUp, staggerContainer, phoneVariants } from "@/lib/animations";
 
@@ -19,20 +20,25 @@ export default function Concept() {
   return (
     <section
       id="concept"
-      className="relative w-full py-12! px-4 md:px-8 lg:px-16 flex justify-center overflow-hidden"
+      className="relative z-2 w-full py-12! px-4 md:px-8 lg:px-16 flex justify-center overflow-visible"
       style={{
         background: "linear-gradient(to bottom, white 16.45%, #4CC9F0 52.2%, #6D5EFC 100%)",
       }}
     >
       <div className="w-full max-w-7xl flex flex-col items-center">
+        {/* Star Field Background - full width, not clipped by padding */}
+        <div className="absolute inset-0 -mx-4 md:-mx-8 lg:-mx-16 overflow-visible pointer-events-none flex justify-center">
+          <StarField className="z-0" />
+        </div>
+
         {/* Header */}
-        <motion.div className="flex flex-col items-center max-w-3xl text-center" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
+        <motion.div className="relative flex flex-col items-center max-w-3xl text-center overflow-visible" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
           {/* Tagline */}
-          <motion.div variants={fadeInUp}>
+          <motion.div variants={fadeInUp} className="relative z-10">
             <Tag>{conceptData.tagline}</Tag>
           </motion.div>
 
-          <motion.div className="flex flex-col gap-6 items-center mt-2" variants={fadeInUp}>
+          <motion.div className="relative z-10 flex flex-col gap-6 items-center mt-2" variants={fadeInUp}>
             <h2
               className="gradient-text font-bw-gradual font-bold tracking-tight leading-tight"
               style={{
@@ -72,7 +78,7 @@ export default function Concept() {
               zIndex: 10,
             }}
             variants={phoneVariants}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.4 }}
           >
             <Image src="/images/concept/phone-center.png" alt="Shopping app - Shop sammen" width={414} height={896} className="w-full h-auto drop-shadow-2xl" />
           </motion.div>
