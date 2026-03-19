@@ -104,7 +104,7 @@ export default function ContactSection() {
   }, [open]);
 
   return (
-    <section ref={sectionRef} className="section section-padding pt-32! md:pt-40 -mt-16 md:-mt-24 flex flex-col items-center justify-center bg-white relative overflow-x-clip overflow-y-visible z-10">
+    <section ref={sectionRef} className="section section-padding pt-12! md:pt-40! -mt-16 md:-mt-24 flex flex-col items-center justify-center bg-white relative overflow-x-clip overflow-y-visible z-10">
       <div className="relative w-full flex flex-col items-center justify-center min-h-[60svh] max-w-7xl rounded-3xl border border-black/15 p-8 md:p-16 overflow-visible">
         {/* Background gradient */}
         <div

@@ -41,16 +41,16 @@ export default function SpotlightCard({ children, className = "", spotlightColor
   };
 
   return (
-    <div ref={divRef} onMouseMove={handleMouseMove} onFocus={handleFocus} onBlur={handleBlur} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={`relative overflow-hidden rounded-3xl ${className}`} style={style}>
+    <div ref={divRef} onMouseMove={handleMouseMove} onFocus={handleFocus} onBlur={handleBlur} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} className={`relative rounded-3xl ${className}`} style={style}>
       {/* Spotlight effect */}
       <div
-        className="pointer-events-none absolute inset-0 transition-opacity duration-500"
+        className="pointer-events-none absolute inset-0 transition-opacity duration-500 rounded-3xl overflow-hidden"
         style={{
           opacity,
           background: `radial-gradient(900px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 90%)`,
         }}
       />
-      {children}
+      <div className="relative rounded-3xl h-full overflow-hidden">{children}</div>
     </div>
   );
 }

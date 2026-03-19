@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Tag, SpotlightCard, RotatingCardStack } from "@/components/ui";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import featureData from "@/data/feature.json";
@@ -22,10 +23,10 @@ function ChatMessage({ sender, message, isAssistant = false, isRight = false, de
   return (
     <motion.div className={`flex flex-col gap-1 ${alignment}`} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: delay * 0.1 }}>
       <div className={`flex items-center gap-2 ${flexDir}`}>
-        <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs ${isAssistant ? "bg-linear-to-br from-violet-500 to-cyan-400" : isRight ? "bg-linear-to-br from-cyan-400 to-cyan-600" : "bg-linear-to-br from-purple-400 to-purple-600"}`}>{isAssistant ? "✨" : sender.charAt(0)}</div>
+        <div className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold leading-none ${isAssistant ? "bg-linear-to-br from-violet-500 to-cyan-400" : isRight ? "bg-linear-to-br from-[#01a4ff] to-cyan-300" : "bg-linear-to-br from-purple-400 to-purple-600"}`}>{isAssistant ? "✨" : sender.charAt(0)}</div>
         <span className="text-xs font-bw-gradual text-black/60">{sender}</span>
       </div>
-      <div className={`rounded-2xl px-4 py-3 max-w-[85%] ${bubbleMargin} ${isAssistant ? "bg-neutral-800 border border-white/10" : isRight ? "bg-cyan-600/60 border border-cyan-400/20" : "bg-neutral-700/50"}`}>
+      <div className={`rounded-2xl px-4 py-3 max-w-[85%] ${bubbleMargin} ${isAssistant ? "bg-neutral-800 border border-white/10" : isRight ? "bg-[rgb(1,164,255)] border border-cyan-400/20" : "bg-neutral-500/50"}`}>
         <p className="text-sm text-white/90 leading-relaxed">{message}</p>
         {isAssistant && (
           <div className="flex flex-wrap gap-2 mt-3">
@@ -76,45 +77,97 @@ export default function Feature() {
       cardBg: item.cardBg || "#E8E4F0",
     })) || [];
 
+  const sectionRef = useRef<HTMLElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  // Track scroll through the spacer area (after cards, before Cases)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["end end", "end start"],
+  });
+
+  // As we scroll through the spacer, push cards down to keep them in viewport
+  // scrollYProgress 0 = section bottom at viewport bottom, 1 = section bottom at viewport top
+  // We want cards to translate down as we scroll, keeping them "pinned"
+  const cardsY = useTransform(scrollYProgress, [0, 1], [0, typeof window !== "undefined" ? window.innerHeight * 0.6 : 600]);
+
   return (
     <section
+      ref={sectionRef}
       id="why-appstract"
-      className="relative w-full py-8 md:py-12 px-4 md:px-8 lg:px-16 flex justify-center -mt-px"
+      className="relative z-1 w-full -mt-px"
       style={{
         background: "#6D5EFC",
       }}
     >
-      <div className="w-full max-w-7xl flex flex-col items-center">
-        {/* Header */}
-        <motion.div className="flex flex-col items-center max-w-3xl text-center mb-12 md:mb-16" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
-          {/* Tag */}
-          <motion.div variants={fadeInUp}>
-            <Tag variant="dark">{featureData.tagline}</Tag>
-          </motion.div>
+      {/* Header - scrolls normally */}
+      <div className="w-full px-4 md:px-8 lg:px-16 flex justify-center">
+        <div className="w-full max-w-7xl">
+          <div className="py-12 md:py-16 flex flex-col items-center">
+            <motion.div className="flex flex-col items-center max-w-3xl text-center mb-6 md:mb-12" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
+              <motion.div variants={fadeInUp}>
+                <Tag variant="dark">{featureData.tagline}</Tag>
+              </motion.div>
 
-          <motion.div className="mt-6" variants={fadeInUp}>
-            <h2 className="font-bw-gradual font-bold leading-tight text-white" style={{ fontSize: "clamp(32px, 6vw, 64px)" }}>
-              {featureData.headline.line1}
-            </h2>
-            <p className="text-lg md:text-xl text-white/70 mt-4 max-w-xl mx-auto">{featureData.headline.line2}</p>
-          </motion.div>
-        </motion.div>
+              <motion.div className="mt-6" variants={fadeInUp}>
+                <h2 className="font-bw-gradual font-bold leading-tight text-white" style={{ fontSize: "clamp(32px, 6vw, 64px)" }}>
+                  {featureData.headline.line1}
+                </h2>
+                <p className="text-lg md:text-xl text-white/70 mt-4 max-w-xl mx-auto">{featureData.headline.line2}</p>
+              </motion.div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
 
-        {/* Cards */}
-        <motion.div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={staggerContainer}>
+      {/* Cards - scroll-pinned via JS transform */}
+      <div className="px-4 md:px-8 lg:px-16 flex justify-center">
+        <motion.div ref={cardsRef} className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6" style={{ y: cardsY }} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.1 }} variants={staggerContainer}>
           {/* Left Card */}
           <motion.div variants={fadeInUp}>
             <SpotlightCard
               className="h-full"
               spotlightColor="rgba(146, 222, 246, 0.1)"
               style={{
-                background: "rgba(30, 30, 30, 0.3)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
+                background: "linear-gradient(145deg, rgba(40, 40, 45, 0.6) 0%, rgba(25, 25, 30, 0.7) 100%)",
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
+                borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
+                boxShadow: `
+                  0 20px 40px rgba(0, 0, 0, 0.4),
+                  0 8px 16px rgba(0, 0, 0, 0.3),
+                  0 2px 4px rgba(0, 0, 0, 0.2),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                  inset 0 -1px 0 rgba(0, 0, 0, 0.2)
+                `,
               }}
             >
-              <div className="p-6 md:p-8">
+              {/* Top edge highlight sheen */}
+              <div
+                className="absolute top-0 left-8 right-8 h-px pointer-events-none z-10"
+                style={{
+                  background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 20%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 80%, transparent 100%)",
+                }}
+              />
+
+              {/* Gradient overlay for depth */}
+              <div
+                className="absolute inset-0 pointer-events-none rounded-3xl overflow-hidden"
+                style={{
+                  background: "linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 30%, transparent 50%, rgba(0,0,0,0.1) 100%)",
+                }}
+              />
+
+              {/* Bottom reflection */}
+              <div
+                className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none rounded-b-3xl"
+                style={{
+                  background: "linear-gradient(to top, rgba(0,0,0,0.15) 0%, transparent 100%)",
+                }}
+              />
+
+              <div className="p-6 md:p-8 relative z-10">
                 <div className="text-center mb-6">
                   <h3 className="text-xl md:text-2xl font-semibold font-bw-gradual! text-white mb-3">{featureData.cards[0].title}</h3>
                   <p className="text-sm md:text-base font-bw-gradual! text-white/80 leading-relaxed max-w-md mx-auto">{featureData.cards[0].description}</p>
@@ -132,13 +185,45 @@ export default function Feature() {
               className="h-full"
               spotlightColor="rgba(146, 222, 246, 0.1)"
               style={{
-                background: "rgba(30, 30, 30, 0.3)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
+                background: "linear-gradient(145deg, rgba(40, 40, 45, 0.6) 0%, rgba(25, 25, 30, 0.7) 100%)",
+                backdropFilter: "blur(16px)",
+                WebkitBackdropFilter: "blur(16px)",
+                border: "1px solid rgba(255, 255, 255, 0.15)",
+                borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
+                boxShadow: `
+                  0 20px 40px rgba(0, 0, 0, 0.4),
+                  0 8px 16px rgba(0, 0, 0, 0.3),
+                  0 2px 4px rgba(0, 0, 0, 0.2),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1),
+                  inset 0 -1px 0 rgba(0, 0, 0, 0.2)
+                `,
               }}
             >
-              <div className="p-6 md:p-8">
+              {/* Top edge highlight sheen */}
+              <div
+                className="absolute top-0 left-8 right-8 h-px pointer-events-none z-10"
+                style={{
+                  background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 20%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 80%, transparent 100%)",
+                }}
+              />
+
+              {/* Gradient overlay for depth */}
+              <div
+                className="absolute inset-0 pointer-events-none rounded-3xl overflow-hidden"
+                style={{
+                  background: "linear-gradient(160deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 30%, transparent 50%, rgba(0,0,0,0.1) 100%)",
+                }}
+              />
+
+              {/* Bottom reflection */}
+              <div
+                className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none rounded-b-3xl"
+                style={{
+                  background: "linear-gradient(to top, rgba(0,0,0,0.15) 0%, transparent 100%)",
+                }}
+              />
+
+              <div className="p-6 md:p-8 relative z-10">
                 <div className="text-center mb-2">
                   <h3 className="text-xl md:text-2xl font-semibold font-bw-gradual! text-white mb-3">{featureData.cards[1].title}</h3>
                   <p className="text-sm md:text-base font-bw-gradual! text-white/80 leading-relaxed max-w-md mx-auto">{featureData.cards[1].description}</p>
@@ -153,6 +238,9 @@ export default function Feature() {
           </motion.div>
         </motion.div>
       </div>
+
+      {/* Scroll spacer */}
+      <div className="h-[25vh]" aria-hidden="true" />
     </section>
   );
 }
