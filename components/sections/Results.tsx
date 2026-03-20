@@ -43,14 +43,14 @@ export default function Results() {
   // Section-level scroll: slide up over Hero
   const { scrollYProgress: sectionScrollProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "start 0.3"],
+    offset: ["start end", "start 0.1"],
   });
-  const sectionY = useTransform(sectionScrollProgress, [0, 1], [100, 0]);
+  const sectionY = useTransform(sectionScrollProgress, [0, 1], [120, 0]);
 
   return (
     <motion.section
       ref={sectionRef}
-      className="relative z-2 w-full py-12 md:py-24 px-4 md:px-8 flex justify-center overflow-x-hidden -mt-6"
+      className="relative z-2 w-full py-12 md:py-24 px-4 md:px-8 flex justify-center overflow-x-hidden -mt-28"
       style={{
         borderRadius: "24px 24px 0 0",
         backgroundColor: "white",

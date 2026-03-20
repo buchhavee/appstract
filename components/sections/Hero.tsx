@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import heroData from "@/data/hero.json";
@@ -131,20 +131,30 @@ export default function Hero() {
 
   const currentTab = heroData.tabs[activeTab];
 
+  // Parallax: Hero content scrolls at ~50% speed
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: heroScrollProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const heroParallaxY = useTransform(heroScrollProgress, [0, 1], ["0%", "30%"]);
+
   return (
-    <section className="relative z-1 w-full h-svh flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-primary-purple overflow-hidden" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
-      {/* Background Images */}
-      {heroData.tabs.map((tab, index) => (
-        <motion.div key={index} initial={false} animate={{ opacity: index === activeTab ? 1 : 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full" style={{ zIndex: index === activeTab ? 1 : 0 }}>
-          <Image src={tab.image} alt="Hero background" fill className="object-cover" style={{ objectPosition: tab.objectPosition || "center center" }} priority={index === 0} />
-          {/* Overlay */}
-          <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.1) 100%)" }} />
-          {/* Liquid overlay */}
-          <div className="absolute bottom-0 left-0 right-0 h-[30%]" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }}>
-            <LiquidBackground opacity={0.3} speed={0.6} />
-          </div>
-        </motion.div>
-      ))}
+    <section ref={heroRef} className="relative z-1 w-full h-svh flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-primary-purple overflow-hidden" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+      {/* Background Images - parallax container */}
+      <motion.div className="absolute inset-0 w-full h-full" style={{ y: heroParallaxY }}>
+        {heroData.tabs.map((tab, index) => (
+          <motion.div key={index} initial={false} animate={{ opacity: index === activeTab ? 1 : 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full" style={{ zIndex: index === activeTab ? 1 : 0 }}>
+            <Image src={tab.image} alt="Hero background" fill className="object-cover" style={{ objectPosition: tab.objectPosition || "center center" }} priority={index === 0} />
+            {/* Overlay */}
+            <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.1) 100%)" }} />
+            {/* Liquid overlay */}
+            <div className="absolute bottom-0 left-0 right-0 h-[30%]" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }}>
+              <LiquidBackground opacity={0.3} speed={0.6} />
+            </div>
+          </motion.div>
+        ))}
+      </motion.div>
 
       {/* Purple gradient overlay */}
       <motion.div
