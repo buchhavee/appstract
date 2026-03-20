@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useScroll, useTransform } from "framer-motion";
+import { useIsMobile } from "@/lib/hooks";
 import { ArrowRight } from "lucide-react";
 import { LiquidBackground, ConicButton } from "@/components/ui";
 import { Floating3DImage, ContactModal } from "./contact-components";
@@ -14,50 +15,43 @@ const floatingImages = [
     alt: "3D Line Graph",
     positionClasses: "-top-13 md:-top-32 lg:-top-36 xl:-top-44 -left-13 md:-left-20 lg:-left-28 xl:-left-36 w-40 h-36 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-96 xl:h-110",
     yRange: [100, -100] as [number, number],
+    mobileYRange: [20, -20] as [number, number],
     rotateRange: [-5, 5] as [number, number],
-    hoverAnimation: {
-      y: [0, -8, 0],
-      transition: { duration: 4, repeat: Infinity, ease: "easeInOut" as const },
-    },
+    floatClass: "float-a",
   },
   {
     src: "/images/3d/3dchatbubble.png",
     alt: "3D Chat Bubble",
     positionClasses: "-top-13 md:-top-32 lg:-top-36 xl:-top-44 -right-10 md:-right-20 lg:-right-28 xl:-right-36 w-40 h-40 md:w-50 md:h-72 lg:w-62 lg:h-72 xl:w-96 xl:h-110",
     yRange: [80, -120] as [number, number],
+    mobileYRange: [20, -20] as [number, number],
     rotateRange: [5, -5] as [number, number],
-    hoverAnimation: {
-      y: [0, -10, 0],
-      transition: { duration: 5, repeat: Infinity, ease: "easeInOut" as const, delay: 1 },
-    },
+    floatClass: "float-b",
   },
   {
     src: "/images/3d/3denvelope.png",
     alt: "3D Envelope",
-    positionClasses: "-bottom-16 md:-bottom-28 lg:-bottom-32 xl:-bottom-40 -left-12 md:-left-20 lg:-left-28 xl:-left-36 w-40 h-36 md:w-50 md:h-64 lg:w-62 lg:h-72 xl:w-96 xl:h-110",
+    positionClasses: "-bottom-24 md:-bottom-36 lg:-bottom-40 xl:-bottom-48 -left-12 md:-left-20 lg:-left-28 xl:-left-36 w-40 h-36 md:w-50 md:h-64 lg:w-62 lg:h-72 xl:w-96 xl:h-110",
     yRange: [120, -80] as [number, number],
+    mobileYRange: [20, -20] as [number, number],
     rotateRange: [5, -5] as [number, number],
-    hoverAnimation: {
-      y: [0, -6, 0],
-      transition: { duration: 4.5, repeat: Infinity, ease: "easeInOut" as const, delay: 0.5 },
-    },
+    floatClass: "float-c",
   },
   {
     src: "/images/3d/3dpiechart.png",
     alt: "3D Pie Chart",
-    positionClasses: "-bottom-32 md:-bottom-44 lg:-bottom-48 xl:-bottom-56 -right-10 md:-right-20 lg:-right-28 xl:-right-36 w-40 h-36 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-96 xl:h-110",
+    positionClasses: "-bottom-40 md:-bottom-52 lg:-bottom-56 xl:-bottom-64 -right-10 md:-right-20 lg:-right-28 xl:-right-36 w-40 h-36 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-96 xl:h-110",
     yRange: [60, -140] as [number, number],
+    mobileYRange: [20, -20] as [number, number],
     rotateRange: [-5, 5] as [number, number],
-    hoverAnimation: {
-      y: [0, -12, 0],
-      transition: { duration: 5.5, repeat: Infinity, ease: "easeInOut" as const, delay: 1.5 },
-    },
+    floatClass: "float-d",
   },
 ];
 
 export default function ContactSection() {
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const isMobile = useIsMobile();
   const sectionRef = useRef<HTMLElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -76,11 +70,11 @@ export default function ContactSection() {
     offset: ["start end", "end start"],
   });
 
-  // Create motion values for each floating image
-  const y0 = useTransform(scrollYProgress, [0, 1], floatingImages[0].yRange);
-  const y1 = useTransform(scrollYProgress, [0, 1], floatingImages[1].yRange);
-  const y2 = useTransform(scrollYProgress, [0, 1], floatingImages[2].yRange);
-  const y3 = useTransform(scrollYProgress, [0, 1], floatingImages[3].yRange);
+  // Create motion values for each floating image – reduced range on mobile to prevent rubber-band jitter
+  const y0 = useTransform(scrollYProgress, [0, 1], isMobile ? floatingImages[0].mobileYRange : floatingImages[0].yRange);
+  const y1 = useTransform(scrollYProgress, [0, 1], isMobile ? floatingImages[1].mobileYRange : floatingImages[1].yRange);
+  const y2 = useTransform(scrollYProgress, [0, 1], isMobile ? floatingImages[2].mobileYRange : floatingImages[2].yRange);
+  const y3 = useTransform(scrollYProgress, [0, 1], isMobile ? floatingImages[3].mobileYRange : floatingImages[3].yRange);
   const yValues = [y0, y1, y2, y3];
 
   const rotate0 = useTransform(scrollYProgress, [0, 1], floatingImages[0].rotateRange);
@@ -142,7 +136,7 @@ export default function ContactSection() {
 
         {/* Floating 3D Images */}
         {floatingImages.map((image, index) => (
-          <Floating3DImage key={image.src} src={image.src} alt={image.alt} positionClasses={image.positionClasses} y={yValues[index]} rotate={rotateValues[index]} hoverAnimation={image.hoverAnimation} />
+          <Floating3DImage key={image.src} src={image.src} alt={image.alt} positionClasses={image.positionClasses} y={yValues[index]} rotate={rotateValues[index]} floatClass={image.floatClass} />
         ))}
       </div>
 

@@ -184,3 +184,54 @@ img {
 .animate-spin-slow {
   animation: spin-slow 3s linear infinite;
 }
+
+/* Floating 3D image animations – runs on compositor thread */
+@keyframes float-a {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+@keyframes float-b {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes float-c {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes float-d {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+.float-a {
+  animation: float-a 4s ease-in-out infinite;
+}
+.float-b {
+  animation: float-b 5s ease-in-out infinite 1s;
+}
+.float-c {
+  animation: float-c 4.5s ease-in-out infinite 0.5s;
+}
+.float-d {
+  animation: float-d 5.5s ease-in-out infinite 1.5s;
+}

@@ -20,15 +20,7 @@ export interface Floating3DImageProps {
   alt: string;
   y: MotionValue<number>;
   rotate: MotionValue<number>;
-  hoverAnimation: {
-    y: number[];
-    transition: {
-      duration: number;
-      repeat: number;
-      ease: "easeInOut";
-      delay?: number;
-    };
-  };
+  floatClass: string;
   positionClasses: string;
 }
 
