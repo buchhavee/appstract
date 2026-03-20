@@ -20,10 +20,12 @@ export default function SmoothScroll({ children }: SmoothScrollProps) {
 
   useEffect(() => {
     const lenis = new Lenis({
+      wrapper: window,
+      content: document.documentElement,
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
-      syncTouch: false, // Native scroll on iOS – required for Safari address bar transparency (default, but explicit)
+      syncTouch: false, // Native touch scroll on iOS – required for Safari address bar transparency
     });
 
     lenisRef.current = lenis;

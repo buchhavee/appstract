@@ -31,7 +31,7 @@ const floatingImages = [
   {
     src: "/images/3d/3denvelope.png",
     alt: "3D Envelope",
-    positionClasses: "-bottom-24 md:-bottom-36 lg:-bottom-40 xl:-bottom-48 -left-12 md:-left-20 lg:-left-28 xl:-left-36 w-40 h-36 md:w-50 md:h-64 lg:w-62 lg:h-72 xl:w-96 xl:h-110",
+    positionClasses: "-bottom-16 md:-bottom-28 lg:-bottom-32 xl:-bottom-40 -left-12 md:-left-20 lg:-left-28 xl:-left-36 w-40 h-36 md:w-50 md:h-64 lg:w-62 lg:h-72 xl:w-96 xl:h-110",
     yRange: [120, -80] as [number, number],
     mobileYRange: [20, -20] as [number, number],
     rotateRange: [5, -5] as [number, number],
@@ -40,7 +40,7 @@ const floatingImages = [
   {
     src: "/images/3d/3dpiechart.png",
     alt: "3D Pie Chart",
-    positionClasses: "-bottom-40 md:-bottom-52 lg:-bottom-56 xl:-bottom-64 -right-10 md:-right-20 lg:-right-28 xl:-right-36 w-40 h-36 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-96 xl:h-110",
+    positionClasses: "-bottom-32 md:-bottom-44 lg:-bottom-48 xl:-bottom-56 -right-10 md:-right-20 lg:-right-28 xl:-right-36 w-40 h-36 md:w-50 md:h-64 lg:w-65 lg:h-72 xl:w-96 xl:h-110",
     yRange: [60, -140] as [number, number],
     mobileYRange: [20, -20] as [number, number],
     rotateRange: [-5, 5] as [number, number],
