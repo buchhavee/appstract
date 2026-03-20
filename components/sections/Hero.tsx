@@ -145,7 +145,7 @@ export default function Hero() {
   return (
     <div className="relative z-1 h-svh">
       {/* Fixed hero - always fills viewport */}
-      <div className={`${isFixed ? "fixed" : "absolute"} inset-0 z-1 flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-[#1c1c1c] overflow-hidden`} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+      <div className={`${isFixed ? "fixed" : "absolute"} inset-0 z-1 flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-[#6d5efc] overflow-hidden`} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
         {/* Background Images */}
         {heroData.tabs.map((tab, index) => (
           <motion.div key={index} initial={false} animate={{ opacity: index === activeTab ? 1 : 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full" style={{ zIndex: index === activeTab ? 1 : 0 }}>
