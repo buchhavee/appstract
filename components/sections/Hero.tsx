@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import heroData from "@/data/hero.json";
 import { Button, LiquidBackground } from "@/components/ui";
 
@@ -14,21 +14,10 @@ export default function Hero() {
   const [activeTab, setActiveTab] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-  const [isFixed, setIsFixed] = useState(true);
   const pauseTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const touchStartRef = useRef<{ x: number; y: number } | null>(null);
   const touchEndRef = useRef<number | null>(null);
   const isHorizontalSwipeRef = useRef(false);
-
-  // Switch from fixed to absolute once scrolled past the hero
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsFixed(window.scrollY < window.innerHeight);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Auto-rotate tabs
   useEffect(() => {
@@ -144,8 +133,8 @@ export default function Hero() {
 
   return (
     <div className="relative z-1 h-svh">
-      {/* Fixed hero - always fills viewport */}
-      <div className={`${isFixed ? "fixed" : "absolute"} inset-0 z-1 flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-[#6d5efc] overflow-hidden`} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+      {/* Sticky hero - stays pinned until wrapper scrolls out */}
+      <div className="sticky top-0 h-svh z-1 flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-[#6d5efc] overflow-hidden" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
         {/* Background Images */}
         {heroData.tabs.map((tab, index) => (
           <motion.div key={index} initial={false} animate={{ opacity: index === activeTab ? 1 : 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full" style={{ zIndex: index === activeTab ? 1 : 0 }}>
