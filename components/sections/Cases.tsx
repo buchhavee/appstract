@@ -47,7 +47,7 @@ export default function Cases() {
       </div>
 
       {/* Cases List */}
-      <div className="relative z-10 w-full max-w-7xl">
+      <div className="relative z-10 w-full max-w-7xl px-1">
         <CaseList cases={ListData.cases} initialCount={INITIAL_COUNT} />
       </div>
     </motion.section>
