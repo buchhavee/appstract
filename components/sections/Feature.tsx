@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Tag, SpotlightCard, RotatingCardStack } from "@/components/ui";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
@@ -79,6 +79,11 @@ export default function Feature() {
 
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const [winH, setWinH] = useState(600);
+
+  useEffect(() => {
+    setWinH(window.innerHeight);
+  }, []);
 
   // Track scroll through the spacer area (after cards, before Cases)
   const { scrollYProgress } = useScroll({
@@ -87,9 +92,7 @@ export default function Feature() {
   });
 
   // As we scroll through the spacer, push cards down to keep them in viewport
-  // scrollYProgress 0 = section bottom at viewport bottom, 1 = section bottom at viewport top
-  // We want cards to translate down as we scroll, keeping them "pinned"
-  const cardsY = useTransform(scrollYProgress, [0, 1], [0, typeof window !== "undefined" ? window.innerHeight * 0.6 : 600]);
+  const cardsY = useTransform(scrollYProgress, [0, 1], [0, winH * 0.4]);
 
   return (
     <section

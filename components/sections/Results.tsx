@@ -50,9 +50,10 @@ export default function Results() {
   return (
     <motion.section
       ref={sectionRef}
-      className="relative z-2 w-full bg-white py-12 md:py-24 px-4 md:px-8 flex justify-center overflow-x-hidden -mt-12 md:-mt-16"
+      className="relative z-2 w-full py-12 md:py-24 px-4 md:px-8 flex justify-center overflow-x-hidden -mt-6"
       style={{
         borderRadius: "24px 24px 0 0",
+        backgroundColor: "white",
         boxShadow: "0 -20px 60px rgba(0, 0, 0, 0.3), 0 -8px 24px rgba(0, 0, 0, 0.2), 0 -2px 6px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
         y: sectionY,
       }}
