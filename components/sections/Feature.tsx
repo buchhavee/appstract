@@ -89,7 +89,7 @@ export default function Feature() {
   // As we scroll through the spacer, push cards down to keep them in viewport
   // scrollYProgress 0 = section bottom at viewport bottom, 1 = section bottom at viewport top
   // We want cards to translate down as we scroll, keeping them "pinned"
-  const cardsY = useTransform(scrollYProgress, [0, 1], [0, typeof window !== "undefined" ? window.innerHeight * 0.4 : 400]);
+  const cardsY = useTransform(scrollYProgress, [0, 1], [0, typeof window !== "undefined" ? window.innerHeight * 0.6 : 600]);
 
   return (
     <section
