@@ -140,9 +140,9 @@ export default function Hero() {
   const heroParallaxY = useTransform(heroScrollProgress, [0, 1], ["0%", "30%"]);
 
   return (
-    <section ref={heroRef} className="relative z-1 w-full h-svh flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-primary-purple overflow-hidden" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
-      {/* Background Images - parallax container */}
-      <motion.div className="absolute inset-0 w-full h-full" style={{ y: heroParallaxY }}>
+    <section ref={heroRef} className="relative z-1 w-full h-svh flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-primary-purple" onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+      {/* Background Images - parallax container, 105svh to bleed into Safari address bar */}
+      <motion.div className="absolute inset-x-0 top-0 w-full overflow-hidden" style={{ height: "105svh", y: heroParallaxY }}>
         {heroData.tabs.map((tab, index) => (
           <motion.div key={index} initial={false} animate={{ opacity: index === activeTab ? 1 : 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full" style={{ zIndex: index === activeTab ? 1 : 0 }}>
             <Image src={tab.image} alt="Hero background" fill className="object-cover" style={{ objectPosition: tab.objectPosition || "center center" }} priority={index === 0} />
