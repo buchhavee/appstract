@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { Button } from "@/components/ui";
 import { kineticEase } from "@/lib/animations";
 import navbarData from "@/data/navbar.json";
@@ -12,6 +12,19 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  // Match html background to bottom of menu gradient so iOS address bar area blends in
+  useEffect(() => {
+    const html = document.documentElement;
+    if (isOpen) {
+      html.style.backgroundColor = "#4cc9f0";
+    } else {
+      html.style.backgroundColor = "#6d5efc";
+    }
+    return () => {
+      html.style.backgroundColor = "#6d5efc";
+    };
+  }, [isOpen]);
+
   const panelVariants = useMemo(
     () => ({
       closed: (i: number) => ({
