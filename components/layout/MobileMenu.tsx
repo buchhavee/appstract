@@ -66,8 +66,8 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 0.45 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="fixed inset-0 z-40 lg:hidden" style={{ bottom: "-80px", background: "#000", cursor: "pointer", touchAction: "none" }} onClick={() => onClose()} onTouchMove={(e) => e.preventDefault()} aria-hidden="true" />
 
           {/* Sliding panel */}
-          <aside className="fixed inset-0 z-50 lg:hidden" style={{ bottom: "-80px", overflow: "hidden", clipPath: "inset(0)", touchAction: "none" }} onTouchMove={(e) => e.preventDefault()} aria-label="Menu">
-            <div style={{ position: "absolute", inset: 0 }}>
+          <aside className="fixed inset-0 z-50 lg:hidden" style={{ bottom: "-80px", overflow: "hidden", touchAction: "none" }} onTouchMove={(e) => e.preventDefault()} aria-label="Menu">
+            <div style={{ position: "absolute", inset: 0, bottom: 0 }}>
               {[0, 1, 2].map((i) => (
                 <motion.div
                   key={i}
