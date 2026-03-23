@@ -165,7 +165,7 @@ export default function CookieConsent() {
             exit={{ opacity: 0, y: 20 }}
             whileHover={{ y: -2, boxShadow: "0 8px 24px rgba(0, 0, 0, 0.4)" }}
             onClick={openModal}
-            className="fixed bottom-6 left-6 flex items-center justify-center gap-2 cursor-pointer z-50"
+            className="fixed bottom-6 left-6 flex items-center justify-center gap-2 cursor-pointer z-40"
             style={{
               ...glassStyles,
               padding: isMobile ? 16 : "12px 18px",

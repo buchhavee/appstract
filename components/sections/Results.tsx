@@ -45,7 +45,7 @@ export default function Results() {
     target: sectionRef,
     offset: ["start end", "start 0.1"],
   });
-  const sectionY = useTransform(sectionScrollProgress, [0, 1], [160, 0]);
+  const sectionY = useTransform(sectionScrollProgress, [0, 1], [180, 0]);
 
   return (
     <motion.section
