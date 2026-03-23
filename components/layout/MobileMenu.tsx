@@ -12,16 +12,21 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  // Match html background to bottom of menu gradient so iOS address bar area blends in
+  // Match html background + Safari theme-color to bottom of menu gradient so iOS address bar area blends in
   useEffect(() => {
     const html = document.documentElement;
+    const themeMetaTags = document.querySelectorAll('meta[name="theme-color"]');
+
     if (isOpen) {
       html.style.backgroundColor = "#4cc9f0";
+      themeMetaTags.forEach((tag) => tag.setAttribute("content", "#4cc9f0"));
     } else {
       html.style.backgroundColor = "#6d5efc";
+      themeMetaTags.forEach((tag) => tag.setAttribute("content", "#6D5EFC"));
     }
     return () => {
       html.style.backgroundColor = "#6d5efc";
+      themeMetaTags.forEach((tag) => tag.setAttribute("content", "#6D5EFC"));
     };
   }, [isOpen]);
 
