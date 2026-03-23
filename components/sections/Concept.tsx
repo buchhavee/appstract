@@ -26,14 +26,13 @@ export default function Concept() {
       }}
     >
       <div className="w-full max-w-7xl flex flex-col items-center">
-        {/* Star Field Background - full width, not clipped by padding */}
+        {/* Star Field Background */}
         <div className="absolute inset-0 -mx-4 md:-mx-8 lg:-mx-16 overflow-visible pointer-events-none flex justify-center">
           <StarField className="z-0" />
         </div>
 
         {/* Header */}
         <motion.div className="relative flex flex-col items-center max-w-3xl text-center overflow-visible" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={staggerContainer}>
-          {/* Tagline */}
           <motion.div variants={fadeInUp} className="relative z-10">
             <Tag>{conceptData.tagline}</Tag>
           </motion.div>

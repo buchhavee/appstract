@@ -129,15 +129,15 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
 
         let zIndexValue: number;
         if (isActive) {
-          zIndexValue = 50; // Highest for active card
+          zIndexValue = 50;
         } else if (relativePos === -1) {
-          zIndexValue = 40; // Card above active, moving up front
+          zIndexValue = 40;
         } else if (relativePos === 1) {
-          zIndexValue = 30; // Card below active, moving down back
+          zIndexValue = 30;
         } else if (relativePos < 0) {
-          zIndexValue = 20; // Top card (position -2), moving up
+          zIndexValue = 20;
         } else {
-          zIndexValue = 10; // Bottom card (position +2), moving down
+          zIndexValue = 10;
         }
 
         const IconComponent = iconMap[item.icon];

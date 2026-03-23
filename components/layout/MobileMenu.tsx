@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useMemo, useEffect } from "react";
+import { useMemo } from "react";
 import { Button } from "@/components/ui";
 import { kineticEase } from "@/lib/animations";
 import navbarData from "@/data/navbar.json";
@@ -12,24 +12,6 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
-  // Match html background + Safari theme-color to bottom of menu gradient so iOS address bar area blends in
-  useEffect(() => {
-    const html = document.documentElement;
-    const themeMetaTags = document.querySelectorAll('meta[name="theme-color"]');
-
-    if (isOpen) {
-      html.style.backgroundColor = "#4cc9f0";
-      themeMetaTags.forEach((tag) => tag.setAttribute("content", "#4cc9f0"));
-    } else {
-      html.style.backgroundColor = "#6d5efc";
-      themeMetaTags.forEach((tag) => tag.setAttribute("content", "#6D5EFC"));
-    }
-    return () => {
-      html.style.backgroundColor = "#6d5efc";
-      themeMetaTags.forEach((tag) => tag.setAttribute("content", "#6D5EFC"));
-    };
-  }, [isOpen]);
-
   const panelVariants = useMemo(
     () => ({
       closed: (i: number) => ({
@@ -81,11 +63,11 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       {isOpen && (
         <>
           {/* Dark overlay */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 0.45 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="fixed inset-0 z-40 lg:hidden" style={{ bottom: "-80px", background: "#000", cursor: "pointer", touchAction: "none" }} onClick={() => onClose()} onTouchMove={(e) => e.preventDefault()} aria-hidden="true" />
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 0.45 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="fixed inset-0 z-40 lg:hidden" style={{ background: "#000", cursor: "pointer", touchAction: "none" }} onClick={() => onClose()} onTouchMove={(e) => e.preventDefault()} aria-hidden="true" />
 
           {/* Sliding panel */}
-          <aside className="fixed inset-0 z-50 lg:hidden" style={{ bottom: "-80px", overflow: "hidden", touchAction: "none" }} onTouchMove={(e) => e.preventDefault()} aria-label="Menu">
-            <div style={{ position: "absolute", inset: 0, bottom: 0 }}>
+          <aside className="fixed top-0 right-0 z-50 lg:hidden" style={{ width: "100vw", height: "100vh", overflow: "hidden", clipPath: "inset(0)", touchAction: "none" }} onTouchMove={(e) => e.preventDefault()} aria-label="Menu">
+            <div style={{ position: "absolute", inset: 0 }}>
               {[0, 1, 2].map((i) => (
                 <motion.div
                   key={i}
@@ -97,6 +79,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   style={{
                     position: "absolute",
                     inset: 0,
+                    borderRadius: "0 0 24px 24px",
                     background: "linear-gradient(to bottom, rgba(109, 94, 252, 1) 0%, rgba(76, 201, 240, 0.8) 100%)",
                     backdropFilter: "blur(12px)",
                     WebkitBackdropFilter: "blur(12px)",

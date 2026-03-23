@@ -19,7 +19,7 @@ export default function Hero() {
   const touchEndRef = useRef<number | null>(null);
   const isHorizontalSwipeRef = useRef(false);
 
-  // Auto-rotate tabs
+  // tabs
   useEffect(() => {
     if (isPaused) return;
 
@@ -79,7 +79,6 @@ export default function Hero() {
     const diffX = Math.abs(currentX - touchStartRef.current.x);
     const diffY = Math.abs(currentY - touchStartRef.current.y);
 
-    // Once we detect a predominantly horizontal swipe, lock it in and prevent vertical scroll
     if (!isHorizontalSwipeRef.current && diffX > 10 && diffX > diffY * 1.2) {
       isHorizontalSwipeRef.current = true;
     }

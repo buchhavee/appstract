@@ -4,13 +4,13 @@ import Image from "next/image";
 type LogoSize = "sm" | "md" | "lg";
 
 interface LogoProps {
-  /** Link destination, defaults to "/" */
+  /** Link destination */
   href?: string;
   /** Size variant of the logo */
   size?: LogoSize;
   /** Additional class names */
   className?: string;
-  /** Optional click handler (e.g. for smooth scroll) */
+  /** Optional click handler */
   onClick?: (e: React.MouseEvent) => void;
 }
 

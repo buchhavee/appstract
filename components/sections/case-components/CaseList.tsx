@@ -75,7 +75,6 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
         `,
       }}
     >
-      {/* Top edge highlight sheen */}
       <div
         className="absolute top-0 left-8 right-8 h-px pointer-events-none z-20"
         style={{
@@ -83,7 +82,6 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
         }}
       />
 
-      {/* Gradient overlay for depth */}
       <div
         className="absolute inset-0 pointer-events-none rounded-xl overflow-hidden"
         style={{
@@ -91,7 +89,6 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
         }}
       />
 
-      {/* Bottom reflection */}
       <div
         className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none rounded-b-xl"
         style={{
@@ -101,7 +98,6 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
 
       {/* Cases List */}
       <div className="flex flex-col relative z-10">
-        {/* Always visible cases */}
         {initialCases.map((c, i) => (
           <motion.div
             key={c.name + i}
@@ -151,7 +147,6 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
         </AnimatePresence>
       </div>
 
-      {/* Bottom border */}
       <div className="h-px bg-black/10 relative z-10" />
 
       {/* Show more / Show less */}

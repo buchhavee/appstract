@@ -9,7 +9,6 @@ interface ModalProps {
   open: boolean;
   onClose: () => void;
   children: React.ReactNode;
-  /** Tailwind max-width class for the panel, e.g. "max-w-5xl" */
   maxWidth?: string;
   /** Extra classes appended to the white panel */
   panelClassName?: string;

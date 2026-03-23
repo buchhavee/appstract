@@ -6,7 +6,6 @@ import { Tag, SpotlightCard, RotatingCardStack } from "@/components/ui";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import featureData from "@/data/feature.json";
 
-// Chat message component
 interface ChatMessageProps {
   sender: string;
   message: string;
@@ -85,13 +84,11 @@ export default function Feature() {
     setWinH(window.innerHeight);
   }, []);
 
-  // Track scroll through the spacer area (after cards, before Cases)
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["end end", "end start"],
   });
 
-  // As we scroll through the spacer, push cards down to keep them in viewport
   const cardsY = useTransform(scrollYProgress, [0, 1], [0, winH * 0.4]);
 
   return (
@@ -103,7 +100,7 @@ export default function Feature() {
         background: "#6D5EFC",
       }}
     >
-      {/* Header - scrolls normally */}
+      {/* Header  */}
       <div className="w-full px-4 md:px-8 lg:px-16 flex justify-center">
         <div className="w-full max-w-7xl">
           <div className="py-12 md:py-16 flex flex-col items-center">
@@ -154,7 +151,7 @@ export default function Feature() {
                 }}
               />
 
-              {/* Gradient overlay for depth */}
+              {/* Gradient overlay */}
               <div
                 className="absolute inset-0 pointer-events-none rounded-3xl overflow-hidden"
                 style={{

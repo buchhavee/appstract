@@ -33,14 +33,12 @@ export default function Results() {
   const imageRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Internal image parallax
   const { scrollYProgress } = useScroll({
     target: imageRef,
     offset: ["start end", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
 
-  // Section-level scroll: slide up over Hero
   const { scrollYProgress: sectionScrollProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "start 0.1"],

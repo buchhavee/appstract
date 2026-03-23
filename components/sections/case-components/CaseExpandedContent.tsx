@@ -18,11 +18,8 @@ export function CaseExpandedContent({ content, onClose }: CaseExpandedContentPro
 
       <div className="px-4 md:px-8 lg:px-16 py-10 md:py-14">
         <div className="flex flex-col gap-10 lg:gap-14 max-w-7xl mx-auto">
-          {/* Main row: text+stats left, gallery right on desktop */}
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 lg:items-stretch">
-            {/* Left: Headline + Bullets + Stats */}
             <div className="flex flex-col gap-8 lg:flex-1">
-              {/* Headline + Bullets */}
               <div className="flex flex-col gap-5">
                 <h3 className="font-bw-gradual font-bold text-black tracking-tight leading-tight" style={{ fontSize: "clamp(1.5rem, 2vw + 0.75rem, 2.25rem)" }}>
                   {content.headline}
@@ -77,7 +74,7 @@ export function CaseExpandedContent({ content, onClose }: CaseExpandedContentPro
               )}
             </div>
 
-            {/* Right: Gallery */}
+            {/* Gallery */}
             {content.images.length > 0 && (
               <div className="w-full lg:w-[45%] lg:shrink-0 lg:self-stretch lg:flex lg:flex-col">
                 <CaseGallery images={content.images} />

@@ -13,13 +13,11 @@ const INITIAL_COUNT = 2;
 export default function Cases() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // Track when the Cases section enters the viewport from the bottom
   const { scrollYProgress } = useScroll({
     target: sectionRef,
     offset: ["start end", "start 0.3"],
   });
 
-  // Move Cases upward as it enters — creates the "sliding over Feature" effect
   const y = useTransform(scrollYProgress, [0, 1], [120, 0]);
 
   return (

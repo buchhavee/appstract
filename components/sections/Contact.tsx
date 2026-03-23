@@ -64,7 +64,6 @@ export default function ContactSection() {
     offset: ["start end", "end start"],
   });
 
-  // Create motion values for each floating image
   const y0 = useTransform(scrollYProgress, [0, 1], floatingImages[0].yRange);
   const y1 = useTransform(scrollYProgress, [0, 1], floatingImages[1].yRange);
   const y2 = useTransform(scrollYProgress, [0, 1], floatingImages[2].yRange);
