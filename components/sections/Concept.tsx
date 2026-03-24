@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import Image from "next/image";
 import { ShoppingCart, HeartHandshake, MessagesSquare, Unplug } from "lucide-react";
 import { Tag } from "@/components/ui";
@@ -16,11 +17,76 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Unplug,
 };
 
+interface Hotspot {
+  phone: string;
+  top: string;
+  left: string;
+  label: string;
+}
+
+function HotspotDot({ hotspot }: { hotspot: Hotspot }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div className="absolute z-50" style={{ top: hotspot.top, left: hotspot.left }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+      {/* Pulse ring */}
+      <motion.span
+        className="absolute rounded-full"
+        style={{
+          width: 14,
+          height: 14,
+          top: 0,
+          left: 0,
+          border: "2px solid rgba(76,201,240,0.6)",
+          willChange: "transform, opacity",
+        }}
+        animate={{ scale: [1, 2.5], opacity: [0.7, 0] }}
+        transition={{ duration: 2, repeat: Infinity, ease: [0.4, 0, 0.2, 1], repeatDelay: 0.3 }}
+      />
+
+      {/* Dot */}
+      <motion.span
+        className="block rounded-full cursor-pointer"
+        style={{
+          width: 14,
+          height: 14,
+          background: "rgba(76,201,240,0.95)",
+          boxShadow: "0 0 8px rgba(76,201,240,0.6), 0 0 20px rgba(76,201,240,0.4)",
+        }}
+        animate={{ scale: [1, 1.15, 1] }}
+        transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+      />
+
+      {/* Tooltip */}
+      <motion.div
+        className="pointer-events-none absolute left-1/2 rounded-lg px-4 py-2.5"
+        style={{
+          bottom: "calc(100% + 10px)",
+          x: "-50%",
+          width: "max-content",
+          maxWidth: 200,
+          background: "rgba(0,0,0,0.8)",
+          backdropFilter: "blur(8px)",
+          color: "#fff",
+          fontSize: 12,
+          lineHeight: 1.4,
+          whiteSpace: "normal",
+        }}
+        initial={{ opacity: 0, y: 6 }}
+        animate={hovered ? { opacity: 1, y: 0 } : { opacity: 0, y: 6 }}
+        transition={{ duration: 0.2 }}
+      >
+        {hotspot.label}
+      </motion.div>
+    </div>
+  );
+}
+
 export default function Concept() {
   return (
     <section
       id="concept"
-      className="relative z-2 w-full py-12! px-4 md:px-8 lg:px-16 flex justify-center overflow-visible"
+      className="relative z-2 w-full py-12! px-4 md:px-8 lg:px-16 flex justify-center overflow-visible -mt-px"
       style={{
         background: "linear-gradient(to bottom, white 16.45%, #4CC9F0 52.2%, #6D5EFC 100%)",
       }}
@@ -93,6 +159,34 @@ export default function Concept() {
           >
             <Image src="/images/concept/phone-right.png" alt="Shopping app - Chat" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
           </motion.div>
+
+          {/* Hotspot overlay – sits above all phones */}
+          <div className="hidden md:flex absolute inset-0 justify-center items-end pointer-events-none" style={{ zIndex: 20 }}>
+            {/* Left phone hotspot area */}
+            <div className="relative w-50 sm:w-36 md:w-75 lg:w-96 shrink-0 pointer-events-auto" style={{ aspectRatio: "375 / 812" }}>
+              {conceptData.hotspots
+                .filter((h) => h.phone === "left")
+                .map((h, i) => (
+                  <HotspotDot key={i} hotspot={h} />
+                ))}
+            </div>
+            {/* Center phone hotspot area */}
+            <div className="relative w-55 sm:w-40 md:w-85 lg:w-105 shrink-0 -mx-22 sm:-mx-20 md:-mx-30 lg:-mx-42 pointer-events-auto" style={{ aspectRatio: "414 / 896" }}>
+              {conceptData.hotspots
+                .filter((h) => h.phone === "center")
+                .map((h, i) => (
+                  <HotspotDot key={i} hotspot={h} />
+                ))}
+            </div>
+            {/* Right phone hotspot area */}
+            <div className="relative w-50 sm:w-36 md:w-75 lg:w-96 shrink-0 pointer-events-auto" style={{ aspectRatio: "375 / 812" }}>
+              {conceptData.hotspots
+                .filter((h) => h.phone === "right")
+                .map((h, i) => (
+                  <HotspotDot key={i} hotspot={h} />
+                ))}
+            </div>
+          </div>
         </motion.div>
 
         {/* Feature Cards */}
