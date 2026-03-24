@@ -79,7 +79,6 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   style={{
                     position: "absolute",
                     inset: 0,
-                    borderRadius: "0 0 24px 24px",
                     background: "linear-gradient(to bottom, rgba(109, 94, 252, 1) 0%, rgba(76, 201, 240, 0.8) 100%)",
                     backdropFilter: "blur(12px)",
                     WebkitBackdropFilter: "blur(12px)",
@@ -90,7 +89,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             </div>
 
             {/* Navigation links */}
-            <motion.nav className="relative flex flex-col justify-center h-full" style={{ zIndex: 34, padding: "72px 32px" }} initial={{ x: "101%" }} animate={{ x: "0%" }} exit={{ x: "101%" }} transition={{ duration: 0.55, delay: 0.2, ease: kineticEase }}>
+            <motion.nav className="relative flex flex-col justify-center h-full" style={{ zIndex: 34, padding: "72px 32px 40px" }} initial={{ x: "101%" }} animate={{ x: "0%" }} exit={{ x: "101%" }} transition={{ duration: 0.55, delay: 0.2, ease: kineticEase }}>
               <ul className="list-none m-0 p-0 flex flex-col gap-1">
                 {navbarData.links.map((link, i) => (
                   <li key={`${link.label}-${i}`} style={{ overflow: "hidden" }}>
@@ -119,7 +118,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                 ))}
               </ul>
 
-              <div style={{ overflow: "hidden" }} className="mt-10 pb-4">
+              <div style={{ overflow: "hidden" }} className="mt-10 pb-6">
                 <motion.div variants={buttonVariants} initial="closed" animate="open" exit="closed">
                   <Button
                     onClick={() => {

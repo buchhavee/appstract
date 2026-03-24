@@ -2,6 +2,26 @@
   "tagline": "Concept",
   "headline": "Don't export engagement. Own it.",
   "description": "Shopping is rarely a solo decision. By embedding shared shopping directly into your store, you capture the social dynamics of buying and transform them into engagement, insights, and revenue.",
+  "hotspots": [
+    {
+      "phone": "left",
+      "top": "77%",
+      "left": "45%",
+      "label": "Customers browse products natively in your store — no redirects, no friction."
+    },
+    {
+      "phone": "center",
+      "top": "50%",
+      "left": "50%",
+      "label": "Invite friends to shop together in real-time with a single link."
+    },
+    {
+      "phone": "right",
+      "top": "74%",
+      "left": "50%",
+      "label": "Live chat and shared carts keep social decision-making on-site."
+    }
+  ],
   "features": [
     {
       "icon": "ShoppingCart",
