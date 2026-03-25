@@ -134,6 +134,20 @@ export default function Concept() {
             variants={phoneVariants}
           >
             <Image src="/images/concept/phone-left.png" alt="Shopping app - Vælg venner" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
+
+            {/* Dynamic Island overlay */}
+            <motion.div className="absolute bottom-[19%] left-1/2 -translate-x-1/2 w-[40%]" style={{ rotate: -3.95 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
+              <motion.div animate={{ y: [0, -4, 0] }} whileHover={{ scale: 1.08 }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} className="cursor-pointer">
+                <Image src="/images/concept/phone-left-island.png" alt="Dynamic Island" width={200} height={60} className="w-full h-auto" />
+              </motion.div>
+            </motion.div>
+
+            {/* CTA overlay */}
+            <motion.div className="absolute left-1/2 -translate-x-1/2 w-[55%]" style={{ rotate: -3.95, bottom: "calc(20% + 75px)" }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.7, ease: [0.25, 0.4, 0.25, 1] }}>
+              <motion.div animate={{ y: [0, -4, 0] }} whileHover={{ scale: 1.2 }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="cursor-pointer">
+                <Image src="/images/concept/phone-left-cta.png" alt="CTA Button" width={320} height={80} className="w-full h-auto" />
+              </motion.div>
+            </motion.div>
           </motion.div>
 
           {/* Center Phone */}
