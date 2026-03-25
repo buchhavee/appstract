@@ -28,7 +28,7 @@ function HotspotDot({ hotspot }: { hotspot: Hotspot }) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <div className="absolute z-50" style={{ top: hotspot.top, left: hotspot.left }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
+    <div className="absolute z-50 pointer-events-auto" style={{ top: hotspot.top, left: hotspot.left }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
       {/* Pulse ring */}
       <motion.span
         className="absolute rounded-full"
@@ -136,16 +136,20 @@ export default function Concept() {
             <Image src="/images/concept/phone-left.png" alt="Shopping app - Vælg venner" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
 
             {/* Dynamic Island overlay */}
-            <motion.div className="absolute bottom-[19%] left-1/2 -translate-x-1/2 w-[40%]" style={{ rotate: -3.95 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
-              <motion.div animate={{ y: [0, -4, 0] }} whileHover={{ scale: 1.08 }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} className="cursor-pointer">
-                <Image src="/images/concept/phone-left-island.png" alt="Dynamic Island" width={200} height={60} className="w-full h-auto" />
+            <motion.div className="absolute bottom-[18%] left-1/2 -translate-x-1/2 w-[60%] md:w-[48%]" style={{ rotate: -3.95 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
+              <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
+                <motion.div whileHover={{ scale: 1.225 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
+                  <Image src="/images/concept/phone-left-island.png" alt="Dynamic Island" width={200} height={60} className="w-full h-auto rounded-full" style={{ filter: "drop-shadow(0 0 8px rgba(76,201,240,0.1)) drop-shadow(0 0 20px rgba(76,201,240,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.25))" }} />
+                </motion.div>
               </motion.div>
             </motion.div>
 
             {/* CTA overlay */}
-            <motion.div className="absolute left-1/2 -translate-x-1/2 w-[55%]" style={{ rotate: -3.95, bottom: "calc(20% + 75px)" }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.7, ease: [0.25, 0.4, 0.25, 1] }}>
-              <motion.div animate={{ y: [0, -4, 0] }} whileHover={{ scale: 1.2 }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }} className="cursor-pointer">
-                <Image src="/images/concept/phone-left-cta.png" alt="CTA Button" width={320} height={80} className="w-full h-auto" />
+            <motion.div className="absolute bottom-[30%] left-1/2 -translate-x-1/2 w-[75%] md:w-[65%]" style={{ rotate: -3.95 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.7, ease: [0.25, 0.4, 0.25, 1] }}>
+              <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}>
+                <motion.div whileHover={{ scale: 1.225 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
+                  <Image src="/images/concept/phone-left-cta.png" alt="CTA Button" width={320} height={80} className="w-full h-auto rounded-sm" style={{ filter: "drop-shadow(0 0 8px rgba(109,94,252,0.1)) drop-shadow(0 0 20px rgba(109,94,252,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.25))" }} />
+                </motion.div>
               </motion.div>
             </motion.div>
           </motion.div>
@@ -172,12 +176,21 @@ export default function Concept() {
             transition={{ delay: 0.4 }}
           >
             <Image src="/images/concept/phone-right.png" alt="Shopping app - Chat" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
+
+            {/* Message overlay */}
+            <motion.div className="absolute bottom-[30%] left-1/2 -translate-x-1/2 w-[80%] md:w-[65%]" style={{ rotate: 3.31 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
+              <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
+                <motion.div whileHover={{ scale: 1.225 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
+                  <Image src="/images/concept/phone-right-msg.png" alt="Chat Message" width={320} height={80} className="w-full h-auto rounded-sm" style={{ filter: "drop-shadow(0 0 8px rgba(109,94,252,0.1)) drop-shadow(0 0 20px rgba(109,94,252,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.25))" }} />
+                </motion.div>
+              </motion.div>
+            </motion.div>
           </motion.div>
 
           {/* Hotspot overlay – sits above all phones */}
           <div className="hidden md:flex absolute inset-0 justify-center items-end pointer-events-none" style={{ zIndex: 20 }}>
             {/* Left phone hotspot area */}
-            <div className="relative w-50 sm:w-36 md:w-75 lg:w-96 shrink-0 pointer-events-auto" style={{ aspectRatio: "375 / 812" }}>
+            <div className="relative w-50 sm:w-36 md:w-75 lg:w-96 shrink-0 pointer-events-none" style={{ aspectRatio: "375 / 812" }}>
               {conceptData.hotspots
                 .filter((h) => h.phone === "left")
                 .map((h, i) => (
@@ -185,7 +198,7 @@ export default function Concept() {
                 ))}
             </div>
             {/* Center phone hotspot area */}
-            <div className="relative w-55 sm:w-40 md:w-85 lg:w-105 shrink-0 -mx-22 sm:-mx-20 md:-mx-30 lg:-mx-42 pointer-events-auto" style={{ aspectRatio: "414 / 896" }}>
+            <div className="relative w-55 sm:w-40 md:w-85 lg:w-105 shrink-0 -mx-22 sm:-mx-20 md:-mx-30 lg:-mx-42 pointer-events-none" style={{ aspectRatio: "414 / 896" }}>
               {conceptData.hotspots
                 .filter((h) => h.phone === "center")
                 .map((h, i) => (
@@ -193,7 +206,7 @@ export default function Concept() {
                 ))}
             </div>
             {/* Right phone hotspot area */}
-            <div className="relative w-50 sm:w-36 md:w-75 lg:w-96 shrink-0 pointer-events-auto" style={{ aspectRatio: "375 / 812" }}>
+            <div className="relative w-50 sm:w-36 md:w-75 lg:w-96 shrink-0 pointer-events-none" style={{ aspectRatio: "375 / 812" }}>
               {conceptData.hotspots
                 .filter((h) => h.phone === "right")
                 .map((h, i) => (
