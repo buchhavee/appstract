@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { Button, Logo, BurgerButton, DesktopNavLinks } from "@/components/ui";
 import MobileMenu from "./MobileMenu";
 import { useBodyScrollLockWithPendingScroll } from "@/lib/hooks";
@@ -14,6 +15,9 @@ export default function Navbar() {
   const pendingScrollRef = useRef<string | null>(null);
   const scrollUpAccumulator = useRef(0);
   const { scrollY } = useScroll();
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   const SCROLL_UP_THRESHOLD = 30;
 
@@ -66,6 +70,8 @@ export default function Navbar() {
       window.dispatchEvent(new CustomEvent("smoothScrollTo", { detail: href }));
     } else if (href.startsWith("http")) {
       window.open(href, "_blank", "noopener,noreferrer");
+    } else {
+      router.push(href);
     }
   };
 
@@ -111,7 +117,11 @@ export default function Navbar() {
               size="lg"
               onClick={(e) => {
                 e.preventDefault();
-                window.scrollTo({ top: 0, behavior: "smooth" });
+                if (pathname === "/") {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                } else {
+                  router.push("/");
+                }
               }}
             />
           </div>

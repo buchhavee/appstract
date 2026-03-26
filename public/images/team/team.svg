@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="525" viewBox="0 0 1200 525" fill="none">
+  <rect width="1200" height="525" fill="#2a2a2f"/>
+  <g transform="translate(542, 170) scale(4.8)">
+    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="12" cy="7" r="4" stroke="rgba(255,255,255,0.2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text x="600" y="430" font-family="sans-serif" font-size="18" fill="rgba(255,255,255,0.25)" text-anchor="middle">Team photo placeholder</text>
+</svg>
