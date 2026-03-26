@@ -10,7 +10,6 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   maxWidth?: string;
-  /** Extra classes appended to the white panel */
   panelClassName?: string;
 }
 
