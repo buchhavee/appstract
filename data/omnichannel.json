@@ -1,0 +1,33 @@
+{
+  "hero": {
+    "tagline": "Omnichannel",
+    "headline": "KPI's influenced by Shared Shopping & Digital Cart Experiences",
+    "description": "Turn shared shopping behavior into measurable commercial outcomes."
+  },
+  "categories": [
+    {
+      "title": "Revenue & Conversion",
+      "icon": "TrendingUp",
+      "description": "Track the metrics that directly impact your bottom line. From cart recovery to order value, these KPIs reveal how shared shopping drives revenue growth.",
+      "kpis": ["Conversion rate", "Abandoned cart recovery rate", "Average order value (AOV)", "Revenue per visitor", "Number of returned purchases"]
+    },
+    {
+      "title": "Customer Engagement",
+      "icon": "Users",
+      "description": "Understand how customers interact across channels. These metrics show the power of social shopping and cross-channel experiences.",
+      "kpis": ["Cart revisit rate", "Cart share rate (shared shopping usage)", "Click-through rate from cart links", "Time to purchase decision", "Cross-channel engagement"]
+    },
+    {
+      "title": "Marketing Efficiency",
+      "icon": "Target",
+      "description": "Measure the effectiveness of every marketing dollar. These KPIs connect shared shopping behavior to acquisition cost and lifetime value.",
+      "kpis": ["Customer acquisition cost (CAC)", "Return on marketing investment (ROMI)", "Performance of email/SMS/retargeting campaigns", "Cost per conversion", "Customer lifetime value (CLV)"]
+    }
+  ],
+  "cta": {
+    "headline": "Ready to measure what matters?",
+    "description": "See how shared shopping experiences transform your omnichannel KPIs.",
+    "buttonLabel": "Book a demo",
+    "buttonLink": "/contact"
+  }
+}

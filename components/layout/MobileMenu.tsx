@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui";
 import { kineticEase } from "@/lib/animations";
@@ -13,6 +14,7 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
+  const router = useRouter();
   const panelVariants = useMemo(
     () => ({
       closed: (i: number) => ({
@@ -100,6 +102,9 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                           if (link.href.startsWith("http")) {
                             window.open(link.href, "_blank", "noopener,noreferrer");
                             onClose();
+                          } else if (link.href.startsWith("/")) {
+                            onClose();
+                            router.push(link.href);
                           } else {
                             onClose(link.href);
                           }

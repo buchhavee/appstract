@@ -1,0 +1,53 @@
+{
+  "hero": {
+    "tagline": "About Us",
+    "headline": "The team building the future of shared shopping",
+    "description": "We're a passionate team of designers, developers, and strategists on a mission to make online shopping a truly social experience."
+  },
+  "team": {
+    "headline": "Meet the people behind Appstract",
+    "description": "We believe great products come from great teams. Here's who we are.",
+    "members": [
+      {
+        "name": "Kim Lowert",
+        "role": "Co-founder & CEO",
+        "bio": "Short bio about this person and their background, passion, and role in the company.",
+        "image": "/images/team/person1.png"
+      },
+      {
+        "name": "Nicolai Nøhr",
+        "role": "Co-founder & CCO",
+        "bio": "Short bio about this person and their background, passion, and role in the company.",
+        "image": "/images/team/person2.png"
+      },
+      {
+        "name": "Name Surname",
+        "role": "Head of Design",
+        "bio": "Short bio about this person and their background, passion, and role in the company.",
+        "image": "/images/team/person3.svg"
+      },
+      {
+        "name": "Name Surname",
+        "role": "Head of Design",
+        "bio": "Short bio about this person and their background, passion, and role in the company.",
+        "image": "/images/team/person3.svg"
+      },
+      {
+        "name": "Name Surname",
+        "role": "Head of Design",
+        "bio": "Short bio about this person and their background, passion, and role in the company.",
+        "image": "/images/team/person3.svg"
+      }
+    ]
+  },
+  "teamPhoto": {
+    "headline": "We build together",
+    "description": "From strategy to design to code — everything we ship starts with a shared vision and a tight-knit team.",
+    "image": "/images/team/team.svg"
+  },
+  "cta": {
+    "headline": "Want to work with us?",
+    "description": "Whether you're a potential partner, investor, or just curious — we'd love to hear from you.",
+    "buttonLabel": "Get in touch"
+  }
+}
