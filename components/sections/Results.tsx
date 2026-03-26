@@ -113,7 +113,7 @@ export default function Results() {
 
           <motion.div ref={imageRef} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeInRight} className="relative min-w-0 w-screen md:w-full lg:w-100 xl:w-126.5 h-75 sm:h-100 lg:h-115 xl:h-135 md:rounded-[25px] overflow-hidden order-last md:order-last lg:order-last -mx-4 md:mx-0">
             <motion.div className="absolute inset-0 -top-[15%] h-[130%]" style={{ y }}>
-              <Image src="/images/results/results-image.png" alt="Results" fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 500px" className="object-cover object-[65%_center]" />
+              <Image src="/images/results/results-image.png" alt="Results" fill sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 1400px" quality={80} className="object-cover object-[65%_center]" />
             </motion.div>
           </motion.div>
         </div>

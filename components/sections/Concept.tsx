@@ -3,8 +3,8 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import Image from "next/image";
-import { ShoppingCart, HeartHandshake, MessagesSquare, Unplug } from "lucide-react";
-import { Tag } from "@/components/ui";
+import { ShoppingCart, HeartHandshake, MessagesSquare, Unplug, ArrowUpRight } from "lucide-react";
+import { Tag, Button } from "@/components/ui";
 import StarField from "@/components/ui/StarField";
 import conceptData from "@/data/concept.json";
 import { fadeInUp, staggerContainer, phoneVariants } from "@/lib/animations";
@@ -133,10 +133,10 @@ export default function Concept() {
             }}
             variants={phoneVariants}
           >
-            <Image src="/images/concept/phone-left.png" alt="Shopping app - Vælg venner" width={375} height={812} loading="eager" className="w-full h-auto drop-shadow-2xl" />
+            <Image src="/images/concept/phone-left.png" alt="Shopping app - Vælg venner" width={375} height={812} loading="eager" sizes="(max-width: 640px) 200px, (max-width: 768px) 144px, (max-width: 1024px) 300px, 384px" className="w-full h-auto drop-shadow-2xl" />
 
             {/* Dynamic Island overlay */}
-            <motion.div className="absolute bottom-[18%] left-1/2 -translate-x-1/2 w-[60%] md:w-[48%]" style={{ rotate: -3.95 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
+            <motion.div className="absolute bottom-[18%] left-1/2 -translate-x-1/2 w-[60%] md:w-[55%]" style={{ rotate: -3.95 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
               <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
                 <motion.div whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
                   <Image src="/images/concept/phone-left-island.png" alt="Dynamic Island" width={200} height={60} className="w-full h-auto rounded-full" style={{ filter: "drop-shadow(0 0 8px rgba(76,201,240,0.1)) drop-shadow(0 0 20px rgba(76,201,240,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.25))" }} />
@@ -145,7 +145,7 @@ export default function Concept() {
             </motion.div>
 
             {/* CTA overlay */}
-            <motion.div className="absolute bottom-[30%] left-1/2 -translate-x-1/2 w-[75%] md:w-[65%]" style={{ rotate: -3.95 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.7, ease: [0.25, 0.4, 0.25, 1] }}>
+            <motion.div className="absolute bottom-[30%] left-1/2 -translate-x-1/2 w-[75%] md:w-[75%]" style={{ rotate: -3.95 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.7, ease: [0.25, 0.4, 0.25, 1] }}>
               <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}>
                 <motion.div whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
                   <Image src="/images/concept/phone-left-cta.png" alt="CTA Button" width={320} height={80} className="w-full h-auto rounded-sm" style={{ filter: "drop-shadow(0 0 8px rgba(109,94,252,0.1)) drop-shadow(0 0 20px rgba(109,94,252,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.25))" }} />
@@ -163,7 +163,26 @@ export default function Concept() {
             variants={phoneVariants}
             transition={{ delay: 0.4 }}
           >
-            <Image src="/images/concept/phone-center.png" alt="Shopping app - Shop sammen" width={414} height={896} loading="eager" className="w-full h-auto drop-shadow-2xl" />
+            <Image src="/images/concept/phone-center.png" alt="Shopping app - Shop sammen" width={414} height={896} loading="eager" sizes="(max-width: 640px) 220px, (max-width: 768px) 160px, (max-width: 1024px) 340px, 420px" className="w-full h-auto drop-shadow-2xl" />
+
+            {/* text overlay */}
+            <motion.div className="absolute bottom-[22%] left-1/2 -translate-x-1/2 w-[60%] text-center" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.8, ease: [0.25, 0.4, 0.25, 1] }}>
+              <motion.div whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
+                <p
+                  className="font-bw-gradual font-semibold text-white leading-snug rounded-full px-3 py-3"
+                  style={{
+                    fontSize: "clamp(8px, 1.8vw, 14px)",
+                    background: "rgba(0, 0, 0, 0.35)",
+                    backdropFilter: "blur(8px)",
+                    WebkitBackdropFilter: "blur(8px)",
+                    border: "1px solid rgba(255, 255, 255, 0.15)",
+                    boxShadow: "0 4px 16px rgba(0, 0, 0, 0.2)",
+                  }}
+                >
+                  {conceptData.phoneOverlayText}
+                </p>
+              </motion.div>
+            </motion.div>
           </motion.div>
 
           {/* Right Phone */}
@@ -175,10 +194,10 @@ export default function Concept() {
             variants={phoneVariants}
             transition={{ delay: 0.4 }}
           >
-            <Image src="/images/concept/phone-right.png" alt="Shopping app - Chat" width={375} height={812} className="w-full h-auto drop-shadow-2xl" />
+            <Image src="/images/concept/phone-right.png" alt="Shopping app - Chat" width={375} height={812} sizes="(max-width: 640px) 200px, (max-width: 768px) 144px, (max-width: 1024px) 300px, 384px" className="w-full h-auto drop-shadow-2xl" />
 
             {/* Message overlay */}
-            <motion.div className="absolute top-[24%] left-[59%] -translate-x-1/2 w-[80%] md:w-[65%]" style={{ rotate: 3.31 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
+            <motion.div className="absolute top-[22%] left-[62%] -translate-x-1/2 w-[80%] md:w-[73%]" style={{ rotate: 3.31 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
               <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
                 <motion.div whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
                   <Image src="/images/concept/phone-right-msg.png" alt="Chat Message" width={320} height={80} className="w-full h-auto rounded-sm" style={{ filter: "drop-shadow(0 0 8px rgba(109,94,252,0.1)) drop-shadow(0 0 20px rgba(109,94,252,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.25))" }} />
@@ -214,6 +233,14 @@ export default function Concept() {
                 ))}
             </div>
           </div>
+        </motion.div>
+
+        {/* Try Demo Button */}
+        <motion.div className="relative z-10 flex justify-center -mt-6 md:-mt-10 mb-10" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }} variants={fadeInUp}>
+          <motion.button whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} onClick={() => window.open(conceptData.demoUrl, "_blank", "noopener,noreferrer")} className="inline-flex items-center gap-2 font-bw-gradual font-medium text-base text-white border border-white/40 rounded-full px-6 py-3 cursor-pointer backdrop-blur-sm" style={{ background: "rgba(255, 255, 255, 0.08)" }}>
+            Try Demo
+            <ArrowUpRight className="w-4 h-4 opacity-70" />
+          </motion.button>
         </motion.div>
 
         {/* Feature Cards */}

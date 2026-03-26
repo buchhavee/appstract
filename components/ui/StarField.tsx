@@ -3,20 +3,22 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { useIsMobile } from "@/lib/hooks";
 
-const STAR_COUNT = 1200;
-const FIELD_DEPTH = 600;
+const STAR_COUNT_DESKTOP = 8000;
+const STAR_COUNT_MOBILE = 3000;
+const FIELD_DEPTH = 800;
 const FIELD_WIDTH = 400;
-const FIELD_HEIGHT = 300;
-const SPEED = 0.3;
+const FIELD_HEIGHT = 200;
+const SPEED = 0.2;
 
-function Stars() {
+function Stars({ count }: { count: number }) {
   const pointsRef = useRef<THREE.Points>(null);
 
   const { positions, sizes, colors } = useMemo(() => {
-    const positions = new Float32Array(STAR_COUNT * 3);
-    const sizes = new Float32Array(STAR_COUNT);
-    const colors = new Float32Array(STAR_COUNT * 3);
+    const positions = new Float32Array(count * 3);
+    const sizes = new Float32Array(count);
+    const colors = new Float32Array(count * 3);
 
     // Color palette matching the site: purple (#6D5EFC), cyan (#4CC9F0), white
     const colorOptions = [
@@ -28,7 +30,7 @@ function Stars() {
       new THREE.Color("#b8b0ff"), // Lavender
     ];
 
-    for (let i = 0; i < STAR_COUNT; i++) {
+    for (let i = 0; i < count; i++) {
       // Spread stars in a wide field
       positions[i * 3] = (Math.random() - 0.5) * FIELD_WIDTH;
       positions[i * 3 + 1] = (Math.random() - 0.5) * FIELD_HEIGHT;
@@ -60,7 +62,7 @@ function Stars() {
     }
 
     return { positions, sizes, colors };
-  }, []);
+  }, [count]);
 
   useFrame((_, delta) => {
     if (!pointsRef.current) return;
@@ -68,7 +70,7 @@ function Stars() {
     const positionAttr = pointsRef.current.geometry.attributes.position;
     const posArray = positionAttr.array as Float32Array;
 
-    for (let i = 0; i < STAR_COUNT; i++) {
+    for (let i = 0; i < count; i++) {
       // Move stars toward the camera (z direction)
       posArray[i * 3 + 2] += SPEED * delta * 60;
 
@@ -89,9 +91,9 @@ function Stars() {
   return (
     <points ref={pointsRef}>
       <bufferGeometry>
-        <bufferAttribute attach="attributes-position" args={[positions, 3]} count={STAR_COUNT} />
-        <bufferAttribute attach="attributes-size" args={[sizes, 1]} count={STAR_COUNT} />
-        <bufferAttribute attach="attributes-color" args={[colors, 3]} count={STAR_COUNT} />
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} count={count} />
+        <bufferAttribute attach="attributes-size" args={[sizes, 1]} count={count} />
+        <bufferAttribute attach="attributes-color" args={[colors, 3]} count={count} />
       </bufferGeometry>
       <shaderMaterial
         transparent
@@ -145,8 +147,20 @@ interface StarFieldProps {
 }
 
 export default function StarField({ className = "" }: StarFieldProps) {
+  const isMobile = useIsMobile();
+  const starCount = isMobile ? STAR_COUNT_MOBILE : STAR_COUNT_DESKTOP;
+
   return (
-    <div className={`absolute left-0 right-0 top-0 pointer-events-none ${className}`} style={{ height: "420px", minHeight: 320, maxHeight: 600 }}>
+    <div
+      className={`absolute left-0 right-0 top-0 pointer-events-none ${className}`}
+      style={{
+        height: "600px",
+        minHeight: 320,
+        maxHeight: 600,
+        maskImage: "radial-gradient(ellipse 70% 45% at 50% 50%, black 40%, transparent 100%)",
+        WebkitMaskImage: "radial-gradient(ellipse 70% 45% at 50% 50%, black 40%, transparent 100%)",
+      }}
+    >
       <Canvas
         camera={{
           position: [0, 0, 150],
@@ -162,7 +176,7 @@ export default function StarField({ className = "" }: StarFieldProps) {
         dpr={[1, 1.5]}
         style={{ background: "transparent" }}
       >
-        <Stars />
+        <Stars count={starCount} />
       </Canvas>
     </div>
   );

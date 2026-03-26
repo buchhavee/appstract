@@ -11,6 +11,11 @@
     {
       "label": "Our work",
       "href": "#cases"
+    },
+    {
+      "label": "Demo",
+      "href": "https://furnifiesta.appstract.shop/?utm_source=appstract&utm_medium=website&utm_campaign=demo",
+      "external": true
     }
   ],
   "cta": {

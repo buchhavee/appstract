@@ -35,7 +35,7 @@ export default function Logo({ href = "/", size = "md", className = "", onClick 
   return (
     <Link href={href} onClick={onClick} className={`flex items-center gap-2 lg:gap-3 ${className}`}>
       <div className={`relative ${sizes.icon} rounded-[10px] overflow-hidden flex items-center justify-center`}>
-        <Image src="/images/logo/logo-icon.svg" alt="" width={40} height={40} loading="eager" className="object-contain" />
+        <Image src="/images/logo/logo-icon.svg" alt="Appstract logo" width={40} height={40} loading="eager" className="object-contain" />
       </div>
       <Image src="/images/logo/logo-text.svg" alt="Appstract" width={176} height={29} loading="eager" className={`${sizes.text} w-auto object-contain`} />
     </Link>

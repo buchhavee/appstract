@@ -37,8 +37,10 @@ export function InteractiveListItem({ name, logo, images = [], isExpanded = fals
 
       {/* Coming Soon pill overlay */}
       {comingSoon && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
-          <span className="px-5 py-1.5 rounded-full bg-black/10 text-black/40 text-sm font-semibold tracking-wide backdrop-blur-sm">Coming Soon!</span>
+        <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none" role="status" aria-label="Coming Soon">
+          <span className="px-5 py-1.5 rounded-full bg-black/10 text-black/40 text-sm font-semibold tracking-wide backdrop-blur-sm" aria-hidden="true">
+            Coming Soon!
+          </span>
         </div>
       )}
 
@@ -70,12 +72,12 @@ export function InteractiveListItem({ name, logo, images = [], isExpanded = fals
 
         {/* Preview images */}
         <div className="hidden lg:flex relative" style={{ height: "clamp(3.5rem, 4vw + 1.5rem, 5rem)" }}>
-          <div className="relative flex items-center gap-2" style={{ clipPath: "inset(-50% -50% -100% -50%)" }}>
+          <div className="relative flex items-center gap-2 overflow-visible">
             {previewImages.map((img, i) => (
               <motion.div
                 key={i}
-                className="relative rounded-sm overflow-hidden bg-white aspect-square"
-                style={{ height: "100%" }}
+                className="relative rounded-sm overflow-hidden bg-white"
+                style={{ height: "clamp(3.5rem, 4vw + 1.5rem, 5rem)", width: "clamp(3.5rem, 4vw + 1.5rem, 5rem)" }}
                 initial={{ y: "200%" }}
                 animate={{
                   y: isHovered ? 0 : "200%",
@@ -88,9 +90,9 @@ export function InteractiveListItem({ name, logo, images = [], isExpanded = fals
                 }}
               >
                 {getImageSrc(img) ? (
-                  <motion.div className="absolute inset-0" animate={{ scale: isExpanded ? 1.1 : 1 }} transition={TRANSITION_STANDARD}>
+                  <div className="absolute inset-0">
                     <Image src={getImageSrc(img)} alt={`Preview ${i + 1}`} fill className="object-cover" sizes="80px" />
-                  </motion.div>
+                  </div>
                 ) : (
                   <div className="absolute inset-0 bg-gray-200" />
                 )}

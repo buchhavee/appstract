@@ -2,6 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useMemo } from "react";
+import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui";
 import { kineticEase } from "@/lib/animations";
 import navbarData from "@/data/navbar.json";
@@ -96,7 +97,12 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                     <motion.div custom={i} variants={linkVariants} initial="closed" animate="open" exit="closed">
                       <button
                         onClick={() => {
-                          onClose(link.href);
+                          if (link.href.startsWith("http")) {
+                            window.open(link.href, "_blank", "noopener,noreferrer");
+                            onClose();
+                          } else {
+                            onClose(link.href);
+                          }
                         }}
                         className="block w-full text-left cursor-pointer"
                         style={{
@@ -109,8 +115,9 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                           borderBottomColor: "rgba(255,255,255,0.06)",
                         }}
                       >
-                        <span className="text-white text-4xl sm:text-5xl font-bw-gradual font-normal tracking-tight leading-none transition-colors duration-250" style={{ letterSpacing: "-0.02em" }} onMouseEnter={(e) => (e.currentTarget.style.color = "#6366f1")} onMouseLeave={(e) => (e.currentTarget.style.color = "#fff")}>
+                        <span className="text-white text-4xl sm:text-5xl font-bw-gradual font-normal tracking-tight leading-none transition-colors duration-250 inline-flex items-center gap-2" style={{ letterSpacing: "-0.02em" }} onMouseEnter={(e) => (e.currentTarget.style.color = "#6366f1")} onMouseLeave={(e) => (e.currentTarget.style.color = "#fff")}>
                           {link.label}
+                          {(link as { external?: boolean }).external && <ArrowUpRight className="w-6 h-6 sm:w-8 sm:h-8" />}
                         </span>
                       </button>
                     </motion.div>

@@ -2,10 +2,12 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useRef, useCallback } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 interface NavLink {
   label: string;
   href: string;
+  external?: boolean;
 }
 
 interface DesktopNavLinksProps {
@@ -68,9 +70,10 @@ export default function DesktopNavLinks({ links, onLinkClick, className = "" }: 
             setHoveredIndex(index);
             measurePill(index);
           }}
-          className="relative text-base font-bw-gradual font-medium leading-normal text-white! cursor-pointer px-4 py-2 rounded-full transition-colors duration-200 z-10"
+          className="relative text-base font-bw-gradual font-medium leading-normal text-white! cursor-pointer px-4 py-2 rounded-full transition-colors duration-200 z-10 flex items-center gap-1"
         >
           {link.label}
+          {link.external && <ArrowUpRight className="w-3.5 h-3.5 opacity-60 -ml-0.5" strokeWidth={2.5} />}
         </button>
       ))}
     </div>
