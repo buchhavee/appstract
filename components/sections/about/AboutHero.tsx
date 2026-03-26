@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Tag } from "@/components/ui";
+import { Tag, LiquidBackground } from "@/components/ui";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import aboutData from "@/data/about.json";
 
@@ -9,7 +9,7 @@ export default function AboutHero() {
   const { hero } = aboutData;
 
   return (
-    <section className="relative z-1 w-full flex flex-col items-center justify-center overflow-hidden" style={{ background: "var(--gradient-primary)" }}>
+    <section className="relative z-1 w-full flex flex-col items-center justify-center overflow-hidden" style={{ background: "linear-gradient(to bottom, var(--color-primary-purple) 0%, var(--color-primary-cyan) 100%)" }}>
       {/* Subtle radial glow */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -17,6 +17,11 @@ export default function AboutHero() {
           background: "radial-gradient(ellipse 70% 50% at 50% 40%, rgba(76,201,240,0.15) 0%, transparent 70%)",
         }}
       />
+
+      {/* Liquid gradient overlay */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <LiquidBackground opacity={0.4} speed={0.3} zoom={1.0} warpStrength={0.5} />
+      </div>
 
       {/* Content */}
       <div className="relative w-full max-w-5xl px-4 md:px-8 lg:px-16 pt-44 pb-24 md:pt-52 md:pb-32">

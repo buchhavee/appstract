@@ -4,6 +4,7 @@
     "href": "/"
   },
   "links": [
+    { "label": "Home", "href": "/" },
     {
       "label": "Omnichannel",
       "href": "/omnichannel"

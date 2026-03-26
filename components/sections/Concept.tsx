@@ -168,19 +168,77 @@ export default function Concept() {
             {/* text overlay */}
             <motion.div className="absolute bottom-[22%] left-1/2 -translate-x-1/2 w-[60%] text-center" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.8, ease: [0.25, 0.4, 0.25, 1] }}>
               <motion.div whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
-                <p
-                  className="font-bw-gradual font-semibold text-white leading-snug rounded-full px-3 py-3"
+                <div
+                  className="relative rounded-lg overflow-hidden"
                   style={{
-                    fontSize: "clamp(8px, 1.8vw, 14px)",
-                    background: "rgba(0, 0, 0, 0.35)",
-                    backdropFilter: "blur(8px)",
-                    WebkitBackdropFilter: "blur(8px)",
                     border: "1px solid rgba(255, 255, 255, 0.15)",
-                    boxShadow: "0 4px 16px rgba(0, 0, 0, 0.2)",
+                    borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
+                    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.2)",
                   }}
                 >
-                  {conceptData.phoneOverlayText}
-                </p>
+                  {/* Top edge highlight sheen */}
+                  <div
+                    className="absolute top-0 left-2 right-2 h-px pointer-events-none z-10"
+                    style={{
+                      background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 20%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 80%, transparent 100%)",
+                    }}
+                  />
+                  {/* Solid purple base layer */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: "var(--color-neutral-light)",
+                      opacity: 0.5,
+                    }}
+                  />
+                  {/* Glass overlay */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: "rgba(255, 255, 255, 0.1)",
+                      backdropFilter: "blur(4px)",
+                      WebkitBackdropFilter: "blur(4px)",
+                    }}
+                  />
+                  {/* Animated conic border */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      borderRadius: "inherit",
+                      overflow: "hidden",
+                      WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      WebkitMaskComposite: "xor",
+                      mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+                      maskComposite: "exclude",
+                      padding: "1px",
+                      opacity: 1,
+                    }}
+                  >
+                    <motion.div
+                      style={{
+                        position: "absolute",
+                        top: "-450%",
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        height: "1000%",
+                        background: "conic-gradient(transparent 200deg, #4cc9f0)",
+                      }}
+                      animate={{ rotate: 360 }}
+                      transition={{ duration: 4, ease: "linear", repeat: Infinity, repeatDelay: 0 }}
+                    />
+                  </div>
+                  {/* Text */}
+                  <p
+                    className="relative z-10 font-bw-gradual font-medium leading-snug px-2 py-1.5 md:px-3 md:py-3 text-black/90"
+                    style={{
+                      fontSize: "clamp(11px, 2vw, 14px)",
+                    }}
+                  >
+                    {conceptData.phoneOverlayText}
+                  </p>
+                </div>
               </motion.div>
             </motion.div>
           </motion.div>
@@ -197,7 +255,7 @@ export default function Concept() {
             <Image src="/images/concept/phone-right.png" alt="Shopping app - Chat" width={375} height={812} sizes="(max-width: 640px) 200px, (max-width: 768px) 144px, (max-width: 1024px) 300px, 384px" className="w-full h-auto drop-shadow-2xl" />
 
             {/* Message overlay */}
-            <motion.div className="absolute top-[22%] left-[62%] -translate-x-1/2 w-[80%] md:w-[73%]" style={{ rotate: 3.31 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
+            <motion.div className="absolute top-[22%] left-[59%] -translate-x-1/2 w-[80%] md:w-[73%]" style={{ rotate: 3.31 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
               <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
                 <motion.div whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
                   <Image src="/images/concept/phone-right-msg.png" alt="Chat Message" width={320} height={80} className="w-full h-auto rounded-sm" style={{ filter: "drop-shadow(0 0 8px rgba(109,94,252,0.1)) drop-shadow(0 0 20px rgba(109,94,252,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.25))" }} />
