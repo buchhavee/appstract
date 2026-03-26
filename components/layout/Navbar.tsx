@@ -12,14 +12,22 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const pendingScrollRef = useRef<string | null>(null);
+  const scrollUpAccumulator = useRef(0);
   const { scrollY } = useScroll();
+
+  const SCROLL_UP_THRESHOLD = 30;
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
     if (latest > previous && latest > 100) {
+      scrollUpAccumulator.current = 0;
       setHidden(true);
     } else {
-      setHidden(false);
+      scrollUpAccumulator.current += previous - latest;
+      if (scrollUpAccumulator.current >= SCROLL_UP_THRESHOLD || latest <= 100) {
+        setHidden(false);
+        scrollUpAccumulator.current = 0;
+      }
     }
   });
 
@@ -56,6 +64,8 @@ export default function Navbar() {
   const scrollToSection = (href: string) => {
     if (href.startsWith("#")) {
       window.dispatchEvent(new CustomEvent("smoothScrollTo", { detail: href }));
+    } else if (href.startsWith("http")) {
+      window.open(href, "_blank", "noopener,noreferrer");
     }
   };
 

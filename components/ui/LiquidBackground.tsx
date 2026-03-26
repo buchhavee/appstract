@@ -287,7 +287,9 @@ export default function LiquidBackground({ className = "", opacity = 0.4, color1
       gl.bindVertexArray(null);
       gl.bindBuffer(gl.ARRAY_BUFFER, null);
     } catch (e) {
-      console.error("LiquidBackground shader error:", e);
+      if (process.env.NODE_ENV === "development") {
+        console.error("LiquidBackground shader error:", e);
+      }
       if (program) gl.deleteProgram(program);
       if (vao) gl.deleteVertexArray(vao);
       if (buffer) gl.deleteBuffer(buffer);

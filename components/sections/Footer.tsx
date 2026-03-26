@@ -6,7 +6,7 @@ import footerData from "@/data/footer.json";
 
 export default function Footer() {
   return (
-    <footer className="relative z-[2] w-full min-h-[30svh] lg:min-h-[50svh] pt-26 pb-12 px-5 md:px-20 flex flex-col items-center justify-end">
+    <footer className="relative z-2 w-full min-h-[30svh] lg:min-h-[50svh] pt-26 pb-12 px-5 md:px-20 flex flex-col items-center justify-end">
       {/* Background gradient */}
       <div
         className="absolute inset-0 pointer-events-none"
