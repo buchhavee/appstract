@@ -9,4 +9,5 @@ export { default as RotatingCardStack } from "./RotatingCardStack";
 export { default as SpotlightCard } from "./SpotlightCard";
 export { default as StarField } from "./StarField";
 export { default as Tag } from "./Tag";
+export { default as TopGradient } from "./TopGradient";
 export { default as Modal } from "./Modal";

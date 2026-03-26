@@ -82,7 +82,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                   style={{
                     position: "absolute",
                     inset: 0,
-                    background: "linear-gradient(to bottom, rgba(109, 94, 252, 1) 0%, rgba(76, 201, 240, 0.8) 100%)",
+                    background: "linear-gradient(to bottom, rgba(67, 58, 251, 1) 0%, rgba(76, 201, 240, 0.8) 100%)",
                     backdropFilter: "blur(12px)",
                     WebkitBackdropFilter: "blur(12px)",
                     opacity: i === 0 ? 0.4 : i === 1 ? 0.6 : 1,

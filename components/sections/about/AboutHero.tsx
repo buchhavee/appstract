@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Tag, LiquidBackground } from "@/components/ui";
+import { Tag, LiquidBackground, TopGradient } from "@/components/ui";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 import aboutData from "@/data/about.json";
 
@@ -22,6 +22,8 @@ export default function AboutHero() {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <LiquidBackground opacity={0.4} speed={0.3} zoom={1.0} warpStrength={0.5} />
       </div>
+
+      <TopGradient />
 
       {/* Content */}
       <div className="relative w-full max-w-5xl px-4 md:px-8 lg:px-16 pt-44 pb-24 md:pt-52 md:pb-32">

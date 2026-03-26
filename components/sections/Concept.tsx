@@ -171,9 +171,11 @@ export default function Concept() {
                 <div
                   className="relative rounded-lg overflow-hidden"
                   style={{
+                    background: "rgba(0, 0, 0, 0.55)",
+                    backdropFilter: "blur(12px)",
+                    WebkitBackdropFilter: "blur(12px)",
                     border: "1px solid rgba(255, 255, 255, 0.15)",
-                    borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
-                    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1), inset 0 -1px 0 rgba(0, 0, 0, 0.2)",
+                    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)",
                   }}
                 >
                   {/* Top edge highlight sheen */}
@@ -183,55 +185,9 @@ export default function Concept() {
                       background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 20%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 80%, transparent 100%)",
                     }}
                   />
-                  {/* Solid purple base layer */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: "var(--color-neutral-light)",
-                      opacity: 0.5,
-                    }}
-                  />
-                  {/* Glass overlay */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background: "rgba(255, 255, 255, 0.1)",
-                      backdropFilter: "blur(4px)",
-                      WebkitBackdropFilter: "blur(4px)",
-                    }}
-                  />
-                  {/* Animated conic border */}
-                  <div
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      borderRadius: "inherit",
-                      overflow: "hidden",
-                      WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                      WebkitMaskComposite: "xor",
-                      mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-                      maskComposite: "exclude",
-                      padding: "1px",
-                      opacity: 1,
-                    }}
-                  >
-                    <motion.div
-                      style={{
-                        position: "absolute",
-                        top: "-450%",
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        height: "1000%",
-                        background: "conic-gradient(transparent 200deg, #4cc9f0)",
-                      }}
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 4, ease: "linear", repeat: Infinity, repeatDelay: 0 }}
-                    />
-                  </div>
                   {/* Text */}
                   <p
-                    className="relative z-10 font-bw-gradual font-medium leading-snug px-2 py-1.5 md:px-3 md:py-3 text-black/90"
+                    className="relative z-10 font-bw-gradual font-medium leading-snug px-2 py-1.5 md:px-3 md:py-3 text-white"
                     style={{
                       fontSize: "clamp(11px, 2vw, 14px)",
                     }}

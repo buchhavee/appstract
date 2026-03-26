@@ -5,8 +5,8 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useIsMobile } from "@/lib/hooks";
 
-const STAR_COUNT_DESKTOP = 8000;
-const STAR_COUNT_MOBILE = 3000;
+const STAR_COUNT_DESKTOP = 4000;
+const STAR_COUNT_MOBILE = 1500;
 const FIELD_DEPTH = 800;
 const FIELD_WIDTH = 400;
 const FIELD_HEIGHT = 200;
@@ -37,7 +37,7 @@ function Stars({ count }: { count: number }) {
       positions[i * 3 + 2] = (Math.random() - 0.5) * FIELD_DEPTH;
 
       // Vary sizes for depth perception
-      sizes[i] = Math.random() * 2.5 + 0.3;
+      sizes[i] = Math.random() * 2.5 + 0.8;
 
       // Assign colors from palette with bias towards white/cyan
       const colorIndex = Math.random();
@@ -64,8 +64,11 @@ function Stars({ count }: { count: number }) {
     return { positions, sizes, colors };
   }, [count]);
 
-  useFrame((_, delta) => {
+  useFrame((_, rawDelta) => {
     if (!pointsRef.current) return;
+
+    // Cap delta to prevent large jumps after tab regains focus
+    const delta = Math.min(rawDelta, 0.1);
 
     const positionAttr = pointsRef.current.geometry.attributes.position;
     const posArray = positionAttr.array as Float32Array;
@@ -129,12 +132,12 @@ function Stars({ count }: { count: number }) {
             alpha *= alpha; // Sharper center
             
             // Fade based on distance (depth fog) - far away
-            float depthFade = smoothstep(600.0, 50.0, vDistance);
+            float depthFade = smoothstep(700.0, 20.0, vDistance);
             
             // Fade out when close to camera so stars don't get clipped
             float nearFade = smoothstep(0.0, 140.0, vDistance);
             
-            gl_FragColor = vec4(vColor, alpha * depthFade * nearFade * 0.85);
+            gl_FragColor = vec4(vColor, alpha * depthFade * nearFade);
           }
         `}
       />
@@ -157,8 +160,8 @@ export default function StarField({ className = "" }: StarFieldProps) {
         height: "600px",
         minHeight: 320,
         maxHeight: 600,
-        maskImage: "radial-gradient(ellipse 70% 45% at 50% 50%, black 40%, transparent 100%)",
-        WebkitMaskImage: "radial-gradient(ellipse 70% 45% at 50% 50%, black 40%, transparent 100%)",
+        maskImage: "radial-gradient(ellipse 80% 55% at 50% 50%, black 40%, transparent 100%)",
+        WebkitMaskImage: "radial-gradient(ellipse 80% 55% at 50% 50%, black 40%, transparent 100%)",
       }}
     >
       <Canvas

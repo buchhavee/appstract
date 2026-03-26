@@ -1,9 +1,11 @@
 @import "tailwindcss";
 :root {
   /* Primary Gradient Colors */
+  --color-primary-blue: #433afb;
   --color-primary-purple: #6d5efc;
   --color-primary-cyan: #4cc9f0;
   --color-primary-magenta: #d53cff;
+  --color-secondary-blue: #0100ff;
 
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-cyan) 100%);
@@ -123,7 +125,7 @@ html {
   position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #6d5efc;
+  background: #433afb;
 }
 
 body {

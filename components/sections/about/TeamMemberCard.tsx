@@ -42,8 +42,15 @@ export default function TeamMemberCard({ name, role, bio, image }: TeamMemberCar
         <div className="relative z-10 p-6 md:p-8 flex flex-col gap-5">
           {/* Profile image + name */}
           <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full overflow-hidden shrink-0 border-2" style={{ borderColor: "rgba(255,255,255,0.15)" }}>
-              <Image src={image} alt={name} width={64} height={64} className="w-full h-full object-cover" />
+            <div
+              className="w-16 h-16 rounded-full shrink-0 p-0.5"
+              style={{
+                background: "linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-cyan) 100%)",
+              }}
+            >
+              <div className="w-full h-full rounded-full overflow-hidden">
+                <Image src={image} alt={name} width={64} height={64} className="w-full h-full object-cover" />
+              </div>
             </div>
             <div className="flex flex-col gap-1">
               <h3 className="font-bw-gradual font-bold text-lg text-white leading-tight">{name}</h3>

@@ -4,7 +4,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import heroData from "@/data/hero.json";
-import { Button, LiquidBackground } from "@/components/ui";
+import { Button, LiquidBackground, TopGradient } from "@/components/ui";
 
 const TAB_DURATION = 10000;
 const PAUSE_AFTER_CLICK = 5000;
@@ -149,31 +149,13 @@ export default function Hero() {
             <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(255,255,255,0.1) 100%)" }} />
             {/* Liquid overlay */}
             <div className="absolute bottom-0 left-0 right-0 h-[30%]" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }}>
-              <LiquidBackground opacity={0.3} speed={0.6} />
+              <LiquidBackground opacity={0.4} speed={0.3} />
             </div>
           </motion.div>
         ))}
       </motion.div>
 
-      {/* Purple gradient overlay */}
-      <motion.div
-        initial={{ y: "-20%" }}
-        animate={{ y: 0 }}
-        transition={{ duration: 1.6, ease: "easeOut", delay: 0.2 }}
-        className="absolute top-0 left-0 w-full z-2 pointer-events-none"
-        style={{
-          height: "130px",
-          background: `linear-gradient(to bottom,
-            rgba(109,94,252,1)   0%,
-            rgba(109,94,252,0.7) 10%,
-            rgba(109,94,252,0.5) 22%,
-            rgba(109,94,252,0.35) 38%,
-            rgba(109,94,252,0.2) 57%,
-            rgba(109,94,252,0.05) 75%,
-            rgba(109,94,252,0)   100%
-          )`,
-        }}
-      />
+      <TopGradient />
 
       {/* Content */}
       <div className="relative z-10 flex flex-col items-center justify-center max-w-360 w-full min-h-75 md:min-h-87 lg:min-h-102 pt-64 md:pt-72 lg:pt-64">
