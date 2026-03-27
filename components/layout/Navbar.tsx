@@ -14,19 +14,40 @@ export default function Navbar() {
   const [modalOpen, setModalOpen] = useState(false);
   const pendingScrollRef = useRef<string | null>(null);
   const scrollUpAccumulator = useRef(0);
+  const scrollDownAccumulator = useRef(0);
+  const isMobileRef = useRef(false);
   const { scrollY } = useScroll();
 
   const router = useRouter();
   const pathname = usePathname();
 
   const SCROLL_UP_THRESHOLD = 30;
+  const SCROLL_DOWN_THRESHOLD = 60;
+
+  useEffect(() => {
+    const update = () => {
+      isMobileRef.current = window.innerWidth < 1024;
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious() ?? 0;
     if (latest > previous && latest > 100) {
       scrollUpAccumulator.current = 0;
-      setHidden(true);
+      if (isMobileRef.current) {
+        scrollDownAccumulator.current += latest - previous;
+        if (scrollDownAccumulator.current >= SCROLL_DOWN_THRESHOLD) {
+          setHidden(true);
+          scrollDownAccumulator.current = 0;
+        }
+      } else {
+        setHidden(true);
+      }
     } else {
+      scrollDownAccumulator.current = 0;
       scrollUpAccumulator.current += previous - latest;
       if (scrollUpAccumulator.current >= SCROLL_UP_THRESHOLD || latest <= 100) {
         setHidden(false);

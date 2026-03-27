@@ -165,12 +165,12 @@ export default function CookieConsent() {
             exit={{ opacity: 0, y: 20 }}
             whileHover={{ y: -2, boxShadow: "0 8px 24px oklch(0% 0 0 / 0.4)" }}
             onClick={openModal}
-            className="fixed bottom-6 left-6 flex items-center justify-center gap-2 cursor-pointer z-40"
+            className="fixed bottom-4 left-4 md:bottom-6 md:left-6 flex items-center justify-center gap-2 cursor-pointer z-40"
             style={{
               ...glassStyles,
-              padding: isMobile ? 16 : "12px 18px",
-              width: isMobile ? 56 : "auto",
-              height: isMobile ? 56 : "auto",
+              padding: isMobile ? 10 : "12px 18px",
+              width: isMobile ? 42 : "auto",
+              height: isMobile ? 42 : "auto",
               border: "1px solid oklch(100% 0 0 / 0.12)",
               borderRadius: 100,
               color: "white",
@@ -178,7 +178,7 @@ export default function CookieConsent() {
               boxShadow: "0 4px 16px oklch(0% 0 0 / 0.3)",
             }}
           >
-            <Cookie size={isMobile ? 28 : 18} />
+            <Cookie size={isMobile ? 20 : 18} />
             {!isMobile && <span className="text-sm font-medium">{texts.settingsButton}</span>}
           </motion.button>
         )}

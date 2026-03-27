@@ -17,7 +17,7 @@ interface ChatMessageProps {
 
 function ChatMessage({ sender, message, isAssistant = false, isRight = false, delay = 0 }: ChatMessageProps) {
   const alignment = isRight ? "items-end" : "items-start";
-  const bubbleMargin = isRight ? "mr-8" : "ml-8";
+  const bubbleMargin = isRight ? "mr-7" : "ml-7";
   const flexDir = isRight ? "flex-row-reverse" : "flex-row";
 
   return (
@@ -51,7 +51,7 @@ function ProductPreviewCard({ product, sender, delay = 0 }: { product: { title: 
         <div className="w-6 h-6 rounded-full flex items-center justify-center text-xs font-semibold leading-none bg-linear-to-br from-[oklch(69.4%_0.173_244.6)] to-cyan-300">{sender.charAt(0)}</div>
         <span className="text-xs font-bw-gradual text-black/60">{sender}</span>
       </div>
-      <div className="rounded-md overflow-hidden w-[75%] mr-8 bg-[oklch(96%_0.005_240)] border border-black/5 shadow-sm">
+      <div className="rounded-md overflow-hidden w-[75%] mr-7 bg-[oklch(96%_0.005_240)] border border-black/5 shadow-sm">
         {/* Horizontal image gallery with cut-off 4th image */}
         <div className="flex gap-1 p-1.5 pb-0 overflow-hidden">
           {[0, 1, 2].map((i) => (
