@@ -40,17 +40,17 @@ export default function KpiBentoGrid() {
               <motion.div key={idx} variants={fadeInUp} className={isFirst ? "md:col-span-2" : ""}>
                 <SpotlightCard
                   className="h-full"
-                  spotlightColor="rgba(146, 222, 246, 0.12)"
+                  spotlightColor="oklch(85.9% 0.082 219.8 / 0.12)"
                   style={{
-                    background: "linear-gradient(145deg, rgba(40, 40, 45, 0.6) 0%, rgba(25, 25, 30, 0.7) 100%)",
+                    background: "linear-gradient(145deg, oklch(27.9% 0.009 285.8 / 0.6) 0%, oklch(21.6% 0.010 285.6 / 0.7) 100%)",
                     backdropFilter: "blur(16px)",
                     WebkitBackdropFilter: "blur(16px)",
-                    border: "1px solid rgba(255, 255, 255, 0.12)",
-                    borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
+                    border: "1px solid oklch(100% 0 0 / 0.12)",
+                    borderBottom: "1px solid oklch(0% 0 0 / 0.2)",
                     boxShadow: `
-                      0 20px 40px rgba(0, 0, 0, 0.25),
-                      0 8px 16px rgba(0, 0, 0, 0.15),
-                      inset 0 1px 0 rgba(255, 255, 255, 0.08)
+                      0 20px 40px oklch(0% 0 0 / 0.25),
+                      0 8px 16px oklch(0% 0 0 / 0.15),
+                      inset 0 1px 0 oklch(100% 0 0 / 0.08)
                     `,
                   }}
                 >
@@ -58,7 +58,7 @@ export default function KpiBentoGrid() {
                   <div
                     className="absolute top-0 left-8 right-8 h-px pointer-events-none z-10"
                     style={{
-                      background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 20%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0.3) 80%, transparent 100%)",
+                      background: "linear-gradient(90deg, transparent 0%, oklch(100% 0 0 / 0.3) 20%, oklch(100% 0 0 / 0.5) 50%, oklch(100% 0 0 / 0.3) 80%, transparent 100%)",
                     }}
                   />
 
@@ -84,8 +84,8 @@ export default function KpiBentoGrid() {
                             key={kpiIdx}
                             className="flex items-center gap-3 rounded-xl px-4 py-3"
                             style={{
-                              background: "rgba(255,255,255,0.05)",
-                              border: "1px solid rgba(255,255,255,0.08)",
+                              background: "oklch(100% 0 0 / 0.05)",
+                              border: "1px solid oklch(100% 0 0 / 0.08)",
                             }}
                             initial={{ opacity: 0, y: 12 }}
                             whileInView={{ opacity: 1, y: 0 }}

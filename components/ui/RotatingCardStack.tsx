@@ -76,7 +76,8 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
     <motion.div
       className={`relative w-full flex items-center justify-center ${className}`}
       style={{
-        height: "480px",
+        height: "100%",
+        minHeight: "480px",
         perspective: "1200px",
         perspectiveOrigin: "center center",
       }}
@@ -102,7 +103,7 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
           className="w-full h-48 rounded-full"
           style={{
             maxWidth: "500px",
-            background: "radial-gradient(ellipse, rgba(255, 255, 255, 0.15) 0%, rgba(146, 222, 246, 0.85) 25%, rgba(139, 92, 246, 0.6) 50%, rgba(109, 94, 252, 0.4) 70%, transparent 90%)",
+            background: "radial-gradient(ellipse, oklch(100% 0 0 / 0.15) 0%, oklch(85.9% 0.082 219.8 / 0.85) 25%, oklch(60.8% 0.219 292.7 / 0.6) 50%, oklch(58.8% 0.226 281.2 / 0.4) 70%, transparent 90%)",
           }}
         />
       </div>
@@ -166,7 +167,7 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
             style={{
               zIndex: zIndexValue,
               width: "100%",
-              maxWidth: "380px",
+              maxWidth: "440px",
               transformStyle: "preserve-3d",
               willChange: "transform, filter",
               backfaceVisibility: "hidden",
@@ -175,18 +176,18 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
           >
             {/* Card */}
             <motion.div
-              className="flex items-center gap-5 px-6 py-5 rounded-2xl relative"
+              className="flex items-center gap-6 px-7 py-6 rounded-2xl relative"
               style={{
                 background: `linear-gradient(145deg, ${item.cardBg} 0%, ${item.cardBg} 100%)`,
                 boxShadow: `
-                  0 ${shadowY}px ${shadowBlur}px rgba(0, 0, 0, ${shadowOpacity}),
-                  0 ${shadowY / 3}px ${shadowBlur / 3}px rgba(0, 0, 0, ${shadowOpacity * 0.6}),
-                  0 1px 3px rgba(0, 0, 0, 0.08),
-                  inset 0 1px 0 rgba(255, 255, 255, ${isActive ? 0.5 : 0.25}),
-                  inset 0 -1px 0 rgba(0, 0, 0, ${isActive ? 0.08 : 0.05})
+                  0 ${shadowY}px ${shadowBlur}px oklch(0% 0 0 / ${shadowOpacity}),
+                  0 ${shadowY / 3}px ${shadowBlur / 3}px oklch(0% 0 0 / ${shadowOpacity * 0.6}),
+                  0 1px 3px oklch(0% 0 0 / 0.08),
+                  inset 0 1px 0 oklch(100% 0 0 / ${isActive ? 0.5 : 0.25}),
+                  inset 0 -1px 0 oklch(0% 0 0 / ${isActive ? 0.08 : 0.05})
                 `,
-                border: `1px solid rgba(255, 255, 255, ${isActive ? 0.35 : 0.15})`,
-                borderBottom: `1px solid rgba(0, 0, 0, ${isActive ? 0.1 : 0.05})`,
+                border: `1px solid oklch(100% 0 0 / ${isActive ? 0.35 : 0.15})`,
+                borderBottom: `1px solid oklch(0% 0 0 / ${isActive ? 0.1 : 0.05})`,
               }}
               whileHover={
                 isActive
@@ -204,7 +205,7 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
               <div
                 className="absolute top-0 left-4 right-4 h-px pointer-events-none"
                 style={{
-                  background: `linear-gradient(90deg, transparent 0%, rgba(255,255,255,${isActive ? 0.6 : 0.3}) 20%, rgba(255,255,255,${isActive ? 0.8 : 0.4}) 50%, rgba(255,255,255,${isActive ? 0.6 : 0.3}) 80%, transparent 100%)`,
+                  background: `linear-gradient(90deg, transparent 0%, oklch(100% 0 0 / ${isActive ? 0.6 : 0.3}) 20%, oklch(100% 0 0 / ${isActive ? 0.8 : 0.4}) 50%, oklch(100% 0 0 / ${isActive ? 0.6 : 0.3}) 80%, transparent 100%)`,
                 }}
               />
 
@@ -212,7 +213,7 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
               <div
                 className="absolute inset-0 pointer-events-none rounded-2xl overflow-hidden"
                 style={{
-                  background: isActive ? "linear-gradient(160deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.05) 30%, transparent 50%, rgba(0,0,0,0.03) 100%)" : "linear-gradient(160deg, rgba(255,255,255,0.1) 0%, transparent 40%, rgba(0,0,0,0.05) 100%)",
+                  background: isActive ? "linear-gradient(160deg, oklch(100% 0 0 / 0.2) 0%, oklch(100% 0 0 / 0.05) 30%, transparent 50%, oklch(0% 0 0 / 0.03) 100%)" : "linear-gradient(160deg, oklch(100% 0 0 / 0.1) 0%, transparent 40%, oklch(0% 0 0 / 0.05) 100%)",
                 }}
               />
 
@@ -220,33 +221,33 @@ export default function RotatingCardStack({ items, autoRotate = true, rotationIn
               <div
                 className="absolute bottom-0 left-0 right-0 h-8 pointer-events-none rounded-b-2xl"
                 style={{
-                  background: "linear-gradient(to top, rgba(0,0,0,0.04) 0%, transparent 100%)",
+                  background: "linear-gradient(to top, oklch(0% 0 0 / 0.04) 0%, transparent 100%)",
                 }}
               />
 
               {/* Icon */}
               <div
-                className="shrink-0 w-14 h-14 rounded-xl flex items-center justify-center relative z-10"
+                className="shrink-0 w-16 h-16 rounded-xl flex items-center justify-center relative z-10"
                 style={{
                   backgroundColor: item.iconBg,
                   boxShadow: `
-                    0 6px 16px rgba(0, 0, 0, 0.25),
-                    0 2px 4px rgba(0, 0, 0, 0.15),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-                    inset 0 -1px 0 rgba(0, 0, 0, 0.15)
+                    0 6px 16px oklch(0% 0 0 / 0.25),
+                    0 2px 4px oklch(0% 0 0 / 0.15),
+                    inset 0 1px 0 oklch(100% 0 0 / 0.3),
+                    inset 0 -1px 0 oklch(0% 0 0 / 0.15)
                   `,
-                  border: "1px solid rgba(255, 255, 255, 0.15)",
+                  border: "1px solid oklch(100% 0 0 / 0.15)",
                 }}
               >
-                {IconComponent && <IconComponent className="w-7 h-7 text-white drop-shadow-md relative z-10" strokeWidth={2} />}
+                {IconComponent && <IconComponent className="w-8 h-8 text-white drop-shadow-md relative z-10" strokeWidth={2} />}
               </div>
 
               {/* Title */}
               <span
-                className="text-lg font-semibold relative z-10"
+                className="text-xl font-semibold relative z-10"
                 style={{
-                  color: "rgba(25, 25, 25, 0.95)",
-                  textShadow: "0 1px 0 rgba(255, 255, 255, 0.6)",
+                  color: "oklch(21.3% 0 0 / 0.95)",
+                  textShadow: "0 1px 0 oklch(100% 0 0 / 0.6)",
                 }}
               >
                 {item.title}

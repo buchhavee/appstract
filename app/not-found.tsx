@@ -3,8 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
-import { Navbar } from "@/components/layout";
-import { Footer } from "@/components/sections";
+import { Navbar, Footer } from "@/components/layout";
 import { Tag, LiquidBackground, TopGradient } from "@/components/ui";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
@@ -18,7 +17,7 @@ export default function NotFound() {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            background: "radial-gradient(ellipse 70% 50% at 50% 40%, rgba(76,201,240,0.15) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse 70% 50% at 50% 40%, oklch(78.2% 0.121 222.5 / 0.15) 0%, transparent 70%)",
           }}
         />
 
@@ -45,7 +44,7 @@ export default function NotFound() {
             </motion.p>
 
             <motion.div variants={fadeInUp}>
-              <Link href="/" className="inline-flex items-center gap-2 font-bw-gradual font-medium text-base text-white! border border-white/40 rounded-full px-6 py-3 backdrop-blur-sm transition-transform hover:scale-105" style={{ background: "rgba(255, 255, 255, 0.08)" }}>
+              <Link href="/" className="inline-flex items-center gap-2 font-bw-gradual font-medium text-base text-white! border border-white/40 rounded-full px-6 py-3 backdrop-blur-sm transition-transform hover:scale-105" style={{ background: "oklch(100% 0 0 / 0.08)" }}>
                 <ArrowLeft className="w-4 h-4 opacity-70" />
                 Back to home
               </Link>

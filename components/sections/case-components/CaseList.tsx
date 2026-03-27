@@ -63,36 +63,36 @@ export function CaseList({ cases, initialCount = 6 }: CaseListProps) {
       ref={containerRef}
       className="relative z-10 w-full overflow-hidden md:rounded-xl rounded-md"
       style={{
-        background: "linear-gradient(145deg, rgba(255, 255, 255, 1) 0%, rgba(250, 250, 252, 1) 100%)",
-        border: "1px solid rgba(0, 0, 0, 0.08)",
-        borderBottom: "1px solid rgba(0, 0, 0, 0.12)",
+        background: "linear-gradient(145deg, oklch(100% 0 0) 0%, oklch(98.6% 0.003 286.4) 100%)",
+        border: "1px solid oklch(0% 0 0 / 0.08)",
+        borderBottom: "1px solid oklch(0% 0 0 / 0.12)",
         boxShadow: `
-          0 20px 40px rgba(0, 0, 0, 0.08),
-          0 8px 16px rgba(0, 0, 0, 0.06),
-          0 2px 4px rgba(0, 0, 0, 0.04),
-          inset 0 1px 0 rgba(255, 255, 255, 1),
-          inset 0 -1px 0 rgba(0, 0, 0, 0.04)
+          0 20px 40px oklch(0% 0 0 / 0.08),
+          0 8px 16px oklch(0% 0 0 / 0.06),
+          0 2px 4px oklch(0% 0 0 / 0.04),
+          inset 0 1px 0 oklch(100% 0 0),
+          inset 0 -1px 0 oklch(0% 0 0 / 0.04)
         `,
       }}
     >
       <div
         className="absolute top-0 left-8 right-8 h-px pointer-events-none z-20"
         style={{
-          background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,1) 20%, rgba(255,255,255,1) 50%, rgba(255,255,255,1) 80%, transparent 100%)",
+          background: "linear-gradient(90deg, transparent 0%, oklch(100% 0 0) 20%, oklch(100% 0 0) 50%, oklch(100% 0 0) 80%, transparent 100%)",
         }}
       />
 
       <div
         className="absolute inset-0 pointer-events-none rounded-xl overflow-hidden"
         style={{
-          background: "linear-gradient(160deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.1) 30%, transparent 50%, rgba(0,0,0,0.02) 100%)",
+          background: "linear-gradient(160deg, oklch(100% 0 0 / 0.6) 0%, oklch(100% 0 0 / 0.1) 30%, transparent 50%, oklch(0% 0 0 / 0.02) 100%)",
         }}
       />
 
       <div
         className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none rounded-b-xl"
         style={{
-          background: "linear-gradient(to top, rgba(0,0,0,0.03) 0%, transparent 100%)",
+          background: "linear-gradient(to top, oklch(0% 0 0 / 0.03) 0%, transparent 100%)",
         }}
       />
 

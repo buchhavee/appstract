@@ -11,7 +11,7 @@ export default function Footer() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(78,195,239,1) 40%, rgba(109,94,252,1) 100%)",
+          background: "linear-gradient(180deg, oklch(100% 0 0) 0%, oklch(76.9% 0.121 226.6) 40%, oklch(50.9% 0.269 273.3) 100%)",
         }}
       />
 
@@ -21,9 +21,9 @@ export default function Footer() {
         <div
           className="relative w-full rounded-3xl p-6 md:p-10 flex flex-col gap-16 md:gap-24"
           style={{
-            background: "rgba(0,0,0,0.2)",
-            boxShadow: "0px 4px 20.8px rgba(0,0,0,0.1), inset 0px 4px 29.7px rgba(255,255,255,0.1)",
-            border: "1px solid rgba(255,255,255,0.2)",
+            background: "oklch(0% 0 0 / 0.2)",
+            boxShadow: "0px 4px 20.8px oklch(0% 0 0 / 0.1), inset 0px 4px 29.7px oklch(100% 0 0 / 0.1)",
+            border: "1px solid oklch(100% 0 0 / 0.2)",
             backdropFilter: "blur(12px)",
             WebkitBackdropFilter: "blur(12px)",
           }}

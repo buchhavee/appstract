@@ -46,7 +46,7 @@ export default function DesktopNavLinks({ links, onLinkClick, className = "" }: 
         {hoveredIndex !== null && (
           <motion.div
             className="absolute top-0 bottom-0 rounded-full pointer-events-none"
-            style={{ background: "rgba(255, 255, 255, 0.2)" }}
+            style={{ background: "oklch(100% 0 0 / 0.2)" }}
             initial={{ opacity: 0, left: pillStyle.left, width: pillStyle.width }}
             animate={{ opacity: 1, left: pillStyle.left, width: pillStyle.width }}
             exit={{ opacity: 0 }}

@@ -14,7 +14,7 @@ export default function OmnichannelHero() {
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 70% 50% at 50% 40%, rgba(76,201,240,0.15) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse 70% 50% at 50% 40%, oklch(78.2% 0.121 222.5 / 0.15) 0%, transparent 70%)",
         }}
       />
 

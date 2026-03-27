@@ -9,7 +9,7 @@ interface SpotlightCardProps {
   style?: CSSProperties;
 }
 
-export default function SpotlightCard({ children, className = "", spotlightColor = "rgba(146, 222, 246, 0.5)", style }: SpotlightCardProps) {
+export default function SpotlightCard({ children, className = "", spotlightColor = "oklch(85.9% 0.082 219.8 / 0.5)", style }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null);
   const [isFocused, setIsFocused] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });

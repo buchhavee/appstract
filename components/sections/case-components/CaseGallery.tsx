@@ -137,7 +137,7 @@ export function CaseGallery({ images, autoPlaySpeed = 10000, interactionDelay = 
   const currentImage = normalizedImages[currentIndex];
 
   return (
-    <div className="relative w-full aspect-9/16 md:aspect-video lg:aspect-auto lg:h-full lg:min-h-80 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.15)]">
+    <div className="relative w-full aspect-9/16 md:aspect-video lg:aspect-auto lg:h-full lg:min-h-80 rounded-2xl shadow-[0_4px_20px_oklch(0%_0_0_/_0.15)]">
       <div className="absolute inset-0 rounded-2xl overflow-hidden bg-neutral-lightest">
         <AnimatePresence initial={false}>
           <motion.div key={currentIndex} className="absolute inset-0" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={TRANSITION_GALLERY}>
@@ -145,7 +145,7 @@ export function CaseGallery({ images, autoPlaySpeed = 10000, interactionDelay = 
             <div
               className="absolute inset-0"
               style={{
-                background: "linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.2) 40%, transparent 100%)",
+                background: "linear-gradient(to top, oklch(0% 0 0 / 0.9) 0%, oklch(0% 0 0 / 0.2) 40%, transparent 100%)",
               }}
             />
             {(currentImage.title || currentImage.description) && (

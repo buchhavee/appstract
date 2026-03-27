@@ -17,7 +17,7 @@ interface ConicButtonProps {
   textColor?: string;
 }
 
-export default function ConicButton({ children, onClick, className = "", borderColor = "#6D5EFC", animationDuration = 4, blurRadius = 2, borderRadius = 999, backgroundColor = "rgba(255, 255, 255, 0.1)", overlayBorderColor = "#6D5EFC", overlayMargin = 2, textColor = "white" }: ConicButtonProps) {
+export default function ConicButton({ children, onClick, className = "", borderColor = "oklch(58.8% 0.226 281.2)", animationDuration = 4, blurRadius = 2, borderRadius = 999, backgroundColor = "oklch(100% 0 0 / 0.1)", overlayBorderColor = "oklch(58.8% 0.226 281.2)", overlayMargin = 2, textColor = "white" }: ConicButtonProps) {
   return (
     <motion.button
       onClick={onClick}
@@ -42,9 +42,9 @@ export default function ConicButton({ children, onClick, className = "", borderC
           borderRadius: `${borderRadius}px`,
           overflow: "hidden",
           // Mask to only show the border area
-          WebkitMask: `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
+          WebkitMask: `linear-gradient(oklch(100% 0 0) 0 0) content-box, linear-gradient(oklch(100% 0 0) 0 0)`,
           WebkitMaskComposite: "xor",
-          mask: `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
+          mask: `linear-gradient(oklch(100% 0 0) 0 0) content-box, linear-gradient(oklch(100% 0 0) 0 0)`,
           maskComposite: "exclude",
           padding: `${overlayMargin}px`,
         }}

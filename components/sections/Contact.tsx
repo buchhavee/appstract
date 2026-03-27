@@ -97,7 +97,7 @@ export default function ContactSection() {
         <div
           className="absolute inset-0 rounded-3xl"
           style={{
-            background: "radial-gradient(ellipse 120% 150% at 50% 100%, rgba(146,126,219,1) 0%, rgba(112,161,229,0.8) 27%, rgba(78,195,239,0.8) 54%, rgba(78,195,239,0.8) 100%)",
+            background: "radial-gradient(ellipse 120% 150% at 50% 100%, oklch(65.1% 0.136 292.1) 0%, oklch(70.2% 0.114 256.7 / 0.8) 27%, oklch(76.9% 0.121 226.6 / 0.8) 54%, oklch(76.9% 0.121 226.6 / 0.8) 100%)",
           }}
         />
 
@@ -115,7 +115,7 @@ export default function ContactSection() {
             {contactData.description}
           </p>
 
-          <ConicButton onClick={() => setOpen(true)} borderColor="#4CC9F0" overlayBorderColor="rgba(76, 201, 240, 0.3)" backgroundColor="rgba(255, 255, 255, 0.1)" textColor="white" animationDuration={4} blurRadius={4} borderRadius={999} overlayMargin={2} className="mt-4 font-bw-gradual group">
+          <ConicButton onClick={() => setOpen(true)} borderColor="oklch(78.2% 0.121 222.5)" overlayBorderColor="oklch(78.2% 0.121 222.5 / 0.3)" backgroundColor="oklch(100% 0 0 / 0.1)" textColor="white" animationDuration={4} blurRadius={4} borderRadius={999} overlayMargin={2} className="mt-4 font-bw-gradual group">
             <span className="flex items-center gap-3">
               {contactData.button.label}
               <ArrowRight size={24} className="transition-transform duration-300 group-hover:translate-x-1" />

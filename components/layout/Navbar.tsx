@@ -88,25 +88,25 @@ export default function Navbar() {
         <div
           className="relative flex items-center justify-between gap-4 lg:gap-8 w-full max-w-screen-2xl h-15 rounded-[20px] overflow-hidden px-4 lg:px-5"
           style={{
-            background: "rgba(0, 0, 0, 0.3)",
+            background: "oklch(0% 0 0 / 0.3)",
             backdropFilter: "blur(8px)",
             WebkitBackdropFilter: "blur(8px)",
-            border: "1px solid rgba(255, 255, 255, 0.3)",
-            boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.1), inset 0 0 30px 15px rgba(255, 255, 255, 0.15)",
+            border: "1px solid oklch(100% 0 0 / 0.3)",
+            boxShadow: "0 8px 32px oklch(0% 0 0 / 0.1), inset 0 1px 0 oklch(100% 0 0 / 0.5), inset 0 -1px 0 oklch(100% 0 0 / 0.1), inset 0 0 30px 15px oklch(100% 0 0 / 0.15)",
           }}
         >
           {/* Top gradient line */}
           <div
             className="absolute top-0 left-0 right-0 h-px pointer-events-none"
             style={{
-              background: "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)",
+              background: "linear-gradient(90deg, transparent, oklch(100% 0 0 / 0.3), transparent)",
             }}
           />
           {/* Left gradient line */}
           <div
             className="absolute top-0 left-0 w-px h-full pointer-events-none"
             style={{
-              background: "linear-gradient(180deg, rgba(255, 255, 255, 0.8), transparent, rgba(255, 255, 255, 0.3))",
+              background: "linear-gradient(180deg, oklch(100% 0 0 / 0.8), transparent, oklch(100% 0 0 / 0.3))",
             }}
           />
 

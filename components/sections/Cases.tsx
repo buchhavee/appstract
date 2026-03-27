@@ -27,7 +27,7 @@ export default function Cases() {
       className="relative z-2 w-full flex flex-col items-center justify-center pt-12 pb-28 md:pt-20 md:pb-40 lg:pt-28 lg:pb-48 bg-white -mt-32 md:-mt-40"
       style={{
         borderRadius: "24px 24px 0 0",
-        boxShadow: "0 -8px 30px rgba(0, 0, 0, 0.15), 0 -2px 8px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+        boxShadow: "0 -8px 30px oklch(0% 0 0 / 0.15), 0 -2px 8px oklch(0% 0 0 / 0.1), inset 0 1px 0 oklch(100% 0 0 / 0.9)",
         y,
       }}
     >
