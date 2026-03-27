@@ -59,7 +59,7 @@ export function CaseExpandedContent({ content, onClose }: CaseExpandedContentPro
                       transition={{ duration: 0.35, delay: 0.15 + si * 0.08 }}
                       className="flex flex-col gap-1.5 flex-1 min-w-32 rounded-2xl px-5 py-4 bg-white border border-black/6"
                       style={{
-                        boxShadow: "0 2px 12px rgba(109, 94, 252, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04)",
+                        boxShadow: "0 2px 12px oklch(58.8% 0.226 281.2 / 0.06), 0 1px 4px oklch(0% 0 0 / 0.04)",
                       }}
                     >
                       <span className="gradient-text font-bw-gradual font-bold" style={{ fontSize: "clamp(1.5rem, 1.5vw + 0.75rem, 2rem)" }}>
@@ -87,7 +87,7 @@ export function CaseExpandedContent({ content, onClose }: CaseExpandedContentPro
             onClick={onClose}
             className="group mx-auto flex items-center gap-2 px-5 py-2.5 rounded-full transition-all duration-200 cursor-pointer border border-black/10 hover:border-black/20 bg-white hover:bg-neutral-50"
             style={{
-              boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+              boxShadow: "0 1px 4px oklch(0% 0 0 / 0.06)",
             }}
           >
             <ChevronUp className="w-4 h-4 text-neutral-medium group-hover:text-black transition-colors" />

@@ -33,7 +33,7 @@ const Toggle = ({ active, disabled, onChange }: { active: boolean; disabled?: bo
     style={{
       width: 44,
       height: 24,
-      background: active ? "rgba(109, 94, 252, 0.5)" : "rgba(109, 94, 252, 0.15)",
+      background: active ? "oklch(58.8% 0.226 281.2 / 0.5)" : "oklch(58.8% 0.226 281.2 / 0.15)",
       borderRadius: 12,
       cursor: disabled ? "not-allowed" : "pointer",
       border: "none",
@@ -48,9 +48,9 @@ const Toggle = ({ active, disabled, onChange }: { active: boolean; disabled?: bo
         left: active ? 22 : 2,
         width: 20,
         height: 20,
-        background: active ? "#6D5EFC" : "rgba(109, 94, 252, 0.5)",
+        background: active ? "oklch(58.8% 0.226 281.2)" : "oklch(58.8% 0.226 281.2 / 0.5)",
         borderRadius: "50%",
-        boxShadow: active ? "0 2px 4px rgba(0,0,0,0.2)" : "none",
+        boxShadow: active ? "0 2px 4px oklch(0% 0 0 / 0.2)" : "none",
       }}
     />
   </button>
@@ -151,7 +151,7 @@ export default function CookieConsent() {
   const glassStyles = {
     backdropFilter: "blur(20px)",
     WebkitBackdropFilter: "blur(20px)",
-    background: "rgba(28, 28, 28, 0.9)",
+    background: "oklch(22.6% 0 0 / 0.9)",
   };
 
   return (
@@ -163,7 +163,7 @@ export default function CookieConsent() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            whileHover={{ y: -2, boxShadow: "0 8px 24px rgba(0, 0, 0, 0.4)" }}
+            whileHover={{ y: -2, boxShadow: "0 8px 24px oklch(0% 0 0 / 0.4)" }}
             onClick={openModal}
             className="fixed bottom-6 left-6 flex items-center justify-center gap-2 cursor-pointer z-40"
             style={{
@@ -171,11 +171,11 @@ export default function CookieConsent() {
               padding: isMobile ? 16 : "12px 18px",
               width: isMobile ? 56 : "auto",
               height: isMobile ? 56 : "auto",
-              border: "1px solid rgba(255, 255, 255, 0.12)",
+              border: "1px solid oklch(100% 0 0 / 0.12)",
               borderRadius: 100,
               color: "white",
               opacity: 0.8,
-              boxShadow: "0 4px 16px rgba(0, 0, 0, 0.3)",
+              boxShadow: "0 4px 16px oklch(0% 0 0 / 0.3)",
             }}
           >
             <Cookie size={isMobile ? 28 : 18} />
@@ -195,7 +195,7 @@ export default function CookieConsent() {
               exit={{ opacity: 0 }}
               className="fixed inset-0 z-99"
               style={{
-                background: "rgba(0, 0, 0, 0.6)",
+                background: "oklch(0% 0 0 / 0.6)",
                 backdropFilter: "blur(8px)",
                 WebkitBackdropFilter: "blur(8px)",
               }}
@@ -217,9 +217,9 @@ export default function CookieConsent() {
                 ...glassStyles,
                 width: "calc(100% - 48px)",
                 maxWidth: 420,
-                border: "1px solid rgba(255, 255, 255, 0.12)",
+                border: "1px solid oklch(100% 0 0 / 0.12)",
                 borderRadius: 16,
-                boxShadow: "0 24px 48px rgba(0, 0, 0, 0.4)",
+                boxShadow: "0 24px 48px oklch(0% 0 0 / 0.4)",
               }}
               role="dialog"
               aria-modal="true"
@@ -246,8 +246,8 @@ export default function CookieConsent() {
                       onClick={handleAccept}
                       className="flex-1 py-3.5 px-5 rounded-lg text-sm font-semibold cursor-pointer border-none transition-colors"
                       style={{
-                        background: "#FFFFFF",
-                        color: "#000000",
+                        background: "oklch(100% 0 0)",
+                        color: "oklch(0% 0 0)",
                       }}
                     >
                       {texts.accept}
@@ -259,7 +259,7 @@ export default function CookieConsent() {
                       style={{
                         background: "transparent",
                         color: "white",
-                        border: "1px solid rgba(255, 255, 255, 0.12)",
+                        border: "1px solid oklch(100% 0 0 / 0.12)",
                       }}
                     >
                       {texts.reject}
@@ -273,7 +273,7 @@ export default function CookieConsent() {
                     {(Object.keys(categories) as Array<keyof typeof categories>).map((key) => {
                       const cat = categories[key];
                       return (
-                        <div key={key} className="flex items-center justify-between py-3" style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.08)" }}>
+                        <div key={key} className="flex items-center justify-between py-3" style={{ borderBottom: "1px solid oklch(100% 0 0 / 0.08)" }}>
                           <div className="flex-1 mr-4">
                             <div className="text-sm font-semibold text-white mb-1">{cat.name}</div>
                             <div className="text-xs text-white/70 leading-relaxed">{cat.description}</div>
@@ -292,8 +292,8 @@ export default function CookieConsent() {
                     onClick={handleSave}
                     className="w-full py-3.5 px-6 rounded-lg text-sm font-semibold cursor-pointer border-none mt-6 transition-colors"
                     style={{
-                      background: "#FFFFFF",
-                      color: "#000000",
+                      background: "oklch(100% 0 0)",
+                      color: "oklch(0% 0 0)",
                     }}
                   >
                     {texts.save}
@@ -312,8 +312,8 @@ export default function CookieConsent() {
               <div
                 className="flex justify-center gap-6 py-4 px-7"
                 style={{
-                  borderTop: "1px solid rgba(255, 255, 255, 0.08)",
-                  background: "rgba(0, 0, 0, 0.15)",
+                  borderTop: "1px solid oklch(100% 0 0 / 0.08)",
+                  background: "oklch(0% 0 0 / 0.15)",
                 }}
               >
                 {links.privacy && (

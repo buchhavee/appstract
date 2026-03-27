@@ -1,31 +1,31 @@
 @import "tailwindcss";
 :root {
   /* Primary Gradient Colors */
-  --color-primary-blue: #433afb;
-  --color-primary-purple: #6d5efc;
-  --color-primary-cyan: #4cc9f0;
-  --color-primary-magenta: #d53cff;
-  --color-secondary-blue: #0100ff;
+  --color-primary-blue: oklch(50.9% 0.269 273.3);
+  --color-primary-purple: oklch(58.8% 0.226 281.2);
+  --color-primary-cyan: oklch(78.2% 0.121 222.5);
+  --color-primary-magenta: oklch(66.3% 0.28 317.7);
+  --color-secondary-blue: oklch(45.2% 0.313 264.1);
 
   /* Gradients */
   --gradient-primary: linear-gradient(135deg, var(--color-primary-purple) 0%, var(--color-primary-cyan) 100%);
-  --gradient-logo: linear-gradient(137deg, rgba(213, 60, 255, 0.8) 4%, rgba(0, 195, 255, 0.8) 96%);
+  --gradient-logo: linear-gradient(137deg, oklch(66.3% 0.28 317.7 / 0.8) 4%, oklch(76.5% 0.151 229.4 / 0.8) 96%);
   --gradient-hero-text: linear-gradient(161deg, var(--color-primary-purple) 0%, var(--color-primary-cyan) 100%);
-  --gradient-concept-bg: linear-gradient(180deg, #ffffff 16%, #4cc9f0 52%, #6d5efc 100%);
-  --gradient-cta-bg: radial-gradient(ellipse at center, #927edb 0%, #70a1e5 27%, #4ec3ef 54%);
+  --gradient-concept-bg: linear-gradient(180deg, oklch(100% 0 0) 16%, oklch(78.2% 0.121 222.5) 52%, oklch(58.8% 0.226 281.2) 100%);
+  --gradient-cta-bg: radial-gradient(ellipse at center, oklch(65.1% 0.136 292.1) 0%, oklch(70.2% 0.114 256.7) 27%, oklch(76.9% 0.121 226.6) 54%);
 
   /* Neutrals */
-  --color-white: #ffffff;
-  --color-black: #000000;
-  --color-neutral-dark: #1c1c1c;
-  --color-neutral-medium: #41423c;
-  --color-neutral-light: #aaaaaa;
-  --color-neutral-lightest: #eeeeee;
+  --color-white: oklch(100% 0 0);
+  --color-black: oklch(0% 0 0);
+  --color-neutral-dark: oklch(22.6% 0 0);
+  --color-neutral-medium: oklch(37.6% 0.01 114.6);
+  --color-neutral-light: oklch(73.8% 0 0);
+  --color-neutral-lightest: oklch(94.9% 0 0);
 
   /* Backgrounds */
   --bg-primary: var(--color-white);
   --bg-dark: var(--color-neutral-dark);
-  --bg-glass: rgba(255, 255, 255, 0.1);
+  --bg-glass: oklch(100% 0 0 / 0.1);
 
   /* Text Colors */
   --text-primary: var(--color-black);
@@ -33,7 +33,7 @@
   --text-inverse: var(--color-white);
 
   /* Borders */
-  --border-light: rgba(0, 0, 0, 0.15);
+  --border-light: oklch(0% 0 0 / 0.15);
   --border-dark: var(--color-neutral-medium);
 
   /* Typographies */
@@ -87,10 +87,10 @@
   --radius-full: 3.125rem; /* 50px */
 
   /*  Shadows  */
-  --shadow-sm: 0px 4px 12px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0px 4px 20.8px rgba(0, 0, 0, 0.1);
-  --shadow-card: 0px 4px 24.6px rgba(76, 201, 240, 0.21);
-  --shadow-button: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-sm: 0px 4px 12px oklch(0% 0 0 / 0.1);
+  --shadow-md: 0px 4px 20.8px oklch(0% 0 0 / 0.1);
+  --shadow-card: 0px 4px 24.6px oklch(78.2% 0.121 222.5 / 0.21);
+  --shadow-button: 0px 4px 12px oklch(0% 0 0 / 0.1);
 
   /*  Transitions  */
   --transition-fast: 150ms ease;
@@ -100,15 +100,15 @@
 
 /*  Tailwind Theme  */
 @theme inline {
-  --color-background: #ffffff;
-  --color-foreground: #000000;
-  --color-primary-purple: #6d5efc;
-  --color-primary-cyan: #4cc9f0;
-  --color-primary-magenta: #d53cff;
-  --color-neutral-dark: #1c1c1c;
-  --color-neutral-medium: #41423c;
-  --color-neutral-light: #aaaaaa;
-  --color-neutral-lightest: #eeeeee;
+  --color-background: oklch(100% 0 0);
+  --color-foreground: oklch(0% 0 0);
+  --color-primary-purple: oklch(58.8% 0.226 281.2);
+  --color-primary-cyan: oklch(78.2% 0.121 222.5);
+  --color-primary-magenta: oklch(66.3% 0.28 317.7);
+  --color-neutral-dark: oklch(22.6% 0 0);
+  --color-neutral-medium: oklch(37.6% 0.01 114.6);
+  --color-neutral-light: oklch(73.8% 0 0);
+  --color-neutral-lightest: oklch(94.9% 0 0);
   --font-sans: var(--font-body);
   --font-heading: var(--font-heading);
   --font-bw-gradual: var(--font-bw-gradual), "Bw Gradual DEMO", system-ui, sans-serif;
@@ -125,7 +125,7 @@ html {
   position: relative;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #433afb;
+  background: oklch(50.9% 0.269 273.3);
 }
 
 body {

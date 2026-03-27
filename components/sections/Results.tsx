@@ -52,7 +52,7 @@ export default function Results() {
       style={{
         borderRadius: "24px 24px 0 0",
         backgroundColor: "white",
-        boxShadow: "0 -20px 60px rgba(0, 0, 0, 0.3), 0 -8px 24px rgba(0, 0, 0, 0.2), 0 -2px 6px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.9)",
+        boxShadow: "0 -20px 60px oklch(0% 0 0 / 0.3), 0 -8px 24px oklch(0% 0 0 / 0.2), 0 -2px 6px oklch(0% 0 0 / 0.15), inset 0 1px 0 oklch(100% 0 0 / 0.9)",
         y: sectionY,
       }}
     >

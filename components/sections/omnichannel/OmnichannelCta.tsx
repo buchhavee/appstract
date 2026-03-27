@@ -21,7 +21,7 @@ export default function OmnichannelCta() {
     <section
       className="relative w-full px-4 md:px-8 lg:px-16 flex justify-center"
       style={{
-        background: "#ffffff",
+        background: "oklch(100% 0 0)",
       }}
     >
       <motion.div className="w-full max-w-3xl py-20 md:py-28 flex flex-col items-center text-center gap-6" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={staggerContainer}>

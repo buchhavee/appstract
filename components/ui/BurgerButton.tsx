@@ -88,7 +88,7 @@ export default function BurgerButton({ isOpen, onClick, className = "" }: Burger
       onClick={onClick}
       className={`flex items-center justify-center w-9 h-9 cursor-pointer rounded-full ${className}`}
       style={{
-        background: "rgba(255, 255, 255, 1)",
+        background: "oklch(100% 0 0)",
         border: "none",
         padding: "8px",
       }}
@@ -96,9 +96,9 @@ export default function BurgerButton({ isOpen, onClick, className = "" }: Burger
       aria-expanded={isOpen}
     >
       <motion.div variants={containerVariants} animate={animationState} className="flex flex-col items-center justify-center w-full h-full" style={{ gap: "4px" }}>
-        <motion.div variants={topLineVariants} animate={animationState} className="h-0.5 rounded-full self-start" style={{ backgroundColor: "rgb(0, 0, 0)" }} />
-        <motion.div variants={middleLineVariants} animate={animationState} className="h-0.5 rounded-full" style={{ backgroundColor: "rgb(0, 0, 0)" }} />
-        <motion.div variants={bottomLineVariants} animate={animationState} className="h-0.5 rounded-full self-end" style={{ backgroundColor: "rgb(0, 0, 0)" }} />
+        <motion.div variants={topLineVariants} animate={animationState} className="h-0.5 rounded-full self-start" style={{ backgroundColor: "oklch(0% 0 0)" }} />
+        <motion.div variants={middleLineVariants} animate={animationState} className="h-0.5 rounded-full" style={{ backgroundColor: "oklch(0% 0 0)" }} />
+        <motion.div variants={bottomLineVariants} animate={animationState} className="h-0.5 rounded-full self-end" style={{ backgroundColor: "oklch(0% 0 0)" }} />
       </motion.div>
     </button>
   );

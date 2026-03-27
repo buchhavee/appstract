@@ -18,32 +18,32 @@
         {
           "icon": "Zap",
           "title": "Faster Decisions",
-          "iconBg": "#6D5EFC",
-          "cardBg": "#D8D4F8"
+          "iconBg": "oklch(58.8% 0.226 281.2)",
+          "cardBg": "oklch(88.4% 0.049 290.4)"
         },
         {
           "icon": "Users",
           "title": "Social Proof",
-          "iconBg": "#D53CFF",
-          "cardBg": "#F4D8F8"
+          "iconBg": "oklch(66.3% 0.280 317.7)",
+          "cardBg": "oklch(91.5% 0.052 322.0)"
         },
         {
           "icon": "Gift",
           "title": "Group Incentives",
-          "iconBg": "#4CC9F0",
-          "cardBg": "#D4F0F8"
+          "iconBg": "oklch(78.2% 0.121 222.5)",
+          "cardBg": "oklch(93.7% 0.031 216.8)"
         },
         {
           "icon": "ShieldCheck",
           "title": "Reduced Hesitation",
-          "iconBg": "#8B7CF7",
-          "cardBg": "#E4E0FC"
+          "iconBg": "oklch(65.8% 0.177 286.0)",
+          "cardBg": "oklch(91.8% 0.038 292.2)"
         },
         {
           "icon": "TrendingUp",
           "title": "Purchase Momentum",
-          "iconBg": "#5DD8F7",
-          "cardBg": "#DDF4FC"
+          "iconBg": "oklch(82.5% 0.117 217.2)",
+          "cardBg": "oklch(95.3% 0.026 220.6)"
         }
       ]
     }
@@ -56,14 +56,19 @@
         "isRight": true
       },
       {
-        "sender": "Sofia",
-        "message": "Oh nice, checking now!",
-        "isRight": false
+        "sender": "Emma",
+        "type": "product-preview",
+        "isRight": true,
+        "product": {
+          "title": "Product Name",
+          "description": "Product description — Color",
+          "price": "450 kr.",
+          "icons": ["ShoppingBag", "Package", "Shirt", "Box"]
+        }
       },
       {
-        "sender": "Maya",
-        "message": "Oh nice — yeah I’m in! I was actually thinking of ordering that anyway.",
-        "isAssistant": false,
+        "sender": "Sofia",
+        "message": "So cool! Count me in!",
         "isRight": false
       },
       {
@@ -73,7 +78,7 @@
       },
       {
         "sender": "Emma",
-        "message": "Perfect. I’ll add yours and we’ll hit the discount 🙌",
+        "message": "Perfect. Just add products to our shared cart and we'll hit the discount! 🙌",
         "isRight": true
       }
     ],

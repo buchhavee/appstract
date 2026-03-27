@@ -55,8 +55,8 @@ export default function KpiShowcase() {
                   <div
                     className="rounded-2xl p-6 md:p-8"
                     style={{
-                      background: "linear-gradient(145deg, #f8f8fb 0%, #f0f0f5 100%)",
-                      border: "1px solid rgba(0,0,0,0.06)",
+                      background: "linear-gradient(145deg, oklch(98.0% 0.004 286.3) 0%, oklch(95.7% 0.007 286.3) 100%)",
+                      border: "1px solid oklch(0% 0 0 / 0.06)",
                     }}
                   >
                     <ul className="flex flex-col gap-3">
@@ -65,7 +65,7 @@ export default function KpiShowcase() {
                           key={kpiIdx}
                           className="flex items-center gap-3 bg-white rounded-xl px-4 py-3.5 transition-shadow hover:shadow-md"
                           style={{
-                            border: "1px solid rgba(0,0,0,0.06)",
+                            border: "1px solid oklch(0% 0 0 / 0.06)",
                           }}
                           initial={{ opacity: 0, x: isReversed ? -20 : 20 }}
                           whileInView={{ opacity: 1, x: 0 }}

@@ -23,8 +23,8 @@ export default function TeamPhoto() {
         <motion.div
           className="w-full rounded-3xl overflow-hidden"
           style={{
-            border: "1px solid rgba(0,0,0,0.08)",
-            boxShadow: "0 20px 60px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.05)",
+            border: "1px solid oklch(0% 0 0 / 0.08)",
+            boxShadow: "0 20px 60px oklch(0% 0 0 / 0.08), 0 4px 16px oklch(0% 0 0 / 0.05)",
             aspectRatio: "16 / 7",
             position: "relative",
           }}

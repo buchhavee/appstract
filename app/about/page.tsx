@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { Navbar } from "@/components/layout";
-import { Footer } from "@/components/sections";
+import { Navbar, Footer } from "@/components/layout";
 import { AboutHero, TeamSection, TeamPhoto, AboutCta } from "@/components/sections/about";
 import SmoothScroll from "@/components/SmoothScroll";
 

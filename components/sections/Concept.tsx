@@ -37,7 +37,7 @@ function HotspotDot({ hotspot }: { hotspot: Hotspot }) {
           height: 14,
           top: 0,
           left: 0,
-          border: "2px solid rgba(76,201,240,0.6)",
+          border: "2px solid oklch(78.2% 0.121 222.5 / 0.6)",
           willChange: "transform, opacity",
         }}
         animate={{ scale: [1, 2.5], opacity: [0.7, 0] }}
@@ -50,10 +50,10 @@ function HotspotDot({ hotspot }: { hotspot: Hotspot }) {
         style={{
           width: 14,
           height: 14,
-          background: "rgba(76,201,240,0.95)",
-          boxShadow: "0 0 8px rgba(76,201,240,0.6), 0 0 20px rgba(76,201,240,0.4)",
+          background: "oklch(78.2% 0.121 222.5 / 0.95)",
+          boxShadow: "0 0 8px oklch(78.2% 0.121 222.5 / 0.6), 0 0 20px oklch(78.2% 0.121 222.5 / 0.4)",
         }}
-        animate={hovered ? { scale: 1.6, boxShadow: "0 0 14px rgba(76,201,240,0.8), 0 0 30px rgba(76,201,240,0.6)" } : { scale: [1, 1.15, 1] }}
+        animate={hovered ? { scale: 1.6, boxShadow: "0 0 14px oklch(78.2% 0.121 222.5 / 0.8), 0 0 30px oklch(78.2% 0.121 222.5 / 0.6)" } : { scale: [1, 1.15, 1] }}
         transition={hovered ? { type: "spring", stiffness: 300, damping: 20 } : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
       />
 
@@ -65,9 +65,9 @@ function HotspotDot({ hotspot }: { hotspot: Hotspot }) {
           x: "-50%",
           width: "max-content",
           maxWidth: 200,
-          background: "rgba(0,0,0,0.8)",
+          background: "oklch(0% 0 0 / 0.8)",
           backdropFilter: "blur(8px)",
-          color: "#fff",
+          color: "oklch(100% 0 0)",
           fontSize: 12,
           lineHeight: 1.4,
           whiteSpace: "normal",
@@ -88,7 +88,7 @@ export default function Concept() {
       id="concept"
       className="relative z-2 w-full py-12! px-4 md:px-8 lg:px-16 flex justify-center overflow-visible -mt-px"
       style={{
-        background: "linear-gradient(to bottom, white 16.45%, #4CC9F0 52.2%, #6D5EFC 100%)",
+        background: "linear-gradient(to bottom, oklch(100% 0 0) 16.45%, oklch(78.2% 0.121 222.5) 52.2%, oklch(58.8% 0.226 281.2) 100%)",
       }}
     >
       <div className="w-full max-w-7xl flex flex-col items-center">
@@ -139,7 +139,7 @@ export default function Concept() {
             <motion.div className="absolute bottom-[18%] left-1/2 -translate-x-1/2 w-[60%] md:w-[55%]" style={{ rotate: -3.95 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
               <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
                 <motion.div whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
-                  <Image src="/images/concept/phone-left-island.png" alt="Dynamic Island" width={200} height={60} className="w-full h-auto rounded-full" style={{ filter: "drop-shadow(0 0 8px rgba(76,201,240,0.1)) drop-shadow(0 0 20px rgba(76,201,240,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.25))" }} />
+                  <Image src="/images/concept/phone-left-island.png" alt="Dynamic Island" width={200} height={60} className="w-full h-auto rounded-full" style={{ filter: "drop-shadow(0 0 8px oklch(78.2% 0.121 222.5 / 0.1)) drop-shadow(0 0 20px oklch(78.2% 0.121 222.5 / 0.35)) drop-shadow(0 4px 12px oklch(0% 0 0 / 0.25))" }} />
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -148,7 +148,7 @@ export default function Concept() {
             <motion.div className="absolute bottom-[30%] left-1/2 -translate-x-1/2 w-[75%] md:w-[75%]" style={{ rotate: -3.95 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.7, ease: [0.25, 0.4, 0.25, 1] }}>
               <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}>
                 <motion.div whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
-                  <Image src="/images/concept/phone-left-cta.png" alt="CTA Button" width={320} height={80} className="w-full h-auto rounded-sm" style={{ filter: "drop-shadow(0 0 8px rgba(109,94,252,0.1)) drop-shadow(0 0 20px rgba(109,94,252,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.25))" }} />
+                  <Image src="/images/concept/phone-left-cta.png" alt="CTA Button" width={320} height={80} className="w-full h-auto rounded-sm" style={{ filter: "drop-shadow(0 0 8px oklch(58.8% 0.226 281.2 / 0.1)) drop-shadow(0 0 20px oklch(58.8% 0.226 281.2 / 0.35)) drop-shadow(0 4px 12px oklch(0% 0 0 / 0.25))" }} />
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -171,18 +171,18 @@ export default function Concept() {
                 <div
                   className="relative rounded-lg overflow-hidden"
                   style={{
-                    background: "rgba(0, 0, 0, 0.55)",
+                    background: "oklch(0% 0 0 / 0.55)",
                     backdropFilter: "blur(12px)",
                     WebkitBackdropFilter: "blur(12px)",
-                    border: "1px solid rgba(255, 255, 255, 0.15)",
-                    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4), 0 8px 16px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)",
+                    border: "1px solid oklch(100% 0 0 / 0.15)",
+                    boxShadow: "0 20px 40px oklch(0% 0 0 / 0.4), 0 8px 16px oklch(0% 0 0 / 0.3), inset 0 1px 0 oklch(100% 0 0 / 0.08)",
                   }}
                 >
                   {/* Top edge highlight sheen */}
                   <div
                     className="absolute top-0 left-2 right-2 h-px pointer-events-none z-10"
                     style={{
-                      background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.4) 20%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.4) 80%, transparent 100%)",
+                      background: "linear-gradient(90deg, transparent 0%, oklch(100% 0 0 / 0.4) 20%, oklch(100% 0 0 / 0.6) 50%, oklch(100% 0 0 / 0.4) 80%, transparent 100%)",
                     }}
                   />
                   {/* Text */}
@@ -214,7 +214,7 @@ export default function Concept() {
             <motion.div className="absolute top-[22%] left-[59%] -translate-x-1/2 w-[80%] md:w-[73%]" style={{ rotate: 3.31 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
               <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
                 <motion.div whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
-                  <Image src="/images/concept/phone-right-msg.png" alt="Chat Message" width={320} height={80} className="w-full h-auto rounded-sm" style={{ filter: "drop-shadow(0 0 8px rgba(109,94,252,0.1)) drop-shadow(0 0 20px rgba(109,94,252,0.35)) drop-shadow(0 4px 12px rgba(0,0,0,0.25))" }} />
+                  <Image src="/images/concept/phone-right-msg.png" alt="Chat Message" width={320} height={80} className="w-full h-auto rounded-sm" style={{ filter: "drop-shadow(0 0 8px oklch(58.8% 0.226 281.2 / 0.1)) drop-shadow(0 0 20px oklch(58.8% 0.226 281.2 / 0.35)) drop-shadow(0 4px 12px oklch(0% 0 0 / 0.25))" }} />
                 </motion.div>
               </motion.div>
             </motion.div>
@@ -251,7 +251,7 @@ export default function Concept() {
 
         {/* Try Demo Button */}
         <motion.div className="relative z-10 flex justify-center -mt-6 md:-mt-10 mb-10" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.5 }} variants={fadeInUp}>
-          <motion.button whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} onClick={() => window.open(conceptData.demoUrl, "_blank", "noopener,noreferrer")} className="inline-flex items-center gap-2 font-bw-gradual font-medium text-base text-white border border-white/40 rounded-full px-6 py-3 cursor-pointer backdrop-blur-sm" style={{ background: "rgba(255, 255, 255, 0.08)" }}>
+          <motion.button whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} onClick={() => window.open(conceptData.demoUrl, "_blank", "noopener,noreferrer")} className="inline-flex items-center gap-2 font-bw-gradual font-medium text-base text-white border border-white/40 rounded-full px-6 py-3 cursor-pointer backdrop-blur-sm" style={{ background: "oklch(100% 0 0 / 0.08)" }}>
             Try Demo
             <ArrowUpRight className="w-4 h-4 opacity-70" />
           </motion.button>
