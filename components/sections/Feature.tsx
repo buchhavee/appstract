@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
+import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Tag, SpotlightCard, RotatingCardStack } from "@/components/ui";
 import { fadeInUp, staggerContainer } from "@/lib/animations";
@@ -54,11 +55,14 @@ function ProductPreviewCard({ product, sender, delay = 0 }: { product: { title: 
       <div className="rounded-md overflow-hidden w-[75%] mr-7 bg-[oklch(96%_0.005_240)] border border-black/5 shadow-sm">
         {/* Horizontal image gallery with cut-off 4th image */}
         <div className="flex gap-1 p-1.5 pb-0 overflow-hidden">
-          {[0, 1, 2].map((i) => (
-            <div key={i} className="flex-1 min-w-0 rounded-sm bg-black/30 aspect-4/5" />
+          {[1, 2, 3].map((n) => (
+            <div key={n} className="flex-1 min-w-0 rounded-sm overflow-hidden bg-black/10 aspect-4/5 relative">
+              <Image src={`/images/product-imgs/product-img${n}.webp`} alt={`${product.title} preview ${n}`} fill sizes="(max-width: 768px) 25vw, 120px" className="object-cover" />
+            </div>
           ))}
           {/* 4th image with "more" overlay */}
-          <div className="shrink-0 rounded-sm bg-black/10 w-[12%] aspect-4/5 relative">
+          <div className="shrink-0 rounded-sm overflow-hidden bg-black/10 w-[12%] aspect-4/5 relative">
+            <Image src="/images/product-imgs/product-img1.webp" alt="" fill sizes="40px" className="object-cover" aria-hidden="true" />
             <div className="absolute rounded-sm inset-0 bg-black/40 flex items-center justify-center">
               <span className="text-white text-[9px] font-semibold">+3</span>
             </div>

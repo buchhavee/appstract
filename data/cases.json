@@ -16,9 +16,7 @@
           { "label": "AOV increase", "value": "+18%" }
         ],
         "images": [
-          { "src": "/images/cases/case-bahne1.png", "title": "Shop Together", "description": "Invite friends to browse and shop with you in real-time" },
-          { "src": "/images/cases/case-bahne2.png", "title": "Live Reactions", "description": "See what your friends think about products instantly" },
-          { "src": "/images/cases/case-bahne3.png", "title": "Shared Cart", "description": "Build a cart together and split purchases easily" }
+          { "src": "/images/cases/bahne_shared_shopping.webp", "title": "Shared Shopping", "description": "Shop together directly within the Bahne webshop" }
         ]
       }
     },

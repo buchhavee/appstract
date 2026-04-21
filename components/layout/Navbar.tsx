@@ -86,6 +86,8 @@ export default function Navbar() {
 
   useBodyScrollLockWithPendingScroll(mobileMenuOpen, pendingScrollRef);
 
+  const visibleLinks = navbarData.links.filter((link) => !(link as { hidden?: boolean }).hidden);
+
   const scrollToSection = (href: string) => {
     if (href.startsWith("#")) {
       window.dispatchEvent(new CustomEvent("smoothScrollTo", { detail: href }));
@@ -149,7 +151,7 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex flex-1 flex-col items-end min-w-0">
-            <DesktopNavLinks links={navbarData.links} onLinkClick={scrollToSection} />
+            <DesktopNavLinks links={visibleLinks} onLinkClick={scrollToSection} />
           </div>
 
           {/* Desktop CTA */}

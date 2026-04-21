@@ -4,26 +4,22 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Undo2 } from "lucide-react";
 import Image from "next/image";
-import type { GalleryImage } from "./types";
-import { getImageSrc, TRANSITION_STANDARD } from "./utils";
+import { TRANSITION_STANDARD } from "./utils";
 import { useIsMobile } from "@/lib/hooks";
 
 interface InteractiveListItemProps {
   name: string;
   logo?: string;
-  images?: (string | GalleryImage)[];
   isExpanded?: boolean;
   comingSoon?: boolean;
   onClick?: () => void;
 }
 
-export function InteractiveListItem({ name, logo, images = [], isExpanded = false, comingSoon = false, onClick }: InteractiveListItemProps) {
+export function InteractiveListItem({ name, logo, isExpanded = false, comingSoon = false, onClick }: InteractiveListItemProps) {
   const [isHovered, setIsHovered] = useState(false);
   const isMobile = useIsMobile(1024);
 
   const isActive = comingSoon ? false : isMobile ? isExpanded : isHovered || isExpanded;
-
-  const previewImages = images.slice(0, 3);
 
   const logoHeight = "clamp(3rem, 4vw + 1rem, 4rem)";
   const textHeight = "clamp(3rem, 4vw + 1.5rem, 5rem)";
@@ -70,46 +66,15 @@ export function InteractiveListItem({ name, logo, images = [], isExpanded = fals
           </div>
         )}
 
-        {/* Preview images */}
-        <div className="hidden lg:flex relative" style={{ height: "clamp(3.5rem, 4vw + 1.5rem, 5rem)" }}>
-          <div className="relative flex items-center gap-2 overflow-visible">
-            {previewImages.map((img, i) => (
-              <motion.div
-                key={i}
-                className="relative rounded-sm overflow-hidden bg-white"
-                style={{ height: "clamp(3.5rem, 4vw + 1.5rem, 5rem)", width: "clamp(3.5rem, 4vw + 1.5rem, 5rem)" }}
-                initial={{ y: "200%" }}
-                animate={{
-                  y: isHovered ? 0 : "200%",
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 170,
-                  damping: 26,
-                  delay: isHovered ? (previewImages.length - 1 - i) * 0.05 : i * 0.03,
-                }}
-              >
-                {getImageSrc(img) ? (
-                  <div className="absolute inset-0">
-                    <Image src={getImageSrc(img)} alt={`Preview ${i + 1}`} fill className="object-cover" sizes="80px" />
-                  </div>
-                ) : (
-                  <div className="absolute inset-0 bg-gray-200" />
-                )}
-                <div className="absolute inset-0 bg-black/20" />
-              </motion.div>
-            ))}
-
-            <motion.div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
-              <div className="relative overflow-hidden h-7 bg-black/70 rounded-full px-4">
-                <motion.div animate={{ y: isExpanded ? "-50%" : "0%" }} transition={TRANSITION_STANDARD} className="flex flex-col center items-center">
-                  <span className="text-white text-sm font-semibold h-7 flex items-center gap-2">
-                    See case
-                    <Undo2 className="w-4 h-4 rotate-180 -scale-x-100" />
-                  </span>
-                  <span className="text-white text-sm font-semibold h-7 flex items-center">Close window</span>
-                </motion.div>
-              </div>
+        {/* Rolling action pill */}
+        <div className="hidden lg:flex items-center" style={{ height: "clamp(3.5rem, 4vw + 1.5rem, 5rem)" }}>
+          <div className="relative overflow-hidden h-7 bg-black/70 rounded-full px-4">
+            <motion.div animate={{ y: isExpanded ? "-50%" : "0%" }} transition={TRANSITION_STANDARD} className="flex flex-col items-center">
+              <span className="text-white text-sm font-semibold h-7 flex items-center gap-2">
+                See case
+                <Undo2 className="w-4 h-4 rotate-180 -scale-x-100" />
+              </span>
+              <span className="text-white text-sm font-semibold h-7 flex items-center">Close window</span>
             </motion.div>
           </div>
         </div>

@@ -133,12 +133,12 @@ export default function Concept() {
             }}
             variants={phoneVariants}
           >
-            <Image src="/images/concept/phone-left.png" alt="Shopping app - Vælg venner" width={375} height={812} loading="eager" sizes="(max-width: 640px) 200px, (max-width: 768px) 144px, (max-width: 1024px) 300px, 384px" className="w-full h-auto drop-shadow-2xl" />
+            <Image src="/images/concept/phone-left.webp" alt="Shopping app - Vælg venner" width={375} height={812} loading="eager" sizes="(max-width: 640px) 200px, (max-width: 768px) 144px, (max-width: 1024px) 300px, 384px" className="w-full h-auto drop-shadow-2xl" />
 
             {/* Dynamic Island overlay */}
             <motion.div className="absolute bottom-[18%] left-1/2 -translate-x-1/2 w-[60%] md:w-[55%]" style={{ rotate: -3.95 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
               <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
-                <motion.div whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
+                <motion.div whileHover={{ scale: 1.2, x: -24 }} transition={{ type: "spring", stiffness: 260, damping: 22 }} className="cursor-pointer">
                   <Image src="/images/concept/phone-left-island.png" alt="Dynamic Island" width={200} height={60} className="w-full h-auto rounded-full" style={{ filter: "drop-shadow(0 0 8px oklch(78.2% 0.121 222.5 / 0.1)) drop-shadow(0 0 20px oklch(78.2% 0.121 222.5 / 0.35)) drop-shadow(0 4px 12px oklch(0% 0 0 / 0.25))" }} />
                 </motion.div>
               </motion.div>
@@ -147,7 +147,7 @@ export default function Concept() {
             {/* CTA overlay */}
             <motion.div className="absolute bottom-[30%] left-1/2 -translate-x-1/2 w-[75%] md:w-[75%]" style={{ rotate: -3.95 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.7, ease: [0.25, 0.4, 0.25, 1] }}>
               <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 1 }}>
-                <motion.div whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
+                <motion.div whileHover={{ scale: 1.2, x: -24 }} transition={{ type: "spring", stiffness: 260, damping: 22 }} className="cursor-pointer">
                   <Image src="/images/concept/phone-left-cta.png" alt="CTA Button" width={320} height={80} className="w-full h-auto rounded-sm" style={{ filter: "drop-shadow(0 0 8px oklch(58.8% 0.226 281.2 / 0.1)) drop-shadow(0 0 20px oklch(58.8% 0.226 281.2 / 0.35)) drop-shadow(0 4px 12px oklch(0% 0 0 / 0.25))" }} />
                 </motion.div>
               </motion.div>
@@ -163,7 +163,7 @@ export default function Concept() {
             variants={phoneVariants}
             transition={{ delay: 0.4 }}
           >
-            <Image src="/images/concept/phone-center.png" alt="Shopping app - Shop sammen" width={414} height={896} loading="eager" sizes="(max-width: 640px) 220px, (max-width: 768px) 160px, (max-width: 1024px) 340px, 420px" className="w-full h-auto drop-shadow-2xl" />
+            <Image src="/images/concept/phone-center.webp" alt="Shopping app - Shop sammen" width={414} height={896} loading="eager" sizes="(max-width: 640px) 220px, (max-width: 768px) 160px, (max-width: 1024px) 340px, 420px" className="w-full h-auto drop-shadow-2xl" />
 
             {/* text overlay */}
             <motion.div className="absolute bottom-[22%] left-1/2 -translate-x-1/2 w-[60%] text-center" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.8, ease: [0.25, 0.4, 0.25, 1] }}>
@@ -208,12 +208,12 @@ export default function Concept() {
             variants={phoneVariants}
             transition={{ delay: 0.4 }}
           >
-            <Image src="/images/concept/phone-right.png" alt="Shopping app - Chat" width={375} height={812} sizes="(max-width: 640px) 200px, (max-width: 768px) 144px, (max-width: 1024px) 300px, 384px" className="w-full h-auto drop-shadow-2xl" />
+            <Image src="/images/concept/phone-right.webp" alt="Shopping app - Chat" width={375} height={812} sizes="(max-width: 640px) 200px, (max-width: 768px) 144px, (max-width: 1024px) 300px, 384px" className="w-full h-auto drop-shadow-2xl" />
 
             {/* Message overlay */}
             <motion.div className="absolute top-[22%] left-[59%] -translate-x-1/2 w-[80%] md:w-[73%]" style={{ rotate: 3.31 }} initial={{ opacity: 0, scale: 0.85 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: 0.5, ease: [0.25, 0.4, 0.25, 1] }}>
               <motion.div animate={{ y: [0, -4, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>
-                <motion.div whileHover={{ scale: 1.2 }} transition={{ type: "spring", stiffness: 300, damping: 20 }} className="cursor-pointer">
+                <motion.div whileHover={{ scale: 1.2, x: 24 }} transition={{ type: "spring", stiffness: 260, damping: 22 }} className="cursor-pointer">
                   <Image src="/images/concept/phone-right-msg.png" alt="Chat Message" width={320} height={80} className="w-full h-auto rounded-sm" style={{ filter: "drop-shadow(0 0 8px oklch(58.8% 0.226 281.2 / 0.1)) drop-shadow(0 0 20px oklch(58.8% 0.226 281.2 / 0.35)) drop-shadow(0 4px 12px oklch(0% 0 0 / 0.25))" }} />
                 </motion.div>
               </motion.div>
