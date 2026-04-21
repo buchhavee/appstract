@@ -3,7 +3,7 @@
 import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
-import { useIsMobile } from "@/lib/hooks";
+import { useIsMobile, useInView } from "@/lib/hooks";
 
 const STAR_COUNT_DESKTOP = 4000;
 const STAR_COUNT_MOBILE = 1500;
@@ -152,9 +152,12 @@ interface StarFieldProps {
 export default function StarField({ className = "" }: StarFieldProps) {
   const isMobile = useIsMobile();
   const starCount = isMobile ? STAR_COUNT_MOBILE : STAR_COUNT_DESKTOP;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(containerRef, "200px");
 
   return (
     <div
+      ref={containerRef}
       className={`absolute left-0 right-0 top-0 pointer-events-none ${className}`}
       style={{
         height: "600px",
@@ -177,6 +180,7 @@ export default function StarField({ className = "" }: StarFieldProps) {
           powerPreference: "low-power",
         }}
         dpr={[1, 1.5]}
+        frameloop={inView ? "always" : "never"}
         style={{ background: "transparent" }}
       >
         <Stars count={starCount} />
