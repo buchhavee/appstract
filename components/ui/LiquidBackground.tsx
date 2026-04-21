@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useMemo } from "react";
+import { useInView } from "@/lib/hooks";
 
 /* ── helpers ────────────────────────────────────────────── */
 
@@ -204,6 +205,9 @@ interface LiquidBackgroundProps {
 
 export default function LiquidBackground({ className = "", opacity = 0.4, color1 = "#0100ff", color2 = "#6700ff", color3 = "#00b8ff", speed = 0.1, warpStrength = 0.3, warpFrequency = 10, warpSpeed = 1, warpRange = 20, colorShift = 0, blendAngle = 1, blendSoftness = 0.15, flowRotation = 500, flowNoise = 2, grainAmount = 0.1, grainSize = 2, grainAnimate = false, contrast = 1, gamma = 1, saturation = 1, zoom = 1.4 }: LiquidBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(containerRef, "100px");
+  const renderFrameRef = useRef<((timeSec: number) => void) | null>(null);
+  const startTimeRef = useRef<number>(0);
 
   const c1 = useMemo(() => colorToRgb(color1), [color1]);
   const c2 = useMemo(() => colorToRgb(color2), [color2]);
@@ -382,17 +386,11 @@ export default function LiquidBackground({ className = "", opacity = 0.4, color1
     ro.observe(container);
     updateSize();
 
-    let rafId = 0;
-    const startTime = performance.now();
-    const loop = (now: number) => {
-      const elapsed = (now - startTime) * 0.001;
-      renderFrame(elapsed);
-      rafId = requestAnimationFrame(loop);
-    };
-    rafId = requestAnimationFrame(loop);
+    startTimeRef.current = performance.now();
+    renderFrameRef.current = renderFrame;
 
     return () => {
-      if (rafId) cancelAnimationFrame(rafId);
+      renderFrameRef.current = null;
       ro.disconnect();
       if (container.contains(canvas)) container.removeChild(canvas);
       if (program) gl.deleteProgram(program);
@@ -400,6 +398,21 @@ export default function LiquidBackground({ className = "", opacity = 0.4, color1
       if (buffer) gl.deleteBuffer(buffer);
     };
   }, [fallback, speed, colorShift, warpStrength, warpFrequency, warpSpeed, warpRange, blendAngle, blendSoftness, flowRotation, flowNoise, grainAmount, grainSize, grainAnimate, contrast, gamma, saturation, zoom, c1, c2, c3]);
+
+  useEffect(() => {
+    if (!inView) return;
+    let rafId = 0;
+    const loop = (now: number) => {
+      const render = renderFrameRef.current;
+      if (render) {
+        const elapsed = (now - startTimeRef.current) * 0.001;
+        render(elapsed);
+      }
+      rafId = requestAnimationFrame(loop);
+    };
+    rafId = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(rafId);
+  }, [inView]);
 
   return (
     <div

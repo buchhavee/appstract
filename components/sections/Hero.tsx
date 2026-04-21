@@ -4,7 +4,7 @@ import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import heroData from "@/data/hero.json";
-import { Button, LiquidBackground, TopGradient } from "@/components/ui";
+import { LiquidBackground, TopGradient } from "@/components/ui";
 
 const TAB_DURATION = 10000;
 const PAUSE_AFTER_CLICK = 5000;
@@ -142,17 +142,17 @@ export default function Hero() {
     <section ref={heroRef} className="relative z-1 w-full h-svh flex flex-col items-center justify-center px-4 md:px-8 lg:px-16 bg-primary-purple" style={{ borderRadius: "25px 25px 0 0" }} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
       {/* Background Images */}
       <motion.div className="absolute inset-x-0 top-0 w-full overflow-hidden" style={{ height: "107svh", y: heroParallaxY }}>
-        {heroData.tabs.map((tab, index) => (
-          <motion.div key={index} initial={false} animate={{ opacity: index === activeTab ? 1 : 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full" style={{ zIndex: index === activeTab ? 1 : 0 }}>
-            <Image src={tab.image} alt="Hero background" fill className="object-cover" style={{ objectPosition: tab.objectPosition || "center center" }} priority={index === 0} />
+        <AnimatePresence initial={false}>
+          <motion.div key={activeTab} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.8 }} className="absolute inset-0 w-full h-full">
+            <Image src={currentTab.image} alt="Hero background" fill className="object-cover" style={{ objectPosition: currentTab.objectPosition || "center center" }} priority={activeTab === 0} />
             {/* Overlay */}
             <div className="absolute inset-0" style={{ background: "linear-gradient(to bottom, oklch(0% 0 0 / 0.5) 0%, oklch(100% 0 0 / 0.1) 100%)" }} />
-            {/* Liquid overlay */}
-            <div className="absolute bottom-0 left-0 right-0 h-[30%]" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }}>
-              <LiquidBackground opacity={0.4} speed={0.3} />
-            </div>
           </motion.div>
-        ))}
+        </AnimatePresence>
+        {/* Liquid overlay — single shared instance */}
+        <div className="absolute bottom-0 left-0 right-0 h-[30%] z-2" style={{ maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)", WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)" }}>
+          <LiquidBackground opacity={0.4} speed={0.3} />
+        </div>
       </motion.div>
 
       <TopGradient />
