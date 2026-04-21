@@ -7,7 +7,8 @@
     { "label": "Home", "href": "/" },
     {
       "label": "Omnichannel",
-      "href": "/omnichannel"
+      "href": "/omnichannel",
+      "hidden": true
     },
     {
       "label": "About us",

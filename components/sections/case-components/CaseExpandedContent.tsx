@@ -2,8 +2,9 @@
 
 import { motion } from "framer-motion";
 import { ChevronUp, Check } from "lucide-react";
-import { CaseGallery } from "./CaseGallery";
+import Image from "next/image";
 import type { ExpandedContent } from "./types";
+import { normalizeImage } from "./utils";
 
 interface CaseExpandedContentProps {
   content: ExpandedContent;
@@ -74,12 +75,17 @@ export function CaseExpandedContent({ content, onClose }: CaseExpandedContentPro
               )}
             </div>
 
-            {/* Gallery */}
-            {content.images.length > 0 && (
-              <div className="w-full lg:w-[45%] lg:shrink-0 lg:self-stretch lg:flex lg:flex-col">
-                <CaseGallery images={content.images} />
-              </div>
-            )}
+            {/* Screenshot */}
+            {content.images.length > 0 && (() => {
+              const image = normalizeImage(content.images[0]);
+              return (
+                <div className="w-full lg:w-[30%] lg:shrink-0 lg:self-stretch lg:flex lg:flex-col">
+                  <div className="relative w-full aspect-9/16 md:aspect-video lg:aspect-auto lg:h-full lg:min-h-152">
+                    <Image src={image.src} alt={image.title || "Case screenshot"} fill className="object-contain" sizes="(max-width: 768px) 100vw, 30vw" />
+                  </div>
+                </div>
+              );
+            })()}
           </div>
 
           {/* Close button */}

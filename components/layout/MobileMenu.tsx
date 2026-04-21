@@ -19,6 +19,8 @@ const MENU_SHADOW = "0 20px 60px oklch(0% 0 0 / 0.5), 0 8px 24px oklch(0% 0 0 / 
 export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const router = useRouter();
 
+  const visibleLinks = navbarData.links.filter((link) => !(link as { hidden?: boolean }).hidden);
+
   const panelVariants = useMemo(
     () => ({
       closed: (i: number) => ({
@@ -47,7 +49,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         y: "140%",
         rotate: 10,
         opacity: 0,
-        transition: { duration: 0.35, delay: (navbarData.links.length - i) * 0.04, ease: kineticEase },
+        transition: { duration: 0.35, delay: (visibleLinks.length - i) * 0.04, ease: kineticEase },
       }),
       open: (i: number) => ({
         y: "0%",
@@ -71,7 +73,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         y: "0%",
         rotate: 0,
         opacity: 1,
-        transition: { duration: 0.65, delay: 0.35 + navbarData.links.length * 0.07, ease: kineticEase },
+        transition: { duration: 0.65, delay: 0.35 + visibleLinks.length * 0.07, ease: kineticEase },
       },
     }),
     [],
@@ -178,7 +180,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             {/* Navigation links */}
             <motion.nav className="relative flex flex-col justify-center h-full" style={{ zIndex: 2, padding: "72px 32px 40px" }} initial={{ x: "101%" }} animate={{ x: "0%" }} exit={{ x: "101%" }} transition={{ duration: 0.55, delay: 0.2, ease: kineticEase }}>
               <ul className="list-none m-0 p-0 flex flex-col gap-1">
-                {navbarData.links.map((link, i) => (
+                {visibleLinks.map((link, i) => (
                   <li key={`${link.label}-${i}`} className="overflow-hidden">
                     <motion.div custom={i} variants={linkVariants} initial="closed" animate="open" exit="closed">
                       <button onClick={() => handleNavigate(link.href)} className="group block w-full text-left cursor-pointer bg-transparent border-0 py-3.5" style={{ borderBottom: "1px solid oklch(100% 0 0 / 0.06)" }}>
